@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="ltr">
+
+    <RelativeLayout
+        android:id="@+id/ToolbarActHome"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/header">
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/RippleHamberRecyclerToolbar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="16dp"
+            app:mrl_rippleAlpha="0.05"
+            app:mrl_rippleColor="#10000000"
+            app:mrl_rippleRoundedCorners="100dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ImgHamberRecyclerToolbar"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_hamberger" />
+            </RelativeLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <TextView
+            android:id="@+id/lblTitleActMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/AppTitle"
+            android:textColor="@color/colorWhite"
+            android:textSize="17sp"
+            tools:ignore="RelativeOverlap" />
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="45dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentBottom="true"
+                android:background="#ffffff" />
+
+            <ImageView
+                android:id="@+id/imgSearchActMain"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:alpha=".9"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_search"
+                android:tint="@color/colorWhite" />
+
+            <EditText
+                android:id="@+id/TxtSearchActMain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_toStartOf="@id/imgSearchActMain"
+                android:background="@android:color/transparent"
+                android:gravity="right|center"
+                android:hint="@string/HintSearchText"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingEnd="10dp"
+                android:textColorHint="#ffffff"
+                android:textSize="13sp"
+                tools:ignore="RtlSymmetry" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/TagsActmain"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/ToolbarActHome"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="-20dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/gradianet_orange">
+
+            <TextView
+                android:id="@+id/lblNearMeTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/NearMe"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/gradianet_orange">
+
+            <TextView
+                android:id="@+id/lblLowPriceTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/LowPrice"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/gradianet_green_blue">
+
+            <TextView
+                android:id="@+id/lblComfortTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/Comfort"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/gradianet_green_pink">
+
+            <TextView
+                android:id="@+id/lblSpaciousTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/Spacious"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerHouseActMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/TagsActmain"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:scrollbars="none" />
+</RelativeLayout>

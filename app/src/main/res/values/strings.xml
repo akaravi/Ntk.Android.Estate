@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">آلونک</string>
+    <string name="AppTitle">سیستم املاک آلونک</string>
+    <string name="HintSearchText">عبارت جستجو را وارد نمایید</string>
+    <string name="NearMe">نزدیک</string>
+    <string name="LowPrice">ارزان</string>
+    <string name="Comfort">راحت</string>
+    <string name="Spacious">جادار</string>
+</resources>
