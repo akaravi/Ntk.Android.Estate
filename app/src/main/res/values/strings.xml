@@ -2,8 +2,15 @@
     <string name="app_name">آلونک</string>
     <string name="AppTitle">سیستم املاک آلونک</string>
     <string name="HintSearchText">عبارت جستجو را وارد نمایید</string>
-    <string name="NearMe">نزدیک</string>
-    <string name="LowPrice">ارزان</string>
-    <string name="Comfort">راحت</string>
-    <string name="Spacious">جادار</string>
+    <string name="SendTicket">ارسال درخواست پشتیبانی</string>
+    <string name="PhoneNumber">+9810005612020</string>
+    <string name="Subject">موضوع درخواست</string>
+    <string name="Inportant">اهمیت</string>
+    <string name="UserService">سرویس مرتبط</string>
+
+    <string-array name="StateTicket">
+        <item>معمولی</item>
+        <item>مهم</item>
+        <item>ضروری</item>
+    </string-array>
 </resources>

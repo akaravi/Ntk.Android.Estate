@@ -29,6 +29,7 @@
             <com.flaviofaria.kenburnsview.KenBurnsView
                 android:id="@+id/HeaderImageActMain"
                 android:layout_width="match_parent"
+                android:src="@drawable/header"
                 android:layout_height="120dp" />
 
             <android.support.v7.widget.RecyclerView

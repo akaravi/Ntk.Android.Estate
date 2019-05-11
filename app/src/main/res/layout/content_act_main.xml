@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/NearMe"
+                android:text="زمین"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
         </RelativeLayout>
@@ -134,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/LowPrice"
+                android:text="تجاری"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
         </RelativeLayout>
@@ -151,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/Comfort"
+                android:text="اداری"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
         </RelativeLayout>
@@ -168,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/Spacious"
+                android:text="مسکونی"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
         </RelativeLayout>
@@ -182,4 +182,15 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:scrollbars="none" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/FabAddActMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_plus"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:fabSize="auto" />
 </RelativeLayout>

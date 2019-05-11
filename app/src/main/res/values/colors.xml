@@ -10,4 +10,9 @@
     <color name="colorScroll">#f1f0f8</color>
     <color name="colorBlueDark">#3f62e7</color>
     <color name="colorBlueLight">#4c71fe</color>
+    <color name="colorTextBlack">#211c0e</color>
+    <color name="colorMenu">#030303</color>
+    <color name="colorGrayText">#363f45</color>
+    <color name="colorGray">#bdbdbd</color>
+    <color name="colorGreen">#4caf50</color>
 </resources>

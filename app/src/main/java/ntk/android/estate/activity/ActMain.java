@@ -1,7 +1,10 @@
 package ntk.android.estate.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.google.gson.Gson;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -25,9 +30,14 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ntk.android.estate.EState;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.AdHouse;
+import ntk.android.estate.adapter.drawer.AdDrawer;
 import ntk.android.estate.model.House;
+import ntk.android.estate.model.theme.Drawer;
+import ntk.android.estate.utill.AppUtill;
+import ntk.android.estate.utill.EasyPreference;
 import ntk.android.estate.utill.FontManager;
 
 public class ActMain extends AppCompatActivity {
@@ -50,12 +60,16 @@ public class ActMain extends AppCompatActivity {
     @BindView(R.id.recyclerHouseActMain)
     RecyclerView RvHouse;
 
+    @BindView(R.id.FabAddActMain)
+    FloatingActionButton Fab;
+
     private long lastPressedTime;
     private static final int PERIOD = 2000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppUtill.setStatusBarGradiant(this);
         setContentView(R.layout.act_main);
         ButterKnife.bind(this);
         init();
@@ -83,6 +97,8 @@ public class ActMain extends AppCompatActivity {
             }
         });
 
+        HandelToolbarDrawer();
+
         RvHouse.setHasFixedSize(true);
         RvHouse.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -102,11 +118,38 @@ public class ActMain extends AppCompatActivity {
         RvHouse.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
+        RvHouse.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    Fab.hide();
+                } else {
+                    Fab.show();
+                }
+            }
+        });
+
     }
 
     @OnClick(R.id.RippleHamberRecyclerToolbar)
     public void ClickMenu() {
         drawer.openMenu(false);
+    }
+
+    private void HandelToolbarDrawer() {
+        Drawer theme = new Gson().fromJson(EState.JsonThemeExmaple, Drawer.class);
+
+        RvDrawer.setHasFixedSize(true);
+        RvDrawer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        AdDrawer AdDrawer = new AdDrawer(this, theme.Child, drawer);
+        RvDrawer.setAdapter(AdDrawer);
+        AdDrawer.notifyDataSetChanged();
     }
 
     @Override
@@ -125,5 +168,15 @@ public class ActMain extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+
+    @OnClick(R.id.FabAddActMain)
+    public void ClickFab() {
+        if (EasyPreference.with(this).getString("register", "0").equals("1")) {
+
+        } else {
+            startActivity(new Intent(this, ActRegister.class));
+        }
     }
 }

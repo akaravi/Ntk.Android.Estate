@@ -1,6 +1,7 @@
 package ntk.android.estate.utill;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,9 +10,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import java.io.File;
@@ -32,6 +37,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import ntk.android.estate.R;
 
 public class AppUtill {
     private final static AtomicInteger ID = new AtomicInteger(0);
@@ -93,5 +100,70 @@ public class AppUtill {
         input = input.replace("ي", "ی");
         input = input.replace("ك", "ک");
         return input;
+    }
+
+    public static String GetDeviceName() {
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        if (model.startsWith(manufacturer)) {
+            return capitalize(model);
+        }
+        return capitalize(manufacturer) + " " + model;
+    }
+
+    private static String capitalize(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return str;
+        }
+        char[] arr = str.toCharArray();
+        boolean capitalizeNext = true;
+
+        StringBuilder phrase = new StringBuilder();
+        for (char c : arr) {
+            if (capitalizeNext && Character.isLetter(c)) {
+                phrase.append(Character.toUpperCase(c));
+                capitalizeNext = false;
+                continue;
+            } else if (Character.isWhitespace(c)) {
+                capitalizeNext = true;
+            }
+            phrase.append(c);
+        }
+
+        return phrase.toString();
+    }
+
+    public static String GregorianToPersian(String value) {
+        String[] Value = value.split("T");
+        String[] date = Value[0].split("-");
+        String result = "";
+
+        try {
+            int e = Integer.parseInt(date[0]);
+            int m = Integer.parseInt(date[1]);
+            int d = Integer.parseInt(date[2]);
+            if (e != 0 || m != 0 || d != 0) {
+                UtillDate roozh = new UtillDate();
+                roozh.GregorianToPersian(e, m, d);
+                result = roozh.toString();
+                result = result.replace("-", "/");
+            }
+        } catch (Exception var8) {
+            result = "Error Convert Date";
+        }
+
+        return result;
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.backgradianet);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
     }
 }
