@@ -45,9 +45,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <!--<activity-->
-            <!--android:name=".activity.ActAbout"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />-->
+        <!--android:name=".activity.ActAbout"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />-->
         <activity
             android:name=".activity.ActSupport"
             android:screenOrientation="portrait"
@@ -90,6 +90,10 @@
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".activity.ActTicketAnswer"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".activity.ActAddState"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
 

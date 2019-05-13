@@ -174,7 +174,7 @@ public class ActMain extends AppCompatActivity {
     @OnClick(R.id.FabAddActMain)
     public void ClickFab() {
         if (EasyPreference.with(this).getString("register", "0").equals("1")) {
-
+            startActivity(new Intent(this , ActAddState.class));
         } else {
             startActivity(new Intent(this, ActRegister.class));
         }
