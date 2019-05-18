@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "ntk.android.estate.app"
+        applicationId "ntk.android.estate.APPNTK"
         minSdkVersion 19
         targetSdkVersion 28
         multiDexEnabled true
@@ -59,3 +59,4 @@ dependencies {
 
     implementation 'com.github.akaravi:ntk.android.base:0.0.23'
 }
+apply plugin: 'com.google.gms.google-services'
