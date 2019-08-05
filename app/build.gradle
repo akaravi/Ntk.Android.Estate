@@ -59,4 +59,3 @@ dependencies {
 
     implementation 'com.github.akaravi:ntk.android.base:0.0.23'
 }
-apply plugin: 'com.google.gms.google-services'
