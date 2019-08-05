@@ -265,7 +265,7 @@ public class ActSendTicket extends AppCompatActivity {
                 .subscribe(tedPermissionResult -> {
                     if (tedPermissionResult.isGranted()) {
                         StorageChooser.Theme theme = new StorageChooser.Theme(getApplicationContext());
-                        theme.setScheme(getResources().getIntArray(R.array.paranoid_theme));
+//                        theme.setScheme(getResources().getIntArray(R.array.paranoid_theme));
                         StorageChooser chooser = new StorageChooser.Builder()
                                 .withActivity(this)
                                 .allowCustomPath(true)
