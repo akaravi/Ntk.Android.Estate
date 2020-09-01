@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ntk.android.estate.R;
 import ntk.android.estate.utill.FontManager;
-import ntk.base.api.pooling.model.PoolingContent;
+import ntk.base.api.pooling.entity.PoolingContent;
 
 public class AdDetailPoolCategory extends RecyclerView.Adapter<AdDetailPoolCategory.ViewHolder> {
 

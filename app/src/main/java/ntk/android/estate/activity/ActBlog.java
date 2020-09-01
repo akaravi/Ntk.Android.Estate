@@ -26,7 +26,7 @@ import ntk.android.estate.config.ConfigStaticValue;
 import ntk.android.estate.utill.EndlessRecyclerViewScrollListener;
 import ntk.android.estate.utill.FontManager;
 import ntk.base.api.blog.interfase.IBlog;
-import ntk.base.api.blog.model.BlogContent;
+import ntk.base.api.blog.entity.BlogContent;
 import ntk.base.api.blog.model.BlogContentListRequest;
 import ntk.base.api.blog.model.BlogContentListResponse;
 import ntk.base.api.utill.RetrofitManager;

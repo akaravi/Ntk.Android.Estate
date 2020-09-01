@@ -30,7 +30,7 @@ import ntk.android.estate.utill.EndlessRecyclerViewScrollListener;
 import ntk.base.api.ticket.interfase.ITicket;
 import ntk.base.api.ticket.model.TicketingListRequest;
 import ntk.base.api.ticket.model.TicketingListResponse;
-import ntk.base.api.ticket.model.TicketingTask;
+import ntk.base.api.ticket.entity.TicketingTask;
 import ntk.base.api.utill.NTKUtill;
 import ntk.base.api.utill.RetrofitManager;
 

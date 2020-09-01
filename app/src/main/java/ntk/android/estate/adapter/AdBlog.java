@@ -27,7 +27,8 @@ import butterknife.ButterKnife;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.ActDetailBlog;
 import ntk.android.estate.utill.FontManager;
-import ntk.base.api.blog.model.BlogContent;
+
+import ntk.base.api.blog.entity.BlogContent;
 import ntk.base.api.blog.model.BlogContentViewRequest;
 
 public class AdBlog extends RecyclerView.Adapter<AdBlog.ViewHolder> {

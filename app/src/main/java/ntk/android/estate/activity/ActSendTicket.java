@@ -48,7 +48,7 @@ import ntk.android.estate.utill.AppUtill;
 import ntk.android.estate.utill.FontManager;
 import ntk.android.estate.utill.Regex;
 import ntk.base.api.ticket.interfase.ITicket;
-import ntk.base.api.ticket.model.TicketingDepartemen;
+import ntk.base.api.ticket.entity.TicketingDepartemen;
 import ntk.base.api.ticket.model.TicketingDepartemenList;
 import ntk.base.api.ticket.model.TicketingSubmitRequest;
 import ntk.base.api.ticket.model.TicketingSubmitResponse;
@@ -207,7 +207,7 @@ public class ActSendTicket extends AppCompatActivity {
                                     request.Name = Txts.get(2).getText().toString();
                                     request.HtmlBody = Txts.get(1).getText().toString();
                                     request.Title = Txts.get(0).getText().toString();
-                                    request.uploadName = attaches;
+                                    request.UploadName = attaches.toString();
 
                                     RetrofitManager retro = new RetrofitManager(this);
                                     Map<String, String> headers = new ConfigRestHeader().GetHeaders(this);

@@ -26,7 +26,7 @@ import ntk.android.estate.config.ConfigStaticValue;
 import ntk.android.estate.utill.AppUtill;
 import ntk.android.estate.utill.FontManager;
 import ntk.base.api.blog.interfase.IBlog;
-import ntk.base.api.blog.model.BlogComment;
+import ntk.base.api.blog.entity.BlogComment;
 import ntk.base.api.blog.model.BlogCommentResponse;
 import ntk.base.api.blog.model.BlogCommentViewRequest;
 import ntk.base.api.utill.NTKClientAction;

@@ -26,7 +26,7 @@ import ntk.android.estate.config.ConfigStaticValue;
 import ntk.android.estate.utill.EndlessRecyclerViewScrollListener;
 import ntk.android.estate.utill.FontManager;
 import ntk.base.api.news.interfase.INews;
-import ntk.base.api.news.model.NewsContent;
+import ntk.base.api.news.entity.NewsContent;
 import ntk.base.api.news.model.NewsContentListRequest;
 import ntk.base.api.news.model.NewsContentResponse;
 import ntk.base.api.utill.RetrofitManager;

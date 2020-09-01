@@ -21,9 +21,10 @@ import butterknife.ButterKnife;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.ActTicketAnswer;
 import ntk.android.estate.utill.FontManager;
-import ntk.base.api.model.Filters;
+
+import ntk.base.api.baseModel.Filters;
 import ntk.base.api.ticket.model.TicketingAnswerListRequest;
-import ntk.base.api.ticket.model.TicketingTask;
+import ntk.base.api.ticket.entity.TicketingTask;
 
 public class AdTicket extends RecyclerView.Adapter<AdTicket.ViewHolder> {
 
