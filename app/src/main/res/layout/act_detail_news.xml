@@ -134,7 +134,7 @@
         android:visibility="gone">
 
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none">
@@ -218,7 +218,7 @@
                     android:layout_marginRight="15dp"
                     android:orientation="horizontal">
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerTabActDetailNews"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
@@ -251,7 +251,7 @@
 
                 </RelativeLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerCommentActDetailNews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -260,7 +260,7 @@
                     android:scrollbars="none"
                     tools:targetApi="lollipop" />
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
     <LinearLayout
