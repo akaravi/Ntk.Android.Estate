@@ -27,7 +27,7 @@
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@null"
-                android:scaleType="centerCrop" />
+                android:scaleType="fitXY" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,11 +76,12 @@
             <RatingBar
                 android:id="@+id/ratingBarRowRecyclerNews"
                 android:layout_width="wrap_content"
-                android:layout_height="27dp"
+                android:layout_height="19dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="10dp"
                 android:layoutDirection="rtl"
+                android:isIndicator="true"
                 android:progressDrawable="@drawable/rating_bar_layer"
                 android:rating="3" />
 

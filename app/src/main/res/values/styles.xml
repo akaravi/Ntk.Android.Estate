@@ -1,16 +1,33 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="toolbarColorText">@color/toolbarColorText</item>
+        <item name="toolbarColorBackground">@color/toolbarColorBackground</item>
+        <item name="colorTextPrimary">@color/colorTextPrimary</item>
+        <item name="colorTextSecondary">@color/colorTextSecondary</item>
+        <item name="ntk_base_logo">@drawable/logo</item>
+        <item name="ntk_splash_background">@drawable/splash</item>
+        <item name="ntk_splash_lottie_loading">@raw/loading</item>
+        <item name="ntk_splash_lottie_logo">@raw/loading</item>
+        <item name="ntk_splash_logo">@drawable/logo</item>
+        <item name="ntk_notification_color">@color/colorWhite</item>
+        <item name="Theme_NTK_Intro">@style/AppTheme</item>
+        <item name="Theme_NTK_Register">@style/AppTheme</item>
+        <item name="Theme_NTK_Poll_Detail">@style/AppTheme</item>
+        <item name="Theme_NTK_Notification">@style/AppTheme</item>
+        <item name="Theme_NTK_Fag">@style/AppTheme</item>
+        <item name="Theme_NTK_Ticket_Answer">@style/AppTheme</item>
+        <item name="Theme_NTK_Ticket_Search">@style/AppTheme</item>
+        <item name="Theme_NTK_Ticket_List">@style/AppTheme</item>
+        <item name="Theme_NTK_Faq_Search">@style/AppTheme</item>
+
     </style>
 
-    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    </style>
 
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light">
         <item name="windowNoTitle">true</item>
@@ -20,18 +37,5 @@
         <item name="android:windowDisablePreview">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="TextLabel" parent="TextAppearance.AppCompat">
-        <item name="android:textColorHint">@color/colorGrayText</item>
-        <item name="android:textSize">16sp</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlNormal">@color/colorGrayText</item>
-        <item name="colorControlActivated">@color/colorAccent</item>
-
-    </style>
 
 </resources>

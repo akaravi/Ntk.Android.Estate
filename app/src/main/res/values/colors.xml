@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4a73ff</color>
-    <color name="colorPrimaryDark">#6655ff</color>
-    <color name="colorAccent">#2eb3ff</color>
-    <color name="colorTextOne">#4855c6</color>
-    <color name="colorTextTwo">#3f4551</color>
-    <color name="colorView">#403f4551</color>
-    <color name="colorWhite">#ffffff</color>
-    <color name="colorScroll">#f1f0f8</color>
-    <color name="colorBlueDark">#3f62e7</color>
-    <color name="colorBlueLight">#4c71fe</color>
-    <color name="colorTextBlack">#211c0e</color>
+    <color name="colorPrimary">#004D40</color>
+    <color name="colorPrimaryDark">#880E4F</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccentDark">#303FDB</color>
+    <color name="colorTextPrimary">#202020</color>
+    <color name="colorTextSecondary">#454545</color>
+    <color name="toolbarColorText">@color/warningColor</color>
+    <color name="toolbarColorBackground">@color/colorPrimary</color>
+
     <color name="colorMenu">#030303</color>
+    <color name="colorTextBlack">#211c0e</color>
     <color name="colorGrayText">#363f45</color>
-    <color name="colorGray">#bdbdbd</color>
-    <color name="colorGreen">#4caf50</color>
+    <color name="colorWhite">#fff</color>
+
 </resources>

@@ -1,6 +1,7 @@
-*.iml
+.iml
 .gradle
 /local.properties
+/.idea/*
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
@@ -11,10 +12,11 @@
 /build
 /captures
 .externalNativeBuild
-.idea/codeStyles/Project.xml
-.idea/gradle.xml
-.idea/runConfigurations.xml
-.idea/vcs.xml
-.idea/misc.xml
+/.idea
+/Log.txt
+/.idea/gradle.xml
+/app/app.iml
+/settings.gradle
 NtkCmsBuild.bat
 NtkCmsGitPull.bat
+settings.gradle
