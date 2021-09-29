@@ -30,9 +30,7 @@
                 <RelativeLayout
                     android:id="@+id/rlPhoto"
                     android:layout_width="140.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/rlInfo"
-                    android:layout_alignBottom="@+id/rlInfo"
+                    android:layout_height="140dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="8.0dip"
@@ -54,7 +52,7 @@
                         android:background="@drawable/curve_normal_archive_bg"
                         android:visibility="gone">
 
-                        <ntk.android.estate.view.component.CustomTextViewMedium
+                        <TextView
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -67,8 +65,8 @@
 
                     <ntk.android.estate.view.component.CustomImageView
                         android:id="@+id/imgFavorite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
@@ -99,7 +97,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true">
 
-                            <ntk.android.estate.view.component.CustomTextViewRegular
+                            <TextView
                                 android:id="@+id/txtCamera"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -114,8 +112,8 @@
 
                             <ntk.android.estate.view.component.CustomImageView
                                 android:id="@+id/imgCamera"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/btn_camera_white" />
                         </LinearLayout>
@@ -129,7 +127,7 @@
                             android:layout_toStartOf="@+id/llCamera"
                             android:layout_toLeftOf="@+id/llCamera">
 
-                            <ntk.android.estate.view.component.CustomTextViewLight
+                            <TextView
                                 android:id="@+id/txtArea"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -175,7 +173,7 @@
                         android:layout_marginBottom="22.0dip"
                         android:orientation="vertical">
 
-                        <ntk.android.estate.view.component.CustomTextViewRegular
+                        <TextView
                             android:id="@+id/txtTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -190,8 +188,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16.0dip">
 
-                            <ntk.android.estate.view.component.CustomTextViewRegular
-                                android:id="@+id/txtPrice1Title"
+                            <TextView
+                                android:id="@+id/txtPrice1Title1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
@@ -203,13 +201,13 @@
                                 android:textColor="@color/gray"
                                 android:textSize="12sp" />
 
-                            <ntk.android.estate.view.component.CustomTextViewMedium
+                            <TextView
                                 android:id="@+id/txtPrice1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:layout_toEndOf="@+id/txtPrice1Title"
-                                android:layout_toRightOf="@+id/txtPrice1Title"
+                                android:layout_toEndOf="@+id/txtPrice1Title1"
+                                android:layout_toRightOf="@+id/txtPrice1Title1"
                                 android:maxLines="1"
                                 android:singleLine="true"
                                 android:text="۵۶۰ میلیون تومان"
@@ -221,8 +219,8 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content">
 
-                            <ntk.android.estate.view.component.CustomTextViewRegular
-                                android:id="@+id/txtPrice2Title"
+                            <TextView
+                                android:id="@+id/txtPriceTitle2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
@@ -234,13 +232,13 @@
                                 android:textColor="@color/gray"
                                 android:textSize="15sp" />
 
-                            <ntk.android.estate.view.component.CustomTextViewMedium
+                            <TextView
                                 android:id="@+id/txtPrice2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:layout_toEndOf="@+id/txtPrice2Title"
-                                android:layout_toRightOf="@+id/txtPrice2Title"
+                                android:layout_toEndOf="@+id/txtPriceTitle2"
+                                android:layout_toRightOf="@+id/txtPriceTitle2"
                                 android:maxLines="1"
                                 android:singleLine="true"
                                 android:text="۵۶۰ میلیون تومان"
@@ -262,7 +260,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ntk.android.estate.view.component.CustomTextViewRegular
+                <TextView
                     android:id="@+id/txtDate"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
@@ -282,8 +280,8 @@
                     android:layout_height="fill_parent"
                     android:background="@color/background" />
 
-                <ntk.android.estate.view.component.CustomTextViewRegular
-                    android:id="@+id/txtBedNum"
+                <TextView
+                    android:id="@+id/txtProperty3"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_margin="2.0dip"
@@ -302,8 +300,8 @@
                     android:layout_height="fill_parent"
                     android:background="@color/background" />
 
-                <ntk.android.estate.view.component.CustomTextViewRegular
-                    android:id="@+id/txtFloorArea"
+                <TextView
+                    android:id="@+id/txtProperty2"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_margin="2.0dip"
@@ -322,8 +320,8 @@
                     android:layout_height="fill_parent"
                     android:background="@color/background" />
 
-                <ntk.android.estate.view.component.CustomTextViewRegular
-                    android:id="@+id/txtLanduseType"
+                <TextView
+                    android:id="@+id/txtProperty1"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_margin="2.0dip"
