@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/curve_8_gray_image_bg.xml" value="0.2740740740740741" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/curve_normal_archive_bg.xml" value="0.2740740740740741" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/gradient_curve_8_gray_bottom_to_top.xml" value="0.2740740740740741" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/ic_occasion_left_to_right.xml" value="0.2740740740740741" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_add_state.xml" value="0.152" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_blog.xml" value="0.4" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_detail_blog.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_faq.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_inbox.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_intro.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_main.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_news.xml" value="0.4" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_splash.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_support.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_ticket_answer.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/app_base_empty.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/item_grid_menu.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/item_main_list_4.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/main_page_btn.xml" value="0.17426545086119555" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_blog.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_estateproperty.xml" value="0.5623987034035657" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_house.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_news.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_pool_plus_minse.xml" value="0.18110435663627153" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>
