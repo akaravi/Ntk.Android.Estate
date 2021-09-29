@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/_row_recycler_round_bottom.xml" value="0.23692307692307693" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/curve_8_gray_image_bg.xml" value="0.2740740740740741" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/curve_normal_archive_bg.xml" value="0.2740740740740741" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/curve_white_border_red_bg.xml" value="0.240625" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/gradient_curve_8_gray_bottom_to_top.xml" value="0.2740740740740741" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/gray_border_white_bg.xml" value="0.240625" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/ic_occasion_left_to_right.xml" value="0.2740740740740741" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_add_state.xml" value="0.152" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_blog.xml" value="0.4" />
@@ -27,6 +30,7 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_house.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_news.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_pool_plus_minse.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_tab.xml" value="0.12273550724637682" />
       </map>
     </option>
   </component>

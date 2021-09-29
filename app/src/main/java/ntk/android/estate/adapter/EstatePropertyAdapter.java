@@ -3,6 +3,7 @@ package ntk.android.estate.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,8 +31,10 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
     }
 
     public class VH extends RecyclerView.ViewHolder {
+        TextView title;
         public VH(@NonNull View itemView) {
             super(itemView);
+            title=itemView.findViewById(R.id.txtTitle);
         }
 
     }

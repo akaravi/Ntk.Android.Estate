@@ -17,5 +17,6 @@
     <color name="colorSecondaryDark">#003d73</color>
     <color name="colorSecondary">#0072c3</color>
     <color name="background">#f6f6f6</color>
+    <color name="gray_light">#828282</color>
 
 </resources>

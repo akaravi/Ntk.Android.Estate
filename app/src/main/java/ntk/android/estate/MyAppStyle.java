@@ -3,10 +3,7 @@ package ntk.android.estate;
 import ntk.android.base.ApplicationStyle;
 import ntk.android.base.view.ThemeNameEnum;
 import ntk.android.base.view.ViewController;
-import ntk.android.estate.activity.MainActivity_1;
-import ntk.android.estate.activity.MainActivity_2;
-import ntk.android.estate.activity.MainActivity_3;
-import ntk.android.estate.activity.MainActivity_4;
+import ntk.android.estate.activity.EstateListActivity;
 
 public class MyAppStyle extends ApplicationStyle {
 
@@ -24,14 +21,15 @@ public class MyAppStyle extends ApplicationStyle {
 
     @Override
     public Class<?> getMainActivity() {
-        if (theme == ThemeNameEnum.THEME4)
-            return MainActivity_4.class;
-        else if (theme == ThemeNameEnum.THEME3)
-            return MainActivity_3.class;
-        else if (theme== ThemeNameEnum.THEME2)
-            return MainActivity_2.class;
-        else
-            return MainActivity_1.class;
+        return EstateListActivity.class;
+//        if (theme == ThemeNameEnum.THEME4)
+//            return MainActivity_4.class;
+//        else if (theme == ThemeNameEnum.THEME3)
+//            return MainActivity_3.class;
+//        else if (theme== ThemeNameEnum.THEME2)
+//            return MainActivity_2.class;
+//        else
+//            return MainActivity_1.class;
     }
 
 }

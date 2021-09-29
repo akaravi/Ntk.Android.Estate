@@ -30,13 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.MainActivity_1"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.AboutUsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
 
         <activity
             android:name=".activity.NewsListActivity"
@@ -46,35 +39,14 @@
             android:name=".activity.NewsDetailActivity"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".activity.ArticleListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.ArticleDetailActivity"
-            android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".activity.NewsSearchActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.ArticleSearchActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MainActivity_2"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MainActivity_3"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MainActivity_4"
-            android:screenOrientation="portrait" />
         <activity android:name=".activity.EstateListActivity" />
         <activity android:name=".activity.EstateDetailActivity" />
 
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="ntk.android.ticket.APPNTK"
+            android:authorities="ntk.android.estate.APPNTK"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
