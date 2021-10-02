@@ -192,6 +192,7 @@
                                 android:id="@+id/txtPrice1Title1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginEnd="5.0dip"
                                 android:layout_marginRight="5.0dip"
@@ -206,11 +207,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:layout_toEndOf="@+id/txtPrice1Title1"
-                                android:layout_toRightOf="@+id/txtPrice1Title1"
+
+                                android:layout_toLeftOf="@+id/txtPrice1Title1"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="۵۶۰ میلیون تومان"
                                 android:textColor="@color/colorSecondaryDark"
                                 android:textSize="15sp" />
                         </RelativeLayout>
@@ -223,6 +223,7 @@
                                 android:id="@+id/txtPriceTitle2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginEnd="5.0dip"
                                 android:layout_marginRight="5.0dip"
@@ -237,11 +238,39 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:layout_toEndOf="@+id/txtPriceTitle2"
-                                android:layout_toRightOf="@+id/txtPriceTitle2"
+                                android:layout_toLeftOf="@+id/txtPriceTitle2"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="۵۶۰ میلیون تومان"
+                                android:textColor="@color/colorSecondaryDark"
+                                android:textSize="15sp" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/txtPriceTitle3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="5.0dip"
+                                android:layout_marginRight="5.0dip"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="اجاره:"
+                                android:textColor="@color/gray"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/txtPrice3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@+id/txtPriceTitle3"
+                                android:maxLines="1"
+                                android:singleLine="true"
                                 android:textColor="@color/colorSecondaryDark"
                                 android:textSize="15sp" />
                         </RelativeLayout>
