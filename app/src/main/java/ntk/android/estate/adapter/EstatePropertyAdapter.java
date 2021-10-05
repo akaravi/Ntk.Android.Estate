@@ -48,7 +48,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
         holder.date.setText(AppUtill.DateDifference(item.CreatedDate, now));
         loadImage(item.LinkMainImageIdSrc, holder.image);
         holder.setPictureCount(item);
-
+        holder.setProperties(item);
     }
 
     public class VH extends RecyclerView.ViewHolder {
@@ -93,7 +93,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
                     price1.setVisibility(View.VISIBLE);
                     priceTitle1.setText("فروش :  ");
                     if (m.SalePrice != null && m.SalePrice != 0)
-                        price1.setText(m.SalePrice + "  " + m.UnitPrice);
+                        price1.setText(m.SalePrice + "  " + m.UnitSalePrice);
                     if (m.SalePriceByAgreement)
                         price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
                 } else {
@@ -104,9 +104,9 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
                 if (m.RentPrice != null || m.RentPriceByAgreement) {
                     priceTitle2.setVisibility(View.VISIBLE);
                     price2.setVisibility(View.VISIBLE);
-                    priceTitle2.setText("اچاره :  ");
+                    priceTitle2.setText("اجاره :  ");
                     if (m.RentPrice != null && m.RentPrice != 0)
-                        price2.setText(m.RentPrice + "  " + m.UnitPrice);
+                        price2.setText(m.RentPrice + "  " + m.UnitSalePrice);
                     if (m.RentPriceByAgreement)
                         price2.setText(price2.getText().toString().isEmpty() ? "توافقی" : price2.getText().toString() + "|| توافقی");
                 } else {
@@ -119,7 +119,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
                     price3.setVisibility(View.VISIBLE);
                     priceTitle3.setText("رهن :  ");
                     if (m.DepositPrice != null && m.DepositPrice != 0)
-                        price3.setText(m.DepositPrice + "  " + m.UnitPrice);
+                        price3.setText(m.DepositPrice + "  " + m.UnitSalePrice);
                     if (m.DepositPriceByAgreement)
                         price3.setText(price3.getText().toString().isEmpty() ? "توافقی" : price3.getText().toString() + "|| توافقی");
                 } else {
@@ -138,6 +138,12 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
                 pictureCount.setVisibility(View.VISIBLE);
             } else
                 pictureCount.setVisibility(View.GONE);
+        }
+
+        public void setProperties(EstatePropertyModel item) {
+            property1.setText(item.PropertyTypeLanduse.Title);
+            property2.setText(item.PropertyTypeLanduse.TitlePartition + " : " + item.Partition);
+            property3.setText("متراژ نمیدونم");
         }
     }
 }
