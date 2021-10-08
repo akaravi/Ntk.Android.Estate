@@ -92,7 +92,8 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     //for lottie
     implementation 'com.airbnb.android:lottie:3.4.2'
-
+    //for iamge slider
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
     //for functional codding
     implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.2'
     //for ripple
