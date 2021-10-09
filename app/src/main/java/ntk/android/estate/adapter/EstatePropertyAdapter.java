@@ -42,6 +42,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), EstateDetailActivity.class);
             intent.putExtra(Extras.EXTRA_FIRST_ARG, item.Id);
+            intent.putExtra(Extras.EXTRA_SECOND_ARG, item.Title);
             view.getContext().startActivity(intent);
         });
         holder.title.setText(item.Title);
