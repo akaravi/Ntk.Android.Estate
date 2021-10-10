@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
+import ntk.android.estate.R;
+
 public class MapUtility {
     public static final String MAP_URL = "https://maps.googleapis.com";
 
@@ -53,7 +55,8 @@ public class MapUtility {
     public static void showProgress(final Context context) {
         try {
             if (!((Activity) context).isFinishing()) {
-                View layout = LayoutInflater.from(context).inflate(R.layout.popup_loading, null);
+                //todo change
+                View layout = LayoutInflater.from(context).inflate(R.layout.dialog_load, null);
                 popupWindow = new Dialog(context, android.R.style.Theme_Translucent);
                 popupWindow.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 popupWindow.setContentView(layout);
