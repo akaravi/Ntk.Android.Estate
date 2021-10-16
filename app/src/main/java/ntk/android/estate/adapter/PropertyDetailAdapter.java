@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 
-class PropertyDetailAdapter extends BaseRecyclerAdapter<EstatePropertyDetailValueModel, PropertyDetailAdapter.VH> {
+public class PropertyDetailAdapter extends BaseRecyclerAdapter<EstatePropertyDetailValueModel, PropertyDetailAdapter.VH> {
     public PropertyDetailAdapter(ArrayList<EstatePropertyDetailValueModel> list) {
         super(list);
     }

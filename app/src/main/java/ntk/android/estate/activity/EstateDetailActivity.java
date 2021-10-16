@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -25,7 +27,9 @@ import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
+import ntk.android.estate.adapter.EstateConstractAdapter;
 import ntk.android.estate.adapter.ImageSliderAdapter;
+import ntk.android.estate.adapter.PropertyDetailGroupsAdapter;
 
 public class EstateDetailActivity extends BaseActivity {
     public String Id = "";
@@ -83,7 +87,13 @@ public class EstateDetailActivity extends BaseActivity {
         images.addAll(model.LinkExtraImageIdsSrc);
         imageSlider.renewUrls(images);
         //correct location add
-        //add
+        //add contracts
+        RecyclerView contractsRc = findViewById(R.id.contractsRc);
+        contractsRc.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        contractsRc.setAdapter(new EstateConstractAdapter(model.Contracts));
+        //add details
+        RecyclerView detailsRc = findViewById(R.id.detailsGroupRc);
+        detailsRc.setAdapter(new PropertyDetailGroupsAdapter(model.PropertyDetailGroups));
     }
 
     private String createShareMassage() {
