@@ -32,36 +32,52 @@ public class EstateConstractAdapter extends BaseRecyclerAdapter<EstateContractMo
 
     public class VC extends RecyclerView.ViewHolder {
         TextView price1;
-        TextView title;
-        ImageView icon;
+        TextView title1;
+        ImageView icon1;
+        TextView price2;
+        TextView title2;
+        ImageView icon2;
 
         public VC(@NonNull View itemView) {
             super(itemView);
             price1 = itemView.findViewById(R.id.txtPrice1);
-            title = itemView.findViewById(R.id.txtPrice1Title1);
-            icon = itemView.findViewById(R.id.priceImage1);
+            title1 = itemView.findViewById(R.id.txtPrice1Title1);
+            icon1 = itemView.findViewById(R.id.priceImage1);
+            price2 = itemView.findViewById(R.id.txtPrice2);
+            title2 = itemView.findViewById(R.id.txtPriceTitle2);
+            icon2 = itemView.findViewById(R.id.priceImage2);
         }
 
         public void setData(EstateContractModel item) {
-            icon.setImageResource(R.drawable.contracts);
+            price2.setVisibility(View.GONE);
+            title2.setVisibility(View.GONE);
+            icon2.setVisibility(View.GONE);
+            icon1.setImageResource(R.drawable.contracts);
+
             if (item.SalePrice != null || item.SalePriceByAgreement) {
-                title.setText("فروش :  ");
+
+                title1.setText("فروش :  ");
                 if (item.SalePrice != null && item.SalePrice != 0)
                     price1.setText(item.SalePrice + "  " + item.UnitSalePrice);
                 if (item.SalePriceByAgreement)
                     price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
+
             } else if (item.RentPrice != null || item.RentPriceByAgreement) {
-                title.setText("اجاره :  ");
+                title1.setText("اجاره :  ");
                 if (item.RentPrice != null && item.RentPrice != 0)
                     price1.setText(item.RentPrice + "  " + item.UnitSalePrice);
                 if (item.RentPriceByAgreement)
                     price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
-            } else if (item.DepositPrice != null || item.DepositPriceByAgreement) {
-                title.setText("رهن :  ");
-                if (item.DepositPrice != null && item.DepositPrice != 0)
-                    price1.setText(item.DepositPrice + "  " + item.UnitSalePrice);
-                if (item.DepositPriceByAgreement)
-                    price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
+                if (item.DepositPrice != null || item.DepositPriceByAgreement) {
+                    price2.setVisibility(View.VISIBLE);
+                    title2.setVisibility(View.VISIBLE);
+                    icon2.setVisibility(View.VISIBLE);
+                    title1.setText("رهن :  ");
+                    if (item.DepositPrice != null && item.DepositPrice != 0)
+                        price1.setText(item.DepositPrice + "  " + item.UnitSalePrice);
+                    if (item.DepositPriceByAgreement)
+                        price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
+                }
             }
         }
     }

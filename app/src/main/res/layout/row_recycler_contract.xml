@@ -1,37 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16.0dip">
+    android:orientation="vertical">
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:layout_weight="1" />
-
-    <TextView
-        android:id="@+id/txtPrice1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColor="@color/colorSecondaryDark"
-        android:textSize="15sp" />
+        android:layout_marginTop="16.0dip"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txtPrice1Title1"
-        android:layout_width="wrap_content"
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/txtPrice1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtPrice1Title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5.0dip"
+            android:layout_marginRight="5.0dip"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="رهن:"
+            android:textColor="@color/gray"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/priceImage1"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5.0dip"
-        android:layout_marginRight="5.0dip"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:text="رهن:"
-        android:textColor="@color/gray"
-        android:textSize="12sp" />
+        android:layout_marginTop="16.0dip"
+        android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/priceImage1"
-        android:layout_width="35dp"
-        android:layout_height="35dp" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/txtPrice2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtPriceTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5.0dip"
+            android:layout_marginRight="5.0dip"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="رهن:"
+            android:textColor="@color/gray"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/priceImage2"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+    </LinearLayout>
 </LinearLayout>
