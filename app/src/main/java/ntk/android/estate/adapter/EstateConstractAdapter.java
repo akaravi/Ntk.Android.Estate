@@ -72,11 +72,13 @@ public class EstateConstractAdapter extends BaseRecyclerAdapter<EstateContractMo
                     price2.setVisibility(View.VISIBLE);
                     title2.setVisibility(View.VISIBLE);
                     icon2.setVisibility(View.VISIBLE);
-                    title1.setText("رهن :  ");
+
+                    icon2.setImageResource(R.drawable.contracts);
+                    title2.setText("رهن :  ");
                     if (item.DepositPrice != null && item.DepositPrice != 0)
-                        price1.setText(item.DepositPrice + "  " + item.UnitSalePrice);
+                        price2.setText(item.DepositPrice + "  " + item.UnitSalePrice);
                     if (item.DepositPriceByAgreement)
-                        price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
+                        price2.setText(price2.getText().toString().isEmpty() ? "توافقی" : price2.getText().toString() + "|| توافقی");
                 }
             }
         }
