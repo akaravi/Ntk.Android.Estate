@@ -2,6 +2,7 @@ package ntk.android.estate.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,6 +19,8 @@ import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.utill.AppUtill;
+import ntk.android.base.utill.FontManager;
+import ntk.android.base.view.NViewUtils;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.EstateDetailActivity;
 
@@ -84,6 +87,24 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
             priceTitle3 = itemView.findViewById(R.id.txtPriceTitle3);
             favorite = itemView.findViewById(R.id.imgFavorite);
             image = itemView.findViewById(R.id.imgPhoto);
+            setFont();
+        }
+
+        private void setFont() {
+            Typeface bold = FontManager.T1_BOLD_Typeface(itemView.getContext());
+            Typeface req = FontManager.T1_Typeface(itemView.getContext());
+            title.setTypeface(bold);
+            property1.setTypeface(req);
+            property1.setTypeface(req);
+            property3.setTypeface(req);
+            date.setTypeface(req);
+            pictureCount.setTypeface(bold);
+            price1.setTypeface(req);
+            price2.setTypeface(req);
+            price3.setTypeface(req);
+            priceTitle1.setTypeface(req);
+            priceTitle2.setTypeface(req);
+            priceTitle3.setTypeface(req);
         }
 
         public void setContract(EstatePropertyModel item) {
@@ -94,7 +115,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
                     price1.setVisibility(View.VISIBLE);
                     priceTitle1.setText("فروش :  ");
                     if (m.SalePrice != null && m.SalePrice != 0)
-                        price1.setText(m.SalePrice + "  " + m.UnitSalePrice);
+                        price1.setText(NViewUtils.PriceFormat(m.SalePrice) + "  " + m.UnitSalePrice);
                     if (m.SalePriceByAgreement)
                         price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
                 } else {
@@ -107,7 +128,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
                     price2.setVisibility(View.VISIBLE);
                     priceTitle2.setText("اجاره :  ");
                     if (m.RentPrice != null && m.RentPrice != 0)
-                        price2.setText(m.RentPrice + "  " + m.UnitSalePrice);
+                        price2.setText(NViewUtils.PriceFormat(m.RentPrice) + "  " + m.UnitSalePrice);
                     if (m.RentPriceByAgreement)
                         price2.setText(price2.getText().toString().isEmpty() ? "توافقی" : price2.getText().toString() + "|| توافقی");
                 } else {
@@ -120,7 +141,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
                     price3.setVisibility(View.VISIBLE);
                     priceTitle3.setText("رهن :  ");
                     if (m.DepositPrice != null && m.DepositPrice != 0)
-                        price3.setText(m.DepositPrice + "  " + m.UnitSalePrice);
+                        price3.setText(NViewUtils.PriceFormat(m.DepositPrice) + "  " + m.UnitSalePrice);
                     if (m.DepositPriceByAgreement)
                         price3.setText(price3.getText().toString().isEmpty() ? "توافقی" : price3.getText().toString() + "|| توافقی");
                 } else {
@@ -144,7 +165,13 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
         public void setProperties(EstatePropertyModel item) {
             property1.setText(item.PropertyTypeLanduse.Title);
             property2.setText(item.PropertyTypeLanduse.TitlePartition + " : " + item.Partition);
-            property3.setText("متراژ نمیدونم");
+            if (item.Area != 0) {
+                property3.setVisibility(View.VISIBLE);
+                property3.setText(item.Area + " متر ");
+            } else {
+                property3.setVisibility(View.GONE);
+
+            }
         }
     }
 }

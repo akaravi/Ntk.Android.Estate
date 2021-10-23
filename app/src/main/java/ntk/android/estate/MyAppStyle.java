@@ -1,6 +1,8 @@
 package ntk.android.estate;
 
 import ntk.android.base.ApplicationStyle;
+import ntk.android.base.styles.BaseModuleStyle;
+import ntk.android.base.styles.UnitStyleEnum;
 import ntk.android.base.view.ThemeNameEnum;
 import ntk.android.base.view.ViewController;
 import ntk.android.estate.activity.EstateListActivity;
@@ -17,6 +19,12 @@ public class MyAppStyle extends ApplicationStyle {
                 .setError_button(R.id.btn_error_tryAgain)
                 .setError_label(R.id.tvError);
         return vc;
+    }
+
+    @Override
+    public void Init() {
+        super.Init();
+        modules.put(UnitStyleEnum.Splash, new BaseModuleStyle(ThemeNameEnum.THEME2.code(), 2, 1));
     }
 
     @Override

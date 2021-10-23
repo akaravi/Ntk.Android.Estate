@@ -98,7 +98,8 @@ dependencies {
     implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.2'
     //for ripple
     implementation 'com.balysv:material-ripple:1.0.2'
-
+    //for map
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
 
     api project(path: ':baseActivity')
 //    api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"

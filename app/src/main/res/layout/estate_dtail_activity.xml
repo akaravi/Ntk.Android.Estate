@@ -26,29 +26,54 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="300dp"
                     android:layout_margin="16dp"
                     app:cardCornerRadius="6dp">
 
-                    <com.smarteist.autoimageslider.SliderView
-                        android:id="@+id/imageSlider"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                        app:sliderAnimationDuration="600"
-                        app:sliderAutoCycleDirection="back_and_forth"
-                        app:sliderAutoCycleEnabled="true"
-                        app:sliderIndicatorAnimationDuration="600"
-                        app:sliderIndicatorGravity="center_horizontal|bottom"
-                        app:sliderIndicatorMargin="15dp"
-                        app:sliderIndicatorOrientation="horizontal"
-                        app:sliderIndicatorPadding="3dp"
-                        app:sliderIndicatorRadius="2dp"
-                        app:sliderIndicatorSelectedColor="@color/colorAccent"
-                        app:sliderIndicatorUnselectedColor="#FFF"
-                        app:sliderScrollTimeInSec="@integer/material_motion_duration_short_1"
-                        app:sliderStartAutoCycle="false" />
+                        android:layout_height="match_parent">
 
+                        <com.smarteist.autoimageslider.SliderView
+                            android:id="@+id/imageSlider"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                            app:sliderAnimationDuration="600"
+                            app:sliderAutoCycleDirection="back_and_forth"
+                            app:sliderAutoCycleEnabled="true"
+                            app:sliderIndicatorAnimationDuration="600"
+                            app:sliderIndicatorGravity="center_horizontal|bottom"
+                            app:sliderIndicatorMargin="15dp"
+                            app:sliderIndicatorOrientation="horizontal"
+                            app:sliderIndicatorPadding="3dp"
+                            app:sliderIndicatorRadius="2dp"
+                            app:sliderIndicatorSelectedColor="@color/colorAccent"
+                            app:sliderIndicatorUnselectedColor="#FFF"
+                            app:sliderScrollTimeInSec="@integer/material_motion_duration_short_1"
+                            app:sliderStartAutoCycle="false" />
+
+                        <FrameLayout
+                            android:id="@+id/mapContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone">
+
+                            <fragment
+                                android:id="@+id/mapFragment"
+                                android:name="com.google.android.gms.maps.SupportMapFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </FrameLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/toggleMaps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_margin="8dp"
+                            android:text="نقشه" />
+                    </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </RelativeLayout>
 
@@ -199,18 +224,26 @@
             android:layout_below="@id/ToolbarDetail"
             android:orientation="vertical"
             tools:ignore="WebViewLayout">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/contractsRc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <ntk.android.base.view.NWebView
-                android:id="@+id/WebViewBodyDetail"
+                android:id="@+id/WebViewDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layoutDirection="rtl"
                 android:textDirection="rtl" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="مشخصات اصلی" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/detailsGroupRc"
                 android:layout_width="match_parent"

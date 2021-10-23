@@ -16,6 +16,11 @@ import ntk.android.estate.adapter.EstatePropertyAdapter;
 
 public class EstateListActivity extends BaseFilterModelListActivity<EstatePropertyModel> {
     @Override
+    protected int getResourceLayout() {
+        return R.layout.activity_estate_list;
+    }
+
+    @Override
     protected void onCreated() {
         super.onCreated();
         ((TextView) findViewById(R.id.lblTitle)).setText(R.string.per_estate);
