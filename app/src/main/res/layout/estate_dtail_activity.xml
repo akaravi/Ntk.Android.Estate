@@ -59,11 +59,10 @@
                             android:layout_height="match_parent"
                             android:visibility="gone">
 
-                            <fragment
-                                android:id="@+id/mapFragment"
-                                android:name="com.google.android.gms.maps.SupportMapFragment"
+                            <org.rajman.ui.MapView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:id="@+id/map"/>
                         </FrameLayout>
 
                         <com.google.android.material.button.MaterialButton
