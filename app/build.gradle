@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 def BaseVersion='1.5.33'
@@ -50,19 +50,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-//    repositories {
-//        google()
-//
-//        maven { url "https://jitpack.io" }
-//        maven {
-//            url 'https://dl.bintray.com/omnivirt/OmniVirtSDK'
-//        }
-//        maven { url 'https://dl.bintray.com/drummer-aidan/maven' }
-//        maven {
-//            url "http://dl.bintray.com/lukaville/maven"
-//            allowInsecureProtocol = true
-//        }
-//    }
 }
 configurations.all {
     resolutionStrategy.force 'androidx.annotation:annotation:1.2.0'
@@ -110,8 +97,8 @@ dependencies {
         implementation 'neshan-android-sdk:mobile-sdk:1.0.0'
         implementation 'neshan-android-sdk:services-sdk:1.0.0'
         implementation 'neshan-android-sdk:common-sdk:0.0.1'
-    implementation 'com.google.android.gms:play-services-gcm:16.1.0'
-    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-gcm:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
     api project(path: ':baseActivity')
 //    api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
 }
