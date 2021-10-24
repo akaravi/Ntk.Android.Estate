@@ -1,5 +1,6 @@
 package ntk.android.estate.activity;
 
+import android.content.Intent;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,5 +35,10 @@ public class EstateListActivity extends BaseFilterModelListActivity<EstateProper
     @Override
     public RecyclerView.Adapter createAdapter() {
         return new EstatePropertyAdapter(this, models);
+    }
+
+    @Override
+    public void ClickSearch() {
+        startActivity(new Intent());
     }
 }

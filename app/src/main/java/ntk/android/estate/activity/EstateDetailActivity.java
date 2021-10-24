@@ -11,11 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.google.android.material.button.MaterialButton;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -40,11 +36,11 @@ import ntk.android.estate.adapter.EstateConstractAdapter;
 import ntk.android.estate.adapter.ImageSliderAdapter;
 import ntk.android.estate.adapter.PropertyDetailGroupsAdapter;
 
-public class EstateDetailActivity extends BaseActivity implements OnMapReadyCallback {
+public class EstateDetailActivity extends BaseActivity {
     public String Id = "";
     private EstatePropertyModel model;
     ImageSliderAdapter imageSlider;
-    private GoogleMap mMap;
+
     private boolean mapIsSet = false;
 
     @Override
@@ -126,9 +122,9 @@ public class EstateDetailActivity extends BaseActivity implements OnMapReadyCall
         RecyclerView detailsRc = findViewById(R.id.detailsGroupRc);
         detailsRc.setAdapter(new PropertyDetailGroupsAdapter(model.PropertyDetailGroups));
         //check location is set or not
-        if (!mapIsSet & mMap != null) {
-            onMapReady(mMap);
-        }
+//        if (!mapIsSet & mMap != null) {
+//            onMapReady(mMap);
+//        }
     }
 
     private String createShareMassage() {
@@ -152,21 +148,20 @@ public class EstateDetailActivity extends BaseActivity implements OnMapReadyCall
     }
 
 
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        // googleMapOptions.mapType(googleMap.MAP_TYPE_HYBRID)
-        //todo set defualt locaiton
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(0.0, 0.0), 15));
-        // Add a marker in Sydney and move the camera
-        if (model != null) {
-            //if model lat lang is not null
-            LatLng latLng = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
-            mMap.addMarker(new MarkerOptions()
-                    .position(latLng)
-                    .title("مکان مورد نظر"));
-            mapIsSet = true;
-        }
+    public void onMapReady(@NonNull int googleMap) {
+//        mMap = googleMap;
+//        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//        // googleMapOptions.mapType(googleMap.MAP_TYPE_HYBRID)
+//        //todo set defualt locaiton
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(0.0, 0.0), 15));
+//        // Add a marker in Sydney and move the camera
+//        if (model != null) {
+//            //if model lat lang is not null
+//            LatLng latLng = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
+//            mMap.addMarker(new MarkerOptions()
+//                    .position(latLng)
+//                    .title("مکان مورد نظر"));
+//            mapIsSet = true;
+//        }
     }
 }

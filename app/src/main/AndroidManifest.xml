@@ -43,6 +43,7 @@
         <activity android:name=".activity.EstateListActivity" />
         <activity android:name=".activity.EstateDetailActivity" />
         <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity.SearchEstateActivity" />
 
 
         <provider

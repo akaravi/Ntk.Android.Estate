@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/estate_detail_title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="کلمه کلیدی :" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark" />
+
+            <TextView
+                style="@style/estate_detail_title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="موقعیت :" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark" />
+
+            <TextView
+                style="@style/estate_detail_title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="نوع ملک :" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/propertyTypeRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark" />
+
+            <TextView
+                style="@style/estate_detail_title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="نوع قرار داد :" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contractTypeRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark" />
+
+            <TextView
+                style="@style/estate_detail_title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="محدوده قیمت :" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark" />
+
+            <TextView
+                style="@style/estate_detail_title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="متراژ :" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark" />
+            <TextView
+                style="@style/estate_detail_title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="امکانات ملک :" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
