@@ -64,17 +64,17 @@ public class EstateDetailActivity extends BaseActivity {
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.startAutoCycle();
         findViewById(R.id.toggleMaps).setOnClickListener(view -> {
-            View mapView = findViewById(R.id .mapContainer);
+            View mapView = findViewById(R.id .map);
             MaterialButton button = (findViewById(R.id.toggleMaps));
             View slider = findViewById(R.id.imageSlider);
             if (mapView.getVisibility() == View.VISIBLE) {
                 button.setText("تصاویر");
                 slider.setVisibility(View.VISIBLE);
                 mapView.setVisibility(View.GONE);
-            } else
+            } else{
                 button.setText("نقشه");
             slider.setVisibility(View.GONE);
-            mapView.setVisibility(View.VISIBLE);
+            mapView.setVisibility(View.VISIBLE);}
         });
     }
 
