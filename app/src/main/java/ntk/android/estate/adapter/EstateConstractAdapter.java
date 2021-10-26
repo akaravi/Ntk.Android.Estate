@@ -56,7 +56,7 @@ public class EstateConstractAdapter extends BaseRecyclerAdapter<EstateContractMo
 
             if (item.SalePrice != null || item.SalePriceByAgreement) {
 
-                title1.setText("فروش :  ");
+                title1.setText(item.ContractType.Title + " :  ");
                 if (item.SalePrice != null && item.SalePrice != 0)
                     price1.setText(item.SalePrice + "  " + item.UnitSalePrice);
                 if (item.SalePriceByAgreement)
