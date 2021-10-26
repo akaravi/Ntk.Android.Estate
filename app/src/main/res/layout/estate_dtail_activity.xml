@@ -20,19 +20,12 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_marginTop="?actionBarSize"
                 app:layout_collapseMode="parallax">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_margin="16dp"
-                    app:cardCornerRadius="6dp">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+
 
                         <com.smarteist.autoimageslider.SliderView
                             android:id="@+id/imageSlider"
@@ -53,17 +46,10 @@
                             app:sliderScrollTimeInSec="@integer/material_motion_duration_short_1"
                             app:sliderStartAutoCycle="false" />
 
-                        <FrameLayout
-                            android:id="@+id/mapContainer"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:visibility="gone">
-
                             <org.neshan.mapsdk.MapView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:id="@+id/map"/>
-                        </FrameLayout>
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/toggleMaps"
@@ -72,8 +58,6 @@
                             android:layout_alignParentBottom="true"
                             android:layout_margin="8dp"
                             android:text="نقشه" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
             </RelativeLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -176,18 +160,6 @@
                     app:mrl_rippleColor="#10000000"
                     app:mrl_rippleRoundedCorners="100dp">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_centerInParent="true"
-                            android:contentDescription="@null"
-                            app:srcCompat="@drawable/ic_comment"
-                            app:tint="?attr/toolbarColorText" />
-                    </RelativeLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>
 
                 <TextView
