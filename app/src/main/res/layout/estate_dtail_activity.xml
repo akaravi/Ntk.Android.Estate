@@ -209,7 +209,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/date"
+                        android:id="@+id/dateTv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -229,11 +229,11 @@
                         android:textSize="14sp" />
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="4dp"
                     android:layout_margin="16dp"
-                    android:background="@drawable/dash_line" />
+                    android:src="@drawable/dash_line" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/contractsRc"

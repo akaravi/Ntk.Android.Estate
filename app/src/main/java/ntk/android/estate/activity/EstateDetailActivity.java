@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.google.android.material.button.MaterialButton;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -64,17 +63,18 @@ public class EstateDetailActivity extends BaseActivity {
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.startAutoCycle();
         findViewById(R.id.toggleMaps).setOnClickListener(view -> {
-            View mapView = findViewById(R.id .map);
+            View mapView = findViewById(R.id.map);
             MaterialButton button = (findViewById(R.id.toggleMaps));
             View slider = findViewById(R.id.imageSlider);
             if (mapView.getVisibility() == View.VISIBLE) {
                 button.setText("تصاویر");
                 slider.setVisibility(View.VISIBLE);
                 mapView.setVisibility(View.GONE);
-            } else{
+            } else {
                 button.setText("نقشه");
-            slider.setVisibility(View.GONE);
-            mapView.setVisibility(View.VISIBLE);}
+                slider.setVisibility(View.GONE);
+                mapView.setVisibility(View.VISIBLE);
+            }
         });
     }
 
@@ -103,6 +103,9 @@ public class EstateDetailActivity extends BaseActivity {
     }
 
     private void bindContentData() {
+        if (model.CaseCode != null)
+            ((TextView) findViewById(R.id.idTextView)).setText("شماره ملک : " + model.CaseCode);
+        ((TextView) findViewById(R.id.dateTv)).setText("" + AppUtill.DateDifferenceNow(model.CreatedDate));
         List<String> images = new ArrayList<>();
         images.add(model.LinkMainImageIdSrc);
         images.addAll(model.LinkExtraImageIdsSrc);
