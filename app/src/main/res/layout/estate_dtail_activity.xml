@@ -250,6 +250,7 @@
                     android:textDirection="rtl" />
 
                 <TextView
+                    android:id="@+id/propertyGroupTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="مشخصات اصلی" />

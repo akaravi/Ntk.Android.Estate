@@ -29,6 +29,7 @@ import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.AppUtill;
+import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstateConstractAdapter;
@@ -48,7 +49,15 @@ public class EstateDetailActivity extends BaseActivity {
         setContentView(R.layout.estate_dtail_activity);
 
         initView();
+        setFont();
         getContent();
+    }
+
+    private void setFont() {
+        ((TextView) findViewById(R.id.lblTitleDetail)).setTypeface(FontManager.T1_Typeface(this));
+        ((TextView) findViewById(R.id.idTextView)).setTypeface(FontManager.T1_Typeface(this));
+        ((TextView) findViewById(R.id.dateTv)).setTypeface(FontManager.T1_Typeface(this));
+        ((TextView) findViewById(R.id.propertyGroupTitle)).setTypeface(FontManager.T1_Typeface(this));
     }
 
     private void initView() {

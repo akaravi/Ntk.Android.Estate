@@ -110,48 +110,61 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
         public void setContract(EstatePropertyModel item) {
             for (EstateContractModel m :
                     item.Contracts) {
-                if (m.SalePrice != null || m.SalePriceByAgreement) {
-                    priceTitle1.setVisibility(View.VISIBLE);
-                    price1.setVisibility(View.VISIBLE);
-                    priceTitle1.setText("فروش :  ");
-                    if (m.SalePrice != null && m.SalePrice != 0)
-                        price1.setText(NViewUtils.PriceFormat(m.SalePrice) + "  " + m.UnitSalePrice);
-                    if (m.SalePriceByAgreement)
-                        price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
+                if (m.ContractType.HasSalePrice) {
+                    priceTitle1.setText(m.ContractType.Title);
+                    if (m.SalePrice != null || m.SalePriceByAgreement) {
+                        priceTitle1.setVisibility(View.VISIBLE);
+                        price1.setVisibility(View.VISIBLE);
+                        if (m.SalePrice != null && m.SalePrice != 0)
+                            price1.setText(NViewUtils.PriceFormat(m.SalePrice) + "  " + m.UnitSalePrice);
+                        if (m.SalePriceByAgreement)
+                            price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
+                    } else {
+                        priceTitle1.setVisibility(View.VISIBLE);
+                        priceTitle1.setText("جهت :" + m.ContractType.Title);
+                    }
                 } else {
                     priceTitle1.setVisibility(View.GONE);
                     price1.setVisibility(View.GONE);
 
                 }
-                if (m.RentPrice != null || m.RentPriceByAgreement) {
-                    priceTitle2.setVisibility(View.VISIBLE);
-                    price2.setVisibility(View.VISIBLE);
-                    priceTitle2.setText("اجاره :  ");
-                    if (m.RentPrice != null && m.RentPrice != 0)
-                        price2.setText(NViewUtils.PriceFormat(m.RentPrice) + "  " + m.UnitSalePrice);
-                    if (m.RentPriceByAgreement)
-                        price2.setText(price2.getText().toString().isEmpty() ? "توافقی" : price2.getText().toString() + "|| توافقی");
+                if (m.ContractType.HasDepositPrice) {
+                    priceTitle2.setText(m.ContractType.Title);
+                    if (m.DepositPrice != null || m.DepositPriceByAgreement) {
+                        priceTitle2.setVisibility(View.VISIBLE);
+                        price2.setVisibility(View.VISIBLE);
+                        if (m.DepositPrice != null && m.DepositPrice != 0)
+                            price2.setText(NViewUtils.PriceFormat(m.DepositPrice) + "  " + m.UnitSalePrice);
+                        if (m.DepositPriceByAgreement)
+                            price2.setText(price2.getText().toString().isEmpty() ? "توافقی" : price2.getText().toString() + "|| توافقی");
+                    } else {
+                        priceTitle2.setVisibility(View.VISIBLE);
+                        priceTitle2.setText("جهت :" + m.ContractType.Title);
+                    }
                 } else {
                     priceTitle2.setVisibility(View.GONE);
                     price2.setVisibility(View.GONE);
 
                 }
-                if (m.DepositPrice != null || m.DepositPriceByAgreement) {
-                    priceTitle3.setVisibility(View.VISIBLE);
-                    price3.setVisibility(View.VISIBLE);
-                    priceTitle3.setText("رهن :  ");
-                    if (m.DepositPrice != null && m.DepositPrice != 0)
-                        price3.setText(NViewUtils.PriceFormat(m.DepositPrice) + "  " + m.UnitSalePrice);
-                    if (m.DepositPriceByAgreement)
-                        price3.setText(price3.getText().toString().isEmpty() ? "توافقی" : price3.getText().toString() + "|| توافقی");
+                if (m.ContractType.HasRentPrice) {
+                    priceTitle3.setText(m.ContractType.Title);
+                    if (m.RentPrice != null || m.RentPriceByAgreement) {
+                        priceTitle3.setVisibility(View.VISIBLE);
+                        price3.setVisibility(View.VISIBLE);
+                        if (m.RentPrice != null && m.RentPrice != 0)
+                            price3.setText(NViewUtils.PriceFormat(m.RentPrice) + "  " + m.UnitSalePrice);
+                        if (m.RentPriceByAgreement)
+                            price3.setText(price3.getText().toString().isEmpty() ? "توافقی" : price3.getText().toString() + "|| توافقی");
+                    } else {
+                        priceTitle3.setVisibility(View.VISIBLE);
+                        priceTitle3.setText("جهت :" + m.ContractType.Title);
+                    }
                 } else {
                     priceTitle3.setVisibility(View.GONE);
                     price3.setVisibility(View.GONE);
-
                 }
 
             }
-//            item.Contracts.
         }
 
         public void setPictureCount(EstatePropertyModel item) {
