@@ -1,6 +1,7 @@
 package ntk.android.estate.activity;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -11,10 +12,20 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.carto.styles.AnimationStyle;
+import com.carto.styles.AnimationStyleBuilder;
+import com.carto.styles.AnimationType;
+import com.carto.styles.MarkerStyle;
+import com.carto.styles.MarkerStyleBuilder;
 import com.google.android.material.button.MaterialButton;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+
+import org.neshan.common.model.LatLng;
+import org.neshan.mapsdk.MapView;
+import org.neshan.mapsdk.internal.utils.BitmapUtils;
+import org.neshan.mapsdk.model.Marker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +37,7 @@ import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.GenericErrors;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.AppUtill;
@@ -33,6 +45,7 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstateConstractAdapter;
+import ntk.android.estate.adapter.EstatePropertyAdapter;
 import ntk.android.estate.adapter.ImageSliderAdapter;
 import ntk.android.estate.adapter.PropertyDetailGroupsAdapter;
 
@@ -40,13 +53,13 @@ public class EstateDetailActivity extends BaseActivity {
     public String Id = "";
     private EstatePropertyModel model;
     ImageSliderAdapter imageSlider;
-
+    FilterModel getAllFilter;
     private boolean mapIsSet = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.estate_dtail_activity);
+        setContentView(R.layout.activity_estate_dtail);
 
         initView();
         setFont();
@@ -57,7 +70,6 @@ public class EstateDetailActivity extends BaseActivity {
         ((TextView) findViewById(R.id.lblTitleDetail)).setTypeface(FontManager.T1_Typeface(this));
         ((TextView) findViewById(R.id.idTextView)).setTypeface(FontManager.T1_Typeface(this));
         ((TextView) findViewById(R.id.dateTv)).setTypeface(FontManager.T1_Typeface(this));
-        ((TextView) findViewById(R.id.propertyGroupTitle)).setTypeface(FontManager.T1_Typeface(this));
     }
 
     private void initView() {
@@ -105,6 +117,25 @@ public class EstateDetailActivity extends BaseActivity {
                         }
 
                     });
+            //get all related estate
+            getAllFilter = new FilterModel();
+            ServiceExecute.execute(new EstatePropertyService(this).getAll(getAllFilter))
+                    .subscribe(new ErrorExceptionObserver<EstatePropertyModel>(switcher::showErrorView) {
+
+                        @Override
+                        protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
+                            EstatePropertyAdapter adapter = new EstatePropertyAdapter(EstateDetailActivity.this, response.ListItems);
+                            RecyclerView rc = findViewById(R.id.RcAllEstate);
+                            rc.setAdapter(adapter);
+                            rc.setLayoutManager(new LinearLayoutManager(EstateDetailActivity.this, RecyclerView.HORIZONTAL, false));
+                        }
+
+                        @Override
+                        protected Runnable tryAgainMethod() {
+                            return () -> getContent();
+                        }
+                    });
+
         } else {
             new GenericErrors().netError(switcher::showErrorView, this::getContent);
         }
@@ -130,11 +161,15 @@ public class EstateDetailActivity extends BaseActivity {
 
         //add details
         RecyclerView detailsRc = findViewById(R.id.detailsGroupRc);
-        detailsRc.setAdapter(new PropertyDetailGroupsAdapter(model.PropertyDetailGroups));
-        //check location is set or not
-//        if (!mapIsSet & mMap != null) {
-//            onMapReady(mMap);
-//        }
+        detailsRc.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        detailsRc.setAdapter(PropertyDetailGroupsAdapter.INIT(model.PropertyDetailGroups, model.PropertyDetailValues));
+//        check location is set or not
+        if (model.Geolocationlatitude != null & model.Geolocationlongitude != null) {
+            (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
+            LatLng point = new LatLng(53.529929, 35.164676);
+            ((MapView) findViewById(R.id.map)).addMarker(createMarker(point));
+
+        }
     }
 
     private String createShareMassage() {
@@ -173,5 +208,31 @@ public class EstateDetailActivity extends BaseActivity {
 //                    .title("مکان مورد نظر"));
 //            mapIsSet = true;
 //        }
+    }
+
+    // This method gets a LatLng as input and adds a marker on that position
+    private Marker createMarker(LatLng loc) {
+        // Creating animation for marker. We should use an object of type AnimationStyleBuilder, set
+        // all animation features on it and then call buildStyle() method that returns an object of type
+        // AnimationStyle
+        AnimationStyle animSt;
+        AnimationStyleBuilder animStBl = new AnimationStyleBuilder();
+        animStBl.setFadeAnimationType(AnimationType.ANIMATION_TYPE_SMOOTHSTEP);
+        animStBl.setSizeAnimationType(AnimationType.ANIMATION_TYPE_SPRING);
+        animStBl.setPhaseInDuration(0.5f);
+        animStBl.setPhaseOutDuration(0.5f);
+        animSt = animStBl.buildStyle();
+
+        // Creating marker style. We should use an object of type MarkerStyleCreator, set all features on it
+        // and then call buildStyle method on it. This method returns an object of type MarkerStyle
+        MarkerStyleBuilder markStCr = new MarkerStyleBuilder();
+        markStCr.setSize(30f);
+        markStCr.setBitmap(BitmapUtils.createBitmapFromAndroidBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_marker)));
+        // AnimationStyle object - that was created before - is used here
+        markStCr.setAnimationStyle(animSt);
+        MarkerStyle markSt = markStCr.buildStyle();
+
+        // Creating marker
+        return new Marker(loc, markSt);
     }
 }

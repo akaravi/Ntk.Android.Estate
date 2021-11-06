@@ -24,7 +24,7 @@
         tools:replace="android:supportsRtl,android:icon">
 
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,6 +45,7 @@
         <activity android:name=".activity.EstateDetailActivity" />
         <activity android:name=".activity.TestActivity" />
         <activity android:name=".activity.SearchEstateActivity" />
+<!--        <activity android:name=".activity.MainActivity" />-->
 
 
         <provider
@@ -66,10 +67,6 @@
             </intent-filter>
         </receiver>
 
-<!--        <meta-data-->
-<!--        todo map
-                android:name="com.google.android.geo.API_KEY"-->
-<!--            android:value="${MAPS_API_KEY}" />-->
     </application>
 
 </manifest>

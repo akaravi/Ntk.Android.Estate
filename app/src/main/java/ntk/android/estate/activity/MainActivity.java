@@ -3,8 +3,11 @@ package ntk.android.estate.activity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.config.ErrorExceptionObserver;
@@ -27,7 +30,11 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        row1=new FilterModel();
+        row2=new FilterModel();
+        row3=new FilterModel();
+        row4=new FilterModel();
+        row5=new FilterModel();
         getdata(row1,findViewById(R.id.rc1));
         getdata(row2,findViewById(R.id.rc2));
         getdata(row3,findViewById(R.id.rc3));
@@ -44,6 +51,9 @@ public class MainActivity extends BaseActivity {
                         EstatePropertyAdapter adapter = new EstatePropertyAdapter(MainActivity.this, response.ListItems);
                         rc.setAdapter(adapter);
                         rc.setLayoutManager(new LinearLayoutManager(MainActivity.this, RecyclerView.HORIZONTAL, false));
+                        SnapHelper snapHelper = new PagerSnapHelper();
+                        snapHelper.attachToRecyclerView(rc);
+                        ViewCompat.setNestedScrollingEnabled(rc, false);
                     }
 
                     @Override

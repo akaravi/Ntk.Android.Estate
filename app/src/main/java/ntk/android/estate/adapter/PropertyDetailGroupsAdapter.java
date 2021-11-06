@@ -2,76 +2,65 @@ package ntk.android.estate.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import java9.util.stream.StreamSupport;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
+import ntk.android.base.utill.FontManager;
+import ntk.android.estate.R;
 
 public class PropertyDetailGroupsAdapter extends BaseRecyclerAdapter<EstatePropertyDetailGroupModel, PropertyDetailGroupsAdapter.VH> {
     public PropertyDetailGroupsAdapter(List<EstatePropertyDetailGroupModel> list) {
         super(list);
     }
 
+    public static RecyclerView.Adapter INIT(List<EstatePropertyDetailGroupModel> details, List<EstatePropertyDetailValueModel> values) {
+        for (EstatePropertyDetailGroupModel detail :
+                details) {
+            detail.PropertyValues = new ArrayList<>();
+            for (EstatePropertyDetailValueModel value :
+                    values) {
+                if (value.Value != null && StreamSupport.stream(detail.PropertyDetails).anyMatch(j -> j.Id.equals(value.LinkPropertyDetailId))) {
+                    detail.PropertyValues.add(value);
+                }
+            }
+        }
+        return new PropertyDetailGroupsAdapter(details);
+    }
+
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        return new VH(inflate(parent, R.layout.row_property_detail_group));
     }
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-            holder.setData(getItem(position));
+        EstatePropertyDetailGroupModel item = getItem(position);
+        holder.title.setText(item.Title);
+        holder.rc.setAdapter(new PropertyDetailValueAdapter(item.PropertyValues));
+        holder.rc.setLayoutManager(new GridLayoutManager(holder.itemView.getContext(), 3));
     }
 
     public class VH extends RecyclerView.ViewHolder {
+        TextView title;
+        RecyclerView rc;
+
         public VH(@NonNull View itemView) {
             super(itemView);
+            title = itemView.findViewById(R.id.propertyGroupTitle);
+            title.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
+            rc = itemView.findViewById(R.id.detailsValues);
         }
 
-        public void setData(EstatePropertyDetailGroupModel m) {
-//            if (m.SalePrice != null || m.SalePriceByAgreement) {
-//                priceTitle1.setVisibility(View.VISIBLE);
-//                price1.setVisibility(View.VISIBLE);
-//                priceTitle1.setText("فروش :  ");
-//                if (m.SalePrice != null && m.SalePrice != 0)
-//                    price1.setText(m.SalePrice + "  " + m.UnitSalePrice);
-//                if (m.SalePriceByAgreement)
-//                    price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
-//            } else {
-//                priceTitle1.setVisibility(View.GONE);
-//                price1.setVisibility(View.GONE);
-//
-//            }
-//            if (m.RentPrice != null || m.RentPriceByAgreement) {
-//                priceTitle2.setVisibility(View.VISIBLE);
-//                price2.setVisibility(View.VISIBLE);
-//                priceTitle2.setText("اجاره :  ");
-//                if (m.RentPrice != null && m.RentPrice != 0)
-//                    price2.setText(m.RentPrice + "  " + m.UnitSalePrice);
-//                if (m.RentPriceByAgreement)
-//                    price2.setText(price2.getText().toString().isEmpty() ? "توافقی" : price2.getText().toString() + "|| توافقی");
-//            } else {
-//                priceTitle2.setVisibility(View.GONE);
-//                price2.setVisibility(View.GONE);
-//
-//            }
-//            if (m.DepositPrice != null || m.DepositPriceByAgreement) {
-//                priceTitle3.setVisibility(View.VISIBLE);
-//                price3.setVisibility(View.VISIBLE);
-//                priceTitle3.setText("رهن :  ");
-//                if (m.DepositPrice != null && m.DepositPrice != 0)
-//                    price3.setText(m.DepositPrice + "  " + m.UnitSalePrice);
-//                if (m.DepositPriceByAgreement)
-//                    price3.setText(price3.getText().toString().isEmpty() ? "توافقی" : price3.getText().toString() + "|| توافقی");
-//            } else {
-//                priceTitle3.setVisibility(View.GONE);
-//                price3.setVisibility(View.GONE);
-//
-//            }
-        }
     }
 }

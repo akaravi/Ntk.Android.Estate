@@ -39,6 +39,6 @@ public class EstateListActivity extends BaseFilterModelListActivity<EstateProper
 
     @Override
     public void ClickSearch() {
-        startActivity(new Intent());
+        startActivity(new Intent(this, SearchEstateActivity.class));
     }
 }
