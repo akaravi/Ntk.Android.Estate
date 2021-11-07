@@ -24,14 +24,14 @@
         tools:replace="android:supportsRtl,android:icon">
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+                <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.NewsListActivity"
             android:screenOrientation="portrait" />
@@ -45,7 +45,7 @@
         <activity android:name=".activity.EstateDetailActivity" />
         <activity android:name=".activity.TestActivity" />
         <activity android:name=".activity.SearchEstateActivity" />
-<!--        <activity android:name=".activity.MainActivity" />-->
+
 
 
         <provider

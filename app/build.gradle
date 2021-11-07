@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
-def BaseVersion='1.5.33'
-def incrementalVersion='2'
+def BaseVersion = '1.5.33'
+def incrementalVersion = '2'
 android {
     compileSdkVersion 31
     defaultConfig {
@@ -94,11 +94,15 @@ dependencies {
     //for ripple
     implementation 'com.balysv:material-ripple:1.0.2'
     //for  Neshan sdk library
-        implementation 'neshan-android-sdk:mobile-sdk:1.0.0'
-        implementation 'neshan-android-sdk:services-sdk:1.0.0'
-        implementation 'neshan-android-sdk:common-sdk:0.0.1'
+    implementation 'neshan-android-sdk:mobile-sdk:1.0.0'
+    implementation 'neshan-android-sdk:services-sdk:1.0.0'
+    implementation 'neshan-android-sdk:common-sdk:0.0.1'
     implementation 'com.google.android.gms:play-services-gcm:17.0.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    //for icon fonts
+    implementation "com.mikepenz:iconics-core:3.2.5"
+    implementation "com.mikepenz:iconics-views:3.2.5"
+    implementation 'com.mikepenz:fontawesome-typeface:5.3.1.1@aar'
     api project(path: ':baseActivity')
 //    api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
 }
