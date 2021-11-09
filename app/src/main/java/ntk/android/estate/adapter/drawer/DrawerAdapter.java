@@ -75,7 +75,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
                     ClickEstateList();
                     break;
                 case 1:
-                    clickNewEsatate();
+                    ClickNewEstate();
                     break;
                 case 2:
                     ClickNews();
@@ -115,7 +115,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         }
     }
 
-    private void clickNewEsatate() {
+    private void ClickNewEstate() {
         context.startActivity(new Intent(context, NewEstateActivity.class));
         if (Drawer != null) {
             Drawer.closeMenu(true);

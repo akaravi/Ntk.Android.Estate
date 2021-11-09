@@ -46,6 +46,7 @@
         <activity android:name=".activity.TestActivity" />
         <activity android:name=".activity.SearchEstateActivity" />
         <activity android:name=".activity.AboutUsActivity" />
+        <activity android:name=".activity.NewEstateActivity" />
 
 
         <provider
