@@ -16,8 +16,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.BindViews;
 import ntk.android.base.activity.abstraction.AbstractMainActivity;
 import ntk.android.base.activity.common.IntroActivity;
 import ntk.android.base.activity.common.NotificationsActivity;
@@ -89,19 +87,19 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
                     ClickPooling();
                     break;
                 case 5:
-                    ClickQuestion();
+                    ClickInboxNotification();
                     break;
                 case 6:
-                    ClickFeedBack();
+                    ClickQuestion();
                     break;
                 case 7:
-                    ClickShare();
+                    ClickFeedBack();
                     break;
                 case 8:
-                    ClickAbout();
+                    ClickShare();
                     break;
                 case 9:
-                    ClickIntro();
+                    ClickAbout();
                     break;
                 case 10:
                     ClickIntro();
@@ -123,28 +121,45 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             Drawer.closeMenu(true);
         }
     }
-
-
-    private void ClickInbox() {
-        context.startActivity(new Intent(context, NotificationsActivity.class));
-        if (Drawer != null) {
-            Drawer.closeMenu(true);
-        }
-    }
-
     private void ClickNews() {
         context.startActivity(new Intent(context, NewsListActivity.class));
         if (Drawer != null) {
             Drawer.closeMenu(true);
         }
     }
-
+    private void ClickContact() {
+        context.startActivity(new Intent(context, TicketListActivity.class));
+        if (Drawer != null) {
+            Drawer.closeMenu(true);
+        }
+    }
     private void ClickPooling() {
         context.startActivity(new Intent(context, PolingActivity.class));
         if (Drawer != null) {
             Drawer.closeMenu(true);
         }
     }
+    private void ClickInboxNotification() {
+        context.startActivity(new Intent(context, NotificationsActivity.class));
+        if (Drawer != null) {
+            Drawer.closeMenu(true);
+        }
+    }
+
+    private void ClickQuestion() {
+        context.startActivity(new Intent(context, FaqActivity.class));
+        if (Drawer != null) {
+            Drawer.closeMenu(true);
+        }
+    }
+
+    private void ClickFeedBack() {
+        if (Drawer != null) {
+            Drawer.closeMenu(true);
+        }
+        ((AbstractMainActivity) context).onFeedbackClick();
+    }
+
 
     private void ClickShare() {
         ((AbstractMainActivity) context).onInviteMethod();
@@ -160,32 +175,6 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         }
     }
 
-    private void ClickContact() {
-        context.startActivity(new Intent(context, TicketListActivity.class));
-        if (Drawer != null) {
-            Drawer.closeMenu(true);
-        }
-    }
-
-    private void ClickFeedBack() {
-        if (Drawer != null) {
-            Drawer.closeMenu(true);
-        }
-        ((AbstractMainActivity) context).onFeedbackClick();
-    }
-
-    private void ClickQuestion() {
-        context.startActivity(new Intent(context, FaqActivity.class));
-        if (Drawer != null) {
-            Drawer.closeMenu(true);
-        }
-    }
-
-    private void ClickArticle() {
-        if (Drawer != null) {
-            Drawer.closeMenu(true);
-        }
-    }
 
     private void ClickIntro() {
         context.startActivity(new Intent(context, IntroActivity.class));
