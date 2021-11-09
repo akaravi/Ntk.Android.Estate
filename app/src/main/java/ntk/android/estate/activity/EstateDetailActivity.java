@@ -101,7 +101,7 @@ public class EstateDetailActivity extends BaseActivity {
 
     private void getContent() {
         if (AppUtill.isNetworkAvailable(this)) {
-
+            switcher.showProgressView();
             ServiceExecute.execute(new EstatePropertyService(this).getOne(Id))
                     .subscribe(new ErrorExceptionObserver<EstatePropertyModel>(switcher::showErrorView) {
 
