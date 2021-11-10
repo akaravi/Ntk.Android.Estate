@@ -10,7 +10,7 @@ public class NewEstateFragment4 extends BaseFragment {
         setContentView(R.layout.fragment_new_estate_4);
     }
 
-    @Override
+
     public boolean isValidForm() {
         return true;
     }
