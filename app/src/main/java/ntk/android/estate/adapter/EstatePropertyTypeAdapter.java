@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
+import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyTypeUsageModel;
 import ntk.android.estate.R;
 
-public class EstatePropertyTypeAdapter extends BaseRecyclerAdapter<EstatePropertyTypeModel, EstatePropertyTypeAdapter.VH> {
-    public EstatePropertyTypeAdapter(List<EstatePropertyTypeModel> list) {
+public class EstatePropertyTypeAdapter extends BaseRecyclerAdapter<EstatePropertyTypeUsageModel, EstatePropertyTypeAdapter.VH> {
+    public EstatePropertyTypeAdapter(List<EstatePropertyTypeUsageModel> list) {
         super(list);
     }
 

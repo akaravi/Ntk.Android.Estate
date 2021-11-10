@@ -108,7 +108,9 @@ public class EstateDetailActivity extends BaseActivity {
                         @Override
                         protected void SuccessResponse(ErrorException<EstatePropertyModel> ContentResponse) {
                             model = ContentResponse.Item;
+                            switcher.showContentView();
                             bindContentData();
+
                         }
 
                         @Override

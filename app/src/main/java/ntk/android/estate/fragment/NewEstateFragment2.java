@@ -12,9 +12,10 @@ import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
-import ntk.android.base.entitymodel.estate.EstatePropertyTypeModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyTypeUsageModel;
 import ntk.android.base.fragment.BaseFragment;
-import ntk.android.base.services.estate.EstatePropertyTypeService;
+import ntk.android.base.services.estate.EstatePropertyTypeLanduseService;
+import ntk.android.base.services.estate.EstatePropertyTypeUsageService;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstatePropertyTypeAdapter;
 
@@ -32,10 +33,10 @@ public class NewEstateFragment2 extends BaseFragment {
     }
 
     private void getData() {
-        ServiceExecute.execute(new EstatePropertyTypeService(getContext()).getAll(new FilterModel()))
+        ServiceExecute.execute(new EstatePropertyTypeUsageService(getContext()).getAll(new FilterModel()))
                 .subscribe(new NtkObserver<>() {
                     @Override
-                    public void onNext(@NonNull ErrorException<EstatePropertyTypeModel> response) {
+                    public void onNext(@NonNull ErrorException<EstatePropertyTypeUsageModel> response) {
                         EstatePropertyTypeAdapter adapter = new EstatePropertyTypeAdapter(response.ListItems);
                         RecyclerView rc = findViewById(R.id.estateTypeRc);
                         rc.setAdapter(adapter);
