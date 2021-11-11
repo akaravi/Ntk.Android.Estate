@@ -25,12 +25,13 @@ public class NewEstateActivity extends BaseActivity {
         setContentView(R.layout.activity_new_estate);
         model = new EstatePropertyModel();
         title = findViewById(R.id.txtToolbarTitle);
+        findViewById(R.id.imgToolbarBack).setOnClickListener(view -> finish());
         findViewById(R.id.backBtn).setOnClickListener(view -> {
             onBackPressed();
         });
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
         });
-        showFragment1();
+        showFragment3();
     }
 
     private void showFragment1() {
@@ -103,5 +104,7 @@ public class NewEstateActivity extends BaseActivity {
 
     public void showProgress() {
     }
-    public void showContent(){}
+
+    public void showContent() {
+    }
 }
