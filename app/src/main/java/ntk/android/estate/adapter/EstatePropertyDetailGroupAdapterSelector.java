@@ -22,7 +22,7 @@ public class EstatePropertyDetailGroupAdapterSelector extends BaseRecyclerAdapte
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new VH(inflate(parent, R.layout.chip_row_item));
+        return new VH(inflate(parent, R.layout.property_detail_group_selector));
     }
 
     @Override

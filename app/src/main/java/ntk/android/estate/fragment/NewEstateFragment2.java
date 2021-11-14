@@ -132,36 +132,12 @@ public class NewEstateFragment2 extends BaseFragment {
                 .collect(Collectors.toList());
         RecyclerView rc = findViewById(R.id.EstateLandUsedRc);
         rc.setAdapter(new EstatePropertyLandUseAdapterSelector(models, t -> {
-            getAllDetails(t);
+//            getAllDetails(t);
         }));
         rc.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
-        //https://apicms.ir/api/v1/EstatePropertyDetailGroup/getAll [
-        //  {
-        //    "Filters": [],
-        //    "PropertyName": "LinkPropertyTypeLanduseId",
-        //    "Value": "e334e039-504a-4be2-2e7c-08d92262c427"
-        //  }
-        //]
+
     }
 
-    private void getAllDetails(EstatePropertyTypeLanduseModel t) {
-        FilterModel f = new FilterModel().addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeLanduseId")
-                .setStringValue(t.Id));
-        ServiceExecute.execute(new EstatePropertyDetailGroupService(getContext()).getAll(f
-        )).subscribe(new NtkObserver<ErrorException<EstatePropertyDetailGroupModel>>() {
-            @Override
-            public void onNext(@NonNull ErrorException<EstatePropertyDetailGroupModel> response) {
-                EstatePropertyDetailGroupAdapterSelector adapter = new EstatePropertyDetailGroupAdapterSelector(response.ListItems);
-                RecyclerView rc = (findViewById(R.id.estateDetailGroupValueRc));
-                rc.setAdapter(adapter);
-                rc.setLayoutManager(new GridLayoutManager(getContext(), 3));
-            }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-                estateActivity().showErrorView();
-            }
-        });
-    }
 }
