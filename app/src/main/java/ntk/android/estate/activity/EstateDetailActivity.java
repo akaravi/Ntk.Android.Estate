@@ -44,7 +44,7 @@ import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
-import ntk.android.estate.adapter.EstateConstractAdapter;
+import ntk.android.estate.adapter.EstateContractAdapter;
 import ntk.android.estate.adapter.EstatePropertyAdapter;
 import ntk.android.estate.adapter.ImageSliderAdapter;
 import ntk.android.estate.adapter.PropertyDetailGroupsAdapter;
@@ -156,7 +156,7 @@ public class EstateDetailActivity extends BaseActivity {
         //add contracts
         RecyclerView contractsRc = findViewById(R.id.contractsRc);
         contractsRc.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        contractsRc.setAdapter(new EstateConstractAdapter(model.Contracts));
+        contractsRc.setAdapter(new EstateContractAdapter(model.Contracts));
         //add desc
         WebView webViewBody = findViewById(R.id.WebViewDesc);
         webViewBody.loadData("<html dir=\"rtl\" lang=\"\"><body>" + model.Description + "</body></html>", "text/html; charset=utf-8", "UTF-8");

@@ -16,8 +16,8 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.base.view.NViewUtils;
 import ntk.android.estate.R;
 
-public class EstateConstractAdapter extends BaseRecyclerAdapter<EstateContractModel, EstateConstractAdapter.VC> {
-    public EstateConstractAdapter(List<EstateContractModel> list) {
+public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractModel, EstateContractAdapter.VC> {
+    public EstateContractAdapter(List<EstateContractModel> list) {
         super(list);
     }
 

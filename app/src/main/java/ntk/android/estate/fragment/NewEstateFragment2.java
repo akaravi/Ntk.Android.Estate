@@ -8,18 +8,36 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+import java9.util.stream.Collectors;
+import java9.util.stream.StreamSupport;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyTypeModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeUsageModel;
 import ntk.android.base.fragment.BaseFragment;
+import ntk.android.base.services.estate.EstatePropertyDetailGroupService;
 import ntk.android.base.services.estate.EstatePropertyTypeLanduseService;
+import ntk.android.base.services.estate.EstatePropertyTypeService;
 import ntk.android.base.services.estate.EstatePropertyTypeUsageService;
 import ntk.android.estate.R;
-import ntk.android.estate.adapter.EstatePropertyTypeAdapter;
+import ntk.android.estate.activity.NewEstateActivity;
+import ntk.android.estate.adapter.EstatePropertyDetailGroupAdapterSelector;
+import ntk.android.estate.adapter.EstatePropertyLandUseAdapterSelector;
+import ntk.android.estate.adapter.EstatePropertyTypeAdapterSelector;
 
 public class NewEstateFragment2 extends BaseFragment {
+
+    private int count;
+    private List<EstatePropertyTypeUsageModel> typeUsages;
+    private List<EstatePropertyTypeModel> contractTypes;
+    private List<EstatePropertyTypeLanduseModel> landUses;
 
     @Override
     public void onCreateFragment() {
@@ -29,18 +47,20 @@ public class NewEstateFragment2 extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getData();
+        count = 0;
+        estateActivity().showProgress();
+        getContractType();
+        getTypeUsage();
+        getTypeLandUse();
     }
 
-    private void getData() {
-        ServiceExecute.execute(new EstatePropertyTypeUsageService(getContext()).getAll(new FilterModel()))
-                .subscribe(new NtkObserver<>() {
+    private void getTypeLandUse() {
+        ServiceExecute.execute(new EstatePropertyTypeLanduseService(getContext()).getAll(new FilterModel().setRowPerPage(100)))
+                .subscribe(new NtkObserver<ErrorException<EstatePropertyTypeLanduseModel>>() {
                     @Override
-                    public void onNext(@NonNull ErrorException<EstatePropertyTypeUsageModel> response) {
-                        EstatePropertyTypeAdapter adapter = new EstatePropertyTypeAdapter(response.ListItems);
-                        RecyclerView rc = findViewById(R.id.estateTypeRc);
-                        rc.setAdapter(adapter);
-                        rc.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                    public void onNext(@NonNull ErrorException<EstatePropertyTypeLanduseModel> response) {
+                        landUses = response.ListItems;
+                        showData();
                     }
 
                     @Override
@@ -50,7 +70,98 @@ public class NewEstateFragment2 extends BaseFragment {
                 });
     }
 
+    private void getContractType() {
+        ServiceExecute.execute(new EstatePropertyTypeService(getContext()).getAll(new FilterModel().setRowPerPage(100))).subscribe(new NtkObserver<ErrorException<EstatePropertyTypeModel>>() {
+            @Override
+            public void onNext(@NonNull ErrorException<EstatePropertyTypeModel> response) {
+                contractTypes = response.ListItems;
+                showData();
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                estateActivity().showErrorView();
+            }
+        });
+    }
+
+    private void getTypeUsage() {
+
+        ServiceExecute.execute(new EstatePropertyTypeUsageService(getContext()).getAll(new FilterModel().setRowPerPage(100)))
+                .subscribe(new NtkObserver<>() {
+                    @Override
+                    public void onNext(@NonNull ErrorException<EstatePropertyTypeUsageModel> response) {
+                        typeUsages = response.ListItems;
+                        showData();
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        estateActivity().showErrorView();
+                    }
+                });
+    }
+
+
+    private NewEstateActivity estateActivity() {
+        return ((NewEstateActivity) getActivity());
+    }
+
     public boolean isValidForm() {
         return true;
+    }
+
+
+    private synchronized void showData() {
+        if (count == 2) {
+            EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(typeUsages, estatePropertyTypeUsageModel -> setTypeUsage(estatePropertyTypeUsageModel));
+            RecyclerView rc = findViewById(R.id.estateTypeRc);
+            rc.setAdapter(adapter);
+            rc.setLayoutManager(new GridLayoutManager(getContext(), 4));
+            estateActivity().showContent();
+        } else ++count;
+    }
+
+    private void setTypeUsage(EstatePropertyTypeUsageModel estatePropertyTypeUsageModel) {
+        List<EstatePropertyTypeModel> mappers = StreamSupport.stream(contractTypes)
+                .filter(t -> t.LinkPropertyTypeUsageId.equals(estatePropertyTypeUsageModel.Id))
+                .collect(Collectors.toList());
+        List<EstatePropertyTypeLanduseModel> models = StreamSupport.stream(landUses).
+                filter(t -> StreamSupport.stream(mappers)
+                        .anyMatch(k -> k.LinkPropertyTypeLanduseId.equals(t.Id)))
+                .collect(Collectors.toList());
+        RecyclerView rc = findViewById(R.id.EstateLandUsedRc);
+        rc.setAdapter(new EstatePropertyLandUseAdapterSelector(models, t -> {
+            getAllDetails(t);
+        }));
+        rc.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
+        //https://apicms.ir/api/v1/EstatePropertyDetailGroup/getAll [
+        //  {
+        //    "Filters": [],
+        //    "PropertyName": "LinkPropertyTypeLanduseId",
+        //    "Value": "e334e039-504a-4be2-2e7c-08d92262c427"
+        //  }
+        //]
+    }
+
+    private void getAllDetails(EstatePropertyTypeLanduseModel t) {
+        FilterModel f = new FilterModel().addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeLanduseId")
+                .setStringValue(t.Id));
+        ServiceExecute.execute(new EstatePropertyDetailGroupService(getContext()).getAll(f
+        )).subscribe(new NtkObserver<ErrorException<EstatePropertyDetailGroupModel>>() {
+            @Override
+            public void onNext(@NonNull ErrorException<EstatePropertyDetailGroupModel> response) {
+                EstatePropertyDetailGroupAdapterSelector adapter = new EstatePropertyDetailGroupAdapterSelector(response.ListItems);
+                RecyclerView rc = (findViewById(R.id.estateDetailGroupValueRc));
+                rc.setAdapter(adapter);
+                rc.setLayoutManager(new GridLayoutManager(getContext(), 3));
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                estateActivity().showErrorView();
+            }
+        });
     }
 }

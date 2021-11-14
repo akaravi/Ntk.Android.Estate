@@ -8,12 +8,12 @@ import java.util.List;
 
 import ntk.android.base.entitymodel.estate.EstateContractModel;
 
-public class EditEstateContractAdapter extends EstateConstractAdapter{
+public class EditEstateContractAdapter extends EstateContractAdapter {
     public EditEstateContractAdapter(List<EstateContractModel> list) {
         super(list);
     }
 
-    class EditVH extends EstateConstractAdapter.VC {
+    class EditVH extends EstateContractAdapter.VC {
         View delete;
         public EditVH(@NonNull View itemView) {
             super(itemView);
