@@ -56,13 +56,13 @@ public class NewEstateFragment4 extends BaseFragment {
 
     private void changeView(EstateContractTypeModel model) {
         TextInputLayout et1 = findViewById(R.id.etl1);
-        et1.setHint(model.Title);
+        et1.setHint("قیمت رهن");
         et1.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
         findViewById(R.id.checkbox_row1).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et2 = findViewById(R.id.etl2);
         et2.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
-        et2.setHint(model.Title);
+        et2.setHint("قیمت فروش");
         findViewById(R.id.checkbox_row2).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et3 = findViewById(R.id.etl3);
