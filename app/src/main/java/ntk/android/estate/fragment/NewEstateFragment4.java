@@ -2,20 +2,21 @@ package ntk.android.estate.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
-import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstateContractTypeModel;
 import ntk.android.base.fragment.BaseFragment;
-import ntk.android.base.services.estate.EstateContractService;
 import ntk.android.base.services.estate.EstateContractTypeService;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.NewEstateActivity;
@@ -42,7 +43,7 @@ public class NewEstateFragment4 extends BaseFragment {
                 EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, NewEstateFragment4.this::changeView);
                 RecyclerView rc = findViewById(R.id.contractsRc);
                 rc.setAdapter(adapter);
-                rc.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                rc.setLayoutManager(new GridLayoutManager(getContext(), 3));
             }
 
 
@@ -53,8 +54,22 @@ public class NewEstateFragment4 extends BaseFragment {
         });
     }
 
-    private void changeView(EstateContractTypeModel estateContractModel) {
-
+    private void changeView(EstateContractTypeModel model) {
+        TextInputLayout et1 = findViewById(R.id.etl1);
+        et1.setHint(model.Title);
+        et1.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
+        findViewById(R.id.checkbox_row1).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setText("قیمت توافقی");
+        TextInputLayout et2 = findViewById(R.id.etl2);
+        et2.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
+        et2.setHint(model.Title);
+        findViewById(R.id.checkbox_row2).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setText("قیمت توافقی");
+        TextInputLayout et3 = findViewById(R.id.etl3);
+        et3.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
+        et3.setHint(model.Title);
+        findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
     }
 
     private NewEstateActivity estateActivity() {

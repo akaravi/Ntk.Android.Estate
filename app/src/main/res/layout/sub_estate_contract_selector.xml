@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etl1"
+        style="@style/new_estate_textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="@string/estate_code"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:theme="@style/new_estate_textInputEditText" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <include
+        android:id="@+id/checkbox_row1"
+        layout="@layout/item_check_box_row"
+        android:visibility="gone" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etl2"
+        style="@style/new_estate_textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="@string/estate_code"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:theme="@style/new_estate_textInputEditText" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <include
+        android:id="@+id/checkbox_row2"
+        layout="@layout/item_check_box_row"
+        android:visibility="gone" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etl3"
+        style="@style/new_estate_textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="@string/estate_code"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:theme="@style/new_estate_textInputEditText" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <include
+        android:id="@+id/checkbox_row3"
+        layout="@layout/item_check_box_row"
+        android:visibility="gone" />
+</LinearLayout>

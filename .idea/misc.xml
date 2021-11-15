@@ -11,6 +11,7 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/common_splash_activity_2.xml" value="0.10778985507246377" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/gallery_pager_item.xml" value="0.19610507246376813" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/galley_horizontal_item.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/row_recycler_pool_check_box.xml" value="0.17958459979736577" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/sub_base_empty.xml" value="0.1884498480243161" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/ticket_new_activity.xml" value="0.11676798378926039" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/_row_recycler_round_bottom.xml" value="0.23692307692307693" />
@@ -48,6 +49,7 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/fragment_new_estate_3.xml" value="0.1" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/fragment_new_estate_4.xml" value="0.264" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/image_slider_layout_item.xml" value="0.29347826086956524" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/item_check_box_row.xml" value="0.2" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/item_chips_selecable.xml" value="0.11927083333333334" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/item_grid_menu.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/item_main_list_4.xml" value="0.18110435663627153" />
@@ -66,6 +68,7 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_news.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_pool_plus_minse.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_tab.xml" value="0.12273550724637682" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/sub_estate_contract_selector.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/base_toolbar_back.xml" value="0.18072916666666666" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/drawer_theme_1_item.xml" value="0.14513677811550152" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.Estate/app/src/main/res/layout/activity_main.xml" value="0.1" />
