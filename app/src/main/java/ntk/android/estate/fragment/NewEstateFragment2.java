@@ -15,20 +15,16 @@ import java9.util.stream.StreamSupport;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
-import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
-import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeUsageModel;
 import ntk.android.base.fragment.BaseFragment;
-import ntk.android.base.services.estate.EstatePropertyDetailGroupService;
 import ntk.android.base.services.estate.EstatePropertyTypeLanduseService;
 import ntk.android.base.services.estate.EstatePropertyTypeService;
 import ntk.android.base.services.estate.EstatePropertyTypeUsageService;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.NewEstateActivity;
-import ntk.android.estate.adapter.EstatePropertyDetailGroupAdapterSelector;
 import ntk.android.estate.adapter.EstatePropertyLandUseAdapterSelector;
 import ntk.android.estate.adapter.EstatePropertyTypeAdapterSelector;
 
@@ -103,15 +99,6 @@ public class NewEstateFragment2 extends BaseFragment {
     }
 
 
-    private NewEstateActivity estateActivity() {
-        return ((NewEstateActivity) getActivity());
-    }
-
-    public boolean isValidForm() {
-        return true;
-    }
-
-
     private synchronized void showData() {
         if (count == 2) {
             EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(typeUsages, estatePropertyTypeUsageModel -> setTypeUsage(estatePropertyTypeUsageModel));
@@ -132,11 +119,19 @@ public class NewEstateFragment2 extends BaseFragment {
                 .collect(Collectors.toList());
         RecyclerView rc = findViewById(R.id.EstateLandUsedRc);
         rc.setAdapter(new EstatePropertyLandUseAdapterSelector(models, t -> {
-//            getAllDetails(t);
+            estateActivity().model().PropertyTypeLanduse = t;
         }));
         rc.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
 
+    }
+
+    public boolean isValidForm() {
+        return true;
+    }
+
+    private NewEstateActivity estateActivity() {
+        return ((NewEstateActivity) getActivity());
     }
 
 

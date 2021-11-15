@@ -1,7 +1,11 @@
 package ntk.android.estate.fragment;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ntk.android.base.config.NtkObserver;
@@ -22,6 +26,13 @@ public class NewEstateFragment3 extends BaseFragment {
     public void onCreateFragment() {
         setContentView(R.layout.fragment_new_estate_3);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getAllDetails(estateActivity().model().PropertyTypeLanduse);
+    }
+
     //https://apicms.ir/api/v1/EstatePropertyDetailGroup/getAll [
     //  {
     //    "Filters": [],
@@ -37,9 +48,9 @@ public class NewEstateFragment3 extends BaseFragment {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyDetailGroupModel> response) {
                 EstatePropertyDetailGroupAdapterSelector adapter = new EstatePropertyDetailGroupAdapterSelector(response.ListItems);
-                RecyclerView rc = (findViewById(R.id.estateDetailGroupValueRc));
+                RecyclerView rc = (findViewById(R.id.estateDetailGroupRc));
                 rc.setAdapter(adapter);
-                rc.setLayoutManager(new GridLayoutManager(getContext(), 3));
+                rc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
             }
 
             @Override
@@ -48,11 +59,12 @@ public class NewEstateFragment3 extends BaseFragment {
             }
         });
     }
-    public NewEstateActivity estateActivity() {
-        return ((NewEstateActivity) getActivity());
-    }
 
     public boolean isValidForm() {
         return true;
+    }
+
+    private NewEstateActivity estateActivity() {
+        return ((NewEstateActivity) getActivity());
     }
 }

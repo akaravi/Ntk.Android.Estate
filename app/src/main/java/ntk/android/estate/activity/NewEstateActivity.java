@@ -108,4 +108,8 @@ public class NewEstateActivity extends BaseActivity {
 
     public void showContent() {
     }
+
+    public EstatePropertyModel model() {
+        return model;
+    }
 }
