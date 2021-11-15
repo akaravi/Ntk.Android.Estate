@@ -76,22 +76,42 @@ public class NewEstateActivity extends BaseActivity {
 
     private void showFragment4() {
         stepNumber = 4;
-        title.setText("تصاویر ملک"); title.setText("شرایط معامله");
+        title.setText("شرایط معامله");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
-        NewEstateFragment5 fragment = new NewEstateFragment5();
+        NewEstateFragment4 fragment = new NewEstateFragment4();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
-                showFragment4();
+                showFragment5();
         });
         fragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
 
     }
 
+    private void showFragment5() {
+        stepNumber = 5;
+        title.setText("تصاویر ملک");
+        findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
+        NewEstateFragment5 fragment = new NewEstateFragment5();
+        findViewById(R.id.continueBtn).setOnClickListener(view -> {
+            if (fragment.isValidForm())
+                createModel();
+        });
+        fragment.setArguments(getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
+
+    }
+
+    private void createModel() {
+
+    }
+
     @Override
     public void onBackPressed() {
         stepNumber--;
-        if (stepNumber == 3)
+        if (stepNumber == 4)
+            showFragment4();
+        else if (stepNumber == 3)
             showFragment3();
         else if (stepNumber == 2)
             showFragment2();

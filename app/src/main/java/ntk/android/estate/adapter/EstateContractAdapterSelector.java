@@ -8,8 +8,8 @@ import java.util.List;
 
 import ntk.android.base.entitymodel.estate.EstateContractModel;
 
-public class EditEstateContractAdapter extends EstateContractAdapter {
-    public EditEstateContractAdapter(List<EstateContractModel> list) {
+public class EstateContractAdapterSelector extends EstateContractAdapter {
+    public EstateContractAdapterSelector(List<EstateContractModel> list) {
         super(list);
     }
 
