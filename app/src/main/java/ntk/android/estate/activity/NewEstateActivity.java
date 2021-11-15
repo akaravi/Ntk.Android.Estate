@@ -11,6 +11,7 @@ import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.estate.R;
 import ntk.android.estate.fragment.NewEstateFragment1;
 import ntk.android.estate.fragment.NewEstateFragment2;
+import ntk.android.estate.fragment.NewEstateFragment3;
 import ntk.android.estate.fragment.NewEstateFragment4;
 import ntk.android.estate.fragment.NewEstateFragment5;
 
@@ -62,9 +63,9 @@ public class NewEstateActivity extends BaseActivity {
 
     private void showFragment3() {
         stepNumber = 3;
-        title.setText("شرایط معامله");
+        title.setText("جزئیات و مشخصات");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
-        NewEstateFragment4 fragment = new NewEstateFragment4();
+        NewEstateFragment3 fragment = new NewEstateFragment3();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
                 showFragment4();
@@ -75,7 +76,7 @@ public class NewEstateActivity extends BaseActivity {
 
     private void showFragment4() {
         stepNumber = 4;
-        title.setText("تصاویر ملک");
+        title.setText("تصاویر ملک"); title.setText("شرایط معامله");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
         NewEstateFragment5 fragment = new NewEstateFragment5();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {

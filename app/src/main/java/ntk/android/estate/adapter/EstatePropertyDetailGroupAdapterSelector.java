@@ -1,12 +1,13 @@
 package ntk.android.estate.adapter;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.chip.Chip;
 
 import java.util.List;
 
@@ -29,17 +30,24 @@ public class EstatePropertyDetailGroupAdapterSelector extends BaseRecyclerAdapte
     public void onBindViewHolder(@NonNull VH holder, int position) {
         EstatePropertyDetailGroupModel item = getItem(position);
         holder.title.setText(item.Title);
-//        holder.title.setChecked(selectedItem.equals(item));
-//        holder.title.setSelected(selectedItem.equals(item));
+        holder.rc.setLayoutManager(new GridLayoutManager(holder.getContext(), 2));
+        holder.rc.setAdapter(new EstatePropertyDetailAdapterSelector(item));
+
     }
 
     public class VH extends RecyclerView.ViewHolder {
 
-        Chip title;
+        TextView title;
+        RecyclerView rc;
 
         public VH(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.chip);
+            title = itemView.findViewById(R.id.titleTv);
+            rc = itemView.findViewById(R.id.estateDetailGroupValueRc);
+        }
+
+        public Context getContext() {
+            return itemView.getContext();
         }
     }
 }
