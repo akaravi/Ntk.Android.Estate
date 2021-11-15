@@ -13,15 +13,16 @@ import java.util.List;
 import java9.util.function.Consumer;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstateContractModel;
+import ntk.android.base.entitymodel.estate.EstateContractTypeModel;
 import ntk.android.estate.R;
 
-public class EstateContractAdapterSelector extends BaseRecyclerAdapter<EstateContractModel, EstateContractAdapterSelector.VH> {
-    private EstateContractModel selectedItem;
-    private Consumer<EstateContractModel> caller;
+public class EstateContractAdapterSelector extends BaseRecyclerAdapter<EstateContractTypeModel, EstateContractAdapterSelector.VH> {
+    private EstateContractTypeModel selectedItem;
+    private Consumer<EstateContractTypeModel> caller;
 
-    public EstateContractAdapterSelector(List<EstateContractModel> list, Consumer<EstateContractModel> selector) {
+    public EstateContractAdapterSelector(List<EstateContractTypeModel> list, Consumer<EstateContractTypeModel> selector) {
         super(list);
-        selectedItem = new EstateContractModel();
+        selectedItem = new EstateContractTypeModel();
         caller = selector;
     }
 
@@ -34,8 +35,8 @@ public class EstateContractAdapterSelector extends BaseRecyclerAdapter<EstateCon
 
     @Override
     public void onBindViewHolder(@NonNull EstateContractAdapterSelector.VH holder, final int position) {
-        EstateContractModel item = getItem(position);
-        holder.title.setText(item.ContractType.Title);
+        EstateContractTypeModel item = getItem(position);
+        holder.title.setText(item.Title);
         holder.title.setChecked(selectedItem.equals(item));
         holder.title.setSelected(selectedItem.equals(item));
         holder.title.setOnClickListener(view -> {

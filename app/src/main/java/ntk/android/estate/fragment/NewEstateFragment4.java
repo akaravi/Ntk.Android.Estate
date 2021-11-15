@@ -13,8 +13,10 @@ import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstateContractModel;
+import ntk.android.base.entitymodel.estate.EstateContractTypeModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.estate.EstateContractService;
+import ntk.android.base.services.estate.EstateContractTypeService;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.NewEstateActivity;
 import ntk.android.estate.adapter.EstateContractAdapterSelector;
@@ -33,9 +35,9 @@ public class NewEstateFragment4 extends BaseFragment {
     }
 
     private void getData() {
-        ServiceExecute.execute(new EstateContractService(getContext()).getAll(new FilterModel())).subscribe(new NtkObserver<ErrorException<EstateContractModel>>() {
+        ServiceExecute.execute(new EstateContractTypeService(getContext()).getAll(new FilterModel())).subscribe(new NtkObserver<ErrorException<EstateContractTypeModel>>() {
             @Override
-            public void onNext(@NonNull ErrorException<EstateContractModel> model) {
+            public void onNext(@NonNull ErrorException<EstateContractTypeModel> model) {
                 estateActivity().showContent();
                 EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, NewEstateFragment4.this::changeView);
                 RecyclerView rc = findViewById(R.id.contractsRc);
@@ -51,7 +53,7 @@ public class NewEstateFragment4 extends BaseFragment {
         });
     }
 
-    private void changeView(EstateContractModel estateContractModel) {
+    private void changeView(EstateContractTypeModel estateContractModel) {
 
     }
 
