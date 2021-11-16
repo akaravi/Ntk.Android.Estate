@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import es.dmoral.toasty.Toasty;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
@@ -24,6 +25,8 @@ import ntk.android.estate.adapter.EstateContractAdapterSelector;
 
 public class NewEstateFragment4 extends BaseFragment {
 
+    private EstateContractTypeModel selectedModel;
+
     @Override
     public void onCreateFragment() {
         setContentView(R.layout.fragment_new_estate_4);
@@ -35,7 +38,6 @@ public class NewEstateFragment4 extends BaseFragment {
         getData();
         findViewById(R.id.addNewEstateBtn).setOnClickListener(view1 -> addItem());
     }
-
 
 
     private void getData() {
@@ -58,6 +60,7 @@ public class NewEstateFragment4 extends BaseFragment {
     }
 
     private void changeView(EstateContractTypeModel model) {
+        selectedModel = model;
         findViewById(R.id.addNewEstateBtn).setVisibility(View.VISIBLE);
         TextInputLayout et1 = findViewById(R.id.etl1);
         et1.setHint("قیمت اجاره");
@@ -76,9 +79,22 @@ public class NewEstateFragment4 extends BaseFragment {
         findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
     }
-    private void addItem() {
 
+    private void addItem() {
+        if (selectedModel != null) {
+            if (selectedModel.HasRentPrice || selectedModel.RentPriceAllowAgreement) {
+
+            }
+            if (selectedModel.HasSalePrice || selectedModel.SalePriceAllowAgreement) {
+
+            }
+            if (selectedModel.HasDepositPrice || selectedModel.DepositPriceAllowAgreement) {
+
+            }
+        } else
+            Toasty.info(getContext(), "نوع معامله ی مورد نظر خود را انتخاب کنید");
     }
+
     private NewEstateActivity estateActivity() {
         return ((NewEstateActivity) getActivity());
     }
