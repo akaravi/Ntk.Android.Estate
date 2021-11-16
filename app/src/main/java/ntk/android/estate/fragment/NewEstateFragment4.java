@@ -33,8 +33,10 @@ public class NewEstateFragment4 extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getData();
-        findViewById(R.id)
+        findViewById(R.id.addNewEstateBtn).setOnClickListener(view1 -> addItem());
     }
+
+
 
     private void getData() {
         ServiceExecute.execute(new EstateContractTypeService(getContext()).getAll(new FilterModel())).subscribe(new NtkObserver<ErrorException<EstateContractTypeModel>>() {
@@ -56,7 +58,7 @@ public class NewEstateFragment4 extends BaseFragment {
     }
 
     private void changeView(EstateContractTypeModel model) {
-        
+        findViewById(R.id.addNewEstateBtn).setVisibility(View.VISIBLE);
         TextInputLayout et1 = findViewById(R.id.etl1);
         et1.setHint("قیمت اجاره");
         et1.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
@@ -74,7 +76,9 @@ public class NewEstateFragment4 extends BaseFragment {
         findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
     }
+    private void addItem() {
 
+    }
     private NewEstateActivity estateActivity() {
         return ((NewEstateActivity) getActivity());
     }

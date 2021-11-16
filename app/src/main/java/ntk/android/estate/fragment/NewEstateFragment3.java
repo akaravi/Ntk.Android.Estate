@@ -33,13 +33,7 @@ public class NewEstateFragment3 extends BaseFragment {
         getAllDetails(estateActivity().model().PropertyTypeLanduse);
     }
 
-    //https://apicms.ir/api/v1/EstatePropertyDetailGroup/getAll [
-    //  {
-    //    "Filters": [],
-    //    "PropertyName": "LinkPropertyTypeLanduseId",
-    //    "Value": "e334e039-504a-4be2-2e7c-08d92262c427"
-    //  }
-    //]
+
     private void getAllDetails(EstatePropertyTypeLanduseModel t) {
         FilterModel f = new FilterModel().addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeLanduseId")
                 .setStringValue(t.Id));
