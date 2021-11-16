@@ -16,23 +16,23 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.base.view.NViewUtils;
 import ntk.android.estate.R;
 
-public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractModel, EstateContractAdapter.VC> {
+public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractModel, EstateContractAdapter.VH> {
     public EstateContractAdapter(List<EstateContractModel> list) {
         super(list);
     }
 
     @NonNull
     @Override
-    public VC onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new VC(inflate(parent, R.layout.row_recycler_contract));
+    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new VH(inflate(parent, R.layout.row_recycler_contract));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VC holder, int position) {
+    public void onBindViewHolder(@NonNull VH holder, int position) {
         holder.setData(getItem(position));
     }
 
-    public class VC extends RecyclerView.ViewHolder {
+    public static class VH extends RecyclerView.ViewHolder {
         TextView price1;
         TextView title1;
         ImageView icon1;
@@ -43,7 +43,7 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
         TextView title3;
         ImageView icon3;
 
-        public VC(@NonNull View itemView) {
+        public VH(@NonNull View itemView) {
             super(itemView);
             price1 = itemView.findViewById(R.id.txtPrice1);
             title1 = itemView.findViewById(R.id.txtPrice1Title1);
