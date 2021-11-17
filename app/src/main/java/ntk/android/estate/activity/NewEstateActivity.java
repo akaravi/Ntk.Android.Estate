@@ -16,6 +16,8 @@ import ntk.android.estate.fragment.NewEstateFragment4;
 import ntk.android.estate.fragment.NewEstateFragment5;
 
 public class NewEstateActivity extends BaseActivity {
+    public String MainImage_GUID;
+    public String MainImage_FilePath;
     EstatePropertyModel model;
     TextView title;
     private int stepNumber;

@@ -33,6 +33,7 @@ public class NewEstateFragment5 extends BaseFragment {
         setContentView(R.layout.fragment_new_estate_5);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onViewCreated(@androidx.annotation.NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -55,7 +56,8 @@ public class NewEstateFragment5 extends BaseFragment {
                     ImageLoader.getInstance().displayImage(uri.toString(), (ImageView) findViewById(R.id.selectedImageView));
                     UploadFileToServer(FileManagerService.getFilePath(getContext(), uri),
                             fileUploadModel -> {
-                                estateActivity().model().LinkMainImageId=fileUploadModel.FileKey;
+                                estateActivity().MainImage_GUID=fileUploadModel.FileKey;
+                                estateActivity().MainImage_FilePath=uri.toString();
                             });
                 }
             }
