@@ -30,6 +30,7 @@
                     android:text="تصویر اصلی" />
 
                 <RelativeLayout
+                    android:id="@+id/selectMainImage"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:background="@drawable/dot_rectangle">
