@@ -52,9 +52,10 @@ public class NewEstateFragment5 extends BaseFragment {
             if (result.getData() != null) {
                 uri = result.getData().getData();
                 if (uri != null) {
-                    UploadFileToServer(FileManagerService.getPath(getContext(), uri),
+                    ImageLoader.getInstance().displayImage(uri.toString(), (ImageView) findViewById(R.id.selectedImageView));
+                    UploadFileToServer(FileManagerService.getFilePath(getContext(), uri),
                             fileUploadModel -> {
-                                ImageLoader.getInstance().displayImage(fileUploadModel.RelativePath, (ImageView) findViewById(R.id.selectedImageView));
+                                estateActivity().model().LinkMainImageId=fileUploadModel.FileKey;
                             });
                 }
             }
