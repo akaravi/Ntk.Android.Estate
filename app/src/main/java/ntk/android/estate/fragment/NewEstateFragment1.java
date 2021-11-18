@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import java9.util.stream.IntStream;
+import java9.util.stream.StreamSupport;
 import ntk.android.base.adapter.SpinnerAdapter;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
@@ -71,8 +73,13 @@ public class NewEstateFragment1 extends BaseFragment {
                 // Do something for lollipop and above versions
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                     //if departments is 0
-                    spinner.setText(locationAdapter.getItem(0), false);
-                    //todo set id
+                    if (estateActivity().model().LinkLocationId == 0)
+                        spinner.setText(locationAdapter.getItem(0), false);
+                    else {
+                        int index = IntStream.range(0, model.ListItems.size()).filter(value -> model.ListItems.get(value).Id.equals(estateActivity().model().LinkLocationId)).findFirst().getAsInt();
+                        spinner.setText(locationAdapter.getItem(index), false);
+
+                    }
                 }
             }
 
