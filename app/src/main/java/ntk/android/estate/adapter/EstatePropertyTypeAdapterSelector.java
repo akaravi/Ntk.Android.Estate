@@ -16,13 +16,16 @@ import ntk.android.base.entitymodel.estate.EstatePropertyTypeUsageModel;
 import ntk.android.estate.R;
 
 public class EstatePropertyTypeAdapterSelector extends BaseRecyclerAdapter<EstatePropertyTypeUsageModel, EstatePropertyTypeAdapterSelector.VH> {
-    private EstatePropertyTypeUsageModel selectedItem = new EstatePropertyTypeUsageModel();
+    private EstatePropertyTypeUsageModel selectedItem;
     Consumer<EstatePropertyTypeUsageModel> caller;
 
 
-    public EstatePropertyTypeAdapterSelector(List<EstatePropertyTypeUsageModel> listItems, Consumer<EstatePropertyTypeUsageModel> detailCaller) {
+    public EstatePropertyTypeAdapterSelector(List<EstatePropertyTypeUsageModel> listItems, EstatePropertyTypeUsageModel Item, Consumer<EstatePropertyTypeUsageModel> detailCaller) {
         super(listItems);
         caller = detailCaller;
+        selectedItem = Item;
+        if (selectedItem == null)
+            selectedItem = new EstatePropertyTypeUsageModel();
     }
 
 

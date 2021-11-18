@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import java9.util.stream.Collectors;
 import java9.util.stream.StreamSupport;
 import ntk.android.base.config.NtkObserver;
@@ -101,15 +102,19 @@ public class NewEstateFragment2 extends BaseFragment {
 
     private synchronized void showData() {
         if (count == 2) {
-            EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(typeUsages, estatePropertyTypeUsageModel -> setTypeUsage(estatePropertyTypeUsageModel));
+            EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(typeUsages,estateActivity().model().PropertyTypeUsage, estatePropertyTypeUsageModel -> setTypeUsage(estatePropertyTypeUsageModel));
             RecyclerView rc = findViewById(R.id.estateTypeRc);
             rc.setAdapter(adapter);
             rc.setLayoutManager(new GridLayoutManager(getContext(), 4));
+            if(estateActivity().model().PropertyTypeUsage!=null){
+                setTypeUsage(estateActivity().model().PropertyTypeUsage);
+            }
             estateActivity().showContent();
         } else ++count;
     }
 
     private void setTypeUsage(EstatePropertyTypeUsageModel estatePropertyTypeUsageModel) {
+
         List<EstatePropertyTypeModel> mappers = StreamSupport.stream(contractTypes)
                 .filter(t -> t.LinkPropertyTypeUsageId.equals(estatePropertyTypeUsageModel.Id))
                 .collect(Collectors.toList());
@@ -120,13 +125,24 @@ public class NewEstateFragment2 extends BaseFragment {
         RecyclerView rc = findViewById(R.id.EstateLandUsedRc);
         rc.setAdapter(new EstatePropertyLandUseAdapterSelector(models, t -> {
             estateActivity().model().PropertyTypeLanduse = t;
+            changeUi();
         }));
         rc.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
 
     }
 
+    private void changeUi() {
+
+    }
+
     public boolean isValidForm() {
+
+        if (estateActivity().model().PropertyTypeUsage==null)
+        {
+            Toasty.error(getContext(), "نوع کاربری را انتخاب نمایید", Toasty.LENGTH_LONG, true).show();
+            return false;
+        }
         return true;
     }
 
