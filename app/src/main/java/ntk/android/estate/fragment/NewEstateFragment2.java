@@ -53,13 +53,13 @@ public class NewEstateFragment2 extends BaseFragment {
         getTypeUsage();
         getTypeLandUse();
         if (estateActivity().model().Area != 0)
-            ((TextInputEditText) findViewById(R.id.EstateAreaEditText)).setText(estateActivity().model().Area);
+            ((TextInputEditText) findViewById(R.id.EstateAreaEditText)).setText(String.valueOf(estateActivity().model().Area));
         if (estateActivity().model().PropertyTypeLanduse != null) {
             changeUi();
             if (estateActivity().model().CreatedYaer != 0)
-                ((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).setText(estateActivity().model().CreatedYaer);
+                ((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).setText(String.valueOf(estateActivity().model().CreatedYaer));
             if (estateActivity().model().Partition != 0)
-                ((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).setText(estateActivity().model().Partition);
+                ((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).setText(String.valueOf(estateActivity().model().Partition));
         }
     }
 
