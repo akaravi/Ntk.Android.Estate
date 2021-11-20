@@ -91,7 +91,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         public void bindToView(EstatePropertyDetailModel item, int position) {
             super.bindToView(item, position);
             inputLayout.setHint(item.Title);
-            editText.setText(item.Value);
+//            editText.setText(item.Value);
         }
     }
 
