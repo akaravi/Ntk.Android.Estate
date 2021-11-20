@@ -41,6 +41,7 @@ public class NewEstateFragment3 extends BaseFragment {
         )).subscribe(new NtkObserver<ErrorException<EstatePropertyDetailGroupModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyDetailGroupModel> response) {
+                estateActivity().model().PropertyDetailGroups = response.ListItems;
                 EstatePropertyDetailGroupAdapterSelector adapter = new EstatePropertyDetailGroupAdapterSelector(response.ListItems);
                 RecyclerView rc = (findViewById(R.id.estateDetailGroupRc));
                 rc.setAdapter(adapter);
