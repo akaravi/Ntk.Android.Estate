@@ -8,6 +8,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
@@ -49,6 +52,15 @@ public class NewEstateFragment2 extends BaseFragment {
         getContractType();
         getTypeUsage();
         getTypeLandUse();
+        if (estateActivity().model().Area != 0)
+            ((TextInputEditText) findViewById(R.id.EstateAreaEditText)).setText(estateActivity().model().Area);
+        if (estateActivity().model().PropertyTypeLanduse != null) {
+            changeUi();
+            if (estateActivity().model().CreatedYaer != 0)
+                ((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).setText(estateActivity().model().CreatedYaer);
+            if (estateActivity().model().Partition != 0)
+                ((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).setText(estateActivity().model().Partition);
+        }
     }
 
     private void getTypeLandUse() {
@@ -102,11 +114,17 @@ public class NewEstateFragment2 extends BaseFragment {
 
     private synchronized void showData() {
         if (count == 2) {
-            EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(typeUsages,estateActivity().model().PropertyTypeUsage, estatePropertyTypeUsageModel -> setTypeUsage(estatePropertyTypeUsageModel));
+            EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(typeUsages, estateActivity().model().PropertyTypeUsage,
+                    estatePropertyTypeUsageModel -> {
+                        findViewById(R.id.cardLandUsesView).setVisibility(View.VISIBLE);
+                        estateActivity().model().PropertyTypeUsage = estatePropertyTypeUsageModel;
+                        estateActivity().model().PropertyTypeLanduse = null;
+                        setTypeUsage(estatePropertyTypeUsageModel);
+                    });
             RecyclerView rc = findViewById(R.id.estateTypeRc);
             rc.setAdapter(adapter);
             rc.setLayoutManager(new GridLayoutManager(getContext(), 4));
-            if(estateActivity().model().PropertyTypeUsage!=null){
+            if (estateActivity().model().PropertyTypeUsage != null) {
                 setTypeUsage(estateActivity().model().PropertyTypeUsage);
             }
             estateActivity().showContent();
@@ -114,7 +132,7 @@ public class NewEstateFragment2 extends BaseFragment {
     }
 
     private void setTypeUsage(EstatePropertyTypeUsageModel estatePropertyTypeUsageModel) {
-
+        changeUi();
         List<EstatePropertyTypeModel> mappers = StreamSupport.stream(contractTypes)
                 .filter(t -> t.LinkPropertyTypeUsageId.equals(estatePropertyTypeUsageModel.Id))
                 .collect(Collectors.toList());
@@ -133,16 +151,40 @@ public class NewEstateFragment2 extends BaseFragment {
     }
 
     private void changeUi() {
-
+        EstatePropertyTypeLanduseModel lastSelectedLandUse = estateActivity().model().PropertyTypeLanduse;
+        if (lastSelectedLandUse == null) {
+            findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.GONE);
+            findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.GONE);
+        } else {
+            if (lastSelectedLandUse.TitleCreatedYaer != null && !lastSelectedLandUse.TitleCreatedYaer.equals("") && !lastSelectedLandUse.TitleCreatedYaer.equals("---")) {
+                findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.VISIBLE);
+                ((TextInputLayout) findViewById(R.id.EstatePropertyOneTextInput)).setHint(lastSelectedLandUse.TitleCreatedYaer);
+            } else findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.GONE);
+            if (lastSelectedLandUse.TitlePartition != null && !lastSelectedLandUse.TitlePartition.equals("") && !lastSelectedLandUse.TitlePartition.equals("---")) {
+                findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.VISIBLE);
+                ((TextInputLayout) findViewById(R.id.EstatePropertyTowTextInput)).setHint(lastSelectedLandUse.TitlePartition);
+            } else findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.GONE);
+        }
     }
 
     public boolean isValidForm() {
 
-        if (estateActivity().model().PropertyTypeUsage==null)
-        {
+        if (estateActivity().model().PropertyTypeUsage == null) {
             Toasty.error(getContext(), "نوع کاربری را انتخاب نمایید", Toasty.LENGTH_LONG, true).show();
             return false;
         }
+        if (estateActivity().model().PropertyTypeLanduse == null) {
+            Toasty.error(getContext(), "نوع ملک را انتخاب نمایید", Toasty.LENGTH_LONG, true).show();
+            return false;
+        }
+        if (!((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim().equals(""))
+            estateActivity().model().Area = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim());
+
+        if (!(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim().equals("")))
+            estateActivity().model().CreatedYaer = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim());
+
+        if (!((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim().equals(""))
+            estateActivity().model().Partition = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim());
         return true;
     }
 

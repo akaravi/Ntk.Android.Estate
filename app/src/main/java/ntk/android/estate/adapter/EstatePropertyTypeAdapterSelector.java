@@ -24,8 +24,10 @@ public class EstatePropertyTypeAdapterSelector extends BaseRecyclerAdapter<Estat
         super(listItems);
         caller = detailCaller;
         selectedItem = Item;
-        if (selectedItem == null)
+        if (selectedItem == null) {
             selectedItem = new EstatePropertyTypeUsageModel();
+            selectedItem.Id="";
+        }
     }
 
 
@@ -39,8 +41,8 @@ public class EstatePropertyTypeAdapterSelector extends BaseRecyclerAdapter<Estat
     public void onBindViewHolder(@NonNull EstatePropertyTypeAdapterSelector.VH holder, final int position) {
         EstatePropertyTypeUsageModel item = getItem(position);
         holder.title.setText(item.Title);
-        holder.title.setChecked(selectedItem.equals(item));
-        holder.title.setSelected(selectedItem.equals(item));
+        holder.title.setChecked(selectedItem.Id.equals(item.Id));
+        holder.title.setSelected(selectedItem.Id.equals(item.Id));
         holder.title.setOnClickListener(view -> {
             notifyItemChanged(list().indexOf(item));
             selectedItem = item;

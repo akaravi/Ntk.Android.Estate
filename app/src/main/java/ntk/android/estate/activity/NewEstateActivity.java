@@ -34,7 +34,7 @@ public class NewEstateActivity extends BaseActivity {
         });
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
         });
-        showFragment5();
+        showFragment2();
     }
 
     private void showFragment1() {

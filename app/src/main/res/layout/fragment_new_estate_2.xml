@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"    android:paddingBottom="40dp"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="40dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,8 +31,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/estateTypeRc"
                     android:layout_width="match_parent"
-                    android:nestedScrollingEnabled="true"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="true" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -40,9 +41,11 @@
             android:layout_width="match_parent" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardLandUsesView"
             style="@style/new_estate_cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:contentPadding="8dp">
 
             <LinearLayout
@@ -63,7 +66,7 @@
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/EstateCodeTextInput"
+                    android:id="@+id/EstateAreaTextInput"
                     style="@style/new_estate_textInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,7 +74,7 @@
                     android:hint="@string/area">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/EstateCodeEditText"
+                        android:id="@+id/EstateAreaEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -91,6 +94,7 @@
                         android:id="@+id/EstatePropertyOneEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:maxLines="1"
                         android:textSize="14sp"
                         android:theme="@style/new_estate_textInputEditText" />
@@ -108,6 +112,7 @@
                         android:id="@+id/EstatePropertyTowEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:maxLines="1"
                         android:textSize="14sp"
                         android:theme="@style/new_estate_textInputEditText" />
