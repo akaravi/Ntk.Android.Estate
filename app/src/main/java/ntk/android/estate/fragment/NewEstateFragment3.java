@@ -8,12 +8,16 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import java9.util.stream.StreamSupport;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.estate.EstatePropertyDetailGroupService;
@@ -46,6 +50,18 @@ public class NewEstateFragment3 extends BaseFragment {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyDetailGroupModel> response) {
                 estateActivity().model().PropertyDetailGroups = response.ListItems;
+                //create list of values base on details
+                StreamSupport.stream(estateActivity().model().PropertyDetailGroups).
+                        forEach(estatePropertyDetailGroupModel -> {
+                            estatePropertyDetailGroupModel.PropertyValues = new ArrayList<>();
+                            StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails)
+                                    .forEach(estatePropertyDetailModel -> {
+                                        EstatePropertyDetailValueModel value = new EstatePropertyDetailValueModel();
+                                        value.LinkPropertyDetailId = estatePropertyDetailModel.Id;
+                                        value.PropertyDetail = estatePropertyDetailModel;
+                                        estatePropertyDetailGroupModel.PropertyValues.add(value);
+                                    });
+                        });
                 showView();
             }
 

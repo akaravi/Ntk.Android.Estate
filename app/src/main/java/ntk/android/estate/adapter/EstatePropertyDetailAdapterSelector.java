@@ -16,17 +16,18 @@ import com.google.android.material.textfield.TextInputLayout;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
-class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstatePropertyDetailModel, EstatePropertyDetailAdapterSelector.VH> {
+class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstatePropertyDetailValueModel, EstatePropertyDetailAdapterSelector.VH> {
     public EstatePropertyDetailAdapterSelector(EstatePropertyDetailGroupModel item) {
-        super(item.PropertyDetails);
+        super(item.PropertyValues);
     }
 
     @Override
     public int getItemViewType(int position) {
-        return list.get(position).InputDataType;
+        return list.get(position).PropertyDetail.InputDataType;
     }
 
     @NonNull
@@ -65,7 +66,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         }
 
 
-        public void bindToView(EstatePropertyDetailModel item, int position) {
+        public void bindToView(EstatePropertyDetailValueModel item, int position) {
 
         }
     }
@@ -88,9 +89,9 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         }
 
         @Override
-        public void bindToView(EstatePropertyDetailModel item, int position) {
+        public void bindToView(EstatePropertyDetailValueModel item, int position) {
             super.bindToView(item, position);
-            inputLayout.setHint(item.Title);
+            inputLayout.setHint(item.PropertyDetail.Title);
 //            editText.setText(item.Value);
         }
     }
@@ -141,9 +142,9 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         }
 
         @Override
-        public void bindToView(EstatePropertyDetailModel item, int position) {
+        public void bindToView(EstatePropertyDetailValueModel item, int position) {
             super.bindToView(item, position);
-            textView.setText(item.Title);
+            textView.setText(item.PropertyDetail.Title);
         }
     }
 }
