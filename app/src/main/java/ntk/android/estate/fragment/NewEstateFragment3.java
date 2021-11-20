@@ -80,6 +80,7 @@ public class NewEstateFragment3 extends BaseFragment {
     }
 
     public boolean isValidForm() {
+        estateActivity().model().PropertyDetailValues=new ArrayList<>();
         return true;
     }
 
