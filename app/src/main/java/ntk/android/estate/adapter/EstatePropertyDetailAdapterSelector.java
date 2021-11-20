@@ -136,6 +136,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             super(inflate);
             checkBox = inflate.findViewById(R.id.checkBox);
             textView = inflate.findViewById(R.id.txt);
+            inflate.findViewById(R.id.linear).setOnClickListener(view -> checkBox.toggle());
         }
 
         @Override
