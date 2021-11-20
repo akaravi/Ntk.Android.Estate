@@ -73,19 +73,19 @@ public class NewEstateFragment4 extends BaseFragment {
         selectedModel = model;
         findViewById(R.id.addNewEstateBtn).setVisibility(View.VISIBLE);
         TextInputLayout et1 = findViewById(R.id.etl1);
-        et1.setHint("قیمت اجاره");
+        et1.setHint(model.UnitRentPrice);
         et1.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
         findViewById(R.id.checkbox_row1).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et2 = findViewById(R.id.etl2);
         et2.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
-        et2.setHint("قیمت فروش");
+        et2.setHint(model.UnitSalePrice);
         findViewById(R.id.checkbox_row2).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et3 = findViewById(R.id.etl3);
         et3.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
         et3.setHint(model.Title);
-        et3.setHint("قیمت رهن");
+        et3.setHint(model.UnitDepositPrice);
         findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
     }
