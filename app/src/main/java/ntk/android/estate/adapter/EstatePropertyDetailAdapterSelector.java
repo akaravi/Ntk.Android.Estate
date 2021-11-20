@@ -1,7 +1,9 @@
 package ntk.android.estate.adapter;
 
 import android.content.Context;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -15,7 +17,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
-import ntk.android.base.entitymodel.estate.EstatePropertyDetailModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
@@ -75,13 +76,16 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     private class StringVH extends VH {
         TextInputEditText editText;
         TextInputLayout inputLayout;
+        MyCustomEditTextListener textChangeListener;
 
         public StringVH(View itemView) {
             super(itemView);
+            textChangeListener = new MyCustomEditTextListener();
             inputLayout = itemView.findViewById(R.id.inputLayout);
             editText = itemView.findViewById(R.id.inputEditText);
             editText.setInputType(inputType());
             editText.setTypeface(FontManager.T1_Typeface(getContext()));
+            editText.addTextChangedListener(textChangeListener);
         }
 
         public int inputType() {
@@ -92,7 +96,32 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         public void bindToView(EstatePropertyDetailValueModel item, int position) {
             super.bindToView(item, position);
             inputLayout.setHint(item.PropertyDetail.Title);
-//            editText.setText(item.Value);
+            if (item.Value != null)
+                editText.setText(item.Value);
+            textChangeListener.updatePosition(position);
+        }
+    }
+
+    class MyCustomEditTextListener implements TextWatcher {
+        private int position;
+
+        public void updatePosition(int position) {
+            this.position = position;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            // no op
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            getItem(position).Value = charSequence.toString();
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            // no op
         }
     }
 
@@ -145,6 +174,17 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         public void bindToView(EstatePropertyDetailValueModel item, int position) {
             super.bindToView(item, position);
             textView.setText(item.PropertyDetail.Title);
+            checkBox.setOnCheckedChangeListener((compoundButton, b) -> {
+                if (b) item.Value = "true";
+                else
+                    item.Value = "false";
+            });
+            if (item.Value != null) {
+                if (item.Value.equals("true"))
+                    checkBox.setChecked(true);
+                else
+                    checkBox.setChecked(false);
+            }
         }
     }
 }
