@@ -4,12 +4,14 @@ import android.content.Context;
 import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
@@ -69,12 +71,13 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     }
 
 
-
     private class StringVH extends VH {
         TextInputEditText editText;
+        TextInputLayout inputLayout;
 
         public StringVH(View itemView) {
             super(itemView);
+            inputLayout = itemView.findViewById(R.id.inputLayout);
             editText = itemView.findViewById(R.id.inputEditText);
             editText.setInputType(inputType());
             editText.setTypeface(FontManager.T1_Typeface(getContext()));
@@ -83,7 +86,14 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         public int inputType() {
             return InputType.TYPE_CLASS_TEXT;
         }
+
+        @Override
+        public void bindToView(EstatePropertyDetailModel item, int position) {
+            super.bindToView(item, position);
+            inputLayout.setHint(item.Title);
+        }
     }
+
     private class MultiLineVH extends StringVH {
         public MultiLineVH(View inflate) {
             super(inflate);
@@ -120,10 +130,18 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
 
     private class BooleanVH extends VH {
         MaterialCheckBox checkBox;
+        TextView textView;
 
         public BooleanVH(View inflate) {
             super(inflate);
             checkBox = inflate.findViewById(R.id.checkBox);
+            textView = inflate.findViewById(R.id.txt);
+        }
+
+        @Override
+        public void bindToView(EstatePropertyDetailModel item, int position) {
+            super.bindToView(item, position);
+            textView.setText(item.Title);
         }
     }
 }
