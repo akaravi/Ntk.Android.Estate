@@ -19,10 +19,15 @@ public class EstatePropertyLandUseAdapterSelector extends BaseRecyclerAdapter<Es
     private EstatePropertyTypeLanduseModel selectedItem;
     Consumer<EstatePropertyTypeLanduseModel> caller;
 
-    public EstatePropertyLandUseAdapterSelector(List<EstatePropertyTypeLanduseModel> list, Consumer<EstatePropertyTypeLanduseModel> selector) {
+    public EstatePropertyLandUseAdapterSelector(List<EstatePropertyTypeLanduseModel> list,EstatePropertyTypeLanduseModel Item, Consumer<EstatePropertyTypeLanduseModel> selector) {
         super(list);
-        selectedItem = new EstatePropertyTypeLanduseModel();
         caller = selector;
+        selectedItem =Item;
+        if (selectedItem==null){
+            selectedItem=new EstatePropertyTypeLanduseModel();
+            selectedItem.Id="";
+        }
+
     }
 
     @NonNull
@@ -35,8 +40,8 @@ public class EstatePropertyLandUseAdapterSelector extends BaseRecyclerAdapter<Es
     public void onBindViewHolder(@NonNull VH holder, int position) {
         EstatePropertyTypeLanduseModel item = getItem(position);
         holder.title.setText(item.Title);
-        holder.title.setChecked(selectedItem.equals(item));
-        holder.title.setSelected(selectedItem.equals(item));
+        holder.title.setChecked(selectedItem.Id.equals(item.Id));
+        holder.title.setSelected(selectedItem.Id.equals(item.Id));
         holder.title.setOnClickListener(view -> {
             notifyItemChanged(list().indexOf(item));
             selectedItem = item;

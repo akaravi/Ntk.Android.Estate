@@ -125,6 +125,7 @@ public class NewEstateFragment2 extends BaseFragment {
             rc.setAdapter(adapter);
             rc.setLayoutManager(new GridLayoutManager(getContext(), 4));
             if (estateActivity().model().PropertyTypeUsage != null) {
+                findViewById(R.id.cardLandUsesView).setVisibility(View.VISIBLE);
                 setTypeUsage(estateActivity().model().PropertyTypeUsage);
             }
             estateActivity().showContent();
@@ -141,10 +142,11 @@ public class NewEstateFragment2 extends BaseFragment {
                         .anyMatch(k -> k.LinkPropertyTypeLanduseId.equals(t.Id)))
                 .collect(Collectors.toList());
         RecyclerView rc = findViewById(R.id.EstateLandUsedRc);
-        rc.setAdapter(new EstatePropertyLandUseAdapterSelector(models, t -> {
-            estateActivity().model().PropertyTypeLanduse = t;
-            changeUi();
-        }));
+        rc.setAdapter(new EstatePropertyLandUseAdapterSelector(models, estateActivity().model().PropertyTypeLanduse,
+                t -> {
+                    estateActivity().model().PropertyTypeLanduse = t;
+                    changeUi();
+                }));
         rc.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
 
