@@ -33,7 +33,8 @@ import ntk.android.estate.adapter.EstatePropertyLandUseAdapterSelector;
 import ntk.android.estate.adapter.EstatePropertyTypeAdapterSelector;
 
 public class NewEstateFragment2 extends BaseFragment {
-
+    //to remove all selected value if landUse change
+    EstatePropertyTypeLanduseModel lastSelectedLandUse;
     private int count;
     private List<EstatePropertyTypeUsageModel> typeUsages;
     private List<EstatePropertyTypeModel> contractTypes;
@@ -52,6 +53,7 @@ public class NewEstateFragment2 extends BaseFragment {
         getContractType();
         getTypeUsage();
         getTypeLandUse();
+        lastSelectedLandUse = estateActivity().model().PropertyTypeLanduse;
         if (estateActivity().model().Area != 0)
             ((TextInputEditText) findViewById(R.id.EstateAreaEditText)).setText(String.valueOf(estateActivity().model().Area));
         if (estateActivity().model().PropertyTypeLanduse != null) {
@@ -187,6 +189,10 @@ public class NewEstateFragment2 extends BaseFragment {
 
         if (!((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim().equals(""))
             estateActivity().model().Partition = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim());
+        if (lastSelectedLandUse != null && !lastSelectedLandUse.Id.equals(estateActivity().model().PropertyTypeLanduse.Id)) {
+            estateActivity().model().PropertyDetailGroups = null;
+            estateActivity().model().PropertyDetailValues = null;
+        }
         return true;
     }
 

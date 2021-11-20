@@ -30,7 +30,11 @@ public class NewEstateFragment3 extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getAllDetails(estateActivity().model().PropertyTypeLanduse);
+        if (estateActivity().model().PropertyDetailGroups == null || estateActivity().model().PropertyDetailGroups.size() == 0)
+            getAllDetails(estateActivity().model().PropertyTypeLanduse);
+        else {
+            showView();
+        }
     }
 
 
@@ -42,10 +46,7 @@ public class NewEstateFragment3 extends BaseFragment {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyDetailGroupModel> response) {
                 estateActivity().model().PropertyDetailGroups = response.ListItems;
-                EstatePropertyDetailGroupAdapterSelector adapter = new EstatePropertyDetailGroupAdapterSelector(response.ListItems);
-                RecyclerView rc = (findViewById(R.id.estateDetailGroupRc));
-                rc.setAdapter(adapter);
-                rc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+                showView();
             }
 
             @Override
@@ -53,6 +54,13 @@ public class NewEstateFragment3 extends BaseFragment {
                 estateActivity().showErrorView();
             }
         });
+    }
+
+    private void showView() {
+        EstatePropertyDetailGroupAdapterSelector adapter = new EstatePropertyDetailGroupAdapterSelector(estateActivity().model().PropertyDetailGroups);
+        RecyclerView rc = (findViewById(R.id.estateDetailGroupRc));
+        rc.setAdapter(adapter);
+        rc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
     }
 
     public boolean isValidForm() {
