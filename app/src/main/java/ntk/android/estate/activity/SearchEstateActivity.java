@@ -1,6 +1,7 @@
 package ntk.android.estate.activity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -13,6 +14,7 @@ public class SearchEstateActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estate_search);
         findViewById(R.id.imgToolbarBack).setOnClickListener(view -> finish());
+        ((TextView) findViewById(R.id.txtToolbarTitle)).setText("جست و جو");
 
 
     }
