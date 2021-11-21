@@ -12,6 +12,7 @@ public class SearchEstateActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estate_search);
+        findViewById(R.id.imgToolbarBack).setOnClickListener(view -> finish());
 
 
     }
