@@ -45,7 +45,9 @@ public class NewEstateFragment4 extends BaseFragment {
         getData();
         RecyclerView editContractsRc = findViewById(R.id.contractsEditRc);
         editContractsRc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        editContractsRc.setAdapter(new RemovableContractsAdapter(new ArrayList<>()));
+        if (estateActivity().model().Contracts == null)
+            estateActivity().model().Contracts = new ArrayList<>();
+        editContractsRc.setAdapter(new RemovableContractsAdapter(estateActivity().model().Contracts));
         findViewById(R.id.addNewEstateBtn).setOnClickListener(view1 -> addItem());
     }
 
@@ -93,43 +95,54 @@ public class NewEstateFragment4 extends BaseFragment {
     private void addItem() {
         if (selectedModel != null) {
             EstateContractModel contract = new EstateContractModel();
-            contract.ContractType=selectedModel;
+            contract.ContractType = selectedModel;
             if (selectedModel.HasRentPrice || selectedModel.RentPriceAllowAgreement) {
                 if (((MaterialCheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).isChecked())
                     contract.RentPriceByAgreement = true;
                 else {
+
                     TextInputEditText et = (TextInputEditText) findViewById(R.id.et1);
                     if (et.getText().toString().trim().equals("")) {
-                        Toasty.info(getContext(), "مبلغ احاره مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+                        Toasty.info(getContext(), selectedModel.TitleRentPrice + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
                         return;
-                    } else
+                    } else {
+                        contract.RentPriceByAgreement = false;
                         contract.RentPrice = Double.valueOf(et.getText().toString());
+                    }
                 }
-            }
+            } else
+                contract.RentPriceByAgreement = false;
             if (selectedModel.HasSalePrice || selectedModel.SalePriceAllowAgreement) {
                 if (((MaterialCheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).isChecked())
                     contract.SalePriceByAgreement = true;
                 else {
                     TextInputEditText et = (TextInputEditText) findViewById(R.id.et2);
                     if (et.getText().toString().trim().equals("")) {
-                        Toasty.info(getContext(), "مبلغ فروش مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+                        Toasty.info(getContext(),selectedModel.TitleSalePrice+ " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
                         return;
-                    } else
+                    } else {
+                        contract.SalePriceByAgreement = false;
                         contract.SalePrice = Double.valueOf(et.getText().toString());
+                    }
                 }
-            }
+            } else
+                contract.SalePriceByAgreement = false;
+
             if (selectedModel.HasDepositPrice || selectedModel.DepositPriceAllowAgreement) {
                 if (((MaterialCheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).isChecked())
                     contract.DepositPriceByAgreement = true;
                 else {
                     TextInputEditText et = (TextInputEditText) findViewById(R.id.et3);
                     if (et.getText().toString().trim().equals("")) {
-                        Toasty.info(getContext(), "مبلغ رهن مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+                        Toasty.info(getContext(),selectedModel.TitleDepositPrice+ " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
                         return;
-                    } else
-                        contract.DepositPrice =  Double.valueOf(et.getText().toString());
+                    } else {
+                        contract.DepositPriceByAgreement = false;
+                        contract.DepositPrice = Double.valueOf(et.getText().toString());
+                    }
                 }
-            }
+            } else
+                contract.DepositPriceByAgreement = false;
             if (estateActivity().model().Contracts == null)
                 estateActivity().model().Contracts = new ArrayList<>();
             estateActivity().model().Contracts.add(contract);

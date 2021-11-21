@@ -17,6 +17,7 @@
             android:id="@+id/et1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:maxLines="1"
             android:textSize="14sp"
             android:theme="@style/new_estate_textInputEditText" />
@@ -40,6 +41,7 @@
             android:id="@+id/et2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:maxLines="1"
             android:textSize="14sp"
             android:theme="@style/new_estate_textInputEditText" />
@@ -63,6 +65,7 @@
             android:id="@+id/et3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:maxLines="1"
             android:textSize="14sp"
             android:theme="@style/new_estate_textInputEditText" />

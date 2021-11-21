@@ -28,8 +28,20 @@ public class RemovableContractsAdapter extends BaseRecyclerAdapter<EstateContrac
     }
 
     public class VH extends EstateContractAdapter.VH {
+        View delete;
+
         public VH(@NonNull View itemView) {
             super(itemView);
+            delete = itemView.findViewById(R.id.delete);
+        }
+
+        @Override
+        public void setData(EstateContractModel item) {
+            super.setData(item);
+            delete.setOnClickListener(view -> {
+                list.remove(item);
+                notifyDataSetChanged();
+            });
         }
     }
 }

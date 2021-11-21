@@ -33,6 +33,7 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
     }
 
     public static class VH extends RecyclerView.ViewHolder {
+        TextView contractTitle;
         TextView price1;
         TextView title1;
         ImageView icon1;
@@ -45,6 +46,7 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
 
         public VH(@NonNull View itemView) {
             super(itemView);
+            contractTitle = itemView.findViewById(R.id.title);
             price1 = itemView.findViewById(R.id.txtPrice1);
             title1 = itemView.findViewById(R.id.txtPrice1Title1);
             icon1 = itemView.findViewById(R.id.priceImage1);
@@ -57,60 +59,56 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
             icon1.setImageResource(R.drawable.contracts);
             icon2.setImageResource(R.drawable.contracts);
             icon3.setImageResource(R.drawable.contracts);
-            setFont(price1,price2,price3);
-            setFont(title1,title2,title3);
-
+            setFont(price1, price2, price3);
+            setFont(title1, title2, title3);
+            contractTitle.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
         }
 
         private void setFont(TextView t1, TextView t2, TextView t3) {
             t1.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
             t2.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
             t3.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
-
-
         }
 
         public void setData(EstateContractModel item) {
-
+            contractTitle.setText(item.ContractType.Title);
             if (item.ContractType.HasSalePrice) {
                 itemView.findViewById(R.id.linear1).setVisibility(View.VISIBLE);
-                title1.setText(item.ContractType.Title + " :  ");
+                title1.setText(item.ContractType.TitleSalePrice + "  :   ");
                 if (item.SalePrice != null || item.SalePriceByAgreement) {
 
                     if (item.SalePrice != null && item.SalePrice != 0)
-                        price1.setText(NViewUtils.PriceFormat(item.SalePrice )+ "  " + item.UnitSalePrice);
+                        price1.setText(NViewUtils.PriceFormat(item.SalePrice) + "  " + item.UnitSalePrice);
                     if (item.SalePriceByAgreement)
                         price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
 
-                } else {
-                    title1.setText("جهت " + item.ContractType.Title);
                 }
-            }
+            }else
+                itemView.findViewById(R.id.linear1).setVisibility(View.GONE);
             if (item.ContractType.HasDepositPrice) {
                 itemView.findViewById(R.id.linear2).setVisibility(View.VISIBLE);
-                title2.setText(item.ContractType.Title);
+                title2.setText(item.ContractType.TitleDepositPrice+ "  :   ");
                 if (item.DepositPrice != null || item.DepositPriceByAgreement) {
 
                     if (item.DepositPrice != null && item.DepositPrice != 0)
                         price2.setText(NViewUtils.PriceFormat(item.DepositPrice) + "  " + item.UnitSalePrice);
                     if (item.DepositPriceByAgreement)
                         price2.setText(price2.getText().toString().isEmpty() ? "توافقی" : price2.getText().toString() + "|| توافقی");
-                } else {
-                    title2.setText("جهت " + item.ContractType.Title);
                 }
+            }else{
+                itemView.findViewById(R.id.linear2).setVisibility(View.GONE);
             }
             if (item.ContractType.HasRentPrice) {
-                title3.setText(item.ContractType.Title);
-
+                itemView.findViewById(R.id.linear3).setVisibility(View.VISIBLE);
+                title3.setText(item.ContractType.TitleRentPrice+ "  :   ");
                 if (item.RentPrice != null || item.RentPriceByAgreement) {
                     if (item.RentPrice != null && item.RentPrice != 0)
-                        price3.setText(NViewUtils.PriceFormat(item.RentPrice )+ "  " + item.UnitSalePrice);
+                        price3.setText(NViewUtils.PriceFormat(item.RentPrice) + "  " + item.UnitSalePrice);
                     if (item.RentPriceByAgreement)
                         price3.setText(price3.getText().toString().isEmpty() ? "توافقی" : price3.getText().toString() + "|| توافقی");
-                } else {
-                    title3.setText("جهت " + item.ContractType.Title);
                 }
-            }
+            }else
+                itemView.findViewById(R.id.linear3).setVisibility(View.GONE);
         }
     }
 }
