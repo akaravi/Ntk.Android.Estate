@@ -24,8 +24,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/checkbox_row1"
-        layout="@layout/item_check_box_row"
+        layout="@layout/item_check_box_row"     android:layout_gravity="right"
         android:visibility="gone" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -48,8 +50,9 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <include
-        android:id="@+id/checkbox_row2"
-        layout="@layout/item_check_box_row"
+        android:id="@+id/checkbox_row2"  android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/item_check_box_row"     android:layout_gravity="right"
         android:visibility="gone" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -72,7 +75,9 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <include
-        android:id="@+id/checkbox_row3"
+        android:layout_gravity="right"
+        android:id="@+id/checkbox_row3"  android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         layout="@layout/item_check_box_row"
         android:visibility="gone" />
 </LinearLayout>
