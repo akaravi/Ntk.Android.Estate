@@ -30,6 +30,7 @@ import ntk.android.estate.R;
 import ntk.android.estate.activity.NewEstateActivity;
 import ntk.android.estate.adapter.EstateContractAdapterSelector;
 import ntk.android.estate.adapter.RemovableContractsAdapter;
+import ntk.android.estate.view.NumberTextWatcherForThousand;
 
 public class NewEstateFragment4 extends BaseFragment {
 
@@ -51,6 +52,13 @@ public class NewEstateFragment4 extends BaseFragment {
         ((CheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et1).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et2).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et3).setEnabled(!b));
+        //add seprator to editText
+        TextInputEditText et1 = (TextInputEditText) findViewById(R.id.et1);
+        et1.addTextChangedListener(new NumberTextWatcherForThousand(et1));
+        TextInputEditText et2 = (TextInputEditText) findViewById(R.id.et2);
+        et2.addTextChangedListener(new NumberTextWatcherForThousand(et2));
+        TextInputEditText et3 = (TextInputEditText) findViewById(R.id.et3);
+        et3.addTextChangedListener(new NumberTextWatcherForThousand(et3));
         getData();
         RecyclerView editContractsRc = findViewById(R.id.contractsEditRc);
         editContractsRc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
@@ -126,7 +134,7 @@ public class NewEstateFragment4 extends BaseFragment {
                         return;
                     } else {
                         contract.RentPriceByAgreement = false;
-                        contract.RentPrice = Double.valueOf(et.getText().toString());
+                        contract.RentPrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et.getText().toString()));
                     }
                 }
             } else
@@ -141,7 +149,7 @@ public class NewEstateFragment4 extends BaseFragment {
                         return;
                     } else {
                         contract.SalePriceByAgreement = false;
-                        contract.SalePrice = Double.valueOf(et.getText().toString());
+                        contract.SalePrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et.getText().toString()));
                     }
                 }
             } else
@@ -157,7 +165,7 @@ public class NewEstateFragment4 extends BaseFragment {
                         return;
                     } else {
                         contract.DepositPriceByAgreement = false;
-                        contract.DepositPrice = Double.valueOf(et.getText().toString());
+                        contract.DepositPrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et.getText().toString()));
                     }
                 }
             } else
