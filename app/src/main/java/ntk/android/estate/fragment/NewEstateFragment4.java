@@ -2,6 +2,7 @@ package ntk.android.estate.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,10 @@ public class NewEstateFragment4 extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //click on all of view to affect on  toggling checkBox
+        findViewById(R.id.checkbox_row1).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
+        findViewById(R.id.checkbox_row2).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
+        findViewById(R.id.checkbox_row3).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
         getData();
         RecyclerView editContractsRc = findViewById(R.id.contractsEditRc);
         editContractsRc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
@@ -72,6 +77,7 @@ public class NewEstateFragment4 extends BaseFragment {
     }
 
     private void changeView(EstateContractTypeModel model) {
+        clearAllInput();
         selectedModel = model;
         findViewById(R.id.addNewEstateBtn).setVisibility(View.VISIBLE);
         TextInputLayout et1 = findViewById(R.id.etl1);
@@ -90,6 +96,15 @@ public class NewEstateFragment4 extends BaseFragment {
         et3.setHint(model.TitleDepositPrice);
         findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
+    }
+
+    private void clearAllInput() {
+        ((MaterialCheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setChecked(false);
+        ((TextInputEditText) findViewById(R.id.et1)).setText("");
+        ((MaterialCheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setChecked(false);
+        ((TextInputEditText) findViewById(R.id.et2)).setText("");
+        ((MaterialCheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setChecked(false);
+        ((TextInputEditText) findViewById(R.id.et3)).setText("");
     }
 
     private void addItem() {
@@ -118,7 +133,7 @@ public class NewEstateFragment4 extends BaseFragment {
                 else {
                     TextInputEditText et = (TextInputEditText) findViewById(R.id.et2);
                     if (et.getText().toString().trim().equals("")) {
-                        Toasty.info(getContext(),selectedModel.TitleSalePrice+ " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+                        Toasty.info(getContext(), selectedModel.TitleSalePrice + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
                         return;
                     } else {
                         contract.SalePriceByAgreement = false;
@@ -134,7 +149,7 @@ public class NewEstateFragment4 extends BaseFragment {
                 else {
                     TextInputEditText et = (TextInputEditText) findViewById(R.id.et3);
                     if (et.getText().toString().trim().equals("")) {
-                        Toasty.info(getContext(),selectedModel.TitleDepositPrice+ " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+                        Toasty.info(getContext(), selectedModel.TitleDepositPrice + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
                         return;
                     } else {
                         contract.DepositPriceByAgreement = false;
