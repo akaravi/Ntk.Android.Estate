@@ -47,6 +47,10 @@ public class NewEstateFragment4 extends BaseFragment {
         findViewById(R.id.checkbox_row1).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
         findViewById(R.id.checkbox_row2).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
         findViewById(R.id.checkbox_row3).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
+        //toggle state of Edittext on toggling Checkbox
+        ((CheckBox)findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) ->findViewById(R.id.et1).setEnabled(!b) );
+        ((CheckBox)findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) ->findViewById(R.id.et2).setEnabled(!b) );
+        ((CheckBox)findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) ->findViewById(R.id.et3).setEnabled(!b) );
         getData();
         RecyclerView editContractsRc = findViewById(R.id.contractsEditRc);
         editContractsRc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
