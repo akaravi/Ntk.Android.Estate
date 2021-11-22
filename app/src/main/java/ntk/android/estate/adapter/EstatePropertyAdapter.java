@@ -177,7 +177,12 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
 
         public void setProperties(EstatePropertyModel item) {
             property1.setText(item.PropertyTypeLanduse.Title);
-            property2.setText(item.PropertyTypeLanduse.TitlePartition + " : " + item.Partition);
+            if (item.PropertyTypeLanduse.TitlePartition.equals("")||item.PropertyTypeLanduse.TitlePartition.equals("---"))
+                property2.setVisibility(View.GONE);
+            else{
+                property2.setText(item.PropertyTypeLanduse.TitlePartition + " : " + item.Partition);
+                property2.setVisibility(View.VISIBLE);
+            }
             if (item.Area != 0) {
                 property3.setVisibility(View.VISIBLE);
                 property3.setText(item.Area + " متر ");

@@ -33,7 +33,6 @@ public class PropertyDetailValueAdapter extends BaseRecyclerAdapter<EstateProper
         holder.title.setText(item.PropertyDetail.Title);
         String iconFont = item.PropertyDetail.IconFont;
         holder.icon.setText("{" + iconFont.replace(iconFont.substring(0,iconFont.indexOf("-")+1), "faw-") + "}");
-//        holder.icon.setText("{faw-bell}");//<i class=""></i>
         if (item.PropertyDetail.IconColor != null)
             holder.icon.setTextColor(Color.parseColor(item.PropertyDetail.IconColor));
         if (item.Value.equalsIgnoreCase("true")) {
