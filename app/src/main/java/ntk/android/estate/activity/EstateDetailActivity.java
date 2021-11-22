@@ -83,6 +83,8 @@ public class EstateDetailActivity extends BaseActivity {
         sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.startAutoCycle();
+        //toggle map is gone until model get
+        (findViewById(R.id.toggleMaps)).setVisibility(View.GONE);
         findViewById(R.id.toggleMaps).setOnClickListener(view -> {
             View mapView = findViewById(R.id.map);
             MaterialButton button = (findViewById(R.id.toggleMaps));
@@ -166,9 +168,9 @@ public class EstateDetailActivity extends BaseActivity {
         detailsRc.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         detailsRc.setAdapter(PropertyDetailGroupsAdapter.INIT(model.PropertyDetailGroups, model.PropertyDetailValues));
 //        check location is set or not
-        if (model.Geolocationlatitude != null & model.Geolocationlongitude != null) {
+        if (model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0&&model.Geolocationlongitude!=0) {
             (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
-            LatLng point = new LatLng(53.529929, 35.164676);
+            LatLng  point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
             ((MapView) findViewById(R.id.map)).addMarker(createMarker(point));
 
         }
