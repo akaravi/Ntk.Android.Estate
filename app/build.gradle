@@ -58,6 +58,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //for result
     implementation "androidx.activity:activity:1.4.0"
+    //for add
+    implementation 'com.github.BirjuVachhani:locus-android:3.2.0'
     // Add the Firebase Crashlytics SDK.
     implementation 'com.google.firebase:firebase-crashlytics:18.2.3'
     implementation 'com.google.firebase:firebase-analytics:19.0.2'
