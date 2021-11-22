@@ -16,6 +16,5 @@ public class SearchEstateActivity extends BaseActivity {
         findViewById(R.id.imgToolbarBack).setOnClickListener(view -> finish());
         ((TextView) findViewById(R.id.txtToolbarTitle)).setText("جست و جو");
 
-
     }
 }

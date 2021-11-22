@@ -16,15 +16,29 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/estate_detail_title_text"
+                style="@style/search_estate_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="کلمه کلیدی :" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/EstateTitleTextInput"
+                style="@style/new_estate_textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/title">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EstateTitleEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textSize="14sp"
+                    android:theme="@style/new_estate_textInputEditText" />
+            </com.google.android.material.textfield.TextInputLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+               style="@style/search_estate_padding" />
 
             <TextView
                 style="@style/estate_detail_title_text"
