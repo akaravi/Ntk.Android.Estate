@@ -52,7 +52,7 @@ import ntk.android.estate.adapter.PropertyDetailGroupsAdapter;
 public class EstateDetailActivity extends BaseActivity {
     public String Id = "";
     private EstatePropertyModel model;
-    ImageSliderAdapter imageSlider;
+    ImageSliderAdapter sliderAdapter;
     FilterModel getAllFilter;
     private boolean mapIsSet = false;
 
@@ -78,21 +78,21 @@ public class EstateDetailActivity extends BaseActivity {
         findViewById(R.id.imgBackDetail).setOnClickListener(view -> finish());
         findViewById(R.id.imgShareDetail).setOnClickListener(view -> ClickShare());
         SliderView sliderView = findViewById(R.id.imageSlider);
-        imageSlider = new ImageSliderAdapter(this);
-        sliderView.setSliderAdapter(imageSlider);
+        sliderAdapter = new ImageSliderAdapter(this);
+        sliderView.setSliderAdapter(sliderAdapter);
         sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.startAutoCycle();
         findViewById(R.id.toggleMaps).setOnClickListener(view -> {
             View mapView = findViewById(R.id.map);
             MaterialButton button = (findViewById(R.id.toggleMaps));
-            View slider = findViewById(R.id.imageSlider);
+            SliderView slider = findViewById(R.id.imageSlider);
             if (mapView.getVisibility() == View.VISIBLE) {
-                button.setText("تصاویر");
+                button.setText("نقشه");
                 slider.setVisibility(View.VISIBLE);
                 mapView.setVisibility(View.GONE);
             } else {
-                button.setText("نقشه");
+                button.setText("jwh");
                 slider.setVisibility(View.GONE);
                 mapView.setVisibility(View.VISIBLE);
             }
@@ -151,7 +151,7 @@ public class EstateDetailActivity extends BaseActivity {
         List<String> images = new ArrayList<>();
         images.add(model.LinkMainImageIdSrc);
         images.addAll(model.LinkExtraImageIdsSrc);
-        imageSlider.renewUrls(images);
+        sliderAdapter.renewUrls(images);
         //correct location add
         //add contracts
         RecyclerView contractsRc = findViewById(R.id.contractsRc);

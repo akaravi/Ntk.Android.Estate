@@ -37,6 +37,7 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_splash.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_support.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/act_ticket_answer.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/activity_estate_dtail.xml" value="0.14221014492753623" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/activity_estate_list.xml" value="0.12335359675785208" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/activity_estate_search.xml" value="0.264" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/app_base_empty.xml" value="0.18110435663627153" />
@@ -44,7 +45,7 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/app_base_loading.xml" value="0.2726449275362319" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/estate_dtail_activity.xml" value="0.48526315789473684" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/fragment_location.xml" value="0.23097826086956522" />
-        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/fragment_new_estate_1.xml" value="0.144" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/fragment_new_estate_1.xml" value="0.264" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/fragment_new_estate_2.xml" value="0.4" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/fragment_new_estate_3.xml" value="0.1" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/fragment_new_estate_4.xml" value="0.264" />
