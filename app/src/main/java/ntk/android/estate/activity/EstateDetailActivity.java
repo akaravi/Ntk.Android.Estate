@@ -168,7 +168,7 @@ public class EstateDetailActivity extends BaseActivity {
         detailsRc.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         detailsRc.setAdapter(PropertyDetailGroupsAdapter.INIT(model.PropertyDetailGroups, model.PropertyDetailValues));
 //        check location is set or not
-        if (model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0&&model.Geolocationlongitude!=0) {
+         if (model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0&&model.Geolocationlongitude!=0) {
             (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
             LatLng  point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
             ((MapView) findViewById(R.id.map)).addMarker(createMarker(point));
