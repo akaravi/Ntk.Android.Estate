@@ -48,18 +48,23 @@ public class PropertyDetailGroupsAdapter extends BaseRecyclerAdapter<EstatePrope
         EstatePropertyDetailGroupModel item = getItem(position);
         holder.title.setText(item.Title);
         holder.rc.setAdapter(new PropertyDetailValueAdapter(item.PropertyValues));
-        holder.rc.setLayoutManager(new GridLayoutManager(holder.itemView.getContext(), 3));
+        holder.rc.setLayoutManager(new GridLayoutManager(holder.itemView.getContext(), 2));
+        if (position==list.size()-1)
+            holder.line.setVisibility(View.GONE);
+        else
+            holder.line.setVisibility(View.VISIBLE);
     }
 
     public class VH extends RecyclerView.ViewHolder {
         TextView title;
         RecyclerView rc;
-
+        View line;
         public VH(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.propertyGroupTitle);
             title.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
             rc = itemView.findViewById(R.id.detailsValues);
+            line=itemView.findViewById(R.id.lineImage);
         }
 
     }

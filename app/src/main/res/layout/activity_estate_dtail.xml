@@ -245,7 +245,11 @@
                         android:id="@+id/contractsRc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
-
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/dash_line" />
                     <ntk.android.base.view.NWebView
                         android:id="@+id/WebViewDesc"
                         android:layout_width="match_parent"
@@ -255,7 +259,11 @@
                         android:layout_marginRight="15dp"
                         android:layoutDirection="rtl"
                         android:textDirection="rtl" />
-
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/dash_line" />
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/detailsGroupRc"
                         android:layout_width="match_parent"
