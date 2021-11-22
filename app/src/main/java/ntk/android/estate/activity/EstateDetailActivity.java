@@ -92,7 +92,7 @@ public class EstateDetailActivity extends BaseActivity {
                 slider.setVisibility(View.VISIBLE);
                 mapView.setVisibility(View.GONE);
             } else {
-                button.setText("jwh");
+                button.setText("تصاویر");
                 slider.setVisibility(View.GONE);
                 mapView.setVisibility(View.VISIBLE);
             }
