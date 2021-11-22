@@ -8,17 +8,17 @@
         layout="@layout/base_toolbar_back" />
 
     <org.neshan.mapsdk.MapView
-        android:id="@+id/mapview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/includeToolbar" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/setPointBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="18dp"
-        android:text="ثبت مکان" />
+        android:layout_marginLeft="42dp"
+        android:layout_marginRight="42dp"
+        android:layout_marginBottom="38dp"
+        android:text="ثبت مکان انتخاب شده" />
 </RelativeLayout>
