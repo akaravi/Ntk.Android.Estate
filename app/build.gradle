@@ -28,6 +28,12 @@ android {
     }
     signingConfigs {
         release {
+            storeFile file('..\\..\\keys\\key.jks')
+            storePassword "APPstorePassword"
+            keyAlias "APPkeyAlias"
+            keyPassword "APPkeyPassword"
+        }
+        debug {
             storeFile file('..\\test_key.jks')
             storePassword "Sa@123456"
             keyAlias "key0"
@@ -41,6 +47,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             debuggable true
         }
