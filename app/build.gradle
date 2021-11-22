@@ -28,10 +28,10 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file('..\\..\\keys\\key.jks')
-            storePassword "APPstorePassword"
-            keyAlias "APPkeyAlias"
-            keyPassword "APPkeyPassword"
+            storeFile file('..\\test_key.jks')
+            storePassword "Sa@123456"
+            keyAlias "key0"
+            keyPassword "Sa@123456"
         }
     }
     buildTypes {

@@ -12,6 +12,6 @@ public class GetLocationActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_location);
-        findViewById(R.id.imgToolbarBack).setOnClickListener(view -> finish(););
+        findViewById(R.id.imgToolbarBack).setOnClickListener(view -> finish());
     }
 }
