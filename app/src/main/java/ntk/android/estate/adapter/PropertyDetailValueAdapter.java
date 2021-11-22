@@ -31,7 +31,9 @@ public class PropertyDetailValueAdapter extends BaseRecyclerAdapter<EstateProper
     public void onBindViewHolder(@NonNull VH holder, int position) {
         EstatePropertyDetailValueModel item = getItem(position);
         holder.title.setText(item.PropertyDetail.Title);
-        holder.icon.setText("{ " + item.PropertyDetail.IconFont.replaceFirst("fa fa-", "faw-") + " }");
+        String iconFont = item.PropertyDetail.IconFont;
+        holder.icon.setText("{" + iconFont.replace(iconFont.substring(0,iconFont.indexOf("-")+1), "faw-") + "}");
+//        holder.icon.setText("{faw-bell}");//<i class=""></i>
         if (item.PropertyDetail.IconColor != null)
             holder.icon.setTextColor(Color.parseColor(item.PropertyDetail.IconColor));
         if (item.Value.equalsIgnoreCase("true")) {
