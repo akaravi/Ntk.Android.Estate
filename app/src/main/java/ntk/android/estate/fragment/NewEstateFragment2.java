@@ -37,7 +37,7 @@ public class NewEstateFragment2 extends BaseFragment {
     EstatePropertyTypeLanduseModel lastSelectedLandUse;
     private int count;
     private List<EstatePropertyTypeUsageModel> typeUsages;
-    private List<EstatePropertyTypeModel> contractTypes;
+    private List<EstatePropertyTypeModel> propertyType;
     private List<EstatePropertyTypeLanduseModel> landUses;
 
     @Override
@@ -50,7 +50,7 @@ public class NewEstateFragment2 extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         count = 0;
         estateActivity().showProgress();
-        getContractType();
+        getPropertyType();
         getTypeUsage();
         getTypeLandUse();
         lastSelectedLandUse = estateActivity().model().PropertyTypeLanduse;
@@ -81,11 +81,11 @@ public class NewEstateFragment2 extends BaseFragment {
                 });
     }
 
-    private void getContractType() {
+    private void getPropertyType() {
         ServiceExecute.execute(new EstatePropertyTypeService(getContext()).getAll(new FilterModel().setRowPerPage(100))).subscribe(new NtkObserver<ErrorException<EstatePropertyTypeModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyTypeModel> response) {
-                contractTypes = response.ListItems;
+                propertyType = response.ListItems;
                 showData();
             }
 
@@ -136,7 +136,7 @@ public class NewEstateFragment2 extends BaseFragment {
 
     private void setTypeUsage(EstatePropertyTypeUsageModel estatePropertyTypeUsageModel) {
         changeUi();
-        List<EstatePropertyTypeModel> mappers = StreamSupport.stream(contractTypes)
+        List<EstatePropertyTypeModel> mappers = StreamSupport.stream(propertyType)
                 .filter(t -> t.LinkPropertyTypeUsageId.equals(estatePropertyTypeUsageModel.Id))
                 .collect(Collectors.toList());
         List<EstatePropertyTypeLanduseModel> models = StreamSupport.stream(landUses).
