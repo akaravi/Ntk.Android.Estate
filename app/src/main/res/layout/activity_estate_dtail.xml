@@ -55,8 +55,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:text="نقشه" />
+
+                <TextView
+                    android:id="@+id/txtArea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignTop="@+id/toggleMaps"
+                    android:layout_alignBottom="@+id/toggleMaps"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:padding="8dp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp" />
             </RelativeLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -245,11 +264,13 @@
                         android:id="@+id/contractsRc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="4dp"
                         android:layout_margin="16dp"
                         android:src="@drawable/dash_line" />
+
                     <ntk.android.base.view.NWebView
                         android:id="@+id/WebViewDesc"
                         android:layout_width="match_parent"
@@ -259,11 +280,13 @@
                         android:layout_marginRight="15dp"
                         android:layoutDirection="rtl"
                         android:textDirection="rtl" />
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="4dp"
                         android:layout_margin="16dp"
                         android:src="@drawable/dash_line" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/detailsGroupRc"
                         android:layout_width="match_parent"
@@ -280,6 +303,7 @@
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RcAllEstate"
                 android:layout_width="match_parent"

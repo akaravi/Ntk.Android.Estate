@@ -72,8 +72,10 @@ public class EstateDetailActivity extends BaseActivity {
 
     private void setFont() {
         ((TextView) findViewById(R.id.lblTitleDetail)).setTypeface(FontManager.T1_Typeface(this));
+        ((TextView) findViewById(R.id.txtArea)).setTypeface(FontManager.T1_Typeface(this));
         ((TextView) findViewById(R.id.idTextView)).setTypeface(FontManager.T1_Typeface(this));
         ((TextView) findViewById(R.id.dateTv)).setTypeface(FontManager.T1_Typeface(this));
+        ( (MaterialButton)(findViewById(R.id.toggleMaps))).setTypeface(FontManager.T1_Typeface(this));
     }
 
     private void initView() {
@@ -88,7 +90,7 @@ public class EstateDetailActivity extends BaseActivity {
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.startAutoCycle();
         //toggle map is gone until model get
-        (findViewById(R.id.toggleMaps)).setVisibility(View.GONE);
+        (findViewById(R.id.toggleMaps)).setVisibility(View.INVISIBLE);
         findViewById(R.id.toggleMaps).setOnClickListener(view -> {
             View mapView = findViewById(R.id.map);
             MaterialButton button = (findViewById(R.id.toggleMaps));
@@ -177,6 +179,7 @@ public class EstateDetailActivity extends BaseActivity {
     }
 
     private void bindContentData() {
+        ((TextView) findViewById(R.id.txtArea)).setText( model.LinkLocationIdParentTitle+" - "+model.LinkLocationIdTitle);
         if (model.IsFavorite)
             ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav_full);
         else
