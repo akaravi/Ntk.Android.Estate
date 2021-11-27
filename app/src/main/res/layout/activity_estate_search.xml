@@ -4,116 +4,344 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-   <include layout="@layout/base_toolbar_back"/>
+    <include layout="@layout/base_toolbar_back" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrool"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/search_estate_title"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/titleCardView"
+                style="@style/search_estate_cardView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="کلمه کلیدی :" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/EstateTitleTextInput"
-                style="@style/new_estate_textInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="@string/title">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/EstateTitleEditText"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:textSize="14sp"
-                    android:theme="@style/new_estate_textInputEditText" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <View
-                android:layout_width="match_parent"
-               style="@style/search_estate_padding" />
+                    android:orientation="vertical">
 
-            <TextView
-                style="@style/estate_detail_title_text"
+                    <LinearLayout
+                        android:id="@+id/titleExpander"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/toolbarColorBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:id="@+id/titleExpandIcon"
+                            style="@style/search_estate_arrow" />
+
+                        <TextView
+                            android:id="@+id/titleExpandTv"
+                            style="@style/search_estate_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="کلمه کلیدی :" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/EstateTitleTextInput"
+                        style="@style/search_estate_textInputLayout"
+
+                        android:hint="@string/title">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/EstateTitleEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:textSize="14sp"
+                            android:theme="@style/new_estate_textInputEditText" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                style="@style/search_estate_padding"
+                android:layout_width="match_parent" />
+
+            <androidx.cardview.widget.CardView
+                style="@style/search_estate_cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/locationExpander"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/toolbarColorBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:id="@+id/locationExpandIcon"
+                            style="@style/search_estate_arrow" />
+
+                        <TextView
+                            android:id="@+id/locationExpandTv"
+                            style="@style/search_estate_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="موقعیت :" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/EstateProvinceTextInput"
+                        style="@style/search_estate_spinner"
+                        android:hint="@string/province">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/EstateProvinceAutoComplete"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                style="@style/search_estate_padding"
+                android:layout_width="match_parent" />
+
+
+            <androidx.cardview.widget.CardView
+                style="@style/search_estate_cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/contractTypeExpander"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/toolbarColorBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:id="@+id/contractTypeExpandIcon"
+                            style="@style/search_estate_arrow" />
+
+                        <TextView
+                            android:id="@+id/contractTypeExpandTv"
+                            style="@style/search_estate_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="نوع قرار داد :" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/contractsRc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                style="@style/search_estate_padding"
+                android:layout_width="match_parent" />
+
+            <androidx.cardview.widget.CardView
+                style="@style/search_estate_cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/propertyTypeExpander"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/toolbarColorBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:id="@+id/propertyTypeExpandIcon"
+                            style="@style/search_estate_arrow" />
+
+                        <TextView
+                            android:id="@+id/propertyTypeExpandTv"
+                            style="@style/search_estate_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="نوع ملک :" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/propertyTypeRv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                style="@style/search_estate_padding"
+                android:layout_width="match_parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/TypeUsageCardView"
+                style="@style/search_estate_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="موقعیت :" />
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/typeUsageExpander"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/toolbarColorBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:id="@+id/typeUsageExpandIcon"
+                            style="@style/search_estate_arrow" />
+
+                        <TextView
+                            android:id="@+id/typeUsageExpandTv"
+                            style="@style/search_estate_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="نوع کاربری ملک :" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/TypeUsageRc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                style="@style/search_estate_padding"
+                android:layout_width="match_parent" />
 
-            <TextView
-                style="@style/estate_detail_title_text"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/areaCardView"
+                style="@style/search_estate_cardView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="نوع ملک :" />
+
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/areaExpander"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/toolbarColorBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:id="@+id/areaExpandIcon"
+                            style="@style/search_estate_arrow" />
+
+                        <TextView
+                            android:id="@+id/areaExpandTv"
+                            style="@style/search_estate_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="متراژ (متر مربع):" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/EstateAreaTextInput"
+                        style="@style/search_estate_textInputLayout"
+
+                        android:hint="@string/area">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/EstateAreaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:textSize="14sp"
+                            android:theme="@style/new_estate_textInputEditText" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                style="@style/search_estate_padding"
+                android:layout_width="match_parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/propertyTypeRv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
-
-            <TextView
-                style="@style/estate_detail_title_text"
+                android:id="@+id/detailRc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="نوع قرار داد :" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/contractTypeRv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:nestedScrollingEnabled="true" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
-
-            <TextView
-                style="@style/estate_detail_title_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="محدوده قیمت :" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
-
-            <TextView
-                style="@style/estate_detail_title_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="متراژ :" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
-            <TextView
-                style="@style/estate_detail_title_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="امکانات ملک :" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                style="@style/search_estate_padding"
+                android:layout_width="match_parent" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

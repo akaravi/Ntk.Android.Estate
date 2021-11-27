@@ -52,11 +52,6 @@
         <item name="contentPadding">8dp</item>
     </style>
 
-    <style name="search_estate_title">
-        <item name="cardCornerRadius">8dp</item>
-        <item name="android:layout_margin">8dp</item>
-        <item name="contentPadding">8dp</item>
-    </style>
 
     <style name="new_estate_textInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_marginBottom">6dp</item>
@@ -87,5 +82,44 @@
         <item name="android:layout_marginLeft">32dp</item>
     </style>
 
+    <style name="search_estate_cardView">
+        <item name="android:layout_margin">18dp</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">15dp</item>
+    </style>
 
+    <style name="search_estate_arrow">
+        <item name="android:layout_width">34dp</item>
+        <item name="android:layout_height">34dp</item>
+        <item name="android:padding">4dp</item>
+        <item name="tint">@color/colorAccent</item>
+        <item name="srcCompat">@drawable/ic_arrow_rotate</item>
+    </style>
+
+    <style name="search_estate_title">
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="search_estate_textInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="search_estate_spinner" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+    </style>
 </resources>

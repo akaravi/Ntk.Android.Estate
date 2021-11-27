@@ -72,6 +72,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:19.0.2'
     //rounded imageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    //for transition
+    implementation "com.andkulikov:transitionseverywhere:2.1.0"
 
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
