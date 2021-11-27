@@ -75,6 +75,7 @@ public class EstateDetailActivity extends BaseActivity {
         ((TextView) findViewById(R.id.txtArea)).setTypeface(FontManager.T1_Typeface(this));
         ((TextView) findViewById(R.id.idTextView)).setTypeface(FontManager.T1_Typeface(this));
         ((TextView) findViewById(R.id.dateTv)).setTypeface(FontManager.T1_Typeface(this));
+        ((TextView) findViewById(R.id.textView)).setTypeface(FontManager.T1_Typeface(this));
         ( (MaterialButton)(findViewById(R.id.toggleMaps))).setTypeface(FontManager.T1_Typeface(this));
     }
 
