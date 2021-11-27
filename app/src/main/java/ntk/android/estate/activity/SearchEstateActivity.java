@@ -144,7 +144,7 @@ public class SearchEstateActivity extends BaseActivity {
         ServiceExecute.execute(new EstateContractTypeService(this).getAll(new FilterModel())).subscribe(new NtkObserver<ErrorException<EstateContractTypeModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstateContractTypeModel> model) {
-                EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, NewEstateFragment4.this::changeView);
+                EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, SearchEstateActivity.this::changeView);
                 RecyclerView rc = findViewById(R.id.contractsRc);
                 rc.setAdapter(adapter);
                 rc.setLayoutManager(new GridLayoutManager(SearchEstateActivity.this, 3));
@@ -156,5 +156,9 @@ public class SearchEstateActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void changeView(EstateContractTypeModel estateContractTypeModel) {
+
     }
 }

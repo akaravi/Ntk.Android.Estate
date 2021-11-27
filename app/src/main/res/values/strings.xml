@@ -10,5 +10,7 @@
     <string name="estate_code">کد ملک</string>
     <string name="province">استان</string>
     <string name="area">مساحت (متر مربع)</string>
+    <string name="per_my_estate">املاک من</string>
+    <string name="per_my_favorite">" لیست علاقه مندی ها"</string>
 
 </resources>

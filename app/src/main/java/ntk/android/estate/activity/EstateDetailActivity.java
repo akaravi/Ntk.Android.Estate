@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,13 +31,17 @@ import org.neshan.mapsdk.model.Marker;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+import io.reactivex.Observer;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.appclass.UpdateClass;
 import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.GenericErrors;
+import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.base.ErrorExceptionBase;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
@@ -54,7 +59,6 @@ public class EstateDetailActivity extends BaseActivity {
     private EstatePropertyModel model;
     ImageSliderAdapter sliderAdapter;
     FilterModel getAllFilter;
-    private boolean mapIsSet = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +101,32 @@ public class EstateDetailActivity extends BaseActivity {
                 button.setText("تصاویر");
                 slider.setVisibility(View.GONE);
                 mapView.setVisibility(View.VISIBLE);
+            }
+        });
+        findViewById(R.id.imgFavDetail).setOnClickListener(view -> {
+            if (model != null) {
+                Observer<ErrorExceptionBase> subscriptor = new NtkObserver<ErrorExceptionBase>() {
+                    @Override
+                    public void onNext(@NonNull ErrorExceptionBase errorExceptionBase) {
+                        if (errorExceptionBase.IsSuccess) {
+                            model.IsFavorite = !model.IsFavorite;
+                            if (model.IsFavorite)
+                                ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav_full);
+                            else
+                                ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Toasty.error(EstateDetailActivity.this, "خطا در انجام عملیات").show();
+                    }
+                };
+                if (model.IsFavorite)
+                    ServiceExecute.execute(new EstatePropertyService(EstateDetailActivity.this).removeFavorite(model.Id)).subscribe(subscriptor);
+                else
+                    ServiceExecute.execute(new EstatePropertyService(EstateDetailActivity.this).addFavorite(model.Id)).subscribe(subscriptor);
+
             }
         });
     }
@@ -147,6 +177,10 @@ public class EstateDetailActivity extends BaseActivity {
     }
 
     private void bindContentData() {
+        if (model.IsFavorite)
+            ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav_full);
+        else
+            ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav);
         if (model.CaseCode != null)
             ((TextView) findViewById(R.id.idTextView)).setText("شماره ملک : " + model.CaseCode);
         ((TextView) findViewById(R.id.dateTv)).setText("" + AppUtill.DateDifferenceNow(model.CreatedDate));
@@ -168,9 +202,9 @@ public class EstateDetailActivity extends BaseActivity {
         detailsRc.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         detailsRc.setAdapter(PropertyDetailGroupsAdapter.INIT(model.PropertyDetailGroups, model.PropertyDetailValues));
 //        check location is set or not
-         if (model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0&&model.Geolocationlongitude!=0) {
+        if (model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
             (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
-            LatLng  point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
+            LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
             ((MapView) findViewById(R.id.map)).addMarker(createMarker(point));
 
         }
@@ -196,23 +230,6 @@ public class EstateDetailActivity extends BaseActivity {
         this.startActivity(Intent.createChooser(shareIntent, getString(ntk.android.base.R.string.per_share_to)));
     }
 
-
-    public void onMapReady(@NonNull int googleMap) {
-//        mMap = googleMap;
-//        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-//        // googleMapOptions.mapType(googleMap.MAP_TYPE_HYBRID)
-//        //todo set defualt locaiton
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(0.0, 0.0), 15));
-//        // Add a marker in Sydney and move the camera
-//        if (model != null) {
-//            //if model lat lang is not null
-//            LatLng latLng = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
-//            mMap.addMarker(new MarkerOptions()
-//                    .position(latLng)
-//                    .title("مکان مورد نظر"));
-//            mapIsSet = true;
-//        }
-    }
 
     // This method gets a LatLng as input and adds a marker on that position
     private Marker createMarker(LatLng loc) {

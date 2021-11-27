@@ -53,10 +53,12 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
         loadImage(item.LinkMainImageIdSrc, holder.image);
         holder.setPictureCount(item);
         holder.setProperties(item);
+        holder.location.setText(item.LinkLocationIdParentTitle + "\n" + item.LinkLocationIdTitle);
     }
 
     public class VH extends RecyclerView.ViewHolder {
         TextView title;
+        TextView location;
         TextView property1;
         TextView property2;
         TextView property3;
@@ -74,6 +76,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
         public VH(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.txtTitle);
+            location = itemView.findViewById(R.id.txtArea);
             property1 = itemView.findViewById(R.id.txtProperty1);
             property2 = itemView.findViewById(R.id.txtProperty2);
             property3 = itemView.findViewById(R.id.txtProperty3);
@@ -97,6 +100,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
             property1.setTypeface(req);
             property1.setTypeface(req);
             property3.setTypeface(req);
+            location.setTypeface(req);
             date.setTypeface(req);
             pictureCount.setTypeface(bold);
             price1.setTypeface(req);
@@ -177,9 +181,9 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
 
         public void setProperties(EstatePropertyModel item) {
             property1.setText(item.PropertyTypeLanduse.Title);
-            if (item.PropertyTypeLanduse.TitlePartition.equals("")||item.PropertyTypeLanduse.TitlePartition.equals("---"))
+            if (item.PropertyTypeLanduse.TitlePartition.equals("") || item.PropertyTypeLanduse.TitlePartition.equals("---"))
                 property2.setVisibility(View.GONE);
-            else{
+            else {
                 property2.setText(item.PropertyTypeLanduse.TitlePartition + " : " + item.Partition);
                 property2.setVisibility(View.VISIBLE);
             }
