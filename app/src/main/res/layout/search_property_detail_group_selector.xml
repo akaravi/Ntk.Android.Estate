@@ -40,7 +40,8 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/contractsRc"
+                android:id="@+id/contractsRc"    android:paddingRight="16dp"
+                android:paddingLeft="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

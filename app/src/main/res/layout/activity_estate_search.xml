@@ -337,6 +337,7 @@
                 android:id="@+id/detailRc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:nestedScrollingEnabled="true" />
 
             <View
