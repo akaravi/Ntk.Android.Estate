@@ -56,7 +56,7 @@ public class SearchPropertyDetailGroupAdapterSelector extends BaseRecyclerAdapte
             icon = itemView.findViewById(R.id.contractTypeExpandIcon);
             expnader = itemView.findViewById(R.id.contractTypeExpander);
             expnader.setOnClickListener(view -> {
-                if (expnader.getVisibility() == View.GONE) {
+                if (rc.getVisibility() == View.GONE) {
                     TransitionManager.beginDelayedTransition(root);
                     rc.setVisibility(View.VISIBLE);
                     icon.setRotation(0);
