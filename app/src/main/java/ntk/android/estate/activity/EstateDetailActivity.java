@@ -58,7 +58,6 @@ public class EstateDetailActivity extends BaseActivity {
     public String Id = "";
     private EstatePropertyModel model;
     ImageSliderAdapter sliderAdapter;
-    FilterModel getAllFilter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,7 +75,7 @@ public class EstateDetailActivity extends BaseActivity {
         ((TextView) findViewById(R.id.idTextView)).setTypeface(FontManager.T1_Typeface(this));
         ((TextView) findViewById(R.id.dateTv)).setTypeface(FontManager.T1_Typeface(this));
         ((TextView) findViewById(R.id.textView)).setTypeface(FontManager.T1_Typeface(this));
-        ( (MaterialButton)(findViewById(R.id.toggleMaps))).setTypeface(FontManager.T1_Typeface(this));
+        ((MaterialButton) (findViewById(R.id.toggleMaps))).setTypeface(FontManager.T1_Typeface(this));
     }
 
     private void initView() {
@@ -145,7 +144,10 @@ public class EstateDetailActivity extends BaseActivity {
                             model = ContentResponse.Item;
                             switcher.showContentView();
                             bindContentData();
-
+                            //get all related estate
+                            FilterModel getAllFilter = new FilterModel();
+                            //todo witch filterModel
+                            getSimilar(getAllFilter);
                         }
 
                         @Override
@@ -154,24 +156,6 @@ public class EstateDetailActivity extends BaseActivity {
                         }
 
                     });
-            //get all related estate
-            getAllFilter = new FilterModel();
-            ServiceExecute.execute(new EstatePropertyService(this).getAll(getAllFilter))
-                    .subscribe(new ErrorExceptionObserver<EstatePropertyModel>(switcher::showErrorView) {
-
-                        @Override
-                        protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
-                            EstatePropertyAdapter adapter = new EstatePropertyAdapter(EstateDetailActivity.this, response.ListItems);
-                            RecyclerView rc = findViewById(R.id.RcAllEstate);
-                            rc.setAdapter(adapter);
-                            rc.setLayoutManager(new LinearLayoutManager(EstateDetailActivity.this, RecyclerView.HORIZONTAL, false));
-                        }
-
-                        @Override
-                        protected Runnable tryAgainMethod() {
-                            return () -> getContent();
-                        }
-                    });
 
         } else {
             new GenericErrors().netError(switcher::showErrorView, this::getContent);
@@ -179,8 +163,27 @@ public class EstateDetailActivity extends BaseActivity {
 
     }
 
+    public void getSimilar(FilterModel getAllFilter) {
+        ServiceExecute.execute(new EstatePropertyService(this).getAll(getAllFilter))
+                .subscribe(new ErrorExceptionObserver<EstatePropertyModel>(switcher::showErrorView) {
+
+                    @Override
+                    protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
+                        EstatePropertyAdapter adapter = new EstatePropertyAdapter(EstateDetailActivity.this, response.ListItems);
+                        RecyclerView rc = findViewById(R.id.RcAllEstate);
+                        rc.setAdapter(adapter);
+                        rc.setLayoutManager(new LinearLayoutManager(EstateDetailActivity.this, RecyclerView.HORIZONTAL, false));
+                    }
+
+                    @Override
+                    protected Runnable tryAgainMethod() {
+                        return () -> getContent();
+                    }
+                });
+    }
+
     private void bindContentData() {
-        ((TextView) findViewById(R.id.txtArea)).setText( model.LinkLocationIdParentTitle+" - "+model.LinkLocationIdTitle);
+        ((TextView) findViewById(R.id.txtArea)).setText(model.LinkLocationIdParentTitle + " - " + model.LinkLocationIdTitle);
         if (model.IsFavorite)
             ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav_full);
         else
