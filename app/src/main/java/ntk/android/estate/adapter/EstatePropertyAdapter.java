@@ -53,12 +53,14 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
         loadImage(item.LinkMainImageIdSrc, holder.image);
         holder.setPictureCount(item);
         holder.setProperties(item);
-        holder.location.setText(item.LinkLocationIdParentTitle + "\n" + item.LinkLocationIdTitle);
+        holder.location.setText( item.LinkLocationIdTitle);
+        holder.locationParent.setText( item.LinkLocationIdParentTitle);
     }
 
     public class VH extends RecyclerView.ViewHolder {
         TextView title;
         TextView location;
+        TextView locationParent;
         TextView property1;
         TextView property2;
         TextView property3;
@@ -77,6 +79,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
             super(itemView);
             title = itemView.findViewById(R.id.txtTitle);
             location = itemView.findViewById(R.id.txtArea);
+            locationParent = itemView.findViewById(R.id.txtAreaParent);
             property1 = itemView.findViewById(R.id.txtProperty1);
             property2 = itemView.findViewById(R.id.txtProperty2);
             property3 = itemView.findViewById(R.id.txtProperty3);
@@ -101,6 +104,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
             property1.setTypeface(req);
             property3.setTypeface(req);
             location.setTypeface(req);
+            locationParent.setTypeface(req);
             date.setTypeface(req);
             pictureCount.setTypeface(bold);
             price1.setTypeface(req);
