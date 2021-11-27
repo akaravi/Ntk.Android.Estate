@@ -38,10 +38,11 @@
                     android:layout_marginRight="8.0dip"
                     android:layout_marginBottom="8.0dip">
 
-                    <ntk.android.estate.view.component.RoundedImageView
+                    <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/imgPhoto"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
+                        app:riv_corner_radius="8dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/curve_8_gray_image_bg" />
 
@@ -146,8 +147,8 @@
                                 android:layout_marginStart="-1dp"
                                 android:layout_marginLeft="-1dp"
                                 android:maxLines="2"
+                                android:paddingLeft="4dp"
                                 android:text="asd"
-
                                 android:textColor="@color/colorWhite"
                                 android:textSize="12sp" />
 
