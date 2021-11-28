@@ -1,5 +1,6 @@
 package ntk.android.estate.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -28,6 +29,7 @@ import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstateContractTypeModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.estate.EstateContractTypeService;
+import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.NewEstateActivity;
 import ntk.android.estate.adapter.EstateContractAdapterSelector;
@@ -77,6 +79,17 @@ public class NewEstateFragment4 extends BaseFragment {
 
     private void setFont() {
         //for textView
+        Typeface t1 = FontManager.T1_Typeface(getContext());
+        ((TextView) findViewById(R.id.tv1)).setTypeface(t1);
+        ((TextView) findViewById(R.id.tv3)).setTypeface(t1);
+        //for textInput layout
+        ((TextInputLayout) findViewById(R.id.etl1)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.etl2)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.etl3)).setTypeface(t1);
+        //for TextInputEditText
+        ((TextInputEditText) findViewById(R.id.et1)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.et2)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.et3)).setTypeface(t1);
     }
 
 
