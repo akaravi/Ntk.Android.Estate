@@ -182,14 +182,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="16dp"
-                        android:background="#fff"
-                        android:hint="موقعیت تقریبی"
-                        android:paddingLeft="4dp"
-                        android:paddingRight="4dp"
-                        android:textColor="?android:textColorHint"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        style="@style/new_estate_title"
+                        android:text="موقعیت تقریبی"
+                         />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/getLocationBtn"

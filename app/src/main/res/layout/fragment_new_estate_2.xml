@@ -13,8 +13,7 @@
         <androidx.cardview.widget.CardView
             style="@style/new_estate_cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -40,28 +39,24 @@
                         android:textSize="14sp"
                         android:theme="@style/new_estate_textInputEditText" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/estateTypeRc"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="11dp"
+                    android:nestedScrollingEnabled="true"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:paddingBottom="8dp"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="true" />
+                    android:paddingBottom="8dp" />
+
                 <TextView
                     android:id="@+id/tv1"
+                    style="@style/new_estate_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="16dp"
-                    android:background="#fff"
-                    android:text="نوع کاربری"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:textColor="?android:textColorHint"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:text="نوع کاربری" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -81,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -104,30 +100,26 @@
                             android:textSize="14sp"
                             android:theme="@style/new_estate_textInputEditText" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/EstateLandUsedRc"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="11dp"
+                        android:nestedScrollingEnabled="true"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:paddingBottom="8dp"
-                        android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="true" />
+                        android:paddingBottom="8dp" />
+
                     <TextView
                         android:id="@+id/tv2"
+                        style="@style/new_estate_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="16dp"
-                        android:background="#fff"
-                        android:text="نوع ملک"
-                        android:paddingLeft="4dp"
-                        android:paddingRight="4dp"
-                        android:textColor="?android:textColorHint"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:text="نوع ملک" />
                 </RelativeLayout>
-                
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/EstateAreaTextInput"
@@ -183,9 +175,10 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
