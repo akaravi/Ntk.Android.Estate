@@ -1,6 +1,7 @@
 package ntk.android.estate.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -58,10 +59,10 @@ public class GetLocationActivity extends BaseActivity {
                             if (coarseLocationGranted != null && coarseLocationGranted) {
                                 // Only approximate location access granted.
                                 fusedLocationClient.requestLocationUpdates(LocationRequest.create()
-                                        .setInterval(120000).setFastestInterval(120000)
-                                        .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                                        .setMaxWaitTime(1000),
-                               getLocationCallback(), Looper.myLooper());
+                                                .setInterval(120000).setFastestInterval(120000)
+                                                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                                                .setMaxWaitTime(1000),
+                                        getLocationCallback(), Looper.myLooper());
                             }
                         } else {
                             // No location access granted.
@@ -189,6 +190,12 @@ public class GetLocationActivity extends BaseActivity {
         // Creating animation for marker. We should use an object of type AnimationStyleBuilder, set
         // all animation features on it and then call buildStyle() method that returns an object of type
         // AnimationStyle
+        MakeMarker(this,latLng);
+
+        return marker;
+    }
+
+    public static Marker MakeMarker(Context context, LatLng loc) {
         AnimationStyleBuilder animStBl = new AnimationStyleBuilder();
         animStBl.setFadeAnimationType(AnimationType.ANIMATION_TYPE_SMOOTHSTEP);
         animStBl.setSizeAnimationType(AnimationType.ANIMATION_TYPE_SPRING);
@@ -197,10 +204,9 @@ public class GetLocationActivity extends BaseActivity {
         AnimationStyle animStyle = animStBl.buildStyle();
         MarkerStyleBuilder markStCr = new MarkerStyleBuilder();
         markStCr.setSize(90f);
-        markStCr.setBitmap(BitmapUtils.createBitmapFromAndroidBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo)));
+        markStCr.setBitmap(BitmapUtils.createBitmapFromAndroidBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo)));
         markStCr.setAnimationStyle(animStyle);
-        marker = new Marker(latLng, markStCr.buildStyle());
-
+        Marker marker = new Marker(loc, markStCr.buildStyle());
         return marker;
     }
 }

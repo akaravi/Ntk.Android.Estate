@@ -8,6 +8,6 @@ public class SplashActivity extends BaseSplashActivity {
     @Override
     protected void onCreated() {
         finish();
-        startActivity(new Intent(this, SearchEstateActivity.class));
+        startActivity(new Intent(this, NewEstateActivity.class));
     }
 }

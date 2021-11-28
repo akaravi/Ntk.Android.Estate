@@ -1,5 +1,6 @@
 package ntk.android.estate.activity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
+import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.fragment.NewEstateFragment1;
 import ntk.android.estate.fragment.NewEstateFragment2;
@@ -34,7 +36,13 @@ public class NewEstateActivity extends BaseActivity {
         });
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
         });
+        setFont();
         showFragment1();
+    }
+
+    private void setFont() {
+        Typeface t1 = FontManager.T1_Typeface(this);
+        ((TextView) findViewById(R.id.txtToolbarTitle)).setTypeface(t1);
     }
 
     private void showFragment1() {

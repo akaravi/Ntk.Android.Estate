@@ -1,5 +1,6 @@
 package ntk.android.estate.fragment;
 
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +10,16 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
+import org.neshan.common.model.LatLng;
+import org.neshan.mapsdk.MapView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import java9.util.stream.IntStream;
-import java9.util.stream.StreamSupport;
 import ntk.android.base.adapter.SpinnerAdapter;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
@@ -25,7 +29,9 @@ import ntk.android.base.entitymodel.core.CoreLocationModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.core.CoreLocationService;
+import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
+import ntk.android.estate.activity.GetLocationActivity;
 import ntk.android.estate.activity.NewEstateActivity;
 
 
@@ -38,6 +44,7 @@ public class NewEstateFragment1 extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setFont();
         estateActivity().showProgress();
         TextInputEditText codeEt = findViewById(R.id.EstateCodeEditText);
         TextInputEditText titleEt = findViewById(R.id.EstateTitleEditText);
@@ -52,7 +59,28 @@ public class NewEstateFragment1 extends BaseFragment {
             descEt.setText(model.Description);
         if (model.Address != null)
             addressEt.setText(model.Address);
+        if (model.Geolocationlatitude != null) {
+            MapView map = findViewById(R.id.mapView);
+            map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(model.Geolocationlatitude, model.Geolocationlatitude)));
+        }
         getData();
+    }
+
+    private void setFont() {
+        Typeface t1 = FontManager.T1_Typeface(getContext());
+        //input layout
+        ((TextInputLayout) findViewById(R.id.EstateCodeTextInput)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.EstateTitleTextInput)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.EstateDescTextInput)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.EstateProvinceTextInput)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.EstateAddressTextInput)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.locationTextInputLayout)).setTypeface(t1);
+        //edit text
+        ((TextInputEditText) findViewById(R.id.EstateCodeEditText)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.EstateTitleEditText)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.EstateDescEditText)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.EstateAddressEditText)).setTypeface(t1);
+        ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setTypeface(t1);
     }
 
     private void getData() {
@@ -68,6 +96,12 @@ public class NewEstateFragment1 extends BaseFragment {
                 spinner.setOnItemClickListener((parent, view, position, id) -> {
                     CoreLocationModel selectedModel = model.ListItems.get(position);
                     estateActivity().model().LinkLocationId = selectedModel.Id;
+                    if (estateActivity().model().Geolocationlatitude == null) {
+                        MapView map = findViewById(R.id.mapView);
+                        if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude!=null)
+                            map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
+
+                    }
                 });
                 spinner.setAdapter(locationAdapter);
                 // Do something for lollipop and above versions
