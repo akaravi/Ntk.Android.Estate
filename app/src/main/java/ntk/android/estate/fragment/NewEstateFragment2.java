@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.xiaofeng.flowlayoutmanager.Alignment;
+import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
 import java.util.List;
 
@@ -149,7 +151,10 @@ public class NewEstateFragment2 extends BaseFragment {
                     });
             RecyclerView rc = findViewById(R.id.estateTypeRc);
             rc.setAdapter(adapter);
-            rc.setLayoutManager(new GridLayoutManager(getContext(), 4));
+            FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+            flowLayoutManager.setAutoMeasureEnabled(true);
+            flowLayoutManager.setAlignment(Alignment.RIGHT);
+            rc.setLayoutManager(flowLayoutManager);
             if (estateActivity().model().PropertyTypeUsage != null) {
                 findViewById(R.id.cardLandUsesView).setVisibility(View.VISIBLE);
                 setTypeUsage(estateActivity().model().PropertyTypeUsage);
@@ -173,7 +178,11 @@ public class NewEstateFragment2 extends BaseFragment {
                     estateActivity().model().PropertyTypeLanduse = t;
                     changeUi();
                 }));
-        rc.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+        flowLayoutManager.setAutoMeasureEnabled(true);
+        flowLayoutManager.maxItemsPerLine(4);
+        flowLayoutManager.setAlignment(Alignment.RIGHT);
+        rc.setLayoutManager(flowLayoutManager);
 
 
     }
