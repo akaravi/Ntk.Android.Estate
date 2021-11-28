@@ -1,6 +1,7 @@
 package ntk.android.estate.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -57,7 +58,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             if (viewType == 3)//as float
                 return new FloatVH(inflate(parent, R.layout.row_property_detail_stirng_type));
             if (viewType == 4)//as date
-                return new StringVH(inflate(parent, R.layout.row_property_detail_date_type));
+                return new DateVH(inflate(parent, R.layout.row_property_detail_date_type));
             else
                 return new MultiLineVH(inflate(parent, R.layout.row_property_detail_textarea_type));
         }
@@ -70,6 +71,8 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         public void bindToView(EstatePropertyDetailValueModel item, int position) {
 
         }
+
+
     }
 
 
@@ -80,12 +83,14 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
 
         public StringVH(View itemView) {
             super(itemView);
+            Typeface tf = FontManager.T1_Typeface(getContext());
             textChangeListener = new MyCustomEditTextListener();
             inputLayout = itemView.findViewById(R.id.inputLayout);
             editText = itemView.findViewById(R.id.inputEditText);
             editText.setInputType(inputType());
-            editText.setTypeface(FontManager.T1_Typeface(getContext()));
             editText.addTextChangedListener(textChangeListener);
+            editText.setTypeface(tf);
+            inputLayout.setTypeface(tf);
         }
 
         public int inputType() {
@@ -99,29 +104,6 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             if (item.Value != null)
                 editText.setText(item.Value);
             textChangeListener.updatePosition(position);
-        }
-    }
-
-    class MyCustomEditTextListener implements TextWatcher {
-        private int position;
-
-        public void updatePosition(int position) {
-            this.position = position;
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            // no op
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            getItem(position).Value = charSequence.toString();
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            // no op
         }
     }
 
@@ -158,15 +140,22 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             return InputType.TYPE_NUMBER_FLAG_DECIMAL;
         }
     }
-
+    
+    private class DateVH extends StringVH {
+        public DateVH(View inflate) {
+            super(inflate);
+        }
+    }
     private class BooleanVH extends VH {
         MaterialCheckBox checkBox;
         TextView textView;
 
         public BooleanVH(View inflate) {
             super(inflate);
+            Typeface tf = FontManager.T1_Typeface(getContext());
             checkBox = inflate.findViewById(R.id.checkBox);
             textView = inflate.findViewById(R.id.txt);
+            textView.setTypeface(tf);
             inflate.findViewById(R.id.linear).setOnClickListener(view -> checkBox.toggle());
         }
 
@@ -185,6 +174,29 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
                 else
                     checkBox.setChecked(false);
             }
+        }
+    }
+
+    class MyCustomEditTextListener implements TextWatcher {
+        private int position;
+
+        public void updatePosition(int position) {
+            this.position = position;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            // no op
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            getItem(position).Value = charSequence.toString();
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            // no op
         }
     }
 }
