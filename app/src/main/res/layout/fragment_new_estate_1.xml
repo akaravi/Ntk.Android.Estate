@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="40dp">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -182,23 +182,32 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:hint="موقعیت تقریبی"
-                        android:background="#fff"
                         android:layout_marginRight="16dp"
-                        android:textStyle="bold"
-                        android:paddingRight="4dp"
+                        android:background="#fff"
+                        android:hint="موقعیت تقریبی"
                         android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
                         android:textColor="?android:textColorHint"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
 
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/locationTextInputLayout"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-30dp"
+                        android:paddingLeft="8dp"
+                        app:backgroundTint="@color/colorAccent"
+                        android:paddingRight="8dp"
+                        android:text="تعیین محدوده" />
                 </RelativeLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:text="تعیین محدوده" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
