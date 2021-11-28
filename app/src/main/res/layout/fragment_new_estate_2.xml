@@ -81,18 +81,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv2"
-                    style="@style/new_estate_title"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="نوع ملک" />
+                    android:layout_height="wrap_content">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/EstateLandUsedRc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/new_estate_textInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignTop="@+id/EstateLandUsedRc"
+                        android:layout_alignBottom="@+id/EstateLandUsedRc"
+
+
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:focusable="false"
+
+                            android:textSize="14sp"
+                            android:theme="@style/new_estate_textInputEditText" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/EstateLandUsedRc"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="11dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="true" />
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="16dp"
+                        android:background="#fff"
+                        android:text="نوع ملک"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:textColor="?android:textColorHint"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+                
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/EstateAreaTextInput"
