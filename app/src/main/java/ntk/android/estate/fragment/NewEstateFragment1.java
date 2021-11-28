@@ -4,6 +4,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +47,7 @@ public class NewEstateFragment1 extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         setFont();
         estateActivity().showProgress();
+
         TextInputEditText codeEt = findViewById(R.id.EstateCodeEditText);
         TextInputEditText titleEt = findViewById(R.id.EstateTitleEditText);
         TextInputEditText descEt = findViewById(R.id.EstateDescEditText);
@@ -63,11 +65,16 @@ public class NewEstateFragment1 extends BaseFragment {
             MapView map = findViewById(R.id.mapView);
             map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(model.Geolocationlatitude, model.Geolocationlatitude)));
         }
+        //set custom color for custom hint Title
+        TextView hint = (TextView) findViewById(R.id.customHint);
+        hint.setTextColor(codeEt.getHintTextColors());
         getData();
     }
 
     private void setFont() {
         Typeface t1 = FontManager.T1_Typeface(getContext());
+        //textview
+        ((TextView) findViewById(R.id.customHint)).setTypeface(t1);
         //input layout
         ((TextInputLayout) findViewById(R.id.EstateCodeTextInput)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.EstateTitleTextInput)).setTypeface(t1);
@@ -98,9 +105,8 @@ public class NewEstateFragment1 extends BaseFragment {
                     estateActivity().model().LinkLocationId = selectedModel.Id;
                     if (estateActivity().model().Geolocationlatitude == null) {
                         MapView map = findViewById(R.id.mapView);
-                        if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude!=null)
+                        if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null)
                             map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
-
                     }
                 });
                 spinner.setAdapter(locationAdapter);
