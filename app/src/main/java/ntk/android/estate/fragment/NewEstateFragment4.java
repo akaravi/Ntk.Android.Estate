@@ -100,6 +100,8 @@ public class NewEstateFragment4 extends BaseFragment {
 
 
     private void getData() {
+        //show loading
+        estateActivity().showProgress();
         ServiceExecute.execute(new EstateContractTypeService(getContext()).getAll(new FilterModel())).subscribe(new NtkObserver<ErrorException<EstateContractTypeModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstateContractTypeModel> model) {
@@ -145,11 +147,17 @@ public class NewEstateFragment4 extends BaseFragment {
 
     private void clearAllInput() {
         ((MaterialCheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setChecked(false);
-        ((TextInputEditText) findViewById(R.id.et1)).setText("");
+        TextInputEditText et1 = (TextInputEditText) findViewById(R.id.et1);
+        et1.setText("");
+        et1.clearFocus();
         ((MaterialCheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setChecked(false);
-        ((TextInputEditText) findViewById(R.id.et2)).setText("");
+        TextInputEditText et2 = (TextInputEditText) findViewById(R.id.et2);
+        et2.setText("");
+        et1.clearFocus();
         ((MaterialCheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setChecked(false);
-        ((TextInputEditText) findViewById(R.id.et3)).setText("");
+        TextInputEditText et3 = (TextInputEditText) findViewById(R.id.et3);
+        et3.setText("");
+        et1.clearFocus();
     }
 
     private void addItem() {
