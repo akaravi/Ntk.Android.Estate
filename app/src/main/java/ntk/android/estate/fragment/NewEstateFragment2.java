@@ -1,7 +1,9 @@
 package ntk.android.estate.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +29,7 @@ import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.estate.EstatePropertyTypeLanduseService;
 import ntk.android.base.services.estate.EstatePropertyTypeService;
 import ntk.android.base.services.estate.EstatePropertyTypeUsageService;
+import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.NewEstateActivity;
 import ntk.android.estate.adapter.EstatePropertyLandUseAdapterSelector;
@@ -49,10 +52,6 @@ public class NewEstateFragment2 extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         count = 0;
-        estateActivity().showProgress();
-        getPropertyType();
-        getTypeUsage();
-        getTypeLandUse();
         lastSelectedLandUse = estateActivity().model().PropertyTypeLanduse;
         if (estateActivity().model().Area != 0)
             ((TextInputEditText) findViewById(R.id.EstateAreaEditText)).setText(String.valueOf(estateActivity().model().Area));
@@ -63,6 +62,31 @@ public class NewEstateFragment2 extends BaseFragment {
             if (estateActivity().model().Partition != 0)
                 ((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).setText(String.valueOf(estateActivity().model().Partition));
         }
+        setFont();
+        getData();
+    }
+
+    private void setFont() {
+        //textView
+        Typeface t1 = FontManager.T1_Typeface(getContext());
+        ((TextView) findViewById(R.id.tv1)).setTypeface(t1);
+        ((TextView) findViewById(R.id.tv2)).setTypeface(t1);
+        //textInputLayout
+        ((TextInputLayout) findViewById(R.id.EstatePropertyOneTextInput)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.EstatePropertyTowTextInput)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.EstateAreaTextInput)).setTypeface(t1);
+        //TextInputEditText
+        ((TextInputEditText) findViewById(R.id.EstateAreaEditText)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).setTypeface(t1);
+    }
+
+    private void getData() {
+        estateActivity().showProgress();
+        getPropertyType();
+        getTypeUsage();
+        getTypeLandUse();
+
     }
 
     private void getTypeLandUse() {
