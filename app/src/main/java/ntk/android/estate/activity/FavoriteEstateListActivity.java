@@ -15,7 +15,7 @@ import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstatePropertyAdapter;
 
-public class FavoriteListActivity extends BaseFilterModelListActivity<EstatePropertyModel> {
+public class FavoriteEstateListActivity extends BaseFilterModelListActivity<EstatePropertyModel> {
     @Override
     protected void onCreated() {
         super.onCreated();

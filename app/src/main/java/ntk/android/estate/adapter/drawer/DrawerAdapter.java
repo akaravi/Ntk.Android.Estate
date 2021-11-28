@@ -29,6 +29,8 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.AboutUsActivity;
 import ntk.android.estate.activity.EstateListActivity;
+import ntk.android.estate.activity.FavoriteEstateListActivity;
+import ntk.android.estate.activity.MyEstateActivity;
 import ntk.android.estate.activity.NewEstateActivity;
 import ntk.android.estate.activity.NewsListActivity;
 
@@ -78,30 +80,36 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
                     ClickNewEstate();
                     break;
                 case 2:
-                    ClickNews();
+                    ClickFavoriteEstateList();
                     break;
-                case 3:
-                    ClickContact();
+                 case 3:
+                    clickMyEstates();
                     break;
                 case 4:
-                    ClickPooling();
+                    ClickNews();
                     break;
                 case 5:
-                    ClickInboxNotification();
+                    ClickContact();
                     break;
                 case 6:
-                    ClickQuestion();
+                    ClickPooling();
                     break;
                 case 7:
-                    ClickFeedBack();
+                    ClickInboxNotification();
                     break;
                 case 8:
-                    ClickShare();
+                    ClickQuestion();
                     break;
                 case 9:
-                    ClickAbout();
+                    ClickFeedBack();
                     break;
                 case 10:
+                    ClickShare();
+                    break;
+                case 11:
+                    ClickAbout();
+                    break;
+                case 12:
                     ClickIntro();
                     break;
             }
@@ -121,24 +129,41 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             Drawer.closeMenu(true);
         }
     }
+
+    private void ClickFavoriteEstateList() {
+        context.startActivity(new Intent(context, FavoriteEstateListActivity.class));
+        if (Drawer != null) {
+            Drawer.closeMenu(true);
+        }
+    }
+    private void clickMyEstates() {
+        context.startActivity(new Intent(context, MyEstateActivity.class));
+        if (Drawer != null) {
+            Drawer.closeMenu(true);
+        }
+    }
+
     private void ClickNews() {
         context.startActivity(new Intent(context, NewsListActivity.class));
         if (Drawer != null) {
             Drawer.closeMenu(true);
         }
     }
+
     private void ClickContact() {
         context.startActivity(new Intent(context, TicketListActivity.class));
         if (Drawer != null) {
             Drawer.closeMenu(true);
         }
     }
+
     private void ClickPooling() {
         context.startActivity(new Intent(context, PolingActivity.class));
         if (Drawer != null) {
             Drawer.closeMenu(true);
         }
     }
+
     private void ClickInboxNotification() {
         context.startActivity(new Intent(context, NotificationsActivity.class));
         if (Drawer != null) {
@@ -207,6 +232,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         int i = 0;
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("آخرین ملک های ثبت شده").setDrawableIcon(R.drawable.estate));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("ثبت ملک جدید").setDrawableIcon(R.drawable.add));
+        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("لیست علاقه مندی").setDrawableIcon(R.drawable.favorites_folder));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("اخبار").setDrawableIcon(R.drawable.news2));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("پشتیبانی").setDrawableIcon(R.drawable.inbox));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("صندوق پیام دریافتی").setDrawableIcon(R.drawable.notification2));

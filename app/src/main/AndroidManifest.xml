@@ -49,7 +49,7 @@
         <activity android:name=".activity.NewEstateActivity" />
         <activity android:name=".activity.GetLocationActivity" />
         <activity android:name=".activity.MyEstateActivity" />
-        <activity android:name=".activity.FavoriteListActivity" />
+        <activity android:name=".activity.FavoriteEstateListActivity" />
 
 
         <provider
