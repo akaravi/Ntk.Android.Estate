@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.xiaofeng.flowlayoutmanager.Alignment;
+import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
 import java.util.ArrayList;
 
@@ -86,7 +88,10 @@ public class NewEstateFragment4 extends BaseFragment {
                 EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, NewEstateFragment4.this::changeView);
                 RecyclerView rc = findViewById(R.id.contractsRc);
                 rc.setAdapter(adapter);
-                rc.setLayoutManager(new GridLayoutManager(getContext(), 3));
+                FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+                flowLayoutManager.setAutoMeasureEnabled(true);
+                flowLayoutManager.setAlignment(Alignment.RIGHT);
+                rc.setLayoutManager(flowLayoutManager);
             }
 
 

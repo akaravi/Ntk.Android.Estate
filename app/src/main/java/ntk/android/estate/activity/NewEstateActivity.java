@@ -37,7 +37,7 @@ public class NewEstateActivity extends BaseActivity {
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
         });
         setFont();
-        showFragment2();
+        showFragment4();
     }
 
     private void setFont() {
