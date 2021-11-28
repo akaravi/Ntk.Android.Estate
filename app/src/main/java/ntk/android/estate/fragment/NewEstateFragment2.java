@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -36,6 +35,7 @@ import ntk.android.estate.R;
 import ntk.android.estate.activity.NewEstateActivity;
 import ntk.android.estate.adapter.EstatePropertyLandUseAdapterSelector;
 import ntk.android.estate.adapter.EstatePropertyTypeAdapterSelector;
+import ntk.android.estate.view.NumberTextWatcherForThousand;
 
 public class NewEstateFragment2 extends BaseFragment {
     //to remove all selected value if landUse change
@@ -55,8 +55,12 @@ public class NewEstateFragment2 extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         count = 0;
         lastSelectedLandUse = estateActivity().model().PropertyTypeLanduse;
-        if (estateActivity().model().Area != 0)
-            ((TextInputEditText) findViewById(R.id.EstateAreaEditText)).setText(String.valueOf(estateActivity().model().Area));
+        //set editText separator
+        TextInputEditText AreaEditText = (TextInputEditText) findViewById(R.id.EstateAreaEditText);
+        AreaEditText.addTextChangedListener(new NumberTextWatcherForThousand(AreaEditText));
+        if (estateActivity().model().Area != 0) {
+            AreaEditText.setText(String.valueOf(estateActivity().model().Area));
+        }
         if (estateActivity().model().PropertyTypeLanduse != null) {
             changeUi();
             if (estateActivity().model().CreatedYaer != 0)
@@ -214,8 +218,9 @@ public class NewEstateFragment2 extends BaseFragment {
             Toasty.error(getContext(), "نوع ملک را انتخاب نمایید", Toasty.LENGTH_LONG, true).show();
             return false;
         }
+     
         if (!((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim().equals(""))
-            estateActivity().model().Area = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim());
+            estateActivity().model().Area = Integer.parseInt(NumberTextWatcherForThousand.trimCommaOfString(((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim()));
 
         if (!(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim().equals("")))
             estateActivity().model().CreatedYaer = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim());
