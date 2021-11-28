@@ -140,7 +140,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             return InputType.TYPE_NUMBER_FLAG_DECIMAL;
         }
     }
-    
+
     private class DateVH extends StringVH {
         public DateVH(View inflate) {
             super(inflate);

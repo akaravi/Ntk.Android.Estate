@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="40dp">
+   >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,5 +85,8 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

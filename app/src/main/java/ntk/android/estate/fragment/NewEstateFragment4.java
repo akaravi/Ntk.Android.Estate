@@ -52,20 +52,23 @@ public class NewEstateFragment4 extends BaseFragment {
         ((CheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et1).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et2).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et3).setEnabled(!b));
-        //add seprator to editText
+        //add separator to editText
         TextInputEditText et1 = (TextInputEditText) findViewById(R.id.et1);
         et1.addTextChangedListener(new NumberTextWatcherForThousand(et1));
         TextInputEditText et2 = (TextInputEditText) findViewById(R.id.et2);
         et2.addTextChangedListener(new NumberTextWatcherForThousand(et2));
         TextInputEditText et3 = (TextInputEditText) findViewById(R.id.et3);
         et3.addTextChangedListener(new NumberTextWatcherForThousand(et3));
-        getData();
+
         RecyclerView editContractsRc = findViewById(R.id.contractsEditRc);
         editContractsRc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+        //set previous data
         if (estateActivity().model().Contracts == null)
             estateActivity().model().Contracts = new ArrayList<>();
         editContractsRc.setAdapter(new RemovableContractsAdapter(estateActivity().model().Contracts));
         findViewById(R.id.addNewEstateBtn).setOnClickListener(view1 -> addItem());
+        //get new data
+        getData();
     }
 
 
