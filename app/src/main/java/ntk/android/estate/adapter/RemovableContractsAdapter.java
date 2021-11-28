@@ -1,9 +1,12 @@
 package ntk.android.estate.adapter;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 
 import java.util.List;
 
@@ -33,6 +36,8 @@ public class RemovableContractsAdapter extends BaseRecyclerAdapter<EstateContrac
         public VH(@NonNull View itemView) {
             super(itemView);
             delete = itemView.findViewById(R.id.delete);
+//            Context c=itemView.getContext();
+//            itemView.setBackgroundColor(ColorUtils.setAlphaComponent(ContextCompat.getColor(c,R.color.colorAccent), 100));
         }
 
         @Override
