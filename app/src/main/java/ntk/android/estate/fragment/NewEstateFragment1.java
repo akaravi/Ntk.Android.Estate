@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -68,13 +69,21 @@ public class NewEstateFragment1 extends BaseFragment {
         //set custom color for custom hint Title
         TextView hint = (TextView) findViewById(R.id.customHint);
         hint.setTextColor(codeEt.getHintTextColors());
+        //get location listener
+        findViewById(R.id.getLocationBtn).setOnClickListener(view1 -> getLocation());
         getData();
+    }
+
+    private void getLocation() {
+
     }
 
     private void setFont() {
         Typeface t1 = FontManager.T1_Typeface(getContext());
         //textview
         ((TextView) findViewById(R.id.customHint)).setTypeface(t1);
+        //button
+        ((MaterialButton) findViewById(R.id.getLocationBtn)).setTypeface(t1);
         //input layout
         ((TextInputLayout) findViewById(R.id.EstateCodeTextInput)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.EstateTitleTextInput)).setTypeface(t1);

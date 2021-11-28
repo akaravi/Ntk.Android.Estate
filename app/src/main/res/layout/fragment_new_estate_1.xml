@@ -153,7 +153,7 @@
                         android:id="@+id/mapView"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                    
+
                         android:layout_marginLeft="2dp"
                         android:layout_marginTop="11dp"
                         android:layout_marginRight="2dp"
@@ -194,15 +194,16 @@
                         android:textStyle="bold" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/getLocationBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/locationTextInputLayout"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="-30dp"
                         android:paddingLeft="8dp"
-                        app:backgroundTint="@color/colorAccent"
                         android:paddingRight="8dp"
-                        android:text="تعیین محدوده" />
+                        android:text="تعیین محدوده"
+                        app:backgroundTint="@color/colorAccent" />
                 </RelativeLayout>
 
 
