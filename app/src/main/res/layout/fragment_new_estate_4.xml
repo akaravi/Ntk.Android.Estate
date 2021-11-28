@@ -2,8 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,31 +12,61 @@
         <androidx.cardview.widget.CardView
             style="@style/new_estate_cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:contentPadding="8dp">
-
-
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv1"
-                    style="@style/new_estate_title"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="نوع معامله" />
+                    android:layout_height="wrap_content">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/contractsRc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/locationTextInputLayout"
+                        style="@style/new_estate_textInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignTop="@+id/contractsRc"
+                        android:layout_alignBottom="@+id/contractsRc"
+
+
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:focusable="false"
+
+                            android:textSize="14sp"
+                            android:theme="@style/new_estate_textInputEditText" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/contractsRc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:nestedScrollingEnabled="true"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        style="@style/new_estate_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="نوع معامله" />
+                </RelativeLayout>
+
                 <include
                     layout="@layout/sub_estate_contract_selector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -50,10 +79,10 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/addNewEstateBtn"
                         android:layout_width="0dp"
-                        android:visibility="invisible"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:text="آفزودن به لیست" />
+                        android:text="آفزودن به لیست"
+                        android:visibility="invisible" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -85,6 +114,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="50dp" />

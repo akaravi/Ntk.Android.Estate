@@ -67,8 +67,14 @@ public class NewEstateFragment4 extends BaseFragment {
             estateActivity().model().Contracts = new ArrayList<>();
         editContractsRc.setAdapter(new RemovableContractsAdapter(estateActivity().model().Contracts));
         findViewById(R.id.addNewEstateBtn).setOnClickListener(view1 -> addItem());
+        //set font for views
+        setFont();
         //get new data
         getData();
+    }
+
+    private void setFont() {
+        //for textView
     }
 
 
