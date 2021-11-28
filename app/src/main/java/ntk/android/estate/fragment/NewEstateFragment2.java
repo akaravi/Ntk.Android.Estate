@@ -218,7 +218,7 @@ public class NewEstateFragment2 extends BaseFragment {
             Toasty.error(getContext(), "نوع ملک را انتخاب نمایید", Toasty.LENGTH_LONG, true).show();
             return false;
         }
-     
+
         if (!((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim().equals(""))
             estateActivity().model().Area = Integer.parseInt(NumberTextWatcherForThousand.trimCommaOfString(((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim()));
 

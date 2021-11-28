@@ -146,7 +146,6 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content">
 
                     <org.neshan.mapsdk.MapView
@@ -174,7 +173,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:focusable="false"
-                            android:text="1343"
                             android:textSize="14sp"
                             android:theme="@style/new_estate_textInputEditText" />
                     </com.google.android.material.textfield.TextInputLayout>

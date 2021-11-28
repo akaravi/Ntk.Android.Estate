@@ -16,24 +16,53 @@
             android:layout_height="wrap_content"
             >
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv1"
-                    style="@style/new_estate_title"
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/locationTextInputLayout"
+                    style="@style/new_estate_textInputLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="نوع کاربری" />
+                    android:layout_height="match_parent"
+                    android:layout_alignTop="@+id/estateTypeRc"
+                    android:layout_alignBottom="@+id/estateTypeRc"
 
+
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+
+                        android:textSize="14sp"
+                        android:theme="@style/new_estate_textInputEditText" />
+                </com.google.android.material.textfield.TextInputLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/estateTypeRc"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="11dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="8dp"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="true" />
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:background="#fff"
+                    android:text="نوع کاربری"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:textColor="?android:textColorHint"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
         <View
