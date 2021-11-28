@@ -153,11 +153,11 @@ public class NewEstateFragment4 extends BaseFragment {
         ((MaterialCheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setChecked(false);
         TextInputEditText et2 = (TextInputEditText) findViewById(R.id.et2);
         et2.setText("");
-        et1.clearFocus();
+        et2.clearFocus();
         ((MaterialCheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setChecked(false);
         TextInputEditText et3 = (TextInputEditText) findViewById(R.id.et3);
         et3.setText("");
-        et1.clearFocus();
+        et3.clearFocus();
     }
 
     private void addItem() {
