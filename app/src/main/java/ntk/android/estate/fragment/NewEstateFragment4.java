@@ -8,10 +8,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -90,6 +90,12 @@ public class NewEstateFragment4 extends BaseFragment {
         ((TextInputEditText) findViewById(R.id.et1)).setTypeface(t1);
         ((TextInputEditText) findViewById(R.id.et2)).setTypeface(t1);
         ((TextInputEditText) findViewById(R.id.et3)).setTypeface(t1);
+        //for checkView
+        ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setTypeface(t1);
+        ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setTypeface(t1);
+        ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setTypeface(t1);
+        //for button
+        ((MaterialButton) findViewById(R.id.addNewEstateBtn)).setTypeface(t1);
     }
 
 
