@@ -27,13 +27,13 @@ import ntk.android.estate.activity.NewEstateActivity;
 public class NewEstateFragment5 extends BaseFragment {
 
     private static final int MAIN_IMAGE_REQ = 213;
+    boolean isValid = true;
 
     @Override
     public void onCreateFragment() {
         setContentView(R.layout.fragment_new_estate_5);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onViewCreated(@androidx.annotation.NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -41,12 +41,12 @@ public class NewEstateFragment5 extends BaseFragment {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     private void selectMainImage() {
         ClickAttach(MAIN_IMAGE_REQ);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public void ClickAttach(int REQ) {
         new FileManagerService().clickAttach(estateActivity(), result -> {
             Uri uri;
@@ -56,8 +56,8 @@ public class NewEstateFragment5 extends BaseFragment {
                     ImageLoader.getInstance().displayImage(uri.toString(), (ImageView) findViewById(R.id.selectedImageView));
                     UploadFileToServer(FileManagerService.getFilePath(getContext(), uri),
                             fileUploadModel -> {
-                                estateActivity().MainImage_GUID=fileUploadModel.FileKey;
-                                estateActivity().MainImage_FilePath=uri.toString();
+                                estateActivity().MainImage_GUID = fileUploadModel.FileKey;
+                                estateActivity().MainImage_FilePath = uri.toString();
                             });
                 }
             }
@@ -66,22 +66,25 @@ public class NewEstateFragment5 extends BaseFragment {
 
     private void UploadFileToServer(String url, Consumer<FileUploadModel> consumer) {
         if (AppUtill.isNetworkAvailable(getContext())) {
+            isValid = false;
+            Toasty.info(getContext(), "در حال بارگذاری...", Toasty.LENGTH_LONG).show();
             ServiceExecute.execute(new FileUploaderService(getContext()).uploadFile(url))
                     .subscribe(new NtkObserver<FileUploadModel>() {
                         @Override
                         public void onNext(@NonNull FileUploadModel fileUploadModel) {
+                            isValid = true;
                             consumer.accept(fileUploadModel);
                         }
 
                         @Override
                         public void onError(Throwable e) {
+                            isValid = true;
                             //todo show error
                             Toasty.error(getContext(), "خطا در آپلود فایل").show();
                         }
                     });
         } else {
             Toasty.error(getContext(), "انترنت در دسترس نیست").show();
-
         }
     }
 
@@ -90,7 +93,7 @@ public class NewEstateFragment5 extends BaseFragment {
     }
 
     public boolean isValidForm() {
-        return true;
+        return isValid;
     }
 
 }

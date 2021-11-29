@@ -30,15 +30,12 @@
                         android:layout_height="match_parent"
                         android:layout_alignTop="@+id/contractsRc"
                         android:layout_alignBottom="@+id/contractsRc"
-
-
                         app:hintEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:focusable="false"
-
                             android:textSize="14sp"
                             android:theme="@style/new_estate_textInputEditText" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -131,7 +128,7 @@
                         android:layout_marginTop="11dp"
                         android:nestedScrollingEnabled="true"
                         android:paddingLeft="8dp"
-                        android:paddingRight="8dp"  android:minHeight="20dp"
+                        android:paddingRight="8dp"  android:minHeight="50dp"
                         android:layout_marginBottom="8dp" />
 
                     <TextView

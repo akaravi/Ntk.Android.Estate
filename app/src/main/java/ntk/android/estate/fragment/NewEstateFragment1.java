@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -16,12 +18,14 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.neshan.common.model.LatLng;
 import org.neshan.mapsdk.MapView;
+import org.neshan.mapsdk.model.Marker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import java9.util.stream.IntStream;
+import ntk.android.base.Extras;
 import ntk.android.base.adapter.SpinnerAdapter;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
@@ -38,6 +42,8 @@ import ntk.android.estate.activity.NewEstateActivity;
 
 
 public class NewEstateFragment1 extends BaseFragment {
+    Marker marker;
+
     @Override
     public void onCreateFragment() {
         setContentView(R.layout.fragment_new_estate_1);
@@ -64,7 +70,10 @@ public class NewEstateFragment1 extends BaseFragment {
             addressEt.setText(model.Address);
         if (model.Geolocationlatitude != null) {
             MapView map = findViewById(R.id.mapView);
-            map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(model.Geolocationlatitude, model.Geolocationlatitude)));
+            LatLng loc = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
+            marker = GetLocationActivity.MakeMarker(getContext(), loc);
+            map.addMarker(marker);
+            map.moveCamera(loc, 5);
         }
         //set custom color for custom hint Title
         TextView hint = (TextView) findViewById(R.id.customHint);
@@ -75,7 +84,23 @@ public class NewEstateFragment1 extends BaseFragment {
     }
 
     private void getLocation() {
-
+        GetLocationActivity.REGISTER_FOR_RESULT(estateActivity(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getData() != null && result.getData().getExtras() != null) {
+                    estateActivity().model().Geolocationlatitude = result.getData().getExtras().getDouble(Extras.EXTRA_FIRST_ARG);
+                    estateActivity().model().Geolocationlongitude = result.getData().getExtras().getDouble(Extras.EXTRA_SECOND_ARG);
+                    LatLng latLng = new LatLng(estateActivity().model().Geolocationlatitude, estateActivity().model().Geolocationlongitude);
+                    MapView map = findViewById(R.id.mapView);
+                    //remove previous marker
+                    if (marker != null)
+                        map.removeMarker(marker);
+                    marker = GetLocationActivity.MakeMarker(getContext(), latLng);
+                    map.addMarker(marker);
+                    map.moveCamera(latLng, 3);
+                }
+            }
+        });
     }
 
     private void setFont() {

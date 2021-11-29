@@ -5,10 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.button.MaterialButton;
+
+import es.dmoral.toasty.Toasty;
 import ntk.android.base.activity.BaseActivity;
+import ntk.android.base.config.NtkObserver;
+import ntk.android.base.config.ServiceExecute;
+import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
+import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.fragment.NewEstateFragment1;
@@ -37,12 +45,15 @@ public class NewEstateActivity extends BaseActivity {
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
         });
         setFont();
-        showFragment4();
+        showFragment1();
     }
 
     private void setFont() {
         Typeface t1 = FontManager.T1_Typeface(this);
         ((TextView) findViewById(R.id.txtToolbarTitle)).setTypeface(t1);
+        ((MaterialButton) findViewById(R.id.continueBtn)).setTypeface(t1);
+        ((MaterialButton) findViewById(R.id.backBtn)).setTypeface(t1);
+        ((MaterialButton) findViewById(R.id.addNewBtn)).setTypeface(t1);
     }
 
     private void showFragment1() {
@@ -88,6 +99,8 @@ public class NewEstateActivity extends BaseActivity {
         stepNumber = 4;
         title.setText("شرایط معامله");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
+        findViewById(R.id.addNewBtn).setVisibility(View.GONE);
+        findViewById(R.id.continueBtn).setVisibility(View.VISIBLE);
         NewEstateFragment4 fragment = new NewEstateFragment4();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
@@ -102,18 +115,40 @@ public class NewEstateActivity extends BaseActivity {
         stepNumber = 5;
         title.setText("تصاویر ملک");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
+        findViewById(R.id.addNewBtn).setVisibility(View.VISIBLE);
+        findViewById(R.id.continueBtn).setVisibility(View.GONE);
+
         NewEstateFragment5 fragment = new NewEstateFragment5();
-        findViewById(R.id.continueBtn).setOnClickListener(view -> {
+        findViewById(R.id.addNewBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
                 createModel();
         });
+
         fragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
 
     }
 
     private void createModel() {
+        showProgress();
+        ServiceExecute.execute(new EstatePropertyService(this).add(model)).subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
+            @Override
+            public void onNext(@NonNull ErrorException<EstatePropertyModel> response) {
+                if (response.IsSuccess) {
+                    Toasty.success(NewEstateActivity.this, "ملک شما ثبت شد").show();
+                    finish();
+                } else {
+                    Toasty.error(NewEstateActivity.this, "هنگام ثبت خطا رخ داد مجددا تلاش نمایید").show();
+                    showContent();
+                }
+            }
 
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Toasty.error(NewEstateActivity.this, "هنگام ثبت خطا رخ داد مجددا تلاش نمایید").show();
+                showContent();
+            }
+        });
     }
 
     @Override
@@ -131,12 +166,15 @@ public class NewEstateActivity extends BaseActivity {
     }
 
     public void showErrorView() {
+        switcher.showErrorView();
     }
 
     public void showProgress() {
+        switcher.showProgressView();
     }
 
     public void showContent() {
+        switcher.showContentView();
     }
 
     public EstatePropertyModel model() {

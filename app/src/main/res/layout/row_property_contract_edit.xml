@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="حذف"
+            android:textSize="13sp"
             android:textColor="@color/colorTextPrimary"
             app:icon="@android:drawable/ic_menu_delete"
             app:iconTint="@color/colorTextPrimary"
@@ -35,8 +36,13 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/dash_line" />
+    <View
+        android:id="@+id/paddingView"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+         />
 </LinearLayout>

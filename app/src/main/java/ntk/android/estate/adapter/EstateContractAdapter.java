@@ -76,38 +76,46 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
                 itemView.findViewById(R.id.linear1).setVisibility(View.VISIBLE);
                 title1.setText(item.ContractType.TitleSalePrice + "  :   ");
                 if (item.SalePrice != null || item.SalePriceByAgreement) {
-
                     if (item.SalePrice != null && item.SalePrice != 0)
-                        price1.setText(NViewUtils.PriceFormat(item.SalePrice) + "  " + item.UnitSalePrice);
-                    if (item.SalePriceByAgreement)
-                        price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
+                        if (item.SalePriceByAgreement)
+                            price1.setText(NViewUtils.PriceFormat(item.SalePrice) + "  " + item.UnitSalePrice + "|| توافقی");
+                        else
+                            price1.setText(NViewUtils.PriceFormat(item.SalePrice) + "  " + item.UnitSalePrice);
+                    else if (item.SalePriceByAgreement)
+                        price1.setText("توافقی");
 
                 }
-            }else
+            } else
                 itemView.findViewById(R.id.linear1).setVisibility(View.GONE);
             if (item.ContractType.HasDepositPrice) {
                 itemView.findViewById(R.id.linear2).setVisibility(View.VISIBLE);
-                title2.setText(item.ContractType.TitleDepositPrice+ "  :   ");
+                title2.setText(item.ContractType.TitleDepositPrice + "  :   ");
                 if (item.DepositPrice != null || item.DepositPriceByAgreement) {
 
                     if (item.DepositPrice != null && item.DepositPrice != 0)
-                        price2.setText(NViewUtils.PriceFormat(item.DepositPrice) + "  " + item.UnitSalePrice);
-                    if (item.DepositPriceByAgreement)
-                        price2.setText(price2.getText().toString().isEmpty() ? "توافقی" : price2.getText().toString() + "|| توافقی");
+                        if (item.DepositPriceByAgreement)
+                            price2.setText(NViewUtils.PriceFormat(item.DepositPrice) + "  " + item.UnitSalePrice + "|| توافقی");
+                        else
+                            price2.setText(NViewUtils.PriceFormat(item.DepositPrice) + "  " + item.UnitSalePrice);
+                    else if (item.DepositPriceByAgreement)
+                        price2.setText("توافقی");
                 }
-            }else{
+            } else {
                 itemView.findViewById(R.id.linear2).setVisibility(View.GONE);
             }
             if (item.ContractType.HasRentPrice) {
                 itemView.findViewById(R.id.linear3).setVisibility(View.VISIBLE);
-                title3.setText(item.ContractType.TitleRentPrice+ "  :   ");
+                title3.setText(item.ContractType.TitleRentPrice + "  :   ");
                 if (item.RentPrice != null || item.RentPriceByAgreement) {
                     if (item.RentPrice != null && item.RentPrice != 0)
-                        price3.setText(NViewUtils.PriceFormat(item.RentPrice) + "  " + item.UnitSalePrice);
-                    if (item.RentPriceByAgreement)
-                        price3.setText(price3.getText().toString().isEmpty() ? "توافقی" : price3.getText().toString() + "|| توافقی");
+                        if (item.RentPriceByAgreement)
+                            price3.setText(NViewUtils.PriceFormat(item.RentPrice) + "  " + item.UnitSalePrice + "|| توافقی");
+                        else
+                            price3.setText(NViewUtils.PriceFormat(item.RentPrice) + "  " + item.UnitSalePrice);
+                    else if (item.RentPriceByAgreement)
+                        price3.setText("توافقی");
                 }
-            }else
+            } else
                 itemView.findViewById(R.id.linear3).setVisibility(View.GONE);
         }
     }

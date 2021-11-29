@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -229,6 +227,10 @@ public class NewEstateFragment4 extends BaseFragment {
 
     public boolean isValidForm() {
         //if contracts add can go to next page
-        return estateActivity().model().Contracts.size() > 0;
+        if (estateActivity().model().Contracts.size() == 0) {
+            Toasty.error(getContext(), "لطفا برای این ملک حداقل یک نوع معامله وارد نمایید", Toasty.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 }

@@ -148,6 +148,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/locationTextInputLayout"
+                        style="@style/new_estate_textInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="11dp"
+android:enabled="true"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:focusable="false"
+                            android:enabled="false"
+                            android:textSize="14sp"
+                            android:theme="@style/new_estate_textInputEditText" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
                     <org.neshan.mapsdk.MapView
                         android:id="@+id/mapView"
                         android:layout_width="match_parent"
@@ -159,24 +177,6 @@
 
 
                         />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/locationTextInputLayout"
-                        style="@style/new_estate_textInputLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginTop="11dp"
-
-                        app:hintEnabled="false">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:focusable="false"
-                            android:textSize="14sp"
-                            android:theme="@style/new_estate_textInputEditText" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
                     <TextView
                         android:id="@+id/customHint"
                         android:layout_width="wrap_content"

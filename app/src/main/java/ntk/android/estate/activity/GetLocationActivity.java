@@ -2,6 +2,7 @@ package ntk.android.estate.activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -39,6 +42,7 @@ import org.neshan.mapsdk.model.Marker;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.estate.R;
 
@@ -122,7 +126,18 @@ public class GetLocationActivity extends BaseActivity {
             map.addMarker(addMarker(map.getCameraTargetPosition()));
         });
         map.setOnMapLongClickListener(latLng -> map.addLabel(addLabel(latLng)));
-
+        findViewById(R.id.setLocationBtn).setOnClickListener(view -> {
+            if (marker==null)
+                Toasty.error(GetLocationActivity.this,"موقعیتی انتخاب نشده است").show();
+            else
+            {
+                Intent i=new Intent();
+                i.putExtra(Extras.EXTRA_FIRST_ARG,marker.getLatLng().getLatitude());
+                i.putExtra(Extras.EXTRA_SECOND_ARG,marker.getLatLng().getLongitude());
+                setResult(RESULT_OK,i);
+                finish();
+            }
+        });
     }
 
     private void getPermission() {
@@ -190,7 +205,7 @@ public class GetLocationActivity extends BaseActivity {
         // Creating animation for marker. We should use an object of type AnimationStyleBuilder, set
         // all animation features on it and then call buildStyle() method that returns an object of type
         // AnimationStyle
-        MakeMarker(this,latLng);
+        marker= MakeMarker(this,latLng);
 
         return marker;
     }
@@ -208,5 +223,10 @@ public class GetLocationActivity extends BaseActivity {
         markStCr.setAnimationStyle(animStyle);
         Marker marker = new Marker(loc, markStCr.buildStyle());
         return marker;
+    }
+
+    public static void REGISTER_FOR_RESULT(BaseActivity activity, ActivityResultCallback<ActivityResult> callback){
+        Intent intent = new Intent(activity,GetLocationActivity.class);
+        activity.lunchActivityForResult(intent, callback);
     }
 }
