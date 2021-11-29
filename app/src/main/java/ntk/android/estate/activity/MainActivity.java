@@ -45,7 +45,6 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems();
 
-        startActivity(new Intent(this,NewEstateActivity.class));
         RecyclerView drawerRecycler = findViewById(R.id.RecyclerDrawer);
         DrawerAdapter adapter = new DrawerAdapter(this, menus, findViewById(R.id.floaingDrawer));
         drawerRecycler.setAdapter(adapter);

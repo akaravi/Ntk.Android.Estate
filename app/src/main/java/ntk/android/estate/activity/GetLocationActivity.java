@@ -3,6 +3,7 @@ package ntk.android.estate.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -25,13 +26,20 @@ import com.carto.styles.AnimationType;
 import com.carto.styles.MarkerStyleBuilder;
 import com.carto.styles.TextStyle;
 import com.carto.styles.TextStyleBuilder;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.CancellationToken;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
+import com.google.android.gms.tasks.Task;
 
 import org.neshan.common.model.LatLng;
 import org.neshan.mapsdk.MapView;
@@ -62,11 +70,8 @@ public class GetLocationActivity extends BaseActivity {
                             // Precise location access granted.
                             if (coarseLocationGranted != null && coarseLocationGranted) {
                                 // Only approximate location access granted.
-                                fusedLocationClient.requestLocationUpdates(LocationRequest.create()
-                                                .setInterval(120000).setFastestInterval(120000)
-                                                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                                                .setMaxWaitTime(1000),
-                                        getLocationCallback(), Looper.myLooper());
+                                //chek is Gps is On or Off
+                                checkGPS();
                             }
                         } else {
                             // No location access granted.
@@ -74,6 +79,40 @@ public class GetLocationActivity extends BaseActivity {
                         }
                     }
             );
+
+    private void checkGPS() {
+
+        LocationRequest locationRequest = LocationRequest.create();
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+
+        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+        Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(builder.build());
+
+        task.addOnSuccessListener(this, locationSettingsResponse -> {
+            Log.d("GPS_main", "OnSuccess");
+            // GPS is ON
+        });
+
+        task.addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull final Exception e) {
+                Log.d("GPS_main", "GPS off");
+                Toasty.info(GetLocationActivity.this, "gps" + " دستگاه شما غیرفعال است ").show();
+                // GPS off
+                if (e instanceof ResolvableApiException) {
+                    ResolvableApiException resolvable = (ResolvableApiException) e;
+                    try {
+                        resolvable.startResolutionForResult(GetLocationActivity.this, 1);
+                    } catch (IntentSender.SendIntentException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+
 
     private LocationCallback getLocationCallback() {
         return new LocationCallback() {
@@ -83,7 +122,7 @@ public class GetLocationActivity extends BaseActivity {
                 if (locationList.size() > 0) {
                     //The last location in the list is the newest
                     Location location = locationList.get(locationList.size() - 1);
-                    Log.i("MapsActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
+
                     if (label != null) {
                         map.removeLabel(label);
                     }
@@ -92,8 +131,13 @@ public class GetLocationActivity extends BaseActivity {
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     map.addLabel(addLabel(latLng));
                     //move map camera
-                    map.moveCamera(latLng, 500);
+                    map.moveCamera(latLng, 2);
                 }
+            }
+
+            @Override
+            public void onLocationAvailability(@NonNull LocationAvailability locationAvailability) {
+                super.onLocationAvailability(locationAvailability);
             }
         };
     }
@@ -106,10 +150,8 @@ public class GetLocationActivity extends BaseActivity {
         //get last location
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        //get location permission
-        getPermission();
         //location button
-        findViewById(R.id.lastLocationFab).setOnClickListener(view -> getLastLocation());
+        findViewById(R.id.lastLocationFab).setOnClickListener(view -> getPermission());
         map = (MapView) findViewById(R.id.mapview);
         map.setOnMapClickListener(new MapView.OnMapClickListener() {
             @Override
@@ -117,7 +159,7 @@ public class GetLocationActivity extends BaseActivity {
                 if (marker != null)
                     map.removeMarker(marker);
                 map.addMarker(addMarker(latLng));
-                map.moveCamera(latLng, 500);
+                map.moveCamera(latLng, 2);
             }
         });
         map.setOnCameraMoveFinishedListener(i -> {
@@ -126,46 +168,50 @@ public class GetLocationActivity extends BaseActivity {
             map.addMarker(addMarker(map.getCameraTargetPosition()));
         });
         map.setOnMapLongClickListener(latLng -> map.addLabel(addLabel(latLng)));
+        map.setMyLocationEnabled(false);
         findViewById(R.id.setLocationBtn).setOnClickListener(view -> {
-            if (marker==null)
-                Toasty.error(GetLocationActivity.this,"موقعیتی انتخاب نشده است").show();
-            else
-            {
-                Intent i=new Intent();
-                i.putExtra(Extras.EXTRA_FIRST_ARG,marker.getLatLng().getLatitude());
-                i.putExtra(Extras.EXTRA_SECOND_ARG,marker.getLatLng().getLongitude());
-                setResult(RESULT_OK,i);
+            if (marker == null)
+                Toasty.error(GetLocationActivity.this, "موقعیتی انتخاب نشده است").show();
+            else {
+                Intent i = new Intent();
+                i.putExtra(Extras.EXTRA_FIRST_ARG, marker.getLatLng().getLatitude());
+                i.putExtra(Extras.EXTRA_SECOND_ARG, marker.getLatLng().getLongitude());
+                setResult(RESULT_OK, i);
                 finish();
             }
         });
     }
 
     private void getPermission() {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            //call request
             locationPermissionRequest.launch(new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-            });
+                    Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION});
+
+        } else {
             fusedLocationClient.requestLocationUpdates(LocationRequest.create()
-                            .setInterval(120000).setFastestInterval(120000)
-                            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                            .setInterval(36000).setFastestInterval(36000)
+                            .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
                             .setMaxWaitTime(1000),
                     getLocationCallback(), Looper.myLooper());
-            return;
+            getCurrentLocation();
         }
     }
 
-    public void getLastLocation() {
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, location -> {
-                    // Got last known location. In some rare situations this can be null.
-                    if (location != null) {
-                        LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
-                        map.moveCamera(myLoc, 500);
-                        addLabel(myLoc);
-                    }
-                });
-    }
+//    public void getLastLocation() {
+//        fusedLocationClient.getLastLocation()
+//                .addOnSuccessListener(this, location -> {
+//                    // Got last known location. In some rare situations this can be null.
+//                    if (location != null) {
+//                        LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
+//                        map.moveCamera(myLoc, 500);
+//                        addLabel(myLoc);
+//                    }
+//                }).addOnFailureListener(runnable ->{
+//                    String s;
+//        });
+//    }
 
     public void getCurrentLocation() {
         fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY, new CancellationToken() {
@@ -183,7 +229,7 @@ public class GetLocationActivity extends BaseActivity {
             // Got last known location. In some rare situations this can be null.
             if (location != null) {
                 LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
-                map.moveCamera(myLoc, 500);
+                map.moveCamera(myLoc, 2);
                 addLabel(myLoc);
             }
         });
@@ -205,7 +251,7 @@ public class GetLocationActivity extends BaseActivity {
         // Creating animation for marker. We should use an object of type AnimationStyleBuilder, set
         // all animation features on it and then call buildStyle() method that returns an object of type
         // AnimationStyle
-        marker= MakeMarker(this,latLng);
+        marker = MakeMarker(this, latLng);
 
         return marker;
     }
@@ -225,8 +271,8 @@ public class GetLocationActivity extends BaseActivity {
         return marker;
     }
 
-    public static void REGISTER_FOR_RESULT(BaseActivity activity, ActivityResultCallback<ActivityResult> callback){
-        Intent intent = new Intent(activity,GetLocationActivity.class);
+    public static void REGISTER_FOR_RESULT(BaseActivity activity, ActivityResultCallback<ActivityResult> callback) {
+        Intent intent = new Intent(activity, GetLocationActivity.class);
         activity.lunchActivityForResult(intent, callback);
     }
 }
