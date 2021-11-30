@@ -55,6 +55,10 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
         holder.setProperties(item);
         holder.location.setText( item.LinkLocationIdTitle);
         holder.locationParent.setText( item.LinkLocationIdParentTitle);
+        if (item.IsFavorite)
+            holder.favorite.setImageResource(R.drawable.ic_fav_full);
+        else
+            holder.favorite.setImageResource(R.drawable.ic_fav);
     }
 
     public class VH extends RecyclerView.ViewHolder {
