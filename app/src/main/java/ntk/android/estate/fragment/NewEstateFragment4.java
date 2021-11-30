@@ -164,6 +164,7 @@ public class NewEstateFragment4 extends BaseFragment {
         if (selectedModel != null) {
             EstateContractModel contract = new EstateContractModel();
             contract.ContractType = selectedModel;
+            contract.LinkEstateContractTypeId=selectedModel.Id;
             if (selectedModel.HasRentPrice || selectedModel.RentPriceAllowAgreement) {
                 if (((MaterialCheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).isChecked())
                     contract.RentPriceByAgreement = true;
