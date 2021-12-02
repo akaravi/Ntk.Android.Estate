@@ -38,7 +38,19 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
 
     @Override
     public int getItemViewType(int position) {
-        return list.get(position).PropertyDetail.InputDataType;
+        EstatePropertyDetailValueModel item = list.get(position);
+        if (item.PropertyDetail.InputDataType == 0) {
+            //is selectable String
+            if (item.PropertyDetail.ConfigValueForceUseDefaultValue)
+                //is as multiple choose
+                if (item.PropertyDetail.ConfigValueMultipleChoice)
+                    return 11;
+                else//is as single choose;
+                    return 12;
+            else
+                return 0;
+        }
+        return item.PropertyDetail.InputDataType;
     }
 
     @NonNull
@@ -71,8 +83,12 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
                 return new FloatVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
             if (viewType == 4)//as date
                 return new DateVH(inflate(parent, R.layout.row_property_detail_date_type), viewType);
-            else
+            if (viewType==5)//as multiLine text
                 return new MultiLineVH(inflate(parent, R.layout.row_property_detail_textarea_type), viewType);
+            else if (viewType==11)
+                return new MultiChoiceVH(inflate(parent, R.layout.row_property_detail_stirng_type),11);
+            else
+                return new SingleChoiceVH(inflate(parent, R.layout.row_property_detail_stirng_type),12);
         }
 
         public Context getContext() {
@@ -82,11 +98,12 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         public void bindToView(EstatePropertyDetailValueModel item, int position) {
 
         }
-        
+
+
     }
 
 
-    private class StringVH extends VH {
+     class StringVH extends VH {
         TextInputEditText editText;
         TextInputLayout inputLayout;
         MyCustomEditTextListener textChangeListener;
@@ -100,11 +117,11 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             editText.setInputType(inputType());
             editText.setTypeface(tf);
             inputLayout.setTypeface(tf);
-            if (viewType!= 4) {
+            if (viewType != 4) {
                 textChangeListener = new MyCustomEditTextListener();
                 editText.setFocusable(true);
                 editText.addTextChangedListener(textChangeListener);
-            }else{
+            } else {
                 editText.setFocusable(false);
             }
 
@@ -123,22 +140,21 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             textChangeListener.updatePosition(position);
         }
     }
-
-    private class MultiLineVH extends StringVH {
-        public MultiLineVH(View inflate, int type) {
-            super(inflate,type);
+     class SingleChoiceVH extends VH {
+        public SingleChoiceVH(View inflate, int type) {
+            super(inflate, type);
         }
-
-        @Override
-        public int inputType() {
-            return InputType.TYPE_TEXT_FLAG_MULTI_LINE;
+    }
+    private class MultiChoiceVH extends VH {
+        public MultiChoiceVH(View inflate, int type) {
+            super(inflate, type);
         }
     }
 
 
     private class IntegerVH extends StringVH {
         public IntegerVH(View inflate, int type) {
-            super(inflate,type);
+            super(inflate, type);
         }
 
         @Override
@@ -149,7 +165,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
 
     private class FloatVH extends StringVH {
         public FloatVH(View inflate, int type) {
-            super(inflate,type);
+            super(inflate, type);
         }
 
         @Override
@@ -158,10 +174,21 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         }
     }
 
+    class MultiLineVH extends StringVH {
+        public MultiLineVH(View inflate, int type) {
+            super(inflate, type);
+        }
+
+        @Override
+        public int inputType() {
+            return InputType.TYPE_TEXT_FLAG_MULTI_LINE;
+        }
+    }
+
     private class DateVH extends StringVH {
 
         public DateVH(View inflate, int viewType) {
-            super(inflate,viewType);
+            super(inflate, viewType);
         }
 
         @Override
@@ -191,8 +218,8 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         MaterialCheckBox checkBox;
         TextView textView;
 
-        public BooleanVH(View inflate,int type) {
-            super(inflate,type);
+        public BooleanVH(View inflate, int type) {
+            super(inflate, type);
             Typeface tf = FontManager.T1_Typeface(getContext());
             checkBox = inflate.findViewById(R.id.checkBox);
             textView = inflate.findViewById(R.id.txt);
@@ -240,4 +267,6 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             // no op
         }
     }
+
+
 }
