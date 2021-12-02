@@ -13,7 +13,7 @@ import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstatePropertyAdapter;
 
-public class TestActivity extends BaseActivity {
+public class TestActivity extends NewEstateActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -23,6 +23,7 @@ public class EstatePropertyDetailGroupAdapterSelector extends BaseRecyclerAdapte
 
     public EstatePropertyDetailGroupAdapterSelector(FragmentManager fra, List<EstatePropertyDetailGroupModel> list) {
         super(list);
+        fragmentManager=fra;
     }
 
     @NonNull

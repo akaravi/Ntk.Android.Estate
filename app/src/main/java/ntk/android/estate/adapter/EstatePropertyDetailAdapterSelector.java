@@ -19,6 +19,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
@@ -41,7 +44,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new VH(parent).CREATE_HOLDER(parent, viewType);
+        return new VH(parent, viewType).CREATE_HOLDER(parent, viewType);
     }
 
     @Override
@@ -50,23 +53,26 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     }
 
     public class VH extends RecyclerView.ViewHolder {
-        public VH(@NonNull View itemView) {
+        protected int viewType;
+
+        public VH(@NonNull View itemView, int type) {
             super(itemView);
+            viewType = type;
         }
 
         public VH CREATE_HOLDER(ViewGroup parent, int viewType) {
             if (viewType == 0)//as String
-                return new StringVH(inflate(parent, R.layout.row_property_detail_stirng_type));
+                return new DateVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
             if (viewType == 1)//as int
-                return new IntegerVH(inflate(parent, R.layout.row_property_detail_stirng_type));
+                return new IntegerVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
             if (viewType == 2)
-                return new BooleanVH(inflate(parent, R.layout.row_property_detail_boolean_type));
+                return new BooleanVH(inflate(parent, R.layout.row_property_detail_boolean_type), viewType);
             if (viewType == 3)//as float
-                return new FloatVH(inflate(parent, R.layout.row_property_detail_stirng_type));
+                return new FloatVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
             if (viewType == 4)//as date
-                return new DateVH(inflate(parent, R.layout.row_property_detail_date_type));
+                return new DateVH(inflate(parent, R.layout.row_property_detail_date_type), viewType);
             else
-                return new MultiLineVH(inflate(parent, R.layout.row_property_detail_textarea_type));
+                return new MultiLineVH(inflate(parent, R.layout.row_property_detail_textarea_type), viewType);
         }
 
         public Context getContext() {
@@ -87,16 +93,23 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         TextInputLayout inputLayout;
         MyCustomEditTextListener textChangeListener;
 
-        public StringVH(View itemView) {
-            super(itemView);
+        public StringVH(View itemView, int viewType) {
+            super(itemView, viewType);
             Typeface tf = FontManager.T1_Typeface(getContext());
-            textChangeListener = new MyCustomEditTextListener();
+
             inputLayout = itemView.findViewById(R.id.inputLayout);
             editText = itemView.findViewById(R.id.inputEditText);
             editText.setInputType(inputType());
-            editText.addTextChangedListener(textChangeListener);
             editText.setTypeface(tf);
             inputLayout.setTypeface(tf);
+            if (viewType!= 4) {
+                textChangeListener = new MyCustomEditTextListener();
+                editText.setFocusable(true);
+                editText.addTextChangedListener(textChangeListener);
+            }else{
+                editText.setFocusable(false);
+            }
+
         }
 
         public int inputType() {
@@ -114,8 +127,8 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     }
 
     private class MultiLineVH extends StringVH {
-        public MultiLineVH(View inflate) {
-            super(inflate);
+        public MultiLineVH(View inflate, int type) {
+            super(inflate,type);
         }
 
         @Override
@@ -126,8 +139,8 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
 
 
     private class IntegerVH extends StringVH {
-        public IntegerVH(View inflate) {
-            super(inflate);
+        public IntegerVH(View inflate, int type) {
+            super(inflate,type);
         }
 
         @Override
@@ -137,8 +150,8 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     }
 
     private class FloatVH extends StringVH {
-        public FloatVH(View inflate) {
-            super(inflate);
+        public FloatVH(View inflate, int type) {
+            super(inflate,type);
         }
 
         @Override
@@ -148,31 +161,31 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     }
 
     private class DateVH extends StringVH {
-        public DateVH(View inflate) {
-            super(inflate);
 
+        public DateVH(View inflate, int viewType) {
+            super(inflate,viewType);
         }
 
         @Override
         public void bindToView(EstatePropertyDetailValueModel item, int position) {
-            Typeface tf = FontManager.T1_Typeface(getContext());
-            inputLayout = itemView.findViewById(R.id.inputLayout);
-            editText = itemView.findViewById(R.id.inputEditText);
-            editText.setInputType(inputType());
-            editText.setFocusable(false);
-            editText.setTypeface(tf);
-            inputLayout.setTypeface(tf);
-            PersianCalendar persianCalendar = new PersianCalendar();
-            DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
-                    (view, year, monthOfYear, dayOfMonth) -> {
-                        list.get(position).Value = (year + "/" + monthOfYear + "/" + dayOfMonth);
-                        editText.setText(year + "/" + monthOfYear + "/" + dayOfMonth);
-                    },
-                    persianCalendar.getPersianYear(),
-                    persianCalendar.getPersianMonth(),
-                    persianCalendar.getPersianDay()
-            );
-            datePickerDialog.show(frag, "Datepickerdialog");
+            inputLayout.setHint(item.PropertyDetail.Title);
+            if (item.Value != null)
+                editText.setText(item.Value);
+            //add clickListener
+            editText.setOnClickListener(view -> {
+                PersianCalendar persianCalendar = new PersianCalendar();
+                DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
+                        (v, year, monthOfYear, dayOfMonth) -> {
+                            list.get(position).Value = (year + "/" + monthOfYear + "/" + dayOfMonth);
+                            NumberFormat formatter = new DecimalFormat("00");
+                            editText.setText(year + "/" + formatter.format(monthOfYear + 1) + "/" + formatter.format(dayOfMonth));
+                        },
+                        persianCalendar.getPersianYear(),
+                        persianCalendar.getPersianMonth(),
+                        persianCalendar.getPersianDay()
+                );
+                datePickerDialog.show(frag, "Datepickerdialog");
+            });
         }
     }
 
@@ -180,8 +193,8 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         MaterialCheckBox checkBox;
         TextView textView;
 
-        public BooleanVH(View inflate) {
-            super(inflate);
+        public BooleanVH(View inflate,int type) {
+            super(inflate,type);
             Typeface tf = FontManager.T1_Typeface(getContext());
             checkBox = inflate.findViewById(R.id.checkBox);
             textView = inflate.findViewById(R.id.txt);
