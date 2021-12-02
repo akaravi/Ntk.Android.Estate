@@ -62,7 +62,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
 
         public VH CREATE_HOLDER(ViewGroup parent, int viewType) {
             if (viewType == 0)//as String
-                return new DateVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
+                return new StringVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
             if (viewType == 1)//as int
                 return new IntegerVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
             if (viewType == 2)
