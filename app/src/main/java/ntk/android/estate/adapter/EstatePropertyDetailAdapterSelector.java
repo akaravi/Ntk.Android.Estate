@@ -79,12 +79,10 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             return itemView.getContext();
         }
 
-
         public void bindToView(EstatePropertyDetailValueModel item, int position) {
 
         }
-
-
+        
     }
 
 
