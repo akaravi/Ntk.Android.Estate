@@ -73,7 +73,8 @@ public class NewEstateFragment3 extends BaseFragment {
     }
 
     private void showView() {
-        EstatePropertyDetailGroupAdapterSelector adapter = new EstatePropertyDetailGroupAdapterSelector(estateActivity().model().PropertyDetailGroups);
+        EstatePropertyDetailGroupAdapterSelector adapter = new EstatePropertyDetailGroupAdapterSelector(
+                estateActivity().getSupportFragmentManager(), estateActivity().model().PropertyDetailGroups);
         RecyclerView rc = (findViewById(R.id.estateDetailGroupRc));
         rc.setAdapter(adapter);
         rc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));

@@ -188,7 +188,7 @@ public class SearchEstateActivity extends BaseActivity {
                                         estatePropertyDetailGroupModel.PropertyValues.add(value);
                                     });
                         });
-                SearchPropertyDetailGroupAdapterSelector adapter = new SearchPropertyDetailGroupAdapterSelector(response.ListItems,findViewById(R.id.nestedScrool));
+                SearchPropertyDetailGroupAdapterSelector adapter = new SearchPropertyDetailGroupAdapterSelector(response.ListItems,findViewById(R.id.nestedScrool),getSupportFragmentManager());
                 RecyclerView rc = (findViewById(R.id.detailRc));
                 rc.setAdapter(adapter);
                 rc.setLayoutManager(new LinearLayoutManager(SearchEstateActivity.this, RecyclerView.VERTICAL, false));

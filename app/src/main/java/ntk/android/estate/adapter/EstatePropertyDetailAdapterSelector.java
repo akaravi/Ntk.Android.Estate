@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.checkbox.MaterialCheckBox;
@@ -23,8 +24,10 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
 class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstatePropertyDetailValueModel, EstatePropertyDetailAdapterSelector.VH> {
-    public EstatePropertyDetailAdapterSelector(EstatePropertyDetailGroupModel item) {
+  FragmentManager frag;
+    public EstatePropertyDetailAdapterSelector(FragmentManager fragment,EstatePropertyDetailGroupModel item) {
         super(item.PropertyValues);
+        frag = fragment;
     }
 
     @Override

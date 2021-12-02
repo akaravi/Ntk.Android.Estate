@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.TransitionManager;
@@ -20,10 +21,12 @@ import ntk.android.estate.R;
 
 public class SearchPropertyDetailGroupAdapterSelector extends BaseRecyclerAdapter<EstatePropertyDetailGroupModel, SearchPropertyDetailGroupAdapterSelector.VH> {
     ViewGroup root;
+    private FragmentManager fragmentManager;
 
-    public SearchPropertyDetailGroupAdapterSelector(List<EstatePropertyDetailGroupModel> list, ViewGroup rootView) {
+    public SearchPropertyDetailGroupAdapterSelector(List<EstatePropertyDetailGroupModel> list, ViewGroup rootView, FragmentManager frag) {
         super(list);
         root = rootView;
+        fragmentManager = frag;
     }
 
 
@@ -38,7 +41,7 @@ public class SearchPropertyDetailGroupAdapterSelector extends BaseRecyclerAdapte
         EstatePropertyDetailGroupModel item = getItem(position);
         holder.title.setText(item.Title);
         holder.rc.setLayoutManager(new GridLayoutManager(holder.getContext(), 2));
-        holder.rc.setAdapter(new EstatePropertyDetailAdapterSelector(item));
+        holder.rc.setAdapter(new EstatePropertyDetailAdapterSelector(fragmentManager, item));
 
     }
 
