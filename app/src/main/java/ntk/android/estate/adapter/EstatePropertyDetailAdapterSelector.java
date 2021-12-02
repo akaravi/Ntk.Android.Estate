@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
@@ -24,8 +26,9 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
 class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstatePropertyDetailValueModel, EstatePropertyDetailAdapterSelector.VH> {
-  FragmentManager frag;
-    public EstatePropertyDetailAdapterSelector(FragmentManager fragment,EstatePropertyDetailGroupModel item) {
+    FragmentManager frag;
+
+    public EstatePropertyDetailAdapterSelector(FragmentManager fragment, EstatePropertyDetailGroupModel item) {
         super(item.PropertyValues);
         frag = fragment;
     }
@@ -147,8 +150,32 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     private class DateVH extends StringVH {
         public DateVH(View inflate) {
             super(inflate);
+
+        }
+
+        @Override
+        public void bindToView(EstatePropertyDetailValueModel item, int position) {
+            Typeface tf = FontManager.T1_Typeface(getContext());
+            inputLayout = itemView.findViewById(R.id.inputLayout);
+            editText = itemView.findViewById(R.id.inputEditText);
+            editText.setInputType(inputType());
+            editText.setFocusable(false);
+            editText.setTypeface(tf);
+            inputLayout.setTypeface(tf);
+            PersianCalendar persianCalendar = new PersianCalendar();
+            DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
+                    (view, year, monthOfYear, dayOfMonth) -> {
+                        list.get(position).Value = (year + "/" + monthOfYear + "/" + dayOfMonth);
+                        editText.setText(year + "/" + monthOfYear + "/" + dayOfMonth);
+                    },
+                    persianCalendar.getPersianYear(),
+                    persianCalendar.getPersianMonth(),
+                    persianCalendar.getPersianDay()
+            );
+            datePickerDialog.show(frag, "Datepickerdialog");
         }
     }
+
     private class BooleanVH extends VH {
         MaterialCheckBox checkBox;
         TextView textView;
