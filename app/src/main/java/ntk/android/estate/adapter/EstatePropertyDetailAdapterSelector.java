@@ -114,20 +114,18 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         public StringVH(View itemView, int viewType) {
             super(itemView, viewType);
             Typeface tf = FontManager.T1_Typeface(getContext());
-
             inputLayout = itemView.findViewById(R.id.inputLayout);
             editText = itemView.findViewById(R.id.inputEditText);
             editText.setInputType(inputType());
             editText.setTypeface(tf);
             inputLayout.setTypeface(tf);
-            if (viewType != 4) {
-                textChangeListener = new MyCustomEditTextListener();
-                editText.setFocusable(true);
-                editText.addTextChangedListener(textChangeListener);
-            } else {
-                editText.setFocusable(false);
-            }
+            create();
 
+        }
+        public void create(){
+            textChangeListener = new MyCustomEditTextListener();
+            editText.setFocusable(true);
+            editText.addTextChangedListener(textChangeListener);
         }
 
         public int inputType() {
@@ -147,6 +145,11 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     class SingleChoiceVH extends StringVH {
         public SingleChoiceVH(View inflate, int type) {
             super(inflate, type);
+        }
+
+        @Override
+        public void create() {
+            editText.setFocusable(false);
         }
 
         @Override
@@ -173,6 +176,11 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     private class MultiChoiceVH extends StringVH {
         public MultiChoiceVH(View inflate, int type) {
             super(inflate, type);
+        }
+
+        @Override
+        public void create() {
+            editText.setFocusable(false);
         }
 
         @Override
@@ -235,6 +243,11 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
 
         public DateVH(View inflate, int viewType) {
             super(inflate, viewType);
+        }
+
+        @Override
+        public void create() {
+            editText.setFocusable(false);
         }
 
         @Override
