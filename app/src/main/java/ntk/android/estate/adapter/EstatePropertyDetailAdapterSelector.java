@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
+import ntk.android.base.dialog.CheckBoxListDialog;
+import ntk.android.base.dialog.RadioListDialog;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 import ntk.android.base.utill.FontManager;
@@ -83,12 +86,12 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
                 return new FloatVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
             if (viewType == 4)//as date
                 return new DateVH(inflate(parent, R.layout.row_property_detail_date_type), viewType);
-            if (viewType==5)//as multiLine text
+            if (viewType == 5)//as multiLine text
                 return new MultiLineVH(inflate(parent, R.layout.row_property_detail_textarea_type), viewType);
-            else if (viewType==11)
-                return new MultiChoiceVH(inflate(parent, R.layout.row_property_detail_stirng_type),11);
+            else if (viewType == 11)
+                return new MultiChoiceVH(inflate(parent, R.layout.row_property_detail_stirng_type), 11);
             else
-                return new SingleChoiceVH(inflate(parent, R.layout.row_property_detail_stirng_type),12);
+                return new SingleChoiceVH(inflate(parent, R.layout.row_property_detail_stirng_type), 12);
         }
 
         public Context getContext() {
@@ -103,7 +106,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     }
 
 
-     class StringVH extends VH {
+    class StringVH extends VH {
         TextInputEditText editText;
         TextInputLayout inputLayout;
         MyCustomEditTextListener textChangeListener;
@@ -140,14 +143,57 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             textChangeListener.updatePosition(position);
         }
     }
-     class SingleChoiceVH extends VH {
+
+    class SingleChoiceVH extends StringVH {
         public SingleChoiceVH(View inflate, int type) {
             super(inflate, type);
         }
+
+        @Override
+        public void bindToView(EstatePropertyDetailValueModel item, int position) {
+            inputLayout.setHint(item.PropertyDetail.Title);
+            if (item.Value != null)
+                editText.setText(item.Value);
+            //add clickListener
+            editText.setOnClickListener(view -> {
+
+                RadioListDialog dialog = RadioListDialog.newInstance((selected, integer) ->
+                        {
+                            list.get(position).Value = selected;
+                            editText.setText(selected);
+                            return null;
+                        },
+                        item.PropertyDetail.ConfigValueDefaultValue
+                );
+                dialog.show(frag, "singleDialog");
+            });
+        }
     }
-    private class MultiChoiceVH extends VH {
+
+    private class MultiChoiceVH extends StringVH {
         public MultiChoiceVH(View inflate, int type) {
             super(inflate, type);
+        }
+
+        @Override
+        public void bindToView(EstatePropertyDetailValueModel item, int position) {
+            inputLayout.setHint(item.PropertyDetail.Title);
+            if (item.Value != null)
+                editText.setText(item.Value);
+            //add clickListener
+            editText.setOnClickListener(view -> {
+
+                CheckBoxListDialog dialog = CheckBoxListDialog.newInstance((selected, integer) ->
+                        {
+                            String str = TextUtils.join(",", selected);
+                            list.get(position).Value = str;
+                            editText.setText(str);
+                            return null;
+                        },
+                        item.PropertyDetail.ConfigValueDefaultValue
+                );
+                dialog.show(frag, "multiDialog");
+            });
         }
     }
 
