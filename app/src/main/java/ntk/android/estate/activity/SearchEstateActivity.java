@@ -44,7 +44,6 @@ import ntk.android.base.services.estate.EstatePropertyTypeUsageService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstateContractAdapterSelector;
-import ntk.android.estate.adapter.EstatePropertyDetailGroupAdapterSelector;
 import ntk.android.estate.adapter.EstatePropertyLandUseAdapterSelector;
 import ntk.android.estate.adapter.EstatePropertyTypeAdapterSelector;
 import ntk.android.estate.adapter.SearchPropertyDetailGroupAdapterSelector;
