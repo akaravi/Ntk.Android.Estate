@@ -82,7 +82,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
                 case 2:
                     ClickFavoriteEstateList();
                     break;
-                 case 3:
+                case 3:
                     clickMyEstates();
                     break;
                 case 4:
@@ -124,7 +124,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
     }
 
     private void ClickNewEstate() {
-        context.startActivity(new Intent(context, NewEstateActivity.class));
+        NewEstateActivity.START_ACTIVITY(context);
         if (Drawer != null) {
             Drawer.closeMenu(true);
         }
@@ -136,6 +136,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             Drawer.closeMenu(true);
         }
     }
+
     private void clickMyEstates() {
         context.startActivity(new Intent(context, MyEstateActivity.class));
         if (Drawer != null) {
