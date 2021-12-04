@@ -1,7 +1,8 @@
 package ntk.android.estate.activity;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -13,11 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.carto.styles.AnimationStyle;
-import com.carto.styles.AnimationStyleBuilder;
-import com.carto.styles.AnimationType;
-import com.carto.styles.MarkerStyle;
-import com.carto.styles.MarkerStyleBuilder;
 import com.google.android.material.button.MaterialButton;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -25,8 +21,6 @@ import com.smarteist.autoimageslider.SliderView;
 
 import org.neshan.common.model.LatLng;
 import org.neshan.mapsdk.MapView;
-import org.neshan.mapsdk.internal.utils.BitmapUtils;
-import org.neshan.mapsdk.model.Marker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,12 +64,14 @@ public class EstateDetailActivity extends BaseActivity {
     }
 
     private void setFont() {
-        ((TextView) findViewById(R.id.lblTitleDetail)).setTypeface(FontManager.T1_Typeface(this));
-        ((TextView) findViewById(R.id.txtArea)).setTypeface(FontManager.T1_Typeface(this));
-        ((TextView) findViewById(R.id.idTextView)).setTypeface(FontManager.T1_Typeface(this));
-        ((TextView) findViewById(R.id.dateTv)).setTypeface(FontManager.T1_Typeface(this));
-        ((TextView) findViewById(R.id.textView)).setTypeface(FontManager.T1_Typeface(this));
-        ((MaterialButton) (findViewById(R.id.toggleMaps))).setTypeface(FontManager.T1_Typeface(this));
+        Typeface tf = FontManager.T1_Typeface(this);
+        ((TextView) findViewById(R.id.lblTitleDetail)).setTypeface(tf);
+        ((TextView) findViewById(R.id.txtArea)).setTypeface(tf);
+        ((TextView) findViewById(R.id.idTextView)).setTypeface(tf);
+        ((TextView) findViewById(R.id.dateTv)).setTypeface(tf);
+        ((TextView) findViewById(R.id.textView)).setTypeface(tf);
+        ((MaterialButton) (findViewById(R.id.toggleMaps))).setTypeface(tf);
+        ((MaterialButton) (findViewById(R.id.phoneButton))).setTypeface(tf);
     }
 
     private void initView() {
@@ -105,6 +101,7 @@ public class EstateDetailActivity extends BaseActivity {
                 mapView.setVisibility(View.VISIBLE);
             }
         });
+        //favorite button listener
         findViewById(R.id.imgFavDetail).setOnClickListener(view -> {
             if (model != null) {
                 Observer<ErrorExceptionBase> subscriptor = new NtkObserver<ErrorExceptionBase>() {
@@ -131,7 +128,10 @@ public class EstateDetailActivity extends BaseActivity {
 
             }
         });
+        //call button
+        findViewById(R.id.phoneButton).setOnClickListener(view -> call());
     }
+
 
     private void getContent() {
         if (AppUtill.isNetworkAvailable(this)) {
@@ -183,6 +183,11 @@ public class EstateDetailActivity extends BaseActivity {
     }
 
     private void bindContentData() {
+        if (model.AboutAgentTel != null) {
+            findViewById(R.id.phoneButton).setVisibility(View.VISIBLE);
+            findViewById(R.id.telPadding).setVisibility(View.VISIBLE);
+        
+        }
         ((TextView) findViewById(R.id.txtArea)).setText(model.LinkLocationIdParentTitle + " - " + model.LinkLocationIdTitle);
         if (model.IsFavorite)
             ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav_full);
@@ -212,7 +217,7 @@ public class EstateDetailActivity extends BaseActivity {
         if (model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
             (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
             LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
-            ((MapView) findViewById(R.id.map)).addMarker(GetLocationActivity.MakeMarker(this,point));
+            ((MapView) findViewById(R.id.map)).addMarker(GetLocationActivity.MakeMarker(this, point));
 
         }
     }
@@ -226,6 +231,11 @@ public class EstateDetailActivity extends BaseActivity {
         return message;
     }
 
+    private void call() {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + model.AboutAgentTel));
+        startActivity(intent);
+    }
+
     public void ClickShare() {
         UpdateClass updateInfo = Preferences.with(this).appVariableInfo().updateInfo();
         Intent shareIntent = new Intent();
@@ -236,7 +246,6 @@ public class EstateDetailActivity extends BaseActivity {
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         this.startActivity(Intent.createChooser(shareIntent, getString(ntk.android.base.R.string.per_share_to)));
     }
-
 
 
 }
