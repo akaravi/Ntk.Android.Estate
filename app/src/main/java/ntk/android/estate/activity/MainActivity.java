@@ -16,6 +16,7 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import java.util.List;
 
 import ntk.android.base.activity.BaseActivity;
+import ntk.android.base.activity.abstraction.AbstractMainActivity;
 import ntk.android.base.appclass.AboutUsClass;
 import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.GenericErrors;
@@ -31,7 +32,7 @@ import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstatePropertyAdapter;
 import ntk.android.estate.adapter.drawer.DrawerAdapter;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AbstractMainActivity {
     FilterModel row1;
     FilterModel row2;
     FilterModel row3;

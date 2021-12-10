@@ -43,6 +43,7 @@ public class NewEstateFragment3 extends BaseFragment {
 
 
     private void getAllDetails(EstatePropertyTypeLanduseModel t) {
+        estateActivity().showProgress();
         FilterModel f = new FilterModel().addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeLanduseId")
                 .setStringValue(t.Id));
         ServiceExecute.execute(new EstatePropertyDetailGroupService(getContext()).getAll(f
@@ -62,6 +63,7 @@ public class NewEstateFragment3 extends BaseFragment {
                                         estatePropertyDetailGroupModel.PropertyValues.add(value);
                                     });
                         });
+                estateActivity().showContent();
                 showView();
             }
 

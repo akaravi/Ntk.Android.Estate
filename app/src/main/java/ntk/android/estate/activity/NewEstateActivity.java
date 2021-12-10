@@ -36,6 +36,8 @@ public class NewEstateActivity extends BaseActivity {
     EstatePropertyModel model;
     TextView title;
     private int stepNumber;
+    //boolean used for prevent add model until uploading pic finished
+    boolean uploadProcess = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +52,9 @@ public class NewEstateActivity extends BaseActivity {
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
         });
         setFont();
-        showFragment2();
+        showFragment1();
+//        Intent i = new Intent(this, AuthWithSmsActivity.class);
+//        startActivity(i);
     }
 
     private void setFont() {
@@ -126,7 +130,11 @@ public class NewEstateActivity extends BaseActivity {
         NewEstateFragment5 fragment = new NewEstateFragment5();
         findViewById(R.id.addNewBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
-                createModel();
+                if (!uploadProcess) {
+                    createModel();
+                } else {
+                    Toasty.info(NewEstateActivity.this, "در حال بارگذاری...", Toasty.LENGTH_LONG).show();
+                }
         });
 
         fragment.setArguments(getIntent().getExtras());
@@ -154,6 +162,14 @@ public class NewEstateActivity extends BaseActivity {
                 showContent();
             }
         });
+    }
+
+    public void onUploadingStep() {
+        uploadProcess = true;
+    }
+
+    public void uploadFinished() {
+        uploadProcess = false;
     }
 
     @Override

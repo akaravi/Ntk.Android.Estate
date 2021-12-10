@@ -27,7 +27,7 @@ import ntk.android.estate.activity.NewEstateActivity;
 public class NewEstateFragment5 extends BaseFragment {
 
     private static final int MAIN_IMAGE_REQ = 213;
-    boolean isValid = true;
+
 
     @Override
     public void onCreateFragment() {
@@ -66,19 +66,19 @@ public class NewEstateFragment5 extends BaseFragment {
 
     private void UploadFileToServer(String url, Consumer<FileUploadModel> consumer) {
         if (AppUtill.isNetworkAvailable(getContext())) {
-            isValid = false;
+         estateActivity().onUploadingStep();
             Toasty.info(getContext(), "در حال بارگذاری...", Toasty.LENGTH_LONG).show();
             ServiceExecute.execute(new FileUploaderService(getContext()).uploadFile(url))
                     .subscribe(new NtkObserver<FileUploadModel>() {
                         @Override
                         public void onNext(@NonNull FileUploadModel fileUploadModel) {
-                            isValid = true;
+                            estateActivity().uploadFinished();
                             consumer.accept(fileUploadModel);
                         }
 
                         @Override
                         public void onError(Throwable e) {
-                            isValid = true;
+                            estateActivity().uploadFinished();
                             //todo show error
                             Toasty.error(getContext(), "خطا در آپلود فایل").show();
                         }
@@ -93,7 +93,7 @@ public class NewEstateFragment5 extends BaseFragment {
     }
 
     public boolean isValidForm() {
-        return isValid;
+        return true;
     }
 
 }
