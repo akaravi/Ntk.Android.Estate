@@ -16,10 +16,7 @@ import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstatePropertyAdapter;
 
 public class EstateListActivity extends BaseFilterModelListActivity<EstatePropertyModel> {
-    @Override
-    protected int getResourceLayout() {
-        return R.layout.activity_estate_list;
-    }
+
 
     @Override
     protected void onCreated() {
