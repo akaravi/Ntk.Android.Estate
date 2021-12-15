@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
-def BaseVersion = '1.5.51'
+def BaseVersion = '1.5.52'
 def incrementalVersion = '2'
 android {
     compileSdkVersion 31
@@ -128,7 +128,7 @@ dependencies {
     //for datePicker
     implementation 'com.github.idindevelop:PersianMaterialDateTimePicker:2.1.1'
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
-    api project(path: ':baseActivity')
-//    api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
+//    api project(path: ':baseActivity')
+    api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
 }
 
