@@ -7,88 +7,90 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false"
-    app:edMenuBackground="@color/colorAccentDark"
+    app:edMenuBackground="@color/colorPrimary"
     app:edMenuSize="220dp"
     app:edPosition="2">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.MainActivity2">
 
-    <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
-        android:id="@+id/floating_top_bar_navigation"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginRight="18dp"
-        android:background="@drawable/rounded_rect_bg"
-        android:elevation="8dp"
-        android:padding="16dp"
-        app:bnc_mode="packed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/l_item_search"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        tools:context=".activity.MainActivity2">
+
+        <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
+            android:id="@+id/floating_top_bar_navigation"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:bt_colorActive="@color/tab_blue_active"
-            app:bt_colorInactive="@color/tab_blue_inactive"
-            app:bt_icon="@drawable/ic_search"
-            app:bt_shape="@drawable/rounded_rect_white"
-            app:bt_shapeColor="@color/tab_blue_bg_light"
-            app:bt_title="جدید ترین" />
+            android:layout_marginStart="18dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginRight="18dp"
+            android:background="@drawable/rounded_rect_bg"
+            android:elevation="8dp"
+            android:padding="16dp"
+            app:bnc_mode="packed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/l_item_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:bt_active="true"
-            app:bt_colorActive="@color/tab_red_active"
-            app:bt_colorInactive="@color/tab_red_inactive"
-            app:bt_icon="@drawable/ic_like_comment"
-            app:bt_shape="@drawable/rounded_rect"
-            app:bt_shapeColor="@color/tab_red_bg_light"
-            app:bt_title="پربازدید ترین" />
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"     app:bt_active="true"
+                app:bt_colorActive="@color/tab_blue_active"
+                app:bt_colorInactive="@color/tab_blue_inactive"
+                app:bt_icon="@drawable/ic_search"
+                app:bt_shape="@drawable/rounded_rect_white"
+                app:bt_shapeColor="@color/tab_blue_bg_light"
+                app:bt_title="جدید ترین" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:bt_colorActive="@color/tab_red_active"
+                app:bt_colorInactive="@color/tab_red_inactive"
+                app:bt_icon="@drawable/ic_like_comment"
+                app:bt_shape="@drawable/rounded_rect"
+                app:bt_shapeColor="@color/tab_red_bg_light"
+                app:bt_title="پربازدید ترین" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_colorActive="@color/tab_green_active"
+                app:bt_colorInactive="@color/tab_green_inactive"
+
+                app:bt_shape="@drawable/rounded_rect_white"   app:bt_icon="@drawable/ic_like"
+                app:bt_shapeColor="@color/tab_green_bg_light"
+                app:bt_title="ویژه" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_profile_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_colorActive="@color/tab_blue_grey_active"
+                app:bt_colorInactive="@color/tab_blue_grey_inactive"
+                app:bt_icon="@drawable/ic_menu"
+                app:bt_shape="@drawable/rounded_rect_white"
+                app:bt_shapeColor="@color/tab_blue_grey_bg_light"
+                app:bt_title="منو" />
 
 
+        </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
 
-        <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/l_item_profile_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:bt_colorActive="@color/tab_blue_grey_active"
-            app:bt_colorInactive="@color/tab_blue_grey_inactive"
-            app:bt_icon="@drawable/ic_like"
-            app:bt_shape="@drawable/rounded_rect_white"
-            app:bt_shapeColor="@color/tab_blue_grey_bg_light"
-            app:bt_title="ویژه" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/l_item_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:bt_colorActive="@color/tab_green_active"
-            app:bt_colorInactive="@color/tab_green_inactive"
-            app:bt_icon="@drawable/ic_menu_90"
-            app:bt_shape="@drawable/rounded_rect_white"
-            app:bt_shapeColor="@color/tab_green_bg_light"
-            app:bt_title="منو" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
     <include layout="@layout/drawer_theme_1" />
 </com.mxn.soul.flowingdrawer_core.FlowingDrawer>

@@ -25,6 +25,7 @@ import ntk.android.estate.fragment.MainActivity2Fragment;
 
 public class MainActivity2 extends BaseMainActivity {
     ArrayList<BaseFragment> fragments = new ArrayList<>();
+    private int lastSelected=0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,19 +37,32 @@ public class MainActivity2 extends BaseMainActivity {
         drawerRecycler.setAdapter(adapter);
         drawerRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         drawerRecycler.setHasFixedSize(true);
-        fragments.add(MainActivity2Fragment.newInstance((row1), R.color.tab_red_inactive));
-        fragments.add(MainActivity2Fragment.newInstance((row2), R.color.tab_blue_inactive));
-        fragments.add(MainActivity2Fragment.newInstance((row3), R.color.tab_blue_grey_inactive));
-        fragments.add(MainActivity2Fragment.newInstance((row4), R.color.tab_green_inactive));
+        fragments.add(MainActivity2Fragment.newInstance((row1), R.color.tab_blue_inactive));
+        fragments.add(MainActivity2Fragment.newInstance((row2), R.color.tab_red_inactive));
+        fragments.add(MainActivity2Fragment.newInstance((row3), R.color.tab_green_inactive));
+
+
         ViewPager2 pager = findViewById(R.id.view_pager);
         pager.setAdapter(new MainPagerAdapter(this));
+        pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                BubbleNavigationConstraintView menu = findViewById(R.id.floating_top_bar_navigation);
+                menu.setCurrentActiveItem(position);
+            }
+        });
         BubbleNavigationConstraintView topMenu = findViewById(R.id.floating_top_bar_navigation);
         topMenu.setNavigationChangeListener((view, position) -> {
-            if (position>fragments.size() )
+            if (position<fragments.size() ) {
+                pager.setCurrentItem(position, true);
+                lastSelected=position;
+            }
+            else {
                 ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(true);
-            else
-            pager.setCurrentItem(position, true);
-        });
+                topMenu.setCurrentActiveItem(lastSelected);
+            }
+            });
     }
 
     private class MainPagerAdapter extends FragmentStateAdapter {
