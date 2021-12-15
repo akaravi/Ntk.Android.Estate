@@ -32,20 +32,14 @@ import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstatePropertyAdapter;
 import ntk.android.estate.adapter.drawer.DrawerAdapter;
 
-public class MainActivity extends AbstractMainActivity {
-    FilterModel row1;
-    FilterModel row2;
-    FilterModel row3;
-    FilterModel row4;
-    FilterModel row5;
+public class MainActivity extends BaseMainActivity {
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems();
-//        startActivity(new Intent(this,NewEstateActivity.class));
-
         RecyclerView drawerRecycler = findViewById(R.id.RecyclerDrawer);
         DrawerAdapter adapter = new DrawerAdapter(this, menus, findViewById(R.id.floaingDrawer));
         drawerRecycler.setAdapter(adapter);
@@ -57,13 +51,9 @@ public class MainActivity extends AbstractMainActivity {
         //click on humberger
         ImageView menu = findViewById(R.id.img_drawable_back);
         menu.setImageResource(R.drawable.hamburger);
-        menu.setOnClickListener(v -> ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(false));
+        menu.setOnClickListener(v -> ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(true));
 
-        row1=new FilterModel();
-        row2=new FilterModel();
-        row3=new FilterModel();
-        row4=new FilterModel();
-        row5=new FilterModel();
+
         getdata(row1,findViewById(R.id.rc1));
         getdata(row2,findViewById(R.id.rc2));
         getdata(row3,findViewById(R.id.rc3));

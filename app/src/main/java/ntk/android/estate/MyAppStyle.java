@@ -7,6 +7,7 @@ import ntk.android.base.view.ThemeNameEnum;
 import ntk.android.base.view.ViewController;
 import ntk.android.estate.activity.EstateListActivity;
 import ntk.android.estate.activity.MainActivity;
+import ntk.android.estate.activity.MainActivity2;
 
 public class MyAppStyle extends ApplicationStyle {
 
@@ -30,7 +31,7 @@ public class MyAppStyle extends ApplicationStyle {
 
     @Override
     public Class<?> getMainActivity() {
-        return MainActivity.class;
+        return MainActivity2.class;
 //        if (theme == ThemeNameEnum.THEME4)
 //            return MainActivity_4.class;
 //        else if (theme == ThemeNameEnum.THEME3)

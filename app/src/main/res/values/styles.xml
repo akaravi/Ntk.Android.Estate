@@ -154,5 +154,14 @@
 
     </style>
 
+    <style name="main_activity_tab">
+        <item name="bt_colorActive">@color/colorAccentDark</item>
+        <item name="bt_colorInactive">@color/colorAccent</item>
+        <item name="bt_shape">@drawable/rounded_rect</item>
+        <item name="bt_shapeColor">@color/colorPrimaryDark</item>
+    </style>
+
+
+
 
 </resources>

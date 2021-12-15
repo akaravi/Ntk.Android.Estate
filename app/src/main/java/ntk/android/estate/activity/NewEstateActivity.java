@@ -53,8 +53,6 @@ public class NewEstateActivity extends BaseActivity {
         });
         setFont();
         showFragment1();
-//        Intent i = new Intent(this, AuthWithSmsActivity.class);
-//        startActivity(i);
     }
 
     private void setFont() {
@@ -65,10 +63,12 @@ public class NewEstateActivity extends BaseActivity {
         ((MaterialButton) findViewById(R.id.addNewBtn)).setTypeface(t1);
     }
 
+
     private void showFragment1() {
         stepNumber = 1;
-        title.setText("مشخصات آگهی");
+        title.setText("مشخصات ملک");
         findViewById(R.id.backBtn).setVisibility(View.GONE);
+
         NewEstateFragment1 fragment = new NewEstateFragment1();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
@@ -80,7 +80,7 @@ public class NewEstateActivity extends BaseActivity {
 
     private void showFragment2() {
         stepNumber = 2;
-        title.setText("مشخصات ملک");
+        title.setText("جزئیات و مشخصات");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
         NewEstateFragment2 fragment = new NewEstateFragment2();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
@@ -93,7 +93,7 @@ public class NewEstateActivity extends BaseActivity {
 
     private void showFragment3() {
         stepNumber = 3;
-        title.setText("جزئیات و مشخصات");
+        title.setText("مشخصات آگهی");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
         NewEstateFragment3 fragment = new NewEstateFragment3();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
@@ -151,7 +151,8 @@ public class NewEstateActivity extends BaseActivity {
                     Toasty.success(NewEstateActivity.this, "ملک شما ثبت شد").show();
                     finish();
                 } else {
-                    Toasty.error(NewEstateActivity.this, "هنگام ثبت خطا رخ داد مجددا تلاش نمایید").show();
+                    Toasty.error(NewEstateActivity.this, "هنگام ثبت خطا رخ داد مجددا تلاش نمایید" + "\n+" +
+                            response.ErrorMessage).show();
                     showContent();
                 }
             }

@@ -127,6 +127,7 @@ dependencies {
     implementation 'com.github.idindevelop:FlowLayoutManager:2.0'
     //for datePicker
     implementation 'com.github.idindevelop:PersianMaterialDateTimePicker:2.1.1'
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
     api project(path: ':baseActivity')
 //    api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
 }

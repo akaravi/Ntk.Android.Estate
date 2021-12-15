@@ -53,8 +53,8 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
         loadImage(item.LinkMainImageIdSrc, holder.image);
         holder.setPictureCount(item);
         holder.setProperties(item);
-        holder.location.setText( item.LinkLocationIdTitle);
-        holder.locationParent.setText( item.LinkLocationIdParentTitle);
+        holder.location.setText(item.LinkLocationIdTitle);
+        holder.locationParent.setText(item.LinkLocationIdParentTitle);
         if (item.IsFavorite)
             holder.favorite.setImageResource(R.drawable.ic_fav_full);
         else
@@ -188,8 +188,13 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
         }
 
         public void setProperties(EstatePropertyModel item) {
-            property1.setText(item.PropertyTypeLanduse.Title);
-            if (item.PropertyTypeLanduse.TitlePartition.equals("") || item.PropertyTypeLanduse.TitlePartition.equals("---"))
+            if (item.PropertyTypeLanduse != null)
+                property1.setText(item.PropertyTypeLanduse.Title);
+            else
+                property1.setText("");
+            if (item.PropertyTypeLanduse == null
+                    || item.PropertyTypeLanduse.TitlePartition.equals("")
+                    || item.PropertyTypeLanduse.TitlePartition.equals("---"))
                 property2.setVisibility(View.GONE);
             else {
                 property2.setText(item.PropertyTypeLanduse.TitlePartition + " : " + item.Partition);

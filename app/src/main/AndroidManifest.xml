@@ -50,6 +50,7 @@
         <activity android:name=".activity.GetLocationActivity" />
         <activity android:name=".activity.MyEstateActivity" />
         <activity android:name=".activity.FavoriteEstateListActivity" />
+        <activity android:name=".activity.MainActivity2" />
 
 
         <provider
