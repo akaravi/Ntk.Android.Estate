@@ -27,7 +27,7 @@ import ntk.android.estate.activity.EstateDetailActivity;
 public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyModel, EstatePropertyAdapter.VH> {
     Date now;
 
-    public EstatePropertyAdapter(Context c, List<EstatePropertyModel> models) {
+    public EstatePropertyAdapter( List<EstatePropertyModel> models) {
         super(models);
         now = AppUtill.Now();
     }

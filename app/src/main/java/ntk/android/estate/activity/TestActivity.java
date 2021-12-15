@@ -20,7 +20,7 @@ public class TestActivity extends NewEstateActivity {
         setContentView(R.layout.abstraction_list);
         RecyclerView rc = findViewById(R.id.recycler);
         rc.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        EstatePropertyAdapter adapter = new EstatePropertyAdapter(this, Arrays.asList(new EstatePropertyModel(), new EstatePropertyModel()));
+        EstatePropertyAdapter adapter = new EstatePropertyAdapter( Arrays.asList(new EstatePropertyModel(), new EstatePropertyModel()));
         rc.setAdapter(adapter);
     }
 }

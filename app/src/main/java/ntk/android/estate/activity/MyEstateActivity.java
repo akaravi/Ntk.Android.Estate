@@ -25,7 +25,7 @@ public class MyEstateActivity extends BaseFilterModelListActivity<EstateProperty
 
     @Override
     public RecyclerView.Adapter createAdapter() {
-        return new EstatePropertyAdapter(this, models);
+        return new EstatePropertyAdapter(models);
     }
 
     @Override

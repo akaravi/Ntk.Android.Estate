@@ -169,7 +169,7 @@ public class EstateDetailActivity extends BaseActivity {
 
                     @Override
                     protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
-                        EstatePropertyAdapter adapter = new EstatePropertyAdapter(EstateDetailActivity.this, response.ListItems);
+                        EstatePropertyAdapter adapter = new EstatePropertyAdapter( response.ListItems);
                         RecyclerView rc = findViewById(R.id.RcAllEstate);
                         rc.setAdapter(adapter);
                         rc.setLayoutManager(new LinearLayoutManager(EstateDetailActivity.this, RecyclerView.HORIZONTAL, false));

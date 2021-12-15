@@ -30,6 +30,7 @@ import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstatePropertyAdapter;
+import ntk.android.estate.adapter.HorizontalEstatePropertyAdapter;
 import ntk.android.estate.adapter.drawer.DrawerAdapter;
 
 public class MainActivity extends BaseMainActivity {
@@ -70,7 +71,7 @@ public class MainActivity extends BaseMainActivity {
                         @Override
                         protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
                             switcher.showContentView();
-                            EstatePropertyAdapter adapter = new EstatePropertyAdapter(MainActivity.this, response.ListItems);
+                            HorizontalEstatePropertyAdapter adapter = new HorizontalEstatePropertyAdapter( response.ListItems);
                             rc.setAdapter(adapter);
                             rc.setLayoutManager(new LinearLayoutManager(MainActivity.this, RecyclerView.HORIZONTAL, false));
                             SnapHelper snapHelper = new PagerSnapHelper();

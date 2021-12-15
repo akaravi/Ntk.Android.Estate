@@ -25,7 +25,7 @@ public class FavoriteEstateListActivity extends BaseFilterModelListActivity<Esta
 
     @Override
     public RecyclerView.Adapter createAdapter() {
-        return new EstatePropertyAdapter(this, models);
+        return new EstatePropertyAdapter( models);
     }
     @Override
     public Function<FilterModel, Observable<ErrorException<EstatePropertyModel>>> getService() {
