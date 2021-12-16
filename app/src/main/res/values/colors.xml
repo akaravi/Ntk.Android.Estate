@@ -20,7 +20,7 @@
     <color name="gray_light">#828282</color>
     <color name="semiGray">#79828282</color>
 
-  <!--for menu-->
+    <!--for main activity 2-->
     <color name="tab_red_active">#f44336</color>
     <color name="tab_purple_active">#9c27b0</color>
     <color name="tab_blue_active">#03a9f4</color>
@@ -49,4 +49,11 @@
     <color name="tab_yellow_bg_light">#fffde7</color>
     <color name="tab_orange_bg_light">#fff3e0</color>
     <color name="tab_grey_bg_light">#fafafa</color>
+    <!--for main activity 3-->
+    <color name="main3_toolbar_icon_bg">#1EB9E1</color>
+    <color name="main3_toolbar_icon">#71E9FE</color>
+    <color name="main3_toolbar_text">#535459</color>
+    <color name="main3_toolbar_hint">#C3C4C8</color>
+    <color name="main3_bg">#EDEFF6</color>
+    <color name="main3_card_bg">#FAFAFA</color>
 </resources>

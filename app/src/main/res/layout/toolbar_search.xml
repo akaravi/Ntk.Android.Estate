@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="4dp">
+
+    <ImageView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/circle_main3"
+        android:padding="10dp"
+        android:src="@drawable/main_share"
+        app:tint="@color/main3_toolbar_icon" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+       app:contentPadding="8dp"
+        app:cardBackgroundColor="@color/main3_card_bg"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:padding="4dp"
+                android:hint="جست و جو ..."
+                android:textColorHint="@color/main3_toolbar_hint"
+                android:textColor="@color/main3_toolbar_text"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_margin="2dp"
+                app:srcCompat="@drawable/main3_search"
+                app:tint="@color/main3_toolbar_text" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/circle_main3"
+        android:padding="8dp"
+        app:srcCompat="@drawable/ic_menu"
+        app:tint="@color/main3_toolbar_icon" />
+</LinearLayout>

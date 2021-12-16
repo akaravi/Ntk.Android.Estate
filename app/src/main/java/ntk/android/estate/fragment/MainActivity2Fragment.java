@@ -25,8 +25,7 @@ import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.estate.R;
-import ntk.android.estate.adapter.EstatePropertyAdapter;
-import ntk.android.estate.adapter.HorizontalEstatePropertyAdapter;
+import ntk.android.estate.adapter.MainEstatePropertyAdapter;
 
 public class MainActivity2Fragment extends BaseFragment {
     FilterModel filter;
@@ -62,7 +61,7 @@ public class MainActivity2Fragment extends BaseFragment {
 
                         @Override
                         protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
-                            HorizontalEstatePropertyAdapter adapter = new HorizontalEstatePropertyAdapter( response.ListItems);
+                            MainEstatePropertyAdapter adapter = new MainEstatePropertyAdapter( response.ListItems);
                             RecyclerView rc = findViewById(R.id.rc);
                             rc.setAdapter(adapter);
                             rc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));

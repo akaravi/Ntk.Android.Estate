@@ -11,9 +11,9 @@ import java.util.List;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.estate.R;
 
-public class HorizontalEstatePropertyAdapter extends EstatePropertyAdapter{
+public class MainEstatePropertyAdapter extends EstatePropertyAdapter{
     int width;
-    public HorizontalEstatePropertyAdapter( List<EstatePropertyModel> models) {
+    public MainEstatePropertyAdapter(List<EstatePropertyModel> models) {
         super( models);
         width=getScreenWidth();
     }

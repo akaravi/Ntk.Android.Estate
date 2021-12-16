@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/drawable/circle_accent.xml" value="0.14635416666666667" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/drawable/circle_gray.xml" value="0.14635416666666667" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/drawable/ic_arrow.xml" value="0.3638888888888889" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/drawable/ic_arrow_rotate.xml" value="0.3638888888888889" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/abstraction_list.xml" value="0.536" />
@@ -24,6 +26,7 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/_row_recycler_round_bottom.xml" value="0.23692307692307693" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/background_small.xml" value="0.14010416666666667" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/button_accent.xml" value="0.14010416666666667" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/circle_main3.xml" value="0.14635416666666667" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/curve_8_gray_image_bg.xml" value="0.2740740740740741" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/curve_normal_archive_bg.xml" value="0.2740740740740741" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/curve_white_border_red_bg.xml" value="0.240625" />
@@ -32,6 +35,8 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/gray_border_white_bg.xml" value="0.240625" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/ic_menu.xml" value="0.21145833333333333" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/ic_occasion_left_to_right.xml" value="0.2740740740740741" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/main3_news_bg.xml" value="0.14635416666666667" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/main3_news_tv_bg.xml" value="0.14635416666666667" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/rounded.xml" value="0.13541666666666666" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/rounded_rect_bg.xml" value="0.21145833333333333" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/drawable/rounded_rect_white.xml" value="0.2833333333333333" />
@@ -54,6 +59,7 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/activity_get_location.xml" value="0.264" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/activity_main.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/activity_main2.xml" value="0.3007246376811594" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/activity_main3.xml" value="0.2" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/activity_main_2.xml" value="0.3007246376811594" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/activity_new_estate.xml" value="0.17426545086119555" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/app_base_empty.xml" value="0.18110435663627153" />
@@ -71,6 +77,7 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/item_chips_selecable.xml" value="0.11927083333333334" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/item_grid_menu.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/item_main_list_4.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/main3_estate_type.xml" value="0.13020833333333334" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/main_page_btn.xml" value="0.17426545086119555" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/property_detail_group_selector.xml" value="0.14945652173913043" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_property_contract_edit.xml" value="0.264" />
@@ -85,12 +92,16 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_blog.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_contract.xml" value="0.4" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_estateproperty.xml" value="0.264" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_estateproperty_main3.xml" value="0.13020833333333334" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_house.xml" value="0.18110435663627153" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_main3_news.xml" value="0.13020833333333334" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_news.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_pool_plus_minse.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_tab.xml" value="0.12273550724637682" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/search_property_detail_group_selector.xml" value="0.26614583333333336" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/sub_estate_contract_selector.xml" value="0.38333333333333336" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/sub_mainactivity3_row.xml" value="0.13020833333333334" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/toolbar_search.xml" value="0.3584905660377358" />
         <entry key="..\:/Users/IdinDeveloper/.gradle/caches/transforms-3/720b55f77d3018480fa00b36135ec169/transformed/jetified-bubblenavigation-1.0.7/res/drawable/rounded_rect.xml" value="0.38256410256410256" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/base_toolbar_back.xml" value="0.18072916666666666" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/drawer_theme_1_item.xml" value="0.14513677811550152" />
@@ -110,5 +121,5 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

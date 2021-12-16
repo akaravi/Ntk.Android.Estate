@@ -15,8 +15,6 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import java.util.List;
 
-import ntk.android.base.activity.BaseActivity;
-import ntk.android.base.activity.abstraction.AbstractMainActivity;
 import ntk.android.base.appclass.AboutUsClass;
 import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.GenericErrors;
@@ -29,8 +27,7 @@ import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
-import ntk.android.estate.adapter.EstatePropertyAdapter;
-import ntk.android.estate.adapter.HorizontalEstatePropertyAdapter;
+import ntk.android.estate.adapter.MainEstatePropertyAdapter;
 import ntk.android.estate.adapter.drawer.DrawerAdapter;
 
 public class MainActivity extends BaseMainActivity {
@@ -71,7 +68,7 @@ public class MainActivity extends BaseMainActivity {
                         @Override
                         protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
                             switcher.showContentView();
-                            HorizontalEstatePropertyAdapter adapter = new HorizontalEstatePropertyAdapter( response.ListItems);
+                            MainEstatePropertyAdapter adapter = new MainEstatePropertyAdapter( response.ListItems);
                             rc.setAdapter(adapter);
                             rc.setLayoutManager(new LinearLayoutManager(MainActivity.this, RecyclerView.HORIZONTAL, false));
                             SnapHelper snapHelper = new PagerSnapHelper();
