@@ -12,12 +12,13 @@ import java.util.List;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyTypeUsageModel;
 import ntk.android.estate.R;
 
-class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyModel, Main3EstatePropertyAdapter.VH> {
+public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyTypeUsageModel, Main3EstatePropertyAdapter.VH> {
     int width;
 
-    public Main3EstatePropertyAdapter(List<EstatePropertyModel> list) {
+    public Main3EstatePropertyAdapter(List<EstatePropertyTypeUsageModel> list) {
         super(list);
         int w = getScreenWidth();
         width = w / 2 - (w / 10);
@@ -33,7 +34,8 @@ class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyModel
 
     @Override
     public void onBindViewHolder(@NonNull Main3EstatePropertyAdapter.VH holder, int position) {
-
+        loadImage(getItem(position).LinkMainImageIdSrc,holder.image);
+        holder.title.setText(getItem(position).Title);
     }
 
     public class VH extends RecyclerView.ViewHolder {

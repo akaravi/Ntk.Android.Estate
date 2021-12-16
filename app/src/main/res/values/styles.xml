@@ -162,19 +162,23 @@
     </style>
 
     <style name="main_activity3_Title">
-        <item name="android:padding">12dp</item>
-        <item name="android:textColor">@color/colorTextPrimary</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/main3_primary_text</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginRight">16dp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="main_activity3_SeeMore">
-        <item name="android:padding">12dp</item>
-        <item name="android:textColor">@color/colorTextPrimary</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/main3_secondary_text</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">16dp</item>
         <item name="android:text">مشاهده همه</item>
     </style>
 
 
+    <color name="main3_primary_text">#000</color>
+    <color name="main3_secondary_text">#6D90A4</color>
 </resources>
