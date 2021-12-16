@@ -1,6 +1,5 @@
 package ntk.android.estate.adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.View;
@@ -61,7 +60,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
             holder.favorite.setImageResource(R.drawable.ic_fav);
     }
 
-    public class VH extends RecyclerView.ViewHolder {
+    public static class VH extends RecyclerView.ViewHolder {
         TextView title;
         TextView location;
         TextView locationParent;
@@ -81,6 +80,10 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
 
         public VH(@NonNull View itemView) {
             super(itemView);
+          creating();
+        }
+
+        protected void creating() {
             title = itemView.findViewById(R.id.txtTitle);
             location = itemView.findViewById(R.id.txtArea);
             locationParent = itemView.findViewById(R.id.txtAreaParent);

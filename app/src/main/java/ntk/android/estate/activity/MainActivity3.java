@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,19 +13,23 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import ntk.android.base.config.ErrorExceptionObserver;
+import ntk.android.base.config.GenericErrors;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
-import ntk.android.base.entitymodel.estate.EstatePropertyTypeUsageModel;
 import ntk.android.base.entitymodel.news.NewsContentModel;
+import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.services.estate.EstatePropertyTypeLanduseService;
-import ntk.android.base.services.estate.EstatePropertyTypeUsageService;
 import ntk.android.base.services.news.NewsContentService;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.Main3EstateLandUseAdapter;
+import ntk.android.estate.adapter.Main3EstatePropertyAdapter;
 import ntk.android.estate.adapter.Main3NewsAdapter;
+import ntk.android.estate.adapter.MainEstatePropertyAdapter;
 
 public class MainActivity3 extends BaseMainActivity {
     RecyclerView Slider;
@@ -36,7 +41,34 @@ public class MainActivity3 extends BaseMainActivity {
         Slider = findViewById(R.id.rcNews);
         HandelSlider();
         getEstateProperty();
+        getData(row1, findViewById(R.id.row1));
+        getData(row2, findViewById(R.id.row2));
+        getData(row3, findViewById(R.id.row3));
     }
+
+    private void getData(FilterModel filter, View view) {
+        ServiceExecute.execute(new EstatePropertyService(this).getAll(filter))
+                .subscribe(new ErrorExceptionObserver<EstatePropertyModel>(switcher::showErrorView) {
+
+                    @Override
+                    protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
+                        RecyclerView rc = view.findViewById(R.id.rc);
+                        rc.setAdapter(new Main3EstatePropertyAdapter(response.ListItems));
+                        rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
+//                        SnapHelper snapHelper = new PagerSnapHelper();
+//                        snapHelper.attachToRecyclerView(rc);
+                        ViewCompat.setNestedScrollingEnabled(rc, false);
+                    }
+
+                    @Override
+                    protected Runnable tryAgainMethod() {
+                        return () -> getData(filter, view);
+                    }
+                });
+
+
+    }
+
 
     private void getEstateProperty() {
         ServiceExecute.execute(new EstatePropertyTypeLanduseService(this).getAll(new FilterModel().setRowPerPage(100)))

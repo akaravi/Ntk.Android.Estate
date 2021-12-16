@@ -4,7 +4,6 @@
     android:id="@+id/floaingDrawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false"
     android:clipToPadding="false"
     app:edMenuBackground="@color/colorAccentDark"
     app:edMenuSize="220dp"
@@ -59,8 +58,7 @@
                             style="@style/main_activity3_SeeMore"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                          />
+                            android:layout_alignParentLeft="true" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/landUseAdapter"
@@ -73,12 +71,19 @@
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
-                <include layout="@layout/sub_mainactivity3_row" />
+                <include
+                    android:id="@+id/row1"
+
+                    layout="@layout/sub_main_activity3_row" />
 
 
-                <include layout="@layout/sub_mainactivity3_row" />
+                <include
+                    android:id="@+id/row2"
+                    layout="@layout/sub_main_activity3_row" />
 
-                <include layout="@layout/sub_mainactivity3_row" />
+                <include
+                    android:id="@+id/row3"
+                    layout="@layout/sub_main_activity3_row" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
