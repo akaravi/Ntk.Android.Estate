@@ -34,6 +34,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcNews"
+
                     android:layout_width="match_parent"
                     android:layout_height="240dp" />
 
@@ -89,5 +90,6 @@
 
     </LinearLayout>
 
-    <include layout="@layout/estate_menu_1" />
+    <include layout="@layout/estate_menu_1"
+       />
 </com.mxn.soul.flowingdrawer_core.FlowingDrawer>

@@ -33,6 +33,7 @@ import ntk.android.estate.adapter.Main3EstateLandUseAdapter;
 import ntk.android.estate.adapter.Main3EstatePropertyAdapter;
 import ntk.android.estate.adapter.Main3NewsAdapter;
 import ntk.android.estate.adapter.MainEstatePropertyAdapter;
+import ntk.android.estate.adapter.drawer.Drawer3Adapter;
 import ntk.android.estate.adapter.drawer.DrawerAdapter;
 
 public class MainActivity3 extends BaseMainActivity {
@@ -46,7 +47,7 @@ public class MainActivity3 extends BaseMainActivity {
         //show drawer
         List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems();
         RecyclerView drawerRecycler = findViewById(R.id.RecyclerDrawer);
-        DrawerAdapter adapter = new DrawerAdapter(this, menus, findViewById(R.id.floaingDrawer));
+        Drawer3Adapter adapter = new Drawer3Adapter(this, menus, findViewById(R.id.floaingDrawer));
         drawerRecycler.setAdapter(adapter);
         drawerRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         drawerRecycler.setHasFixedSize(true);
