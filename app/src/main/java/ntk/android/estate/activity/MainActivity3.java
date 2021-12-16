@@ -11,12 +11,15 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import java.util.List;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.GenericErrors;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
+import ntk.android.base.dtomodel.theme.DrawerChildThemeDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
@@ -30,6 +33,7 @@ import ntk.android.estate.adapter.Main3EstateLandUseAdapter;
 import ntk.android.estate.adapter.Main3EstatePropertyAdapter;
 import ntk.android.estate.adapter.Main3NewsAdapter;
 import ntk.android.estate.adapter.MainEstatePropertyAdapter;
+import ntk.android.estate.adapter.drawer.DrawerAdapter;
 
 public class MainActivity3 extends BaseMainActivity {
     RecyclerView Slider;
@@ -39,8 +43,18 @@ public class MainActivity3 extends BaseMainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
         Slider = findViewById(R.id.rcNews);
+        //show drawer
+        List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems();
+        RecyclerView drawerRecycler = findViewById(R.id.RecyclerDrawer);
+        DrawerAdapter adapter = new DrawerAdapter(this, menus, findViewById(R.id.floaingDrawer));
+        drawerRecycler.setAdapter(adapter);
+        drawerRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        drawerRecycler.setHasFixedSize(true);
+        //get news
         HandelSlider();
+        //get landUsed property
         getEstateProperty();
+        //get row data
         getData(row1, findViewById(R.id.row1));
         getData(row2, findViewById(R.id.row2));
         getData(row3, findViewById(R.id.row3));
