@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -69,6 +71,9 @@ public class MainActivity3 extends BaseMainActivity {
         TextView seeMore = (TextView) findViewById(R.id.seeMore);
         //see landUse list on new activity on click
         seeMore.setOnClickListener(view -> startActivity(new Intent(MainActivity3.this, LandUsedListActivity.class)));
+        //click on humberger
+        findViewById(R.id.img_menu).setOnClickListener(v -> ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(true));
+        findViewById(R.id.shareQrCode).setOnClickListener(v -> onInviteMethod());
 
         TextView rowTitle1 = findViewById(R.id.row1).findViewById(R.id.title);
         TextView rowSeeMore1 = findViewById(R.id.row1).findViewById(R.id.seeMore);
@@ -77,9 +82,15 @@ public class MainActivity3 extends BaseMainActivity {
         TextView rowTitle3 = findViewById(R.id.row3).findViewById(R.id.title);
         TextView rowSeeMore3 = findViewById(R.id.row3).findViewById(R.id.seeMore);
         //special list
-        rowSeeMore1.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this,row1));
-        rowSeeMore2.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this,row2));
-        rowSeeMore3.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this,row3));
+        String title1 = "جدیدترین ";
+        String title2 = "پربازدیدترین ";
+        String title3 = "اجاره روزانه ";
+        rowTitle1.setText(title1);
+        rowTitle2.setText(title2);
+        rowTitle3.setText(title3);
+        rowSeeMore1.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this, row1, title1));
+        rowSeeMore2.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this, row2, title2));
+        rowSeeMore3.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this, row3, title3));
 
         //set font
         Typeface t1 = FontManager.T1_Typeface(this);
@@ -89,9 +100,9 @@ public class MainActivity3 extends BaseMainActivity {
         seeMore.setTypeface(t1);
         rowTitle1.setTypeface(t1);
         rowSeeMore1.setTypeface(t1);
-       rowTitle2.setTypeface(t1);
+        rowTitle2.setTypeface(t1);
         rowSeeMore2.setTypeface(t1);
-       rowTitle3.setTypeface(t1);
+        rowTitle3.setTypeface(t1);
         rowSeeMore3.setTypeface(t1);
 
 

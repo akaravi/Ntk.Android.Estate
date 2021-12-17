@@ -2,12 +2,12 @@ package ntk.android.estate.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.reactivex.Observable;
 import java9.util.function.Function;
+import ntk.android.base.Extras;
 import ntk.android.base.activity.common.BaseFilterModelListActivity;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
@@ -25,11 +25,9 @@ public class EstateListActivity extends BaseFilterModelListActivity<EstateProper
     }
 
 
-
     @Override
     protected void onCreated() {
-        super.onCreated();
-        ((TextView) findViewById(R.id.lblTitle)).setText(R.string.per_estate);
+            LblTitle.setText(R.string.per_estate);
     }
 
     @Override
