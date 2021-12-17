@@ -22,7 +22,7 @@ public class EstateLandUsedAdapter extends BaseRecyclerAdapter<EstatePropertyTyp
     public EstateLandUsedAdapter(List<EstatePropertyTypeLanduseModel> list) {
         super(list);
         int w = getScreenWidth();
-        width = w - (w / 10);
+        width = w/3 - (w / 12);
     }
 
     @NonNull

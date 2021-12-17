@@ -42,6 +42,6 @@ public class LandUsedListActivity extends BaseFilterModelListActivity<EstateProp
 
     @Override
     public RecyclerView.LayoutManager getRvLayoutManager() {
-        return new GridLayoutManager(this,2);
+        return new GridLayoutManager(this,3);
     }
 }
