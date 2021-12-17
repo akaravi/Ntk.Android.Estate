@@ -1,7 +1,11 @@
 package ntk.android.estate.activity;
 
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +20,6 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.config.ErrorExceptionObserver;
-import ntk.android.base.config.GenericErrors;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.dtomodel.theme.DrawerChildThemeDtoModel;
@@ -28,11 +31,11 @@ import ntk.android.base.entitymodel.news.NewsContentModel;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.services.estate.EstatePropertyTypeLanduseService;
 import ntk.android.base.services.news.NewsContentService;
+import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.Main3EstateLandUseAdapter;
 import ntk.android.estate.adapter.Main3EstatePropertyAdapter;
 import ntk.android.estate.adapter.Main3NewsAdapter;
-import ntk.android.estate.adapter.MainEstatePropertyAdapter;
 import ntk.android.estate.adapter.drawer.Drawer3Adapter;
 import ntk.android.estate.adapter.drawer.DrawerAdapter;
 
@@ -51,14 +54,42 @@ public class MainActivity3 extends BaseMainActivity {
         drawerRecycler.setAdapter(adapter);
         drawerRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         drawerRecycler.setHasFixedSize(true);
+        init();
         //get news
         HandelSlider();
         //get landUsed property
-        getEstateProperty();
+        getLandUsedProperty();
         //get row data
         getData(row1, findViewById(R.id.row1));
         getData(row2, findViewById(R.id.row2));
         getData(row3, findViewById(R.id.row3));
+    }
+
+    private void init() {
+        TextView seeMore = (TextView) findViewById(R.id.seeMore);
+        //see landUse list on new activity on click
+        seeMore.setOnClickListener(view -> startActivity(new Intent(MainActivity3.this, LandUsedListActivity.class)));
+        TextView rowTitle1 = findViewById(R.id.row1).findViewById(R.id.title);
+        TextView rowSeeMore1 = findViewById(R.id.row1).findViewById(R.id.seeMore);
+        TextView rowTitle2 = findViewById(R.id.row2).findViewById(R.id.title);
+        TextView rowSeeMore2 = findViewById(R.id.row2).findViewById(R.id.seeMore);
+        TextView rowTitle3 = findViewById(R.id.row3).findViewById(R.id.title);
+        TextView rowSeeMore3 = findViewById(R.id.row3).findViewById(R.id.seeMore);
+
+        //set font
+        Typeface t1 = FontManager.T1_Typeface(this);
+        ((EditText) findViewById(R.id.searchEt)).setTypeface(t1);
+        ((TextView) findViewById(R.id.title1)).setTypeface(t1);
+
+        seeMore.setTypeface(t1);
+        rowTitle1.setTypeface(t1);
+        rowSeeMore1.setTypeface(t1);
+       rowTitle2.setTypeface(t1);
+        rowSeeMore2.setTypeface(t1);
+       rowTitle3.setTypeface(t1);
+        rowSeeMore3.setTypeface(t1);
+
+
     }
 
     private void getData(FilterModel filter, View view) {
@@ -85,7 +116,7 @@ public class MainActivity3 extends BaseMainActivity {
     }
 
 
-    private void getEstateProperty() {
+    private void getLandUsedProperty() {
         ServiceExecute.execute(new EstatePropertyTypeLanduseService(this).getAll(new FilterModel().setRowPerPage(100)))
                 .subscribe(new NtkObserver<>() {
                     @Override

@@ -1,5 +1,6 @@
 package ntk.android.estate.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.widget.TextView;
 
@@ -11,12 +12,17 @@ import ntk.android.base.activity.common.BaseFilterModelListActivity;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstatePropertyAdapter;
 
 public class EstateListActivity extends BaseFilterModelListActivity<EstatePropertyModel> {
 
+
+    public static void START_NEW(Context context, EstatePropertyTypeLanduseModel item) {
+
+    }
 
     @Override
     protected void onCreated() {

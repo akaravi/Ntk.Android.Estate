@@ -16,23 +16,27 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.EstateListActivity;
 
-public class Main3EstateLandUseAdapter extends BaseRecyclerAdapter<EstatePropertyTypeLanduseModel, Main3EstateLandUseAdapter.VH> {
-    public Main3EstateLandUseAdapter(List<EstatePropertyTypeLanduseModel> list) {
+public class EstateLandUsedAdapter extends BaseRecyclerAdapter<EstatePropertyTypeLanduseModel, EstateLandUsedAdapter.VH> {
+    int width;
+
+    public EstateLandUsedAdapter(List<EstatePropertyTypeLanduseModel> list) {
         super(list);
+        int w = getScreenWidth();
+        width = w - (w / 10);
     }
 
     @NonNull
     @Override
-    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new VH(inflate(parent, R.layout.main3_estate_type));
+    public EstateLandUsedAdapter.VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new EstateLandUsedAdapter.VH(inflate(parent, R.layout.row_property_landused));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VH holder, int position) {
+    public void onBindViewHolder(@NonNull EstateLandUsedAdapter.VH holder, int position) {
         EstatePropertyTypeLanduseModel item = getItem(position);
-        loadImage(item.LinkMainImageIdSrc,holder.image);
+        loadImage(item.LinkMainImageIdSrc, holder.image);
         holder.title.setText(item.Title);
-        holder.itemView.setOnClickListener(view -> EstateListActivity.START_NEW(view.getContext(),item));
+        holder.itemView.setOnClickListener(view -> EstateListActivity.START_NEW(view.getContext(), item));
     }
 
     public class VH extends RecyclerView.ViewHolder {
@@ -42,9 +46,12 @@ public class Main3EstateLandUseAdapter extends BaseRecyclerAdapter<EstatePropert
         public VH(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.imgPhoto);
+            image.getLayoutParams().width=width;
+            image.getLayoutParams().height=width;
             title = itemView.findViewById(R.id.title);
             title.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
         }
     }
 }
+
 
