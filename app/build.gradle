@@ -74,6 +74,8 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     //for transition
     implementation "com.andkulikov:transitionseverywhere:2.1.0"
+    //for qrcode
+    implementation  'com.github.idindevelop:QRGenerator:1.0.1'
 
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
