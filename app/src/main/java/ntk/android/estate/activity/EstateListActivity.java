@@ -24,6 +24,8 @@ public class EstateListActivity extends BaseFilterModelListActivity<EstateProper
 
     }
 
+
+
     @Override
     protected void onCreated() {
         super.onCreated();
@@ -37,7 +39,7 @@ public class EstateListActivity extends BaseFilterModelListActivity<EstateProper
 
     @Override
     public RecyclerView.Adapter createAdapter() {
-        return new EstatePropertyAdapter( models);
+        return new EstatePropertyAdapter(models);
     }
 
     @Override

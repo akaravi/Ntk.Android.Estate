@@ -69,12 +69,17 @@ public class MainActivity3 extends BaseMainActivity {
         TextView seeMore = (TextView) findViewById(R.id.seeMore);
         //see landUse list on new activity on click
         seeMore.setOnClickListener(view -> startActivity(new Intent(MainActivity3.this, LandUsedListActivity.class)));
+
         TextView rowTitle1 = findViewById(R.id.row1).findViewById(R.id.title);
         TextView rowSeeMore1 = findViewById(R.id.row1).findViewById(R.id.seeMore);
         TextView rowTitle2 = findViewById(R.id.row2).findViewById(R.id.title);
         TextView rowSeeMore2 = findViewById(R.id.row2).findViewById(R.id.seeMore);
         TextView rowTitle3 = findViewById(R.id.row3).findViewById(R.id.title);
         TextView rowSeeMore3 = findViewById(R.id.row3).findViewById(R.id.seeMore);
+        //special list
+        rowSeeMore1.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this,row1));
+        rowSeeMore2.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this,row2));
+        rowSeeMore3.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this,row3));
 
         //set font
         Typeface t1 = FontManager.T1_Typeface(this);
