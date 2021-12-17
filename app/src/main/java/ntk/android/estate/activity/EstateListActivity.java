@@ -21,7 +21,7 @@ public class EstateListActivity extends BaseFilterModelListActivity<EstateProper
 
 
     public static void START_NEW(Context context, EstatePropertyTypeLanduseModel item) {
-
+        
     }
 
 
