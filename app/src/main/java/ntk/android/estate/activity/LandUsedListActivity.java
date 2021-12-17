@@ -1,5 +1,6 @@
 package ntk.android.estate.activity;
 
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -23,6 +24,7 @@ public class LandUsedListActivity extends BaseFilterModelListActivity<EstateProp
     protected void onCreated() {
         super.onCreated();
         ((TextView) findViewById(R.id.lblTitle)).setText("دسته بندی املاک");
+        findViewById(ntk.android.base.R.id.imgSearch).setVisibility(View.GONE);
     }
 
     @Override
@@ -42,6 +44,6 @@ public class LandUsedListActivity extends BaseFilterModelListActivity<EstateProp
 
     @Override
     public RecyclerView.LayoutManager getRvLayoutManager() {
-        return new GridLayoutManager(this,3);
+        return new GridLayoutManager(this, 3);
     }
 }
