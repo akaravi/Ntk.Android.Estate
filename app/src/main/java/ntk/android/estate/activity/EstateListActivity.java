@@ -5,6 +5,8 @@ import android.content.Intent;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import io.reactivex.Observable;
 import java9.util.function.Function;
 import ntk.android.base.Extras;
@@ -21,7 +23,10 @@ public class EstateListActivity extends BaseFilterModelListActivity<EstateProper
 
 
     public static void START_NEW(Context context, EstatePropertyTypeLanduseModel item) {
-        
+        Intent i=new Intent(context,EstateListActivity.class);
+        FilterModel filterModel=new FilterModel();
+        i.putExtra(Extras.EXTRA_FIRST_ARG, new Gson().toJson(filterModel));
+        context.startActivity(i);
     }
 
 
