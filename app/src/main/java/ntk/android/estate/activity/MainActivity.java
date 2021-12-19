@@ -42,7 +42,6 @@ public class MainActivity extends BaseMainActivity {
         DrawerAdapter adapter = new DrawerAdapter(this, menus, findViewById(R.id.floaingDrawer));
         drawerRecycler.setAdapter(adapter);
         drawerRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        drawerRecycler.setHasFixedSize(true);
         //set title of app
         AboutUsClass aboutUsClass = Preferences.with(this).appVariableInfo().aboutUs();
         ((TextView) findViewById(R.id.txtToolbarTitle)).setText(aboutUsClass.AboutUsTitle);

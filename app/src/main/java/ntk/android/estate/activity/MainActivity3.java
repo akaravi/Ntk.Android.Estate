@@ -57,7 +57,6 @@ public class MainActivity3 extends BaseMainActivity {
         Drawer3Adapter adapter = new Drawer3Adapter(this, menus, findViewById(R.id.floaingDrawer));
         drawerRecycler.setAdapter(adapter);
         drawerRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        drawerRecycler.setHasFixedSize(true);
         init();
         //get news
         HandelSlider();

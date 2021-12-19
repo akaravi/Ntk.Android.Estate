@@ -36,7 +36,6 @@ public class MainActivity2 extends BaseMainActivity {
         DrawerAdapter adapter = new DrawerAdapter(this, menus, findViewById(R.id.floaingDrawer));
         drawerRecycler.setAdapter(adapter);
         drawerRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        drawerRecycler.setHasFixedSize(true);
         fragments.add(MainActivity2Fragment.newInstance((row1), R.color.tab_blue_inactive));
         fragments.add(MainActivity2Fragment.newInstance((row2), R.color.tab_red_inactive));
         fragments.add(MainActivity2Fragment.newInstance((row3), R.color.tab_green_inactive));
