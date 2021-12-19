@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.mxn.soul.flowingdrawer_core.FlowingDrawer xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/tools"
     android:id="@+id/floaingDrawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,11 +33,31 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcNews"
-
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="240dp" />
+                    android:layout_height="240dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcNews"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/news_shimmer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        shimmer:duration="800">
+
+                        <include
+                            android:id="@+id/shimmer_news1"
+                            layout="@layout/shimmer_main3_news" />
+            <include
+                            android:id="@+id/shimmer_news2"
+                            layout="@layout/shimmer_main3_news" />
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+                </RelativeLayout>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -91,6 +112,5 @@
 
     </LinearLayout>
 
-    <include layout="@layout/estate_menu_1"
-       />
+    <include layout="@layout/estate_menu_1" />
 </com.mxn.soul.flowingdrawer_core.FlowingDrawer>

@@ -28,8 +28,14 @@ public class Main3NewsAdapter extends BaseRecyclerAdapter<NewsContentModel, Main
         super(list);
         this.context = context;
         drawable = R.drawable.news_placeholder;
+        width = ITEM_WIDTH();
+
+    }
+
+    public static int ITEM_WIDTH() {
         int w = getScreenWidth();
-        width = w - (w / 8);
+        var width = w - (w / 8);
+        return width;
     }
 
     @Override

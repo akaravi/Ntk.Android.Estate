@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import java.util.List;
@@ -26,9 +27,7 @@ import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.dtomodel.theme.DrawerChildThemeDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
-import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
-import ntk.android.base.entitymodel.enums.EnumSortType;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.entitymodel.news.NewsContentModel;
@@ -68,7 +67,7 @@ public class MainActivity3 extends BaseMainActivity {
         // Ascending = 1,
         // Random = 2,
         // View = 3
-      
+
 
         // karavi
         getData(row1, findViewById(R.id.row1));
@@ -160,7 +159,9 @@ public class MainActivity3 extends BaseMainActivity {
     }
 
     private void HandelSlider() {
-
+        findViewById(R.id.shimmer_news1).getLayoutParams().width = Main3NewsAdapter.ITEM_WIDTH();
+        findViewById(R.id.shimmer_news2).getLayoutParams().width = Main3NewsAdapter.ITEM_WIDTH();
+        ((ShimmerFrameLayout) findViewById(R.id.news_shimmer)).startShimmerAnimation();
         FilterModel request = new FilterModel();
         request.RowPerPage = 5;
         request.SortColumn = "Id";
@@ -172,6 +173,9 @@ public class MainActivity3 extends BaseMainActivity {
 
                     @Override
                     public void onNext(ErrorException<NewsContentModel> newsContentResponse) {
+                        ShimmerFrameLayout shimmerLayout = (ShimmerFrameLayout) findViewById(R.id.news_shimmer);
+                        shimmerLayout.stopShimmerAnimation();
+                        shimmerLayout.setVisibility(View.GONE);
                         if (newsContentResponse.IsSuccess) {
                             if (newsContentResponse.ListItems.size() > 0) {
                                 SnapHelper snapHelper = new PagerSnapHelper();
@@ -182,8 +186,7 @@ public class MainActivity3 extends BaseMainActivity {
                                 Slider.setAdapter(adapter);
                                 snapHelper.attachToRecyclerView(Slider);
                                 adapter.notifyDataSetChanged();
-                            } else
-                                findViewById(R.id.linear).setVisibility(View.GONE);
+                            }
                         }
                     }
 
