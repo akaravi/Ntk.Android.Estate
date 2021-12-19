@@ -5,7 +5,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import ntk.android.base.activity.abstraction.AbstractMainActivity;
+import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
+import ntk.android.base.entitymodel.enums.EnumSortType;
 
 abstract class BaseMainActivity extends AbstractMainActivity {
     FilterModel row1;
@@ -26,5 +28,36 @@ abstract class BaseMainActivity extends AbstractMainActivity {
         row3=new FilterModel();
         row4=new FilterModel();
         row5=new FilterModel();
+        //base on last item
+        row1.setSortType(EnumSortType.Descending.index());
+        row1.setSortColumn("CreatedDate");
+
+        //special list item
+        new FilterDataModel();
+        row2.setSortType(EnumSortType.Random.index());
+        row2.addFilter(new FilterDataModel()
+                .setPropertyName("PropertyAds")
+                .setPropertyAnyName("ViewLevel")
+                .setStringValue("1,2,3,4,5,6"));
+        row2.addFilter(new FilterDataModel()
+                .setPropertyName("PropertyAds")
+                .setPropertyAnyName("StationLevel")
+                .setStringValue("212"));
+        //ejare roozane
+        row3.setSortType(EnumSortType.Descending.index());
+        row3.addFilter(new FilterDataModel().setPropertyName("Contracts")
+                .setPropertyAnyName("LinkEstateContractTypeId")
+                .setStringValue("68dc5e3b-7c34-4412-c071-08d972b7fc67"));
+        //forosh
+        row4.setSortType(EnumSortType.Descending.index());
+        row4.addFilter(new FilterDataModel().setPropertyName("Contracts")
+                .setPropertyAnyName("LinkEstateContractTypeId")
+                .setStringValue("6c2ccf97-2bc6-4a79-19a1-08d92cf7c414"));
+        //rahn ejare
+       row5.setSortType(EnumSortType.Descending.index());
+       row5.addFilter(new FilterDataModel().setPropertyName("Contracts")
+                .setPropertyAnyName("LinkEstateContractTypeId")
+                .setStringValue("db4bf96d-f485-410f-12e5-08d92cf7fe11"));
+
     }
 }

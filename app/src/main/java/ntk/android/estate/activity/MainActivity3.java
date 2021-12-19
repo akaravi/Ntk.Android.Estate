@@ -28,6 +28,7 @@ import ntk.android.base.dtomodel.theme.DrawerChildThemeDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
+import ntk.android.base.entitymodel.enums.EnumSortType;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.entitymodel.news.NewsContentModel;
@@ -68,28 +69,7 @@ public class MainActivity3 extends BaseMainActivity {
         // Ascending = 1,
         // Random = 2,
         // View = 3
-        row1.SortType = 0;
-        row1.SortColumn = "CreatedDate";
-
-        var filter21 = new FilterDataModel();
-        filter21.PropertyName = "PropertyAds";
-        filter21.PropertyAnyName = "StationLevel";
-        filter21.Value = "212";
-        var filter22 = new FilterDataModel();
-        filter22.PropertyName = "PropertyAds";
-        filter22.PropertyAnyName = "ViewLevel";
-        filter22.Value = "1,2,3,4,5,6";
-        row2.SortType = 2;
-        row2.addFilter(filter21);
-        row2.addFilter(filter22);
-
-
-        var filter3 = new FilterDataModel();
-        filter3.PropertyName = "Contracts";
-        filter3.PropertyAnyName = "LinkEstateContractTypeId";
-        filter3.Value = "68dc5e3b-7c34-4412-c071-08d972b7fc67";
-        row3.SortType = 2;
-        row3.addFilter(filter3);
+      
 
         // karavi
         getData(row1, findViewById(R.id.row1));
