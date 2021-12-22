@@ -61,15 +61,7 @@ public class MainActivity3 extends BaseMainActivity {
         HandelSlider();
         //get landUsed property
         getLandUsedProperty();
-        //get row data
-        // karavi
-// Descending = 0,
-        // Ascending = 1,
-        // Random = 2,
-        // View = 3
-
-
-        // karavi
+        //get rows
         getData(row1, findViewById(R.id.row1));
         getData(row2, findViewById(R.id.row2));
         getData(row3, findViewById(R.id.row3));
@@ -113,7 +105,31 @@ public class MainActivity3 extends BaseMainActivity {
         rowTitle3.setTypeface(t1);
         rowSeeMore3.setTypeface(t1);
 
+        //show shimmer
+        findViewById(R.id.shimmer_news1).getLayoutParams().width = Main3NewsAdapter.ITEM_WIDTH();
+        findViewById(R.id.shimmer_news2).getLayoutParams().width = Main3NewsAdapter.ITEM_WIDTH();
+        ((ShimmerFrameLayout) findViewById(R.id.news_shimmer)).startShimmerAnimation();
+        ((ShimmerFrameLayout) findViewById(R.id.landUsed_shimmer)).startShimmerAnimation();
+        initStatePropertyShimmer(findViewById(R.id.row1));
+        initStatePropertyShimmer(findViewById(R.id.row2));
+        initStatePropertyShimmer(findViewById(R.id.row3));
+    }
 
+    private void initStatePropertyShimmer(View v) {
+        int w = Main3EstatePropertyAdapter.ITEM_WIDTH();
+        v.findViewById(R.id.shimmer_property1).getLayoutParams().width = w;
+        {
+            View image = v.findViewById(R.id.shimmer_property1).findViewById(R.id.image);
+            image.getLayoutParams().width = w;
+            image.getLayoutParams().height = w;
+        }
+        v.findViewById(R.id.shimmer_property2).getLayoutParams().width = w;
+        {
+            View image = v.findViewById(R.id.shimmer_property2).findViewById(R.id.image);
+            image.getLayoutParams().width = w;
+            image.getLayoutParams().height = w;
+        }
+        ((ShimmerFrameLayout) v.findViewById(R.id.shimmer_rc)).startShimmerAnimation();
     }
 
     private void getData(FilterModel filter, View view) {
@@ -123,11 +139,15 @@ public class MainActivity3 extends BaseMainActivity {
                     @Override
                     protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
                         RecyclerView rc = view.findViewById(R.id.rc);
+
                         rc.setAdapter(new Main3EstatePropertyAdapter(response.ListItems));
                         rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
 //                        SnapHelper snapHelper = new PagerSnapHelper();
 //                        snapHelper.attachToRecyclerView(rc);
                         ViewCompat.setNestedScrollingEnabled(rc, false);
+                        ShimmerFrameLayout shimmerFrameLayout = (ShimmerFrameLayout) view.findViewById(R.id.shimmer_rc);
+                        shimmerFrameLayout.stopShimmerAnimation();
+                        shimmerFrameLayout.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -145,11 +165,14 @@ public class MainActivity3 extends BaseMainActivity {
                 .subscribe(new NtkObserver<>() {
                     @Override
                     public void onNext(@NonNull ErrorException<EstatePropertyTypeLanduseModel> response) {
+
                         Main3EstateLandUseAdapter adapter = new Main3EstateLandUseAdapter(response.ListItems);
                         RecyclerView rc = findViewById(R.id
                                 .landUseAdapter);
                         rc.setAdapter(adapter);
-
+                        ShimmerFrameLayout shimmer = (ShimmerFrameLayout) findViewById(R.id.landUsed_shimmer);
+                        shimmer.stopShimmerAnimation();
+                        shimmer.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -159,9 +182,7 @@ public class MainActivity3 extends BaseMainActivity {
     }
 
     private void HandelSlider() {
-        findViewById(R.id.shimmer_news1).getLayoutParams().width = Main3NewsAdapter.ITEM_WIDTH();
-        findViewById(R.id.shimmer_news2).getLayoutParams().width = Main3NewsAdapter.ITEM_WIDTH();
-        ((ShimmerFrameLayout) findViewById(R.id.news_shimmer)).startShimmerAnimation();
+
         FilterModel request = new FilterModel();
         request.RowPerPage = 5;
         request.SortColumn = "Id";

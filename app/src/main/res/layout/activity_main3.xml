@@ -50,13 +50,19 @@
                         android:orientation="horizontal"
                         shimmer:duration="800">
 
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
                         <include
                             android:id="@+id/shimmer_news1"
                             layout="@layout/shimmer_main3_news" />
-            <include
+
+                        <include
                             android:id="@+id/shimmer_news2"
                             layout="@layout/shimmer_main3_news" />
-                    </com.facebook.shimmer.ShimmerFrameLayout>
+                        </LinearLayout>    </com.facebook.shimmer.ShimmerFrameLayout>
                 </RelativeLayout>
 
                 <androidx.cardview.widget.CardView
@@ -91,6 +97,29 @@
                             android:orientation="horizontal"
                             android:padding="8dp"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/landUsed_shimmer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title1"
+                            android:orientation="horizontal"
+                            shimmer:duration="800" >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+                                <include android:id="@+id/shimmer_land1" layout="@layout/shimmer_main3_land"/>
+                                <include android:id="@+id/shimmer_land2" layout="@layout/shimmer_main3_land"/>
+                                <include android:id="@+id/shimmer_land3" layout="@layout/shimmer_main3_land"/>
+                                <include android:id="@+id/shimmer_land4" layout="@layout/shimmer_main3_land"/>
+                                <include android:id="@+id/shimmer_land5" layout="@layout/shimmer_main3_land"/>
+                                <include android:id="@+id/shimmer_land6" layout="@layout/shimmer_main3_land"/>
+                                <include android:id="@+id/shimmer_land7" layout="@layout/shimmer_main3_land"/>
+                            </LinearLayout>
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 

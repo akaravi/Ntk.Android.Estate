@@ -1,14 +1,12 @@
 package ntk.android.estate.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -26,10 +24,17 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
 
     public Main3EstatePropertyAdapter(List<EstatePropertyModel> list) {
         super(list);
-        int w = getScreenWidth();
-        width = w / 2 - (w / 15);
+        width = ITEM_WIDTH();
     }
 
+    public static int ITEM_WIDTH() {
+        int w = getScreenWidth();
+        var width = w / 2 - (w / 15);
+        return width;
+    }
+    public static int IMAGE_WIDTH(Context c) {
+        return ITEM_WIDTH() - NViewUtils.dpToPx(c, 8);
+    }
     @NonNull
     @Override
     public Main3EstatePropertyAdapter.VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,7 +58,7 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
         });
     }
 
-    public class VH extends EstatePropertyAdapter.VH{
+    public class VH extends EstatePropertyAdapter.VH {
 
 
         public VH(@NonNull View itemView) {
@@ -64,7 +69,7 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
         protected void creating() {
             image = itemView.findViewById(R.id.image);
             if (imageSize == -1)
-                imageSize = width - NViewUtils.dpToPx(itemView.getContext(), 8);
+                imageSize = IMAGE_WIDTH(itemView.getContext());
             image.getLayoutParams().width = imageSize;
             image.getLayoutParams().height = imageSize;
             favorite = itemView.findViewById(R.id.imgFavorite);
@@ -76,6 +81,7 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
             priceTitle2 = itemView.findViewById(R.id.txtPriceTitle2);
             priceTitle3 = itemView.findViewById(R.id.txtPriceTitle3);
         }
+
         private void setFont() {
             Typeface bold = FontManager.T1_BOLD_Typeface(itemView.getContext());
             Typeface req = FontManager.T1_Typeface(itemView.getContext());
@@ -88,4 +94,6 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
             priceTitle3.setTypeface(req);
         }
     }
+
+
 }
