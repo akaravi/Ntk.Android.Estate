@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.TransitionManager;
 
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,8 @@ import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.core.CoreLocationModel;
+import ntk.android.base.entitymodel.enums.EnumClauseType;
+import ntk.android.base.entitymodel.enums.EnumSearchType;
 import ntk.android.base.entitymodel.estate.EstateContractTypeModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
@@ -83,6 +86,24 @@ public class SearchEstateActivity extends BaseActivity {
         findViewById(R.id.propertyTypeExpander).setOnClickListener(expandLister(findViewById(R.id.propertyTypeRv), findViewById(R.id.propertyTypeExpandIcon)));
         findViewById(R.id.contractTypeExpander).setOnClickListener(expandLister(findViewById(R.id.contractsRc), findViewById(R.id.contractTypeExpandIcon)));
         findViewById(R.id.typeUsageExpander).setOnClickListener(expandLister(findViewById(R.id.TypeUsageRc), findViewById(R.id.typeUsageExpandIcon)));
+        findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setEnabled(false);
+                Search();
+                view.setEnabled(true);
+            }
+        });
+    }
+
+    private void Search() {
+        FilterModel filter=new FilterModel();
+        String title= ((TextInputEditText) findViewById(R.id.EstateTitleEditText)).getText().toString().trim();
+        if (!title.equalsIgnoreCase(""))
+        {
+            filter.addFilter(new FilterDataModel().setPropertyName("Title").setStringValue(title).setSearchType(EnumSearchType.Contains));
+            filter.addFilter(new FilterDataModel().setPropertyName("Description").setStringValue(title).setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or));
+        }
     }
 
     private View.OnClickListener expandLister(View expandableView, ImageView arrowBtn) {
@@ -124,7 +145,7 @@ public class SearchEstateActivity extends BaseActivity {
         ServiceExecute.execute(new EstatePropertyTypeService(this).getAll(new FilterModel().setRowPerPage(100))).subscribe(new NtkObserver<ErrorException<EstatePropertyTypeModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyTypeModel> response) {
-                propertyType=response.ListItems;
+                propertyType = response.ListItems;
             }
 
             @Override
@@ -136,7 +157,7 @@ public class SearchEstateActivity extends BaseActivity {
                 .subscribe(new NtkObserver<ErrorException<EstatePropertyTypeLanduseModel>>() {
                     @Override
                     public void onNext(@NonNull ErrorException<EstatePropertyTypeLanduseModel> response) {
-                        landUses=response.ListItems;
+                        landUses = response.ListItems;
                     }
 
                     @Override
@@ -147,7 +168,7 @@ public class SearchEstateActivity extends BaseActivity {
     }
 
     private void setTypeUsage(EstatePropertyTypeUsageModel estatePropertyTypeUsageModel) {
-        if (findViewById(R.id.TypeUsageCardView).getVisibility()==View.GONE) {
+        if (findViewById(R.id.TypeUsageCardView).getVisibility() == View.GONE) {
             TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
             findViewById(R.id.TypeUsageCardView).setVisibility(View.VISIBLE);
         }
@@ -162,7 +183,7 @@ public class SearchEstateActivity extends BaseActivity {
 
         rc.setAdapter(new EstatePropertyLandUseAdapterSelector(models, null,
                 t -> {
-             //todo set value .PropertyTypeLanduse = t;
+                    //todo set value .PropertyTypeLanduse = t;
                     getAllDetails(t);
                 }));
         rc.setLayoutManager(new GridLayoutManager(this, 3));
@@ -187,7 +208,7 @@ public class SearchEstateActivity extends BaseActivity {
                                         estatePropertyDetailGroupModel.PropertyValues.add(value);
                                     });
                         });
-                SearchPropertyDetailGroupAdapterSelector adapter = new SearchPropertyDetailGroupAdapterSelector(response.ListItems,findViewById(R.id.nestedScrool),getSupportFragmentManager());
+                SearchPropertyDetailGroupAdapterSelector adapter = new SearchPropertyDetailGroupAdapterSelector(response.ListItems, findViewById(R.id.nestedScrool), getSupportFragmentManager());
                 RecyclerView rc = (findViewById(R.id.detailRc));
                 rc.setAdapter(adapter);
                 rc.setLayoutManager(new LinearLayoutManager(SearchEstateActivity.this, RecyclerView.VERTICAL, false));
