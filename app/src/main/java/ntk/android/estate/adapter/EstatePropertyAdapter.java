@@ -17,7 +17,7 @@ import ntk.android.base.Extras;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
-import ntk.android.base.utill.AppUtill;
+import ntk.android.base.utill.AppUtil;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.view.NViewUtils;
 import ntk.android.estate.R;
@@ -28,7 +28,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
 
     public EstatePropertyAdapter( List<EstatePropertyModel> models) {
         super(models);
-        now = AppUtill.Now();
+        now = AppUtil.Now();
     }
 
     @NonNull
@@ -48,7 +48,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
             view.getContext().startActivity(intent);
         });
         holder.title.setText(item.Title);
-        holder.date.setText(AppUtill.DateDifference(item.CreatedDate, now));
+        holder.date.setText(AppUtil.DateDifference(item.CreatedDate, now));
         loadImage(item.LinkMainImageIdSrc, holder.image);
         holder.setPictureCount(item);
         holder.setProperties(item);

@@ -39,7 +39,7 @@ import ntk.android.base.entitymodel.base.ErrorExceptionBase;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
-import ntk.android.base.utill.AppUtill;
+import ntk.android.base.utill.AppUtil;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
@@ -134,7 +134,7 @@ public class EstateDetailActivity extends BaseActivity {
 
 
     private void getContent() {
-        if (AppUtill.isNetworkAvailable(this)) {
+        if (AppUtil.isNetworkAvailable(this)) {
             switcher.showProgressView();
             ServiceExecute.execute(new EstatePropertyService(this).getOne(Id))
                     .subscribe(new ErrorExceptionObserver<EstatePropertyModel>(switcher::showErrorView) {
@@ -195,7 +195,7 @@ public class EstateDetailActivity extends BaseActivity {
             ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav);
         if (model.CaseCode != null)
             ((TextView) findViewById(R.id.idTextView)).setText("شماره ملک : " + model.CaseCode);
-        ((TextView) findViewById(R.id.dateTv)).setText("" + AppUtill.DateDifferenceNow(model.CreatedDate));
+        ((TextView) findViewById(R.id.dateTv)).setText("" + AppUtil.DateDifferenceNow(model.CreatedDate));
         List<String> images = new ArrayList<>();
         images.add(model.LinkMainImageIdSrc);
         images.addAll(model.LinkExtraImageIdsSrc);

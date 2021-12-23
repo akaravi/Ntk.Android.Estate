@@ -20,7 +20,7 @@ import ntk.android.base.entitymodel.file.FileUploadModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.service.FileManagerService;
 import ntk.android.base.services.file.FileUploaderService;
-import ntk.android.base.utill.AppUtill;
+import ntk.android.base.utill.AppUtil;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.NewEstateActivity;
 
@@ -65,7 +65,7 @@ public class NewEstateFragment5 extends BaseFragment {
     }
 
     private void UploadFileToServer(String url, Consumer<FileUploadModel> consumer) {
-        if (AppUtill.isNetworkAvailable(getContext())) {
+        if (AppUtil.isNetworkAvailable(getContext())) {
          estateActivity().onUploadingStep();
             Toasty.info(getContext(), "در حال بارگذاری...", Toasty.LENGTH_LONG).show();
             ServiceExecute.execute(new FileUploaderService(getContext()).uploadFile(url))

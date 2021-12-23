@@ -23,7 +23,7 @@ import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.estate.EstatePropertyService;
-import ntk.android.base.utill.AppUtill;
+import ntk.android.base.utill.AppUtil;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.MainEstatePropertyAdapter;
 
@@ -55,7 +55,7 @@ public class MainActivity2Fragment extends BaseFragment {
     }
 
     private void getData() {
-        if (AppUtill.isNetworkAvailable(getContext())) {
+        if (AppUtil.isNetworkAvailable(getContext())) {
             ServiceExecute.execute(new EstatePropertyService(getContext()).getAll(filter))
                     .subscribe(new ErrorExceptionObserver<EstatePropertyModel>(switcher::showErrorView) {
 

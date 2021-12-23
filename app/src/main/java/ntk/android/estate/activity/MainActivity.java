@@ -24,7 +24,7 @@ import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
-import ntk.android.base.utill.AppUtill;
+import ntk.android.base.utill.AppUtil;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.MainEstatePropertyAdapter;
@@ -59,7 +59,7 @@ public class MainActivity extends BaseMainActivity {
     }
 
     private void getdata(FilterModel req, RecyclerView rc) {
-        if (AppUtill.isNetworkAvailable(this)) {
+        if (AppUtil.isNetworkAvailable(this)) {
             switcher.showProgressView();
             ServiceExecute.execute(new EstatePropertyService(this).getAll(req))
                     .subscribe(new ErrorExceptionObserver<EstatePropertyModel>(switcher::showErrorView) {
