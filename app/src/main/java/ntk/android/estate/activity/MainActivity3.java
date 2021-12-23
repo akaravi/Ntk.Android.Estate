@@ -20,6 +20,7 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.config.ErrorExceptionObserver;
@@ -27,6 +28,7 @@ import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.dtomodel.theme.DrawerChildThemeDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
@@ -73,8 +75,10 @@ public class MainActivity3 extends BaseMainActivity {
         seeMore.setOnClickListener(view -> startActivity(new Intent(MainActivity3.this, LandUsedListActivity.class)));
         //click on humberger
         findViewById(R.id.img_menu).setOnClickListener(v -> ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(true));
+        //click share
         findViewById(R.id.shareQrCode).setOnClickListener(v -> onInviteMethod());
-
+        //click search
+        findViewById(R.id.searchBtn).setOnClickListener(view -> Search());
         TextView rowTitle1 = findViewById(R.id.row1).findViewById(R.id.title);
         TextView rowSeeMore1 = findViewById(R.id.row1).findViewById(R.id.seeMore);
         TextView rowTitle2 = findViewById(R.id.row2).findViewById(R.id.title);
@@ -113,6 +117,17 @@ public class MainActivity3 extends BaseMainActivity {
         initStatePropertyShimmer(findViewById(R.id.row1));
         initStatePropertyShimmer(findViewById(R.id.row2));
         initStatePropertyShimmer(findViewById(R.id.row3));
+    }
+
+    private void Search() {
+        String text = ((EditText) findViewById(R.id.searchEt)).getText().toString();
+        if (text.trim().equals(""))
+            Toasty.info(this, "عنوان مورد نظر خود را وارد کنید").show();
+        else
+        {
+            FilterModel filterModel=new FilterModel();
+            filterModel.addFilter(new FilterDataModel().setPropertyName().setClauseType())
+        }
     }
 
     private void initStatePropertyShimmer(View v) {

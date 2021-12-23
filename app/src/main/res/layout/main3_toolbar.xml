@@ -47,6 +47,7 @@
                 android:textSize="16sp" />
 
             <ImageView
+                android:id="@+id/searchBtn"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_margin="2dp"
