@@ -31,6 +31,7 @@ import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.enums.EnumClauseType;
+import ntk.android.base.entitymodel.enums.EnumSearchType;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.entitymodel.news.NewsContentModel;
@@ -126,8 +127,8 @@ public class MainActivity3 extends BaseMainActivity {
             Toasty.info(this, "عنوان مورد نظر خود را وارد کنید").show();
         else {
             FilterModel filterModel = new FilterModel();
-            filterModel.addFilter(new FilterDataModel().setPropertyName("Title").setClauseType(EnumClauseType.Or.index()).setStringValue(text));
-            filterModel.addFilter(new FilterDataModel().setPropertyName("Description").setClauseType(EnumClauseType.Or.index()).setStringValue(text));
+            filterModel.addFilter(new FilterDataModel().setPropertyName("Title").setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or.index()).setStringValue(text));
+            filterModel.addFilter(new FilterDataModel().setPropertyName("Description").setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or.index()).setStringValue(text));
             EstateListWithFilterActivity.START_NEW(MainActivity3.this, filterModel, "موارد یافت شده");
         }
     }
