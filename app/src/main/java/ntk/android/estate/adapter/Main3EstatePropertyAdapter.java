@@ -80,6 +80,7 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
             priceTitle1 = itemView.findViewById(R.id.txtPrice1Title1);
             priceTitle2 = itemView.findViewById(R.id.txtPriceTitle2);
             priceTitle3 = itemView.findViewById(R.id.txtPriceTitle3);
+            setFont();
         }
 
         private void setFont() {
