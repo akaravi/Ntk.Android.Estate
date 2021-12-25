@@ -28,7 +28,7 @@ import ntk.android.estate.adapter.EstatePropertyDetailGroupAdapterSelector;
 public class NewEstateFragment2 extends BaseFragment {
     @Override
     public void onCreateFragment() {
-        setContentView(R.layout.fragment_new_estate_3);
+        setContentView(R.layout.fragment_new_estate_2);
     }
 
     @Override

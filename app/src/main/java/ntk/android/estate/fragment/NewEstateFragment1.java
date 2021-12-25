@@ -47,7 +47,7 @@ public class NewEstateFragment1 extends BaseFragment {
 
     @Override
     public void onCreateFragment() {
-        setContentView(R.layout.fragment_new_estate_2);
+        setContentView(R.layout.fragment_new_estate_1);
     }
 
     @Override

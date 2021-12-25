@@ -1,7 +1,6 @@
 package ntk.android.estate.fragment;
 
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -20,25 +19,15 @@ import org.neshan.common.model.LatLng;
 import org.neshan.mapsdk.MapView;
 import org.neshan.mapsdk.model.Marker;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import es.dmoral.toasty.Toasty;
-import java9.util.stream.IntStream;
 import ntk.android.base.Extras;
-import ntk.android.base.adapter.SpinnerAdapter;
-import ntk.android.base.config.NtkObserver;
-import ntk.android.base.config.ServiceExecute;
-import ntk.android.base.entitymodel.base.ErrorException;
-import ntk.android.base.entitymodel.base.FilterModel;
-import ntk.android.base.entitymodel.core.CoreLocationModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.fragment.BaseFragment;
-import ntk.android.base.services.core.CoreLocationService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.GetLocationActivity;
 import ntk.android.estate.activity.NewEstateActivity;
+import ntk.android.estate.view.component.LocaionAutoCompleteTextView;
 
 
 public class NewEstateFragment3 extends BaseFragment {
@@ -46,14 +35,14 @@ public class NewEstateFragment3 extends BaseFragment {
 
     @Override
     public void onCreateFragment() {
-        setContentView(R.layout.fragment_new_estate_1);
+        setContentView(R.layout.fragment_new_estate_3);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setFont();
-        estateActivity().showProgress();
+
 
         TextInputEditText codeEt = findViewById(R.id.EstateCodeEditText);
         TextInputEditText titleEt = findViewById(R.id.EstateTitleEditText);
@@ -125,43 +114,9 @@ public class NewEstateFragment3 extends BaseFragment {
     }
 
     private void getData() {
-        ServiceExecute.execute(new CoreLocationService(getContext()).getAllProvinces(new FilterModel())).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
-            @Override
-            public void onNext(@NonNull ErrorException<CoreLocationModel> model) {
-                estateActivity().showContent();
-                MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
-                List<String> names = new ArrayList<>();
-                for (CoreLocationModel t : model.ListItems)
-                    names.add(t.Title);
-                SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
-                spinner.setOnItemClickListener((parent, view, position, id) -> {
-                    CoreLocationModel selectedModel = model.ListItems.get(position);
-                    estateActivity().model().LinkLocationId = selectedModel.Id;
-                    if (estateActivity().model().Geolocationlatitude == null) {
-                        MapView map = findViewById(R.id.mapView);
-                        if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null)
-                            map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
-                    }
-                });
-                spinner.setAdapter(locationAdapter);
-                // Do something for lollipop and above versions
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    //if departments is 0
-                    if (estateActivity().model().LinkLocationId == 0)
-                        spinner.setText(locationAdapter.getItem(0), false);
-                    else {
-                        int index = IntStream.range(0, model.ListItems.size()).filter(value -> model.ListItems.get(value).Id.equals(estateActivity().model().LinkLocationId)).findFirst().getAsInt();
-                        spinner.setText(locationAdapter.getItem(index), false);
-
-                    }
-                }
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-                estateActivity().showErrorView();
-            }
-        });
+        MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
+        LocaionAutoCompleteTextView locaionAutoCompleteTextView = new LocaionAutoCompleteTextView();
+        locaionAutoCompleteTextView.addOnAutoCompleteTextViewTextChangedObserver(spinner);
     }
 
     public NewEstateActivity estateActivity() {
