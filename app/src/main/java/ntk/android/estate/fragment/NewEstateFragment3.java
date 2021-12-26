@@ -118,11 +118,15 @@ public class NewEstateFragment3 extends BaseFragment {
     private void getData() {
         MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
         LocaionAutoCompleteTextView locaionAutoCompleteTextView = new LocaionAutoCompleteTextView();
-        locaionAutoCompleteTextView.addOnAutoCompleteTextViewTextChangedObserver(spinner);
-        locaionAutoCompleteTextView.addOnAutoCompleteTextViewItemClickedSubscriber(spinner,
-                coreLocationModel -> {
-                    estateActivity().model().LinkLocationId = coreLocationModel.Id;
-                    estateActivity().model().LinkLocationIdTitle=coreLocationModel.Title;
+        locaionAutoCompleteTextView.addOnAutoCompleteTextViewTextChangedObserver(spinner,
+                selectedModel -> {
+                    estateActivity().model().LinkLocationId = selectedModel.Id;
+                    estateActivity().model().LinkLocationIdTitle=selectedModel.Title;
+                    if (estateActivity().model().Geolocationlatitude == null) {
+                        if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null){
+                            MapView map = findViewById(R.id.mapView);
+                            map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
+                    }}
                 });
     }
 

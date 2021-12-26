@@ -7,6 +7,9 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.jakewharton.rxbinding2.widget.RxAutoCompleteTextView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
+import org.neshan.common.model.LatLng;
+import org.neshan.mapsdk.MapView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -21,18 +24,18 @@ import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.core.CoreLocationModel;
 import ntk.android.base.services.core.CoreLocationService;
 import ntk.android.estate.MyApplication;
+import ntk.android.estate.activity.GetLocationActivity;
 
 
 public class LocaionAutoCompleteTextView {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public void addOnAutoCompleteTextViewTextChangedObserver(final AutoCompleteTextView autoCompleteTextView) {
+    public void addOnAutoCompleteTextViewTextChangedObserver(final AutoCompleteTextView autoCompleteTextView,Consumer<CoreLocationModel> func) {
         Observable<ErrorException<CoreLocationModel>> autocompleteResponseObservable =
                 RxTextView.textChangeEvents(autoCompleteTextView)
                         .debounce(500, TimeUnit.MILLISECONDS)
                         .map(textViewTextChangeEvent -> textViewTextChangeEvent.text().toString())
                         .filter(s -> s.length() >= 3)
-                        .observeOn(Schedulers.io())
                         .switchMap(s -> new CoreLocationService(MyApplication.getAppContext()).getAll(s)
                         )
                         .observeOn(AndroidSchedulers.mainThread())
@@ -47,6 +50,10 @@ public class LocaionAutoCompleteTextView {
                             SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(autoCompleteTextView.getContext(), names);
                             autoCompleteTextView.setAdapter(locationAdapter);
                             String enteredText = autoCompleteTextView.getText().toString();
+                            autoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
+                                CoreLocationModel selectedModel = placeAutocompleteResult.ListItems.get(position);
+                                func.accept(selectedModel);
+                            });
                             if (names.size() >= 1 && enteredText.equals(names.get(0))) {
                                 autoCompleteTextView.dismissDropDown();
                             } else {
