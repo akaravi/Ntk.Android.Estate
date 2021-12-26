@@ -3,6 +3,7 @@ package ntk.android.estate.activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -57,9 +58,9 @@ public class SearchEstateActivity extends BaseActivity {
     private List<EstatePropertyTypeModel> propertyType;
     private List<EstatePropertyTypeLanduseModel> landUses;
     CoreLocationModel selectedLocation;
-    private EstatePropertyTypeUsageModel PropertyTypeUsage;
-    private EstatePropertyTypeLanduseModel PropertyTypeLanduse;
-    private EstateContractTypeModel ContractModel;
+    private EstatePropertyTypeUsageModel selectedPropertyTypeUsage;
+    private EstatePropertyTypeLanduseModel selectPropertyTypeLanduse;
+    private EstateContractTypeModel selectedContractType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,19 +86,19 @@ public class SearchEstateActivity extends BaseActivity {
         ((TextView) findViewById(R.id.typeUsageExpandTv)).setTypeface(t1);
         ((TextView) findViewById(R.id.propertyTypeExpandTv)).setTypeface(t1);
         ((TextView) findViewById(R.id.areaExpandTv)).setTypeface(t1);
-        //font for contract detail
-        //for textInput layout
+        //for textInput layout contract detail
         ((TextInputLayout) findViewById(R.id.etl1)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.etl2)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.etl3)).setTypeface(t1);
-        //for TextInputEditText
+        //for TextInputEditText  contract detail
         ((TextInputEditText) findViewById(R.id.et1)).setTypeface(t1);
         ((TextInputEditText) findViewById(R.id.et2)).setTypeface(t1);
         ((TextInputEditText) findViewById(R.id.et3)).setTypeface(t1);
-        //for checkView
+        //for checkView  contract detail
         ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setTypeface(t1);
         ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setTypeface(t1);
         ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setTypeface(t1);
+
         //add expand listener
         findViewById(R.id.titleExpander).setOnClickListener(expandLister(findViewById(R.id.EstateTitleTextInput), findViewById(R.id.titleExpandIcon)));
         findViewById(R.id.locationExpander).setOnClickListener(expandLister(findViewById(R.id.EstateProvinceTextInput), findViewById(R.id.locationExpandIcon)));
@@ -121,6 +122,18 @@ public class SearchEstateActivity extends BaseActivity {
                     selectedLocation = location;
 
                 });
+        contractDetailInit();
+    }
+
+    private void contractDetailInit() {
+        //click on all of view to affect on  toggling checkBox
+        findViewById(R.id.checkbox_row1).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
+        findViewById(R.id.checkbox_row2).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
+        findViewById(R.id.checkbox_row3).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
+        //toggle state of Edittext on toggling Checkbox
+        ((CheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et1).setEnabled(!b));
+        ((CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et2).setEnabled(!b));
+        ((CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et3).setEnabled(!b));
     }
 
     private void Search() {
@@ -133,6 +146,11 @@ public class SearchEstateActivity extends BaseActivity {
         if (selectedLocation != null) {
             filter.addFilter(new FilterDataModel().setPropertyName("LinkLocationId").setIntValue(Long.valueOf(selectedLocation.Id)).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
         }
+        if (selectPropertyTypeLanduse != null)
+            filter.addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeLanduseId").setStringValue(selectPropertyTypeLanduse.Id).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
+        if (selectedPropertyTypeUsage != null)
+            filter.addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeUsageId").setStringValue(selectedPropertyTypeUsage.Id).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
+
     }
 
     private View.OnClickListener expandLister(View expandableView, ImageView arrowBtn) {
@@ -157,7 +175,7 @@ public class SearchEstateActivity extends BaseActivity {
                         typeUsages = response.ListItems;
                         EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(typeUsages, null,
                                 estatePropertyTypeUsageModel -> {
-                                    PropertyTypeUsage = estatePropertyTypeUsageModel;
+                                    selectedPropertyTypeUsage = estatePropertyTypeUsageModel;
                                     setTypeUsage(estatePropertyTypeUsageModel);
                                 });
                         RecyclerView rc = findViewById(R.id.propertyTypeRv);
@@ -215,7 +233,7 @@ public class SearchEstateActivity extends BaseActivity {
 
         rc.setAdapter(new EstatePropertyLandUseAdapterSelector(models, null,
                 t -> {
-                    PropertyTypeLanduse = t;
+                    selectPropertyTypeLanduse = t;
                     getAllDetails(t);
                 }));
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
@@ -285,7 +303,7 @@ public class SearchEstateActivity extends BaseActivity {
 
     private void changeView(EstateContractTypeModel model) {
         clearAllInput();
-        ContractModel = model;
+        selectedContractType = model;
         if (model.HasSalePrice || model.HasRentPrice || model.HasDepositPrice) {
             if (findViewById(R.id.contractDetailCardView).getVisibility() == View.GONE) {
                 TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
@@ -303,19 +321,19 @@ public class SearchEstateActivity extends BaseActivity {
         String preTitle = "محدوده ی مبلغ برای ";
         et1.setHint(preTitle + model.TitleRentPrice);
         et1.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
-        ( findViewById(R.id.et1)).setFocusable(false);
+        (findViewById(R.id.et1)).setFocusable(false);
         findViewById(R.id.checkbox_row1).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et2 = findViewById(R.id.etl2);
         et2.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
         et2.setHint(preTitle + model.TitleSalePrice);
-        ( findViewById(R.id.et2)).setFocusable(false);
+        (findViewById(R.id.et2)).setFocusable(false);
         findViewById(R.id.checkbox_row2).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et3 = findViewById(R.id.etl3);
         et3.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
         et3.setHint(preTitle + model.TitleDepositPrice);
-        ( findViewById(R.id.et3)).setFocusable(false);
+        (findViewById(R.id.et3)).setFocusable(false);
         findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
 
