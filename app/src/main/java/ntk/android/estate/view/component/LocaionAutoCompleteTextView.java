@@ -64,23 +64,4 @@ public class LocaionAutoCompleteTextView {
                         () -> {
                         }));
     }
-
-    public void addOnAutoCompleteTextViewItemClickedSubscriber(final MaterialAutoCompleteTextView autoCompleteTextView, Consumer<CoreLocationModel> func) {
-        Observable<CoreLocationModel> adapterViewItemClickEventObservable = RxAutoCompleteTextView.itemClickEvents(autoCompleteTextView)
-                .map(adapterViewItemClickEvent ->
-                        (CoreLocationModel) autoCompleteTextView.getAdapter()
-                                .getItem(adapterViewItemClickEvent.position()))
-                .observeOn(AndroidSchedulers.mainThread())
-                .retry();
-
-        compositeDisposable.add(
-                adapterViewItemClickEventObservable.subscribe(
-                        placeDetailsResult -> {
-                            func.accept(placeDetailsResult);
-                        },
-                        throwable -> Log.e("TAG", "onError", throwable),
-                        () -> {
-                        }));
-    }
-
 }
