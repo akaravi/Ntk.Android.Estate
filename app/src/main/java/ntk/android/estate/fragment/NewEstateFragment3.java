@@ -55,6 +55,8 @@ public class NewEstateFragment3 extends BaseFragment {
             titleEt.setText(model.Title);
         if (model.Description != null)
             descEt.setText(model.Description);
+        if (model.LinkLocationIdTitle!=null)
+            ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(model.LinkLocationIdTitle);
         if (model.Address != null)
             addressEt.setText(model.Address);
         if (model.Geolocationlatitude != null) {
@@ -117,6 +119,11 @@ public class NewEstateFragment3 extends BaseFragment {
         MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
         LocaionAutoCompleteTextView locaionAutoCompleteTextView = new LocaionAutoCompleteTextView();
         locaionAutoCompleteTextView.addOnAutoCompleteTextViewTextChangedObserver(spinner);
+        locaionAutoCompleteTextView.addOnAutoCompleteTextViewItemClickedSubscriber(spinner,
+                coreLocationModel -> {
+                    estateActivity().model().LinkLocationId = coreLocationModel.Id;
+                    estateActivity().model().LinkLocationIdTitle=coreLocationModel.Title;
+                });
     }
 
     public NewEstateActivity estateActivity() {
@@ -143,7 +150,11 @@ public class NewEstateFragment3 extends BaseFragment {
             return false;
         } else
             estateActivity().model().Description = descEt.getText().toString().trim();
-        if (addressEt.getText().toString().trim().equals("")) {
+        if (estateActivity().model().LinkLocationId == 0) {
+            Toasty.error(getContext(), "منظقه مورد نظر  را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+            return false;
+
+        }if (addressEt.getText().toString().trim().equals("")) {
             Toasty.error(getContext(), " آدرس را وارد نمایید", Toasty.LENGTH_LONG, true).show();
             return false;
         } else

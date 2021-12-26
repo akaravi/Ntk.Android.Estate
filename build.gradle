@@ -22,7 +22,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
+        jcenter() //y
         maven { url "https://jitpack.io" }
         maven { url "https://maven.neshan.org/artifactory/public-maven"}
     }

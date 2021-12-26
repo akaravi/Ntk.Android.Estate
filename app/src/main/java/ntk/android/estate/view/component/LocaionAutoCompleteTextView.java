@@ -3,6 +3,7 @@ package ntk.android.estate.view.component;
 import android.util.Log;
 import android.widget.AutoCompleteTextView;
 
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.jakewharton.rxbinding2.widget.RxAutoCompleteTextView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -14,6 +15,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java9.util.function.Consumer;
 import ntk.android.base.adapter.SpinnerAdapter;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.core.CoreLocationModel;
@@ -31,7 +33,7 @@ public class LocaionAutoCompleteTextView {
                         .map(textViewTextChangeEvent -> textViewTextChangeEvent.text().toString())
                         .filter(s -> s.length() >= 3)
                         .observeOn(Schedulers.io())
-                        .switchMap(s -> new CoreLocationService(MyApplication.getAppContext()).getAllTree(s)
+                        .switchMap(s -> new CoreLocationService(MyApplication.getAppContext()).getAll(s)
                         )
                         .observeOn(AndroidSchedulers.mainThread())
                         .retry();
@@ -52,29 +54,26 @@ public class LocaionAutoCompleteTextView {
                             }
                         },
                         e -> Log.e("LOCATION", "onError", e),
-                        () -> {}));
+                        () -> {
+                        }));
     }
-//    void addOnAutoCompleteTextViewItemClickedSubscriber(final AutoCompleteTextView autoCompleteTextView) {
-//        Observable<ErrorException<CoreLocationModel>> adapterViewItemClickEventObservable =
-//                RxAutoCompleteTextView.itemClickEvents(autoCompleteTextView)
-//                        .map(adapterViewItemClickEvent -> {
-//                            CoreLocationModel  item = (  CoreLocationModel ) autoCompleteTextView.getAdapter()
-//                                    .getItem(adapterViewItemClickEvent.position());
-//                            return item;
-//                        })
-//                        .observeOn(Schedulers.io())
-//                        .switchMap(placeId -> RestClient.INSTANCE.getGooglePlacesClient().details(placeId))
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .retry();
-//
-//        compositeDisposable.add(
-//                adapterViewItemClickEventObservable.subscribe(
-//                        placeDetailsResult -> {
-//                            Log.i("PlaceAutocomplete", placeDetailsResult.toString());
-//                            updateMap(placeDetailsResult);
-//                        },
-//                        throwable -> Log.e(TAG, "onError", throwable),
-//                        () -> Log.i(TAG, "onCompleted")));
-//    }
+
+    public void addOnAutoCompleteTextViewItemClickedSubscriber(final MaterialAutoCompleteTextView autoCompleteTextView, Consumer<CoreLocationModel> func) {
+        Observable<CoreLocationModel> adapterViewItemClickEventObservable = RxAutoCompleteTextView.itemClickEvents(autoCompleteTextView)
+                .map(adapterViewItemClickEvent ->
+                        (CoreLocationModel) autoCompleteTextView.getAdapter()
+                                .getItem(adapterViewItemClickEvent.position()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .retry();
+
+        compositeDisposable.add(
+                adapterViewItemClickEventObservable.subscribe(
+                        placeDetailsResult -> {
+                            func.accept(placeDetailsResult);
+                        },
+                        throwable -> Log.e("TAG", "onError", throwable),
+                        () -> {
+                        }));
+    }
 
 }
