@@ -17,6 +17,9 @@ import androidx.transition.TransitionManager;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.neshan.common.model.LatLng;
+import org.neshan.mapsdk.MapView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,13 +53,13 @@ import ntk.android.estate.adapter.EstateContractAdapterSelector;
 import ntk.android.estate.adapter.EstatePropertyLandUseAdapterSelector;
 import ntk.android.estate.adapter.EstatePropertyTypeAdapterSelector;
 import ntk.android.estate.adapter.SearchPropertyDetailGroupAdapterSelector;
+import ntk.android.estate.view.component.LocaionAutoCompleteTextView;
 
 public class SearchEstateActivity extends BaseActivity {
-    int totalReq = 1;
     private List<EstatePropertyTypeUsageModel> typeUsages;
     private List<EstatePropertyTypeModel> propertyType;
     private List<EstatePropertyTypeLanduseModel> landUses;
-
+    CoreLocationModel selectedLocation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +97,13 @@ public class SearchEstateActivity extends BaseActivity {
                 view.setEnabled(true);
             }
         });
+        MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
+        LocaionAutoCompleteTextView locaionAutoCompleteTextView = new LocaionAutoCompleteTextView();
+        locaionAutoCompleteTextView.addOnAutoCompleteTextViewTextChangedObserver(spinner,
+                location -> {
+                    selectedLocation = location;
+
+                });
     }
 
     private void Search() {
@@ -103,6 +113,9 @@ public class SearchEstateActivity extends BaseActivity {
         {
             filter.addFilter(new FilterDataModel().setPropertyName("Title").setStringValue(title).setSearchType(EnumSearchType.Contains));
             filter.addFilter(new FilterDataModel().setPropertyName("Description").setStringValue(title).setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or));
+        }
+        if (selectedLocation!=null){
+
         }
     }
 
@@ -223,35 +236,7 @@ public class SearchEstateActivity extends BaseActivity {
     }
 
     private void getLocations() {
-        ServiceExecute.execute(new CoreLocationService(this).getAllProvinces(new FilterModel())).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
-            @Override
-            public void onNext(@NonNull ErrorException<CoreLocationModel> model) {
 
-                MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
-                List<String> names = new ArrayList<>();
-                names.add("انتخاب نشده");
-                for (CoreLocationModel t : model.ListItems)
-                    names.add(t.Title);
-                SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(SearchEstateActivity.this, names);
-                spinner.setOnItemClickListener((parent, view, position, id) -> {
-                    CoreLocationModel selectedModel;
-                    if (position == 0)
-                        selectedModel = null;
-                    else
-                        selectedModel = model.ListItems.get(position - 1);
-                });
-                spinner.setAdapter(locationAdapter);
-                // Do something for lollipop and above versions
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    spinner.setText(locationAdapter.getItem(0), false);
-                }
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-
-            }
-        });
     }
 
     private void getContractTypes() {
