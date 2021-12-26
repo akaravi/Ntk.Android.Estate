@@ -1,7 +1,6 @@
 package ntk.android.estate.activity;
 
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,9 +15,8 @@ import androidx.transition.TransitionManager;
 
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
-
-import org.neshan.common.model.LatLng;
-import org.neshan.mapsdk.MapView;
+import com.xiaofeng.flowlayoutmanager.Alignment;
+import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,6 @@ import java.util.List;
 import java9.util.stream.Collectors;
 import java9.util.stream.StreamSupport;
 import ntk.android.base.activity.BaseActivity;
-import ntk.android.base.adapter.SpinnerAdapter;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
@@ -41,7 +38,6 @@ import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeUsageModel;
-import ntk.android.base.services.core.CoreLocationService;
 import ntk.android.base.services.estate.EstateContractTypeService;
 import ntk.android.base.services.estate.EstatePropertyDetailGroupService;
 import ntk.android.base.services.estate.EstatePropertyTypeLanduseService;
@@ -60,6 +56,8 @@ public class SearchEstateActivity extends BaseActivity {
     private List<EstatePropertyTypeModel> propertyType;
     private List<EstatePropertyTypeLanduseModel> landUses;
     CoreLocationModel selectedLocation;
+    private EstatePropertyTypeUsageModel PropertyTypeUsage;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +87,7 @@ public class SearchEstateActivity extends BaseActivity {
         findViewById(R.id.propertyTypeExpander).setOnClickListener(expandLister(findViewById(R.id.propertyTypeRv), findViewById(R.id.propertyTypeExpandIcon)));
         findViewById(R.id.contractTypeExpander).setOnClickListener(expandLister(findViewById(R.id.contractsRc), findViewById(R.id.contractTypeExpandIcon)));
         findViewById(R.id.typeUsageExpander).setOnClickListener(expandLister(findViewById(R.id.TypeUsageRc), findViewById(R.id.typeUsageExpandIcon)));
+        findViewById(R.id.areaExpander).setOnClickListener(expandLister(findViewById(R.id.EstateAreaTextInput), findViewById(R.id.areaExpandIcon)));
         findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,15 +106,14 @@ public class SearchEstateActivity extends BaseActivity {
     }
 
     private void Search() {
-        FilterModel filter=new FilterModel();
-        String title= ((TextInputEditText) findViewById(R.id.EstateTitleEditText)).getText().toString().trim();
-        if (!title.equalsIgnoreCase(""))
-        {
-            filter.addFilter(new FilterDataModel().setPropertyName("Title").setStringValue(title).setSearchType(EnumSearchType.Contains));
-            filter.addFilter(new FilterDataModel().setPropertyName("Description").setStringValue(title).setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or));
+        FilterModel filter = new FilterModel();
+        String title = ((TextInputEditText) findViewById(R.id.EstateTitleEditText)).getText().toString().trim();
+        if (!title.equalsIgnoreCase("")) {
+            filter.addFilter(new FilterDataModel().setPropertyName("Title").setStringValue(title).setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or)
+                    .addInnerFilter(new FilterDataModel().setPropertyName("Description").setStringValue(title).setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or)));
         }
-        if (selectedLocation!=null){
-
+        if (selectedLocation != null) {
+            filter.addFilter(new FilterDataModel().setPropertyName("LinkLocationId").setIntValue(Long.valueOf(selectedLocation.Id)).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
         }
     }
 
@@ -141,13 +139,15 @@ public class SearchEstateActivity extends BaseActivity {
                         typeUsages = response.ListItems;
                         EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(typeUsages, null,
                                 estatePropertyTypeUsageModel -> {
-//                  todo show          findViewById(R.id.cardLandUsesView).setVisibility(View.VISIBLE);
-                                    //todo set value .PropertyTypeUsage = estatePropertyTypeUsageModel;
+                                    PropertyTypeUsage = estatePropertyTypeUsageModel;
                                     setTypeUsage(estatePropertyTypeUsageModel);
                                 });
                         RecyclerView rc = findViewById(R.id.propertyTypeRv);
                         rc.setAdapter(adapter);
-                        rc.setLayoutManager(new GridLayoutManager(SearchEstateActivity.this, 4));
+                        FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+                        flowLayoutManager.setAutoMeasureEnabled(true);
+                        flowLayoutManager.setAlignment(Alignment.RIGHT);
+                        rc.setLayoutManager(flowLayoutManager);
                     }
 
                     @Override
@@ -246,7 +246,10 @@ public class SearchEstateActivity extends BaseActivity {
                 EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, SearchEstateActivity.this::changeView);
                 RecyclerView rc = findViewById(R.id.contractsRc);
                 rc.setAdapter(adapter);
-                rc.setLayoutManager(new GridLayoutManager(SearchEstateActivity.this, 3));
+                FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+                flowLayoutManager.setAutoMeasureEnabled(true);
+                flowLayoutManager.setAlignment(Alignment.RIGHT);
+                rc.setLayoutManager(flowLayoutManager);
             }
 
 
