@@ -299,20 +299,23 @@ public class SearchEstateActivity extends BaseActivity {
                 findViewById(R.id.contractDetailCardView).setVisibility(View.GONE);
             }
         }
-            TextInputLayout et1 = findViewById(R.id.etl1);
+        TextInputLayout et1 = findViewById(R.id.etl1);
         String preTitle = "محدوده ی مبلغ برای ";
         et1.setHint(preTitle + model.TitleRentPrice);
         et1.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
+        et1.setFocusable(false);
         findViewById(R.id.checkbox_row1).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et2 = findViewById(R.id.etl2);
         et2.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
         et2.setHint(preTitle + model.TitleSalePrice);
+        et2.setFocusable(false);
         findViewById(R.id.checkbox_row2).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et3 = findViewById(R.id.etl3);
         et3.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
         et3.setHint(preTitle + model.TitleDepositPrice);
+        et3.setFocusable(false);
         findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
 
