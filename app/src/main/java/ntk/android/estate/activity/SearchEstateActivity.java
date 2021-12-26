@@ -8,13 +8,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.TransitionManager;
 
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.xiaofeng.flowlayoutmanager.Alignment;
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
@@ -57,6 +58,8 @@ public class SearchEstateActivity extends BaseActivity {
     private List<EstatePropertyTypeLanduseModel> landUses;
     CoreLocationModel selectedLocation;
     private EstatePropertyTypeUsageModel PropertyTypeUsage;
+    private EstatePropertyTypeLanduseModel PropertyTypeLanduse;
+    private EstateContractTypeModel ContractModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,15 +80,30 @@ public class SearchEstateActivity extends BaseActivity {
         ((TextView) findViewById(R.id.txtToolbarTitle)).setTypeface(t1);
         ((TextView) findViewById(R.id.titleExpandTv)).setTypeface(t1);
         ((TextView) findViewById(R.id.locationExpandTv)).setTypeface(t1);
-        ((TextView) findViewById(R.id.propertyTypeExpandTv)).setTypeface(t1);
-        ((TextView) findViewById(R.id.typeUsageExpandTv)).setTypeface(t1);
         ((TextView) findViewById(R.id.contractTypeExpandTv)).setTypeface(t1);
+        ((TextView) findViewById(R.id.contractDetailExpandTv)).setTypeface(t1);
+        ((TextView) findViewById(R.id.typeUsageExpandTv)).setTypeface(t1);
+        ((TextView) findViewById(R.id.propertyTypeExpandTv)).setTypeface(t1);
         ((TextView) findViewById(R.id.areaExpandTv)).setTypeface(t1);
+        //font for contract detail
+        //for textInput layout
+        ((TextInputLayout) findViewById(R.id.etl1)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.etl2)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.etl3)).setTypeface(t1);
+        //for TextInputEditText
+        ((TextInputEditText) findViewById(R.id.et1)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.et2)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.et3)).setTypeface(t1);
+        //for checkView
+        ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setTypeface(t1);
+        ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setTypeface(t1);
+        ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setTypeface(t1);
         //add expand listener
         findViewById(R.id.titleExpander).setOnClickListener(expandLister(findViewById(R.id.EstateTitleTextInput), findViewById(R.id.titleExpandIcon)));
         findViewById(R.id.locationExpander).setOnClickListener(expandLister(findViewById(R.id.EstateProvinceTextInput), findViewById(R.id.locationExpandIcon)));
-        findViewById(R.id.propertyTypeExpander).setOnClickListener(expandLister(findViewById(R.id.propertyTypeRv), findViewById(R.id.propertyTypeExpandIcon)));
         findViewById(R.id.contractTypeExpander).setOnClickListener(expandLister(findViewById(R.id.contractsRc), findViewById(R.id.contractTypeExpandIcon)));
+        findViewById(R.id.contractDetailExpander).setOnClickListener(expandLister(findViewById(R.id.ContractDetailView), findViewById(R.id.contractDetailExpandIcon)));
+        findViewById(R.id.propertyTypeExpander).setOnClickListener(expandLister(findViewById(R.id.propertyTypeRv), findViewById(R.id.propertyTypeExpandIcon)));
         findViewById(R.id.typeUsageExpander).setOnClickListener(expandLister(findViewById(R.id.TypeUsageRc), findViewById(R.id.typeUsageExpandIcon)));
         findViewById(R.id.areaExpander).setOnClickListener(expandLister(findViewById(R.id.EstateAreaTextInput), findViewById(R.id.areaExpandIcon)));
         findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
@@ -181,6 +199,7 @@ public class SearchEstateActivity extends BaseActivity {
     }
 
     private void setTypeUsage(EstatePropertyTypeUsageModel estatePropertyTypeUsageModel) {
+        //show cards
         if (findViewById(R.id.TypeUsageCardView).getVisibility() == View.GONE) {
             TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
             findViewById(R.id.TypeUsageCardView).setVisibility(View.VISIBLE);
@@ -196,10 +215,14 @@ public class SearchEstateActivity extends BaseActivity {
 
         rc.setAdapter(new EstatePropertyLandUseAdapterSelector(models, null,
                 t -> {
-                    //todo set value .PropertyTypeLanduse = t;
+                    PropertyTypeLanduse = t;
                     getAllDetails(t);
                 }));
-        rc.setLayoutManager(new GridLayoutManager(this, 3));
+        FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+        flowLayoutManager.setAutoMeasureEnabled(true);
+        flowLayoutManager.maxItemsPerLine(4);
+        flowLayoutManager.setAlignment(Alignment.RIGHT);
+        rc.setLayoutManager(flowLayoutManager);
     }
 
     private void getAllDetails(EstatePropertyTypeLanduseModel t) {
@@ -260,7 +283,53 @@ public class SearchEstateActivity extends BaseActivity {
         });
     }
 
-    private void changeView(EstateContractTypeModel estateContractTypeModel) {
+    private void changeView(EstateContractTypeModel model) {
+        clearAllInput();
+        ContractModel = model;
+        if (model.HasSalePrice || model.HasRentPrice || model.HasDepositPrice) {
+            if (findViewById(R.id.contractDetailCardView).getVisibility() == View.GONE) {
+                TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
+                findViewById(R.id.contractDetailCardView).setVisibility(View.VISIBLE);
+            }
+        } else {
+            //hide details
 
+            if (findViewById(R.id.contractDetailCardView).getVisibility() == View.VISIBLE) {
+                TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
+                findViewById(R.id.contractDetailCardView).setVisibility(View.GONE);
+            }
+        }
+            TextInputLayout et1 = findViewById(R.id.etl1);
+        String preTitle = "محدوده ی مبلغ برای ";
+        et1.setHint(preTitle + model.TitleRentPrice);
+        et1.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
+        findViewById(R.id.checkbox_row1).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setText("قیمت توافقی");
+        TextInputLayout et2 = findViewById(R.id.etl2);
+        et2.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
+        et2.setHint(preTitle + model.TitleSalePrice);
+        findViewById(R.id.checkbox_row2).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setText("قیمت توافقی");
+        TextInputLayout et3 = findViewById(R.id.etl3);
+        et3.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
+        et3.setHint(preTitle + model.TitleDepositPrice);
+        findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
+
+    }
+
+    private void clearAllInput() {
+        ((MaterialCheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setChecked(false);
+        TextInputEditText et1 = (TextInputEditText) findViewById(R.id.et1);
+        et1.setText("");
+        et1.clearFocus();
+        ((MaterialCheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setChecked(false);
+        TextInputEditText et2 = (TextInputEditText) findViewById(R.id.et2);
+        et2.setText("");
+        et2.clearFocus();
+        ((MaterialCheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setChecked(false);
+        TextInputEditText et3 = (TextInputEditText) findViewById(R.id.et3);
+        et3.setText("");
+        et3.clearFocus();
     }
 }

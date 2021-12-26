@@ -129,18 +129,20 @@ public class NewEstateFragment4 extends BaseFragment {
         findViewById(R.id.addNewEstateBtn).setVisibility(View.VISIBLE);
         TextInputLayout et1 = findViewById(R.id.etl1);
         et1.setHint(model.TitleRentPrice);
+        et1.setFocusable(false);
         et1.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
         findViewById(R.id.checkbox_row1).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et2 = findViewById(R.id.etl2);
         et2.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
         et2.setHint(model.TitleSalePrice);
+        et2.setFocusable(false);
         findViewById(R.id.checkbox_row2).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et3 = findViewById(R.id.etl3);
         et3.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
-        et3.setHint(model.Title);
         et3.setHint(model.TitleDepositPrice);
+        et3.setFocusable(false);
         findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
     }
@@ -149,22 +151,19 @@ public class NewEstateFragment4 extends BaseFragment {
         ((MaterialCheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setChecked(false);
         TextInputEditText et1 = (TextInputEditText) findViewById(R.id.et1);
         et1.setText("");
-        et1.clearFocus();
         ((MaterialCheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setChecked(false);
         TextInputEditText et2 = (TextInputEditText) findViewById(R.id.et2);
         et2.setText("");
-        et2.clearFocus();
         ((MaterialCheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setChecked(false);
         TextInputEditText et3 = (TextInputEditText) findViewById(R.id.et3);
         et3.setText("");
-        et3.clearFocus();
     }
 
     private void addItem() {
         if (selectedModel != null) {
             EstateContractModel contract = new EstateContractModel();
             contract.ContractType = selectedModel;
-            contract.LinkEstateContractTypeId=selectedModel.Id;
+            contract.LinkEstateContractTypeId = selectedModel.Id;
             if (selectedModel.HasRentPrice || selectedModel.RentPriceAllowAgreement) {
                 if (((MaterialCheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).isChecked())
                     contract.RentPriceByAgreement = true;

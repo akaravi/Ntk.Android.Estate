@@ -180,6 +180,52 @@
                 android:layout_width="match_parent" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/contractDetailCardView"
+                style="@style/search_estate_cardView"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/contractDetailExpander"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/toolbarColorBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:id="@+id/contractDetailExpandIcon"
+                            style="@style/search_estate_arrow" />
+
+                        <TextView
+                            android:id="@+id/contractDetailExpandTv"
+                            style="@style/search_estate_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="مشخصات قرار داد :" />
+                    </LinearLayout>
+
+                    <include android:id="@+id/ContractDetailView" layout="@layout/sub_estate_contract_selector" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                style="@style/search_estate_padding"
+                android:layout_width="match_parent" />
+
+            <androidx.cardview.widget.CardView
                 style="@style/search_estate_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -346,9 +392,10 @@
                 android:layout_width="match_parent" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/searchBtn"
         android:layout_width="match_parent"
-        android:text="نتایج جست وجو"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="نتایج جست وجو" />
 </LinearLayout>
