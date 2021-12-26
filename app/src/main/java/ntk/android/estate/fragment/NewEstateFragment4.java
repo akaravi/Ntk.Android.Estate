@@ -136,7 +136,7 @@ public class NewEstateFragment4 extends BaseFragment {
         TextInputLayout et2 = findViewById(R.id.etl2);
         et2.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
         et2.setHint(model.TitleSalePrice);
-        
+
         findViewById(R.id.checkbox_row2).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et3 = findViewById(R.id.etl3);
