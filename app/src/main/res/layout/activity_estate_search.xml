@@ -353,7 +353,7 @@
                             style="@style/search_estate_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="متراژ (متر مربع):" />
+                            android:text="مشخصات نوع کاربری ملک" />
 
                     </LinearLayout>
 
@@ -361,7 +361,7 @@
                         android:id="@+id/EstateAreaTextInput"
                         style="@style/search_estate_textInputLayout"
 
-                        android:hint="@string/area">
+                        android:hint="محدودی مساحت مورد نظر" >
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/EstateAreaEditText"
@@ -369,6 +369,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="number"
                             android:maxLines="1"
+                            android:focusable="false"
                             android:textSize="14sp"
                             android:theme="@style/new_estate_textInputEditText" />
                     </com.google.android.material.textfield.TextInputLayout>
