@@ -244,6 +244,20 @@ public class SearchEstateActivity extends BaseActivity {
     }
 
     private void getAllDetails(EstatePropertyTypeLanduseModel t) {
+        //change view
+        //show cards
+        if (findViewById(R.id.landUsedDetailCardView).getVisibility() == View.GONE) {
+            TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
+            findViewById(R.id.landUsedDetailCardView).setVisibility(View.VISIBLE);
+        }
+        if (selectPropertyTypeLanduse.TitleCreatedYaer != null && !selectPropertyTypeLanduse.TitleCreatedYaer.equals("") && !selectPropertyTypeLanduse.TitleCreatedYaer.equals("---")) {
+            findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.VISIBLE);
+            ((TextInputLayout) findViewById(R.id.EstatePropertyOneTextInput)).setHint(selectPropertyTypeLanduse.TitleCreatedYaer);
+        } else findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.GONE);
+        if (selectPropertyTypeLanduse.TitlePartition != null && !selectPropertyTypeLanduse.TitlePartition.equals("") && !selectPropertyTypeLanduse.TitlePartition.equals("---")) {
+            findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.VISIBLE);
+            ((TextInputLayout) findViewById(R.id.EstatePropertyTowTextInput)).setHint(selectPropertyTypeLanduse.TitlePartition);
+        } else findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.GONE);
         FilterModel f = new FilterModel().addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeLanduseId")
                 .setStringValue(t.Id));
         ServiceExecute.execute(new EstatePropertyDetailGroupService(this).getAll(f

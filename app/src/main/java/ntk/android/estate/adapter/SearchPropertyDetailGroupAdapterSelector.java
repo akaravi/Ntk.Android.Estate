@@ -17,6 +17,7 @@ import java.util.List;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
+import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
 public class SearchPropertyDetailGroupAdapterSelector extends BaseRecyclerAdapter<EstatePropertyDetailGroupModel, SearchPropertyDetailGroupAdapterSelector.VH> {
@@ -69,6 +70,7 @@ public class SearchPropertyDetailGroupAdapterSelector extends BaseRecyclerAdapte
                     icon.setRotation(180);
                 }
             });
+            title.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
         }
 
         public Context getContext() {
