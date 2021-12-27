@@ -13,18 +13,17 @@ import java.util.List;
 
 import java9.util.function.Consumer;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
-import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstateContractTypeModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
 public class EstateContractAdapterSelector extends BaseRecyclerAdapter<EstateContractTypeModel, EstateContractAdapterSelector.VH> {
-    private EstateContractTypeModel selectedItem;
+    int lastSelected;
     private Consumer<EstateContractTypeModel> caller;
 
     public EstateContractAdapterSelector(List<EstateContractTypeModel> list, Consumer<EstateContractTypeModel> selector) {
         super(list);
-        selectedItem = new EstateContractTypeModel();
+        lastSelected = -1;
         caller = selector;
     }
 
@@ -36,17 +35,22 @@ public class EstateContractAdapterSelector extends BaseRecyclerAdapter<EstateCon
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EstateContractAdapterSelector.VH holder, final int position) {
+    public void onBindViewHolder(@NonNull EstateContractAdapterSelector.VH holder, int position) {
         EstateContractTypeModel item = getItem(position);
         holder.title.setText(item.Title);
-        holder.title.setChecked(selectedItem.equals(item));
-        holder.title.setSelected(selectedItem.equals(item));
+        holder.title.setChecked(position == lastSelected);
+        holder.title.setTag(position);
+        holder.title.setSelected(position == lastSelected);
         holder.title.setOnClickListener(view -> {
-            notifyItemChanged(list().indexOf(item));
-            selectedItem = item;
-            holder.title.setChecked(true);
+            int copyOfLastCheckedPosition = lastSelected;
+            lastSelected = ((Integer) view.getTag());
+            if (lastSelected != copyOfLastCheckedPosition) {
+                notifyItemChanged(copyOfLastCheckedPosition);
+                notifyItemChanged(lastSelected);
+            }else
+                ((Chip) view).setChecked(true);
             caller.accept(item);
-            notifyDataSetChanged();
+
         });
     }
 

@@ -18,17 +18,16 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
 public class EstatePropertyTypeAdapterSelector extends BaseRecyclerAdapter<EstatePropertyTypeUsageModel, EstatePropertyTypeAdapterSelector.VH> {
-    private EstatePropertyTypeUsageModel selectedItem;
+    int lastSelected;
     Consumer<EstatePropertyTypeUsageModel> caller;
 
 
     public EstatePropertyTypeAdapterSelector(List<EstatePropertyTypeUsageModel> listItems, EstatePropertyTypeUsageModel Item, Consumer<EstatePropertyTypeUsageModel> detailCaller) {
         super(listItems);
         caller = detailCaller;
-        selectedItem = Item;
-        if (selectedItem == null) {
-            selectedItem = new EstatePropertyTypeUsageModel();
-            selectedItem.Id = "";
+        lastSelected = -1;
+        if (Item != null) {
+            lastSelected = listItems.indexOf(Item);
         }
     }
 
@@ -43,14 +42,18 @@ public class EstatePropertyTypeAdapterSelector extends BaseRecyclerAdapter<Estat
     public void onBindViewHolder(@NonNull EstatePropertyTypeAdapterSelector.VH holder, final int position) {
         EstatePropertyTypeUsageModel item = getItem(position);
         holder.title.setText(item.Title);
-        holder.title.setChecked(selectedItem.Id.equals(item.Id));
-        holder.title.setSelected(selectedItem.Id.equals(item.Id));
+        holder.title.setChecked(position == lastSelected);
+        holder.title.setTag(position);
+        holder.title.setSelected(position == lastSelected);
         holder.title.setOnClickListener(view -> {
-            notifyItemChanged(list().indexOf(item));
-            selectedItem = item;
-            holder.title.setChecked(true);
+            int copyOfLastCheckedPosition = lastSelected;
+            lastSelected = ((Integer) view.getTag());
+            if (lastSelected != copyOfLastCheckedPosition) {
+                notifyItemChanged(copyOfLastCheckedPosition);
+                notifyItemChanged(lastSelected);
+            }else
+                ((Chip) view).setChecked(true);
             caller.accept(item);
-            notifyDataSetChanged();
         });
     }
 

@@ -18,18 +18,16 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
 public class EstatePropertyLandUseAdapterSelector extends BaseRecyclerAdapter<EstatePropertyTypeLanduseModel, EstatePropertyLandUseAdapterSelector.VH> {
-    private EstatePropertyTypeLanduseModel selectedItem;
+    int lastSelected;
     Consumer<EstatePropertyTypeLanduseModel> caller;
 
     public EstatePropertyLandUseAdapterSelector(List<EstatePropertyTypeLanduseModel> list,EstatePropertyTypeLanduseModel Item, Consumer<EstatePropertyTypeLanduseModel> selector) {
         super(list);
         caller = selector;
-        selectedItem =Item;
-        if (selectedItem==null){
-            selectedItem=new EstatePropertyTypeLanduseModel();
-            selectedItem.Id="";
+        lastSelected = -1;
+        if (Item != null) {
+            lastSelected = list.indexOf(Item);
         }
-
     }
 
     @NonNull
@@ -42,14 +40,18 @@ public class EstatePropertyLandUseAdapterSelector extends BaseRecyclerAdapter<Es
     public void onBindViewHolder(@NonNull VH holder, int position) {
         EstatePropertyTypeLanduseModel item = getItem(position);
         holder.title.setText(item.Title);
-        holder.title.setChecked(selectedItem.Id.equals(item.Id));
-        holder.title.setSelected(selectedItem.Id.equals(item.Id));
+        holder.title.setChecked(position == lastSelected);
+        holder.title.setTag(position);
+        holder.title.setSelected(position == lastSelected);
         holder.title.setOnClickListener(view -> {
-            notifyItemChanged(list().indexOf(item));
-            selectedItem = item;
-            holder.title.setChecked(true);
+            int copyOfLastCheckedPosition = lastSelected;
+            lastSelected = ((Integer) view.getTag());
+            if (lastSelected != copyOfLastCheckedPosition) {
+                notifyItemChanged(copyOfLastCheckedPosition);
+                notifyItemChanged(lastSelected);
+            }else
+                ((Chip) view).setChecked(true);
             caller.accept(item);
-            notifyDataSetChanged();
         });
     }
 
