@@ -221,6 +221,7 @@ public class SearchEstateActivity extends BaseActivity {
         if (findViewById(R.id.TypeUsageCardView).getVisibility() == View.GONE) {
             TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
             findViewById(R.id.TypeUsageCardView).setVisibility(View.VISIBLE);
+            findViewById(R.id.TypeUsageCardView_seprator).setVisibility(View.VISIBLE);
         }
         List<EstatePropertyTypeModel> mappers = StreamSupport.stream(propertyType)
                 .filter(t -> t.LinkPropertyTypeUsageId.equals(estatePropertyTypeUsageModel.Id))
@@ -249,6 +250,7 @@ public class SearchEstateActivity extends BaseActivity {
         if (findViewById(R.id.landUsedDetailCardView).getVisibility() == View.GONE) {
             TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
             findViewById(R.id.landUsedDetailCardView).setVisibility(View.VISIBLE);
+            findViewById(R.id.landUsedDetailCardView_seprator).setVisibility(View.VISIBLE);
         }
         if (selectPropertyTypeLanduse.TitleCreatedYaer != null && !selectPropertyTypeLanduse.TitleCreatedYaer.equals("") && !selectPropertyTypeLanduse.TitleCreatedYaer.equals("---")) {
             findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.VISIBLE);
@@ -322,6 +324,7 @@ public class SearchEstateActivity extends BaseActivity {
             if (findViewById(R.id.contractDetailCardView).getVisibility() == View.GONE) {
                 TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
                 findViewById(R.id.contractDetailCardView).setVisibility(View.VISIBLE);
+                findViewById(R.id.contractDetailCardView_seprator).setVisibility(View.VISIBLE);
             }
         } else {
             //hide details
@@ -329,6 +332,7 @@ public class SearchEstateActivity extends BaseActivity {
             if (findViewById(R.id.contractDetailCardView).getVisibility() == View.VISIBLE) {
                 TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
                 findViewById(R.id.contractDetailCardView).setVisibility(View.GONE);
+                findViewById(R.id.contractDetailCardView_seprator).setVisibility(View.GONE);
             }
         }
         TextInputLayout et1 = findViewById(R.id.etl1);
