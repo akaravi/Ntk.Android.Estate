@@ -101,7 +101,6 @@ public class NumberTextWatcherForThousand implements TextWatcher {
     }
 
     public static String trimCommaOfString(String string) {
-//        String returnString;
         if(string.contains(",")){
             return string.replace(",","");}
         else {

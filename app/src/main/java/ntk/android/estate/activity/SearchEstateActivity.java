@@ -26,6 +26,7 @@ import java.util.List;
 import java9.util.stream.Collectors;
 import java9.util.stream.StreamSupport;
 import ntk.android.base.activity.BaseActivity;
+import ntk.android.base.appclass.FromToClass;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
@@ -62,6 +63,18 @@ public class SearchEstateActivity extends BaseActivity {
     private EstatePropertyTypeUsageModel selectedPropertyTypeUsage;
     private EstatePropertyTypeLanduseModel selectPropertyTypeLanduse;
     private EstateContractTypeModel selectedContractType;
+
+    private String hintContractTitle1;
+    private String hintContractTitle2;
+    private String hintContractTitle3;
+    private String hintLandUseTitle1;
+    private String hintLandUseTitle2;
+
+    FromToClass contract1;
+    FromToClass contract2;
+    FromToClass contract3;
+    FromToClass landUse1;
+    FromToClass landUse2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -136,7 +149,6 @@ public class SearchEstateActivity extends BaseActivity {
     }
 
 
-
     private void contractDetailInit() {
         //click on all of view to affect on  toggling checkBox
         findViewById(R.id.checkbox_row1).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
@@ -146,16 +158,18 @@ public class SearchEstateActivity extends BaseActivity {
         ((CheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et1).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et2).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et3).setEnabled(!b));
-        findViewById(R.id.et1).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
-        findViewById(R.id.et2).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
-        findViewById(R.id.et3).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
+        findViewById(R.id.et1).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle1).show());
+        findViewById(R.id.et2).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle2).show());
+        findViewById(R.id.et3).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle3).show());
     }
+
     private void landUedDetailInit() {
-        findViewById(R.id.EstateAreaEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
-        findViewById(R.id.EstatePropertyOneEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
-        findViewById(R.id.EstatePropertyTowEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
+        findViewById(R.id.EstateAreaEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle("مساحت مورد نظر (متر)").show());
+        findViewById(R.id.EstatePropertyOneEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintLandUseTitle1).show());
+        findViewById(R.id.EstatePropertyTowEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintLandUseTitle2).show());
 
     }
+
     private void Search() {
         FilterModel filter = new FilterModel();
         String title = ((TextInputEditText) findViewById(R.id.EstateTitleEditText)).getText().toString().trim();
@@ -273,10 +287,12 @@ public class SearchEstateActivity extends BaseActivity {
             findViewById(R.id.landUsedDetailCardView_seprator).setVisibility(View.VISIBLE);
         }
         if (selectPropertyTypeLanduse.TitleCreatedYaer != null && !selectPropertyTypeLanduse.TitleCreatedYaer.equals("") && !selectPropertyTypeLanduse.TitleCreatedYaer.equals("---")) {
+            hintLandUseTitle1 = selectPropertyTypeLanduse.TitleCreatedYaer;
             findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.VISIBLE);
             ((TextInputLayout) findViewById(R.id.EstatePropertyOneTextInput)).setHint(selectPropertyTypeLanduse.TitleCreatedYaer);
         } else findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.GONE);
         if (selectPropertyTypeLanduse.TitlePartition != null && !selectPropertyTypeLanduse.TitlePartition.equals("") && !selectPropertyTypeLanduse.TitlePartition.equals("---")) {
+            hintLandUseTitle2 = selectPropertyTypeLanduse.TitlePartition;
             findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.VISIBLE);
             ((TextInputLayout) findViewById(R.id.EstatePropertyTowTextInput)).setHint(selectPropertyTypeLanduse.TitlePartition);
         } else findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.GONE);
@@ -317,7 +333,7 @@ public class SearchEstateActivity extends BaseActivity {
         ServiceExecute.execute(new EstateContractTypeService(this).getAll(new FilterModel())).subscribe(new NtkObserver<ErrorException<EstateContractTypeModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstateContractTypeModel> model) {
-                EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, SearchEstateActivity.this::changeView);
+                EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, SearchEstateActivity.this::ContractTypeSelecting);
                 RecyclerView rc = findViewById(R.id.contractsRc);
                 rc.setAdapter(adapter);
                 FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
@@ -334,7 +350,7 @@ public class SearchEstateActivity extends BaseActivity {
         });
     }
 
-    private void changeView(EstateContractTypeModel model) {
+    private void ContractTypeSelecting(EstateContractTypeModel model) {
         clearAllInput();
         selectedContractType = model;
         if (model.HasSalePrice || model.HasRentPrice || model.HasDepositPrice) {
@@ -354,24 +370,26 @@ public class SearchEstateActivity extends BaseActivity {
         }
         TextInputLayout et1 = findViewById(R.id.etl1);
         String preTitle = "محدوده ی مبلغ برای ";
-        et1.setHint(preTitle + model.TitleRentPrice);
+        hintContractTitle1=preTitle + model.TitleRentPrice;
+        et1.setHint(hintContractTitle1);
         et1.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
         (findViewById(R.id.et1)).setFocusable(false);
         findViewById(R.id.checkbox_row1).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et2 = findViewById(R.id.etl2);
         et2.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
-        et2.setHint(preTitle + model.TitleSalePrice);
+        hintContractTitle2 = preTitle + model.TitleSalePrice;
+        et2.setHint(hintContractTitle2);
         (findViewById(R.id.et2)).setFocusable(false);
         findViewById(R.id.checkbox_row2).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setText("قیمت توافقی");
         TextInputLayout et3 = findViewById(R.id.etl3);
         et3.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
-        et3.setHint(preTitle + model.TitleDepositPrice);
+        hintContractTitle3 = preTitle + model.TitleDepositPrice;
+        et3.setHint(hintContractTitle3);
         (findViewById(R.id.et3)).setFocusable(false);
         findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
-
     }
 
     private void clearAllInput() {
