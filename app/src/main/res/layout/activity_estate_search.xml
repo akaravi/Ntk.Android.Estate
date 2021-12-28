@@ -221,6 +221,11 @@
                     <include
                         android:id="@+id/ContractDetailView"
                         layout="@layout/sub_estate_contract_selector"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="4dp"
                         android:visibility="gone" />
 
                 </LinearLayout>
