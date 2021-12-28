@@ -177,6 +177,7 @@
             </androidx.cardview.widget.CardView>
 
             <View
+
                 style="@style/search_estate_padding"
                 android:layout_width="match_parent" />
 
@@ -219,7 +220,8 @@
 
                     <include
                         android:id="@+id/ContractDetailView"
-                        layout="@layout/sub_estate_contract_selector" />
+                        layout="@layout/sub_estate_contract_selector"
+                        android:visibility="gone" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -227,7 +229,8 @@
             <View
                 android:id="@+id/contractDetailCardView_seprator"
                 style="@style/search_estate_padding"
-                android:layout_width="match_parent" />
+                android:layout_width="match_parent"
+                android:visibility="gone" />
 
             <androidx.cardview.widget.CardView
                 style="@style/search_estate_cardView"
@@ -433,8 +436,10 @@
                 android:nestedScrollingEnabled="true" />
 
             <View
+                android:id="@+id/detailValuesCardView_seprator"
                 style="@style/search_estate_padding"
-                android:layout_width="match_parent" />
+                android:layout_width="match_parent"
+                android:visibility="gone" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
