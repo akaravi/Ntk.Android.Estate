@@ -19,6 +19,7 @@ public class FilterValuePickerDialog {
     Context context;
     String title;
     Consumer consumer;
+    TextInputEditText et;
 
     public FilterValuePickerDialog(Context context) {
         this.context = context;
@@ -29,8 +30,13 @@ public class FilterValuePickerDialog {
         return this;
     }
 
-    public FilterValuePickerDialog setCallBack(Consumer consumer) {
+    public FilterValuePickerDialog setCallBack(Consumer<FromToClass> consumer) {
         this.consumer = consumer;
+        return this;
+    }
+
+    public FilterValuePickerDialog setLable(TextInputEditText view) {
+        this.et = view;
         return this;
     }
 
@@ -58,13 +64,25 @@ public class FilterValuePickerDialog {
             FromToClass fromToClass = new FromToClass();
             String fromStr = ((TextInputEditText) bottomSheetDialog.findViewById(R.id.fromEditText)).getText().toString();
             String toStr = ((TextInputEditText) bottomSheetDialog.findViewById(R.id.toEditText)).getText().toString();
-            if (!fromStr.equals(""))
-                fromToClass.setFrom(Long.getLong(NumberTextWatcherForThousand.trimCommaOfString(fromStr)));
-            if (!toStr.equals(""))
-                fromToClass.setTo(Long.getLong(NumberTextWatcherForThousand.trimCommaOfString(toStr)));
+
+
+            String t = "";
+
+                if (!fromStr.equals("")) {
+                    fromToClass.setFrom(Long.getLong(NumberTextWatcherForThousand.trimCommaOfString(fromStr)));
+                    t += ("از " + fromStr+"  ");
+                }
+                if (!toStr.equals("")) {
+                    fromToClass.setTo(Long.getLong(NumberTextWatcherForThousand.trimCommaOfString(toStr)));
+                    t +=("تا " + toStr);
+                }
+            et.setText(t);
+
             consumer.accept(fromToClass);
             bottomSheetDialog.dismiss();
         });
         bottomSheetDialog.show();
     }
+
+
 }

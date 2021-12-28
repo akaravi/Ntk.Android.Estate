@@ -73,6 +73,7 @@ public class SearchEstateActivity extends BaseActivity {
     FromToClass contract1;
     FromToClass contract2;
     FromToClass contract3;
+    FromToClass area;
     FromToClass landUse1;
     FromToClass landUse2;
 
@@ -158,15 +159,21 @@ public class SearchEstateActivity extends BaseActivity {
         ((CheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et1).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et2).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et3).setEnabled(!b));
-        findViewById(R.id.et1).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle1).show());
-        findViewById(R.id.et2).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle2).show());
-        findViewById(R.id.et3).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle3).show());
+        findViewById(R.id.et1).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle1)
+                .setLable(findViewById(R.id.et1)).setCallBack(o -> contract1 = o).show());
+        findViewById(R.id.et2).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle2)
+                .setLable(findViewById(R.id.et2)).setCallBack(o -> contract2 = o).show());
+        findViewById(R.id.et3).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle3)
+                .setLable(findViewById(R.id.et3)).setCallBack(o -> contract3 = o).show());
     }
 
     private void landUedDetailInit() {
-        findViewById(R.id.EstateAreaEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle("مساحت مورد نظر (متر)").show());
-        findViewById(R.id.EstatePropertyOneEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintLandUseTitle1).show());
-        findViewById(R.id.EstatePropertyTowEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintLandUseTitle2).show());
+        findViewById(R.id.EstateAreaEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle("مساحت مورد نظر (متر)")
+                .setLable(findViewById(R.id.EstateAreaEditText)).setCallBack(o -> area = o).show());
+        findViewById(R.id.EstatePropertyOneEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintLandUseTitle1)
+                .setLable(findViewById(R.id.EstatePropertyOneEditText)).setCallBack(o -> landUse1 = o).show());
+        findViewById(R.id.EstatePropertyTowEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintLandUseTitle2)
+                .setLable(findViewById(R.id.EstatePropertyTowEditText)).setCallBack(o -> landUse2 = o).show());
 
     }
 
@@ -370,7 +377,7 @@ public class SearchEstateActivity extends BaseActivity {
         }
         TextInputLayout et1 = findViewById(R.id.etl1);
         String preTitle = "محدوده ی مبلغ برای ";
-        hintContractTitle1=preTitle + model.TitleRentPrice;
+        hintContractTitle1 = preTitle + model.TitleRentPrice;
         et1.setHint(hintContractTitle1);
         et1.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
         (findViewById(R.id.et1)).setFocusable(false);
