@@ -12,5 +12,7 @@
     <string name="area">مساحت (متر مربع)</string>
     <string name="per_my_estate">املاک من</string>
     <string name="per_my_favorite">" لیست علاقه مندی ها"</string>
+    <string name="from">از</string>
+    <string name="to">تا</string>
 
 </resources>

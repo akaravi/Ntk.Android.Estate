@@ -9,8 +9,8 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrool"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -319,10 +319,11 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <View android:visibility="gone"
+            <View
                 android:id="@+id/TypeUsageCardView_seprator"
                 style="@style/search_estate_padding"
-                android:layout_width="match_parent" />
+                android:layout_width="match_parent"
+                android:visibility="gone" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/landUsedDetailCardView"
@@ -337,7 +338,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/areaExpander"
+                        android:id="@+id/LandUseExpander"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?attr/toolbarColorBackground"
@@ -350,7 +351,7 @@
                             android:layout_weight="1" />
 
                         <ImageView
-                            android:id="@+id/areaExpandIcon"
+                            android:id="@+id/LandUsedExpandIcon"
                             style="@style/search_estate_arrow" />
 
                         <TextView
@@ -362,60 +363,67 @@
 
                     </LinearLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/EstateAreaTextInput"
-                        style="@style/search_estate_textInputLayout"
 
-                        android:hint="محدودی مساحت مورد نظر">
+                    <LinearLayout
+                        android:id="@+id/landUedDetailView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/EstateAreaEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:inputType="number"
-                            android:maxLines="1"
-                            android:textSize="14sp"
-                            android:theme="@style/new_estate_textInputEditText" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/EstateAreaTextInput"
+                            style="@style/search_estate_textInputLayout"
+                            android:hint="محدودی مساحت مورد نظر">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/EstatePropertyOneTextInput"
-                        style="@style/search_estate_textInputLayout">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/EstateAreaEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:textSize="14sp"
+                                android:theme="@style/new_estate_textInputEditText" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/EstatePropertyOneEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:inputType="number"
-                            android:maxLines="1"
-                            android:textSize="14sp"
-                            android:theme="@style/new_estate_textInputEditText" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/EstatePropertyOneTextInput"
+                            style="@style/search_estate_textInputLayout">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/EstatePropertyTowTextInput"
-                        style="@style/search_estate_textInputLayout">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/EstatePropertyOneEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:textSize="14sp"
+                                android:theme="@style/new_estate_textInputEditText" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/EstatePropertyTowEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:inputType="number"
-                            android:maxLines="1"
-                            android:textSize="14sp"
-                            android:theme="@style/new_estate_textInputEditText" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/EstatePropertyTowTextInput"
+                            style="@style/search_estate_textInputLayout">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/EstatePropertyTowEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:textSize="14sp"
+                                android:theme="@style/new_estate_textInputEditText" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <View
                 android:id="@+id/landUsedDetailCardView_seprator"
                 style="@style/search_estate_padding"
-                android:visibility="gone"
-                android:layout_width="match_parent" />
+                android:layout_width="match_parent"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/detailRc"

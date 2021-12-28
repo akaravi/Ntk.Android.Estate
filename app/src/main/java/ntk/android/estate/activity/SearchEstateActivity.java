@@ -51,6 +51,7 @@ import ntk.android.estate.adapter.EstateContractAdapterSelector;
 import ntk.android.estate.adapter.EstatePropertyLandUseAdapterSelector;
 import ntk.android.estate.adapter.EstatePropertyTypeAdapterSelector;
 import ntk.android.estate.adapter.SearchPropertyDetailGroupAdapterSelector;
+import ntk.android.estate.fragment.FilterValuePickerDialog;
 import ntk.android.estate.view.component.LocaionAutoCompleteTextView;
 
 public class SearchEstateActivity extends BaseActivity {
@@ -68,7 +69,6 @@ public class SearchEstateActivity extends BaseActivity {
         setContentView(R.layout.activity_estate_search);
 
         initView();
-        getLocations();
         getEstateType();
         getContractTypes();
     }
@@ -99,6 +99,15 @@ public class SearchEstateActivity extends BaseActivity {
         ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setTypeface(t1);
         ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setTypeface(t1);
 
+        //for landUSe details
+        //for textInput layout landUSe detail
+        ((TextInputLayout) findViewById(R.id.EstateAreaTextInput)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.EstatePropertyOneTextInput)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.EstatePropertyTowTextInput)).setTypeface(t1);
+        //for TextInputEditText  landUSe detail
+        ((TextInputEditText) findViewById(R.id.EstateAreaEditText)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).setTypeface(t1);
         //add expand listener
         findViewById(R.id.titleExpander).setOnClickListener(expandLister(findViewById(R.id.EstateTitleTextInput), findViewById(R.id.titleExpandIcon)));
         findViewById(R.id.locationExpander).setOnClickListener(expandLister(findViewById(R.id.EstateProvinceTextInput), findViewById(R.id.locationExpandIcon)));
@@ -106,7 +115,7 @@ public class SearchEstateActivity extends BaseActivity {
         findViewById(R.id.contractDetailExpander).setOnClickListener(expandLister(findViewById(R.id.ContractDetailView), findViewById(R.id.contractDetailExpandIcon)));
         findViewById(R.id.propertyTypeExpander).setOnClickListener(expandLister(findViewById(R.id.propertyTypeRv), findViewById(R.id.propertyTypeExpandIcon)));
         findViewById(R.id.typeUsageExpander).setOnClickListener(expandLister(findViewById(R.id.TypeUsageRc), findViewById(R.id.typeUsageExpandIcon)));
-        findViewById(R.id.areaExpander).setOnClickListener(expandLister(findViewById(R.id.EstateAreaTextInput), findViewById(R.id.areaExpandIcon)));
+        findViewById(R.id.LandUseExpander).setOnClickListener(expandLister(findViewById(R.id.landUedDetailView), findViewById(R.id.LandUsedExpandIcon)));
         findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,7 +132,10 @@ public class SearchEstateActivity extends BaseActivity {
 
                 });
         contractDetailInit();
+        landUedDetailInit();
     }
+
+
 
     private void contractDetailInit() {
         //click on all of view to affect on  toggling checkBox
@@ -134,8 +146,16 @@ public class SearchEstateActivity extends BaseActivity {
         ((CheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et1).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et2).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et3).setEnabled(!b));
+        findViewById(R.id.et1).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
+        findViewById(R.id.et2).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
+        findViewById(R.id.et3).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
     }
+    private void landUedDetailInit() {
+        findViewById(R.id.EstateAreaEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
+        findViewById(R.id.EstatePropertyOneEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
+        findViewById(R.id.EstatePropertyTowEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).show());
 
+    }
     private void Search() {
         FilterModel filter = new FilterModel();
         String title = ((TextInputEditText) findViewById(R.id.EstateTitleEditText)).getText().toString().trim();
@@ -292,9 +312,6 @@ public class SearchEstateActivity extends BaseActivity {
         });
     }
 
-    private void getLocations() {
-
-    }
 
     private void getContractTypes() {
         ServiceExecute.execute(new EstateContractTypeService(this).getAll(new FilterModel())).subscribe(new NtkObserver<ErrorException<EstateContractTypeModel>>() {

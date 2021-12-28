@@ -17,6 +17,7 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/row__multi_choose_view.xml" value="0.20729166666666668" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/row__single_choose_view.xml" value="0.20989583333333334" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/row_recycler_pool_check_box.xml" value="0.17958459979736577" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/search_value_picker_dialog.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/spinner_item.xml" value="0.1743659420289855" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/sub_base_empty.xml" value="0.1884498480243161" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/ticket_new_activity.xml" value="0.11676798378926039" />
@@ -82,6 +83,7 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_pool_plus_minse.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_tab.xml" value="0.12273550724637682" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/search_property_detail_group_selector.xml" value="0.26614583333333336" />
+        <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/search_value_picker_dialog.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/sub_estate_contract_selector.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/base_toolbar_back.xml" value="0.18072916666666666" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/drawer_theme_1_item.xml" value="0.14513677811550152" />
