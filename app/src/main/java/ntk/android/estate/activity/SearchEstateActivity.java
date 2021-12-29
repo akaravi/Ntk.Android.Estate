@@ -191,6 +191,24 @@ public class SearchEstateActivity extends BaseActivity {
             filter.addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeLanduseId").setStringValue(selectPropertyTypeLanduse.Id).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
         if (selectedPropertyTypeUsage != null)
             filter.addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeUsageId").setStringValue(selectedPropertyTypeUsage.Id).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
+        //for contract
+        if (selectedContractType != null) {
+            if (selectedContractType.HasRentPrice)
+                //for contract Type1
+                if (FromToClass.isSet(contract1)) {
+
+                }
+            if (selectedContractType.HasSalePrice)
+                //for contract Type2
+                if (FromToClass.isSet(contract2)) {
+
+                }
+            if (selectedContractType.HasDepositPrice)
+                //for contract Type3
+                if (FromToClass.isSet(contract3)) {
+
+                }
+        }
 
     }
 
