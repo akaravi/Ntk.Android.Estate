@@ -37,7 +37,7 @@ public class EstatePropertyDetailGroupAdapterSelector extends BaseRecyclerAdapte
         EstatePropertyDetailGroupModel item = getItem(position);
         holder.title.setText(item.Title);
         holder.rc.setLayoutManager(new GridLayoutManager(holder.getContext(), 2));
-        holder.rc.setAdapter(new EstatePropertyDetailAdapterSelector(fragmentManager,item));
+        holder.rc.setAdapter(new SearchEstatePropertyDetailAdapterSelector(fragmentManager,item));
         if (position == list.size() - 1) {
             holder.itemSeparator.setVisibility(View.GONE);
             holder.lastItemPadding.setVisibility(View.VISIBLE);

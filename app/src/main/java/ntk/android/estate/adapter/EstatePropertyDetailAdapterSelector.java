@@ -59,9 +59,26 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new VH(parent, viewType).CREATE_HOLDER(parent, viewType);
+        return CREATE_HOLDER(parent, viewType);
     }
-
+    public VH CREATE_HOLDER(ViewGroup parent, int viewType) {
+        if (viewType == 0)//as String
+            return new StringVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
+        if (viewType == 1)//as int
+            return new IntegerVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
+        if (viewType == 2)
+            return new BooleanVH(inflate(parent, R.layout.row_property_detail_boolean_type), viewType);
+        if (viewType == 3)//as float
+            return new FloatVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
+        if (viewType == 4)//as date
+            return new DateVH(inflate(parent, R.layout.row_property_detail_date_type), viewType);
+        if (viewType == 5)//as multiLine text
+            return new MultiLineVH(inflate(parent, R.layout.row_property_detail_textarea_type), viewType);
+        else if (viewType == 11)
+            return new MultiChoiceVH(inflate(parent, R.layout.row_property_detail_stirng_type), 11);
+        else
+            return new SingleChoiceVH(inflate(parent, R.layout.row_property_detail_stirng_type), 12);
+    }
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         holder.bindToView(getItem(position), position);
@@ -75,24 +92,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             viewType = type;
         }
 
-        public VH CREATE_HOLDER(ViewGroup parent, int viewType) {
-            if (viewType == 0)//as String
-                return new StringVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
-            if (viewType == 1)//as int
-                return new IntegerVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
-            if (viewType == 2)
-                return new BooleanVH(inflate(parent, R.layout.row_property_detail_boolean_type), viewType);
-            if (viewType == 3)//as float
-                return new FloatVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
-            if (viewType == 4)//as date
-                return new DateVH(inflate(parent, R.layout.row_property_detail_date_type), viewType);
-            if (viewType == 5)//as multiLine text
-                return new MultiLineVH(inflate(parent, R.layout.row_property_detail_textarea_type), viewType);
-            else if (viewType == 11)
-                return new MultiChoiceVH(inflate(parent, R.layout.row_property_detail_stirng_type), 11);
-            else
-                return new SingleChoiceVH(inflate(parent, R.layout.row_property_detail_stirng_type), 12);
-        }
+
 
         public Context getContext() {
             return itemView.getContext();
