@@ -67,15 +67,15 @@ public class SearchEstateActivity extends BaseActivity {
     private String hintContractTitle1;
     private String hintContractTitle2;
     private String hintContractTitle3;
-    private String hintLandUseTitle1;
-    private String hintLandUseTitle2;
+    private String hintCreatedYearTitle;
+    private String hintPartitionTitle;
 
-    FromToClass contract1;
-    FromToClass contract2;
-    FromToClass contract3;
-    FromToClass area;
-    FromToClass landUse1;
-    FromToClass landUse2;
+    FromToClass rentFromTo;
+    FromToClass saleFromTo;
+    FromToClass depositFromTo;
+    FromToClass areaFromTo;
+    FromToClass createdYearFromTo;
+    FromToClass partitionFromTo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -160,20 +160,20 @@ public class SearchEstateActivity extends BaseActivity {
         ((CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et2).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et3).setEnabled(!b));
         findViewById(R.id.et1).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle1)
-                .setLable(findViewById(R.id.et1)).setCallBack(o -> contract1 = o).show());
+                .setLable(findViewById(R.id.et1)).setCallBack(o -> rentFromTo = o).show());
         findViewById(R.id.et2).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle2)
-                .setLable(findViewById(R.id.et2)).setCallBack(o -> contract2 = o).show());
+                .setLable(findViewById(R.id.et2)).setCallBack(o -> saleFromTo = o).show());
         findViewById(R.id.et3).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle3)
-                .setLable(findViewById(R.id.et3)).setCallBack(o -> contract3 = o).show());
+                .setLable(findViewById(R.id.et3)).setCallBack(o -> depositFromTo = o).show());
     }
 
     private void landUedDetailInit() {
         findViewById(R.id.EstateAreaEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle("مساحت مورد نظر (متر)")
-                .setLable(findViewById(R.id.EstateAreaEditText)).setCallBack(o -> area = o).show());
-        findViewById(R.id.EstatePropertyOneEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintLandUseTitle1)
-                .setLable(findViewById(R.id.EstatePropertyOneEditText)).setCallBack(o -> landUse1 = o).show());
-        findViewById(R.id.EstatePropertyTowEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintLandUseTitle2)
-                .setLable(findViewById(R.id.EstatePropertyTowEditText)).setCallBack(o -> landUse2 = o).show());
+                .setLable(findViewById(R.id.EstateAreaEditText)).setCallBack(o -> areaFromTo = o).show());
+        findViewById(R.id.EstatePropertyOneEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintCreatedYearTitle)
+                .setLable(findViewById(R.id.EstatePropertyOneEditText)).setCallBack(o -> createdYearFromTo = o).show());
+        findViewById(R.id.EstatePropertyTowEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintPartitionTitle)
+                .setLable(findViewById(R.id.EstatePropertyTowEditText)).setCallBack(o -> partitionFromTo = o).show());
 
     }
 
@@ -195,19 +195,28 @@ public class SearchEstateActivity extends BaseActivity {
         if (selectedContractType != null) {
             if (selectedContractType.HasRentPrice)
                 //for contract Type1
-                if (FromToClass.isSet(contract1)) {
+                if (FromToClass.isSet(rentFromTo)) {
 
                 }
             if (selectedContractType.HasSalePrice)
                 //for contract Type2
-                if (FromToClass.isSet(contract2)) {
+                if (FromToClass.isSet(saleFromTo)) {
 
                 }
             if (selectedContractType.HasDepositPrice)
                 //for contract Type3
-                if (FromToClass.isSet(contract3)) {
+                if (FromToClass.isSet(depositFromTo)) {
 
                 }
+            //for area filter
+            if (FromToClass.isSet(areaFromTo))
+            {}
+            if (FromToClass.isSet(createdYearFromTo))
+            {}
+            if (FromToClass.isSet(partitionFromTo))
+            {
+
+            }
         }
 
     }
@@ -312,12 +321,12 @@ public class SearchEstateActivity extends BaseActivity {
             findViewById(R.id.landUsedDetailCardView_seprator).setVisibility(View.VISIBLE);
         }
         if (selectPropertyTypeLanduse.TitleCreatedYaer != null && !selectPropertyTypeLanduse.TitleCreatedYaer.equals("") && !selectPropertyTypeLanduse.TitleCreatedYaer.equals("---")) {
-            hintLandUseTitle1 = selectPropertyTypeLanduse.TitleCreatedYaer;
+            hintCreatedYearTitle = selectPropertyTypeLanduse.TitleCreatedYaer;
             findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.VISIBLE);
             ((TextInputLayout) findViewById(R.id.EstatePropertyOneTextInput)).setHint(selectPropertyTypeLanduse.TitleCreatedYaer);
         } else findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.GONE);
         if (selectPropertyTypeLanduse.TitlePartition != null && !selectPropertyTypeLanduse.TitlePartition.equals("") && !selectPropertyTypeLanduse.TitlePartition.equals("---")) {
-            hintLandUseTitle2 = selectPropertyTypeLanduse.TitlePartition;
+            hintPartitionTitle = selectPropertyTypeLanduse.TitlePartition;
             findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.VISIBLE);
             ((TextInputLayout) findViewById(R.id.EstatePropertyTowTextInput)).setHint(selectPropertyTypeLanduse.TitlePartition);
         } else findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.GONE);
