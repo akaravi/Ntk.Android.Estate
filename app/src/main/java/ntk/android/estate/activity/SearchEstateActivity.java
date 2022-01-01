@@ -63,7 +63,7 @@ public class SearchEstateActivity extends BaseActivity {
     private EstatePropertyTypeUsageModel selectedPropertyTypeUsage;
     private EstatePropertyTypeLanduseModel selectPropertyTypeLanduse;
     private EstateContractTypeModel selectedContractType;
-
+    private List<EstatePropertyDetailGroupModel> SelectedPropertyDetailGroupModel;
     private String hintContractTitle1;
     private String hintContractTitle2;
     private String hintContractTitle3;
@@ -160,20 +160,20 @@ public class SearchEstateActivity extends BaseActivity {
         ((CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et2).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et3).setEnabled(!b));
         findViewById(R.id.et1).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle1)
-                .setLable(findViewById(R.id.et1)).setCallBack(o -> rentFromTo = o).show());
+                .setLable(findViewById(R.id.et1)).setPreviousValue(rentFromTo).setCallBack(o -> rentFromTo = o).show());
         findViewById(R.id.et2).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle2)
-                .setLable(findViewById(R.id.et2)).setCallBack(o -> saleFromTo = o).show());
+                .setLable(findViewById(R.id.et2)).setPreviousValue(saleFromTo).setCallBack(o -> saleFromTo = o).show());
         findViewById(R.id.et3).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle3)
-                .setLable(findViewById(R.id.et3)).setCallBack(o -> depositFromTo = o).show());
+                .setLable(findViewById(R.id.et3)).setPreviousValue(depositFromTo).setCallBack(o -> depositFromTo = o).show());
     }
 
     private void landUedDetailInit() {
         findViewById(R.id.EstateAreaEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle("مساحت مورد نظر (متر)")
-                .setLable(findViewById(R.id.EstateAreaEditText)).setCallBack(o -> areaFromTo = o).show());
+                .setLable(findViewById(R.id.EstateAreaEditText)).setPreviousValue(areaFromTo).setCallBack(o -> areaFromTo = o).show());
         findViewById(R.id.EstatePropertyOneEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintCreatedYearTitle)
-                .setLable(findViewById(R.id.EstatePropertyOneEditText)).setCallBack(o -> createdYearFromTo = o).show());
+                .setLable(findViewById(R.id.EstatePropertyOneEditText)).setPreviousValue(createdYearFromTo).setCallBack(o -> createdYearFromTo = o).show());
         findViewById(R.id.EstatePropertyTowEditText).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintPartitionTitle)
-                .setLable(findViewById(R.id.EstatePropertyTowEditText)).setCallBack(o -> partitionFromTo = o).show());
+                .setLable(findViewById(R.id.EstatePropertyTowEditText)).setPreviousValue(partitionFromTo).setCallBack(o -> partitionFromTo = o).show());
 
     }
 
@@ -193,32 +193,71 @@ public class SearchEstateActivity extends BaseActivity {
             filter.addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeUsageId").setStringValue(selectedPropertyTypeUsage.Id).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
         //for contract
         if (selectedContractType != null) {
+            filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("Id").setStringValue(selectedContractType.Id).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
+
             if (selectedContractType.HasRentPrice)
                 //for contract Type1
-                if (FromToClass.isSet(rentFromTo)) {
+                if (rentFromTo != null) {
+                    if (rentFromTo.getFrom() != null)
+                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPrice").setIntValue(((Long) rentFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+                    if (rentFromTo.getTo() != null)
+                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPrice").setIntValue(((Long) rentFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
 
                 }
             if (selectedContractType.HasSalePrice)
                 //for contract Type2
-                if (FromToClass.isSet(saleFromTo)) {
+                if ((saleFromTo) != null) {
+                    if (saleFromTo.getFrom() != null)
+                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePrice").setIntValue(((Long) saleFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+                    if (saleFromTo.getTo() != null)
+                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePrice").setIntValue(((Long) saleFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
 
                 }
-            if (selectedContractType.HasDepositPrice)
+            if (selectedContractType.HasDepositPrice) {
                 //for contract Type3
-                if (FromToClass.isSet(depositFromTo)) {
-
-                }
+                if (depositFromTo.getFrom() != null)
+                    filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+                if (depositFromTo.getTo() != null)
+                    filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+            }
             //for area filter
-            if (FromToClass.isSet(areaFromTo))
-            {}
-            if (FromToClass.isSet(createdYearFromTo))
-            {}
-            if (FromToClass.isSet(partitionFromTo))
-            {
+            if (areaFromTo != null) {
+                if (areaFromTo.getFrom() != null)
+                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) areaFromTo.getFrom()).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+                if (areaFromTo.getTo() != null)
+                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) areaFromTo.getTo()).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
 
             }
+            //for created year
+            if (createdYearFromTo != null) {
+                if (createdYearFromTo.getFrom() != null)
+                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) createdYearFromTo.getFrom()).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+                if (createdYearFromTo.getTo() != null)
+                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) createdYearFromTo.getTo()).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+            }
+            if (partitionFromTo != null) {
+                if (partitionFromTo.getFrom() != null)
+                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) partitionFromTo.getFrom()).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+                if (partitionFromTo.getTo() != null)
+                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) partitionFromTo.getTo()).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+            }
+            if (SelectedPropertyDetailGroupModel != null) {
+                FilterDataModel details = new FilterDataModel();
+                for (int i = 0; i < SelectedPropertyDetailGroupModel.size(); i++) {
+                    for (EstatePropertyDetailValueModel t : SelectedPropertyDetailGroupModel.get(i).PropertyValues) {
+                        if (t.Value != null && !t.Value.equals("") && !t.Value.equals("false")) {
+                            FilterDataModel detailFilterModels = new FilterDataModel();
+                            FilterDataModel f1 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("Id").setStringValue(t.Id).setClauseType(EnumClauseType.And);
+                            FilterDataModel f2 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("Value").setStringValue(t.Value).setClauseType(EnumClauseType.And);
+                            detailFilterModels.addInnerFilter(f1).addInnerFilter(f2);
+                            details.addInnerFilter(detailFilterModels);
+                        }
+                    }
+                }
+                filter.addFilter(details);
+            }
+            EstateListWithFilterActivity.START_NEW(this,filter,"جست و جو پیشرفته");
         }
-
     }
 
     private View.OnClickListener expandLister(View expandableView, ImageView arrowBtn) {
@@ -337,7 +376,8 @@ public class SearchEstateActivity extends BaseActivity {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyDetailGroupModel> response) {
                 //create list of values base on details
-                StreamSupport.stream(response.ListItems).
+                SelectedPropertyDetailGroupModel = response.ListItems;
+                StreamSupport.stream(SelectedPropertyDetailGroupModel).
                         forEach(estatePropertyDetailGroupModel -> {
                             estatePropertyDetailGroupModel.PropertyValues = new ArrayList<>();
                             StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails)
@@ -348,7 +388,7 @@ public class SearchEstateActivity extends BaseActivity {
                                         estatePropertyDetailGroupModel.PropertyValues.add(value);
                                     });
                         });
-                SearchPropertyDetailGroupAdapterSelector adapter = new SearchPropertyDetailGroupAdapterSelector(response.ListItems, findViewById(R.id.nestedScrool), getSupportFragmentManager());
+                SearchPropertyDetailGroupAdapterSelector adapter = new SearchPropertyDetailGroupAdapterSelector(SelectedPropertyDetailGroupModel, findViewById(R.id.nestedScrool), getSupportFragmentManager());
                 RecyclerView rc = (findViewById(R.id.detailRc));
                 rc.setAdapter(adapter);
                 rc.setLayoutManager(new LinearLayoutManager(SearchEstateActivity.this, RecyclerView.VERTICAL, false));

@@ -61,7 +61,6 @@ public class MainActivity3 extends BaseMainActivity {
         drawerRecycler.setAdapter(adapter);
         drawerRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         init();
-       startActivity(new Intent(this,SearchEstateActivity.class));
         //get news
         HandelSlider();
         //get landUsed property

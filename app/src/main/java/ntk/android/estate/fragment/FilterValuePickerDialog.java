@@ -9,6 +9,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import es.dmoral.toasty.Toasty;
 import java9.util.function.Consumer;
 import ntk.android.base.appclass.FromToClass;
 import ntk.android.base.utill.FontManager;
@@ -20,6 +21,8 @@ public class FilterValuePickerDialog {
     String title;
     Consumer consumer;
     TextInputEditText et;
+    Long from;
+    Long to;
 
     public FilterValuePickerDialog(Context context) {
         this.context = context;
@@ -27,6 +30,16 @@ public class FilterValuePickerDialog {
 
     public FilterValuePickerDialog setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public FilterValuePickerDialog setPreviousValue(FromToClass prev) {
+        if (prev != null) {
+            if (prev.getFrom() != null)
+                from = (long) prev.getFrom();
+            if (prev.getTo() != null)
+                to = (long) prev.getTo();
+        }
         return this;
     }
 
@@ -55,10 +68,17 @@ public class FilterValuePickerDialog {
         ((TextInputLayout) bottomSheetDialog.findViewById(R.id.fromTextInput)).setTypeface(t1);
         fromEt.setTypeface(t1);
         toEt.setTypeface(t1);
+
         //add separator
         fromEt.addTextChangedListener(new NumberTextWatcherForThousand(fromEt));
         toEt.addTextChangedListener(new NumberTextWatcherForThousand(toEt));
         titleTv.setText(title);
+        //set prev value
+        if (from != null)
+            fromEt.setText(String.valueOf(from));
+        if (to != null)
+            toEt.setText(String.valueOf(to));
+
         //add click listener for add
         filterBtn.setOnClickListener(view -> {
             FromToClass fromToClass = new FromToClass();
@@ -67,19 +87,27 @@ public class FilterValuePickerDialog {
 
 
             String t = "";
-
-                if (!fromStr.equals("")) {
-                    fromToClass.setFrom(Long.getLong(NumberTextWatcherForThousand.trimCommaOfString(fromStr)));
-                    t += ("از " + fromStr+"  ");
-                }
-                if (!toStr.equals("")) {
-                    fromToClass.setTo(Long.getLong(NumberTextWatcherForThousand.trimCommaOfString(toStr)));
-                    t +=("تا " + toStr);
-                }
+            Long fromLong = 0L;
+            Long toLong = 0L;
+            if (!fromStr.equals("")) {
+                fromLong = Long.valueOf(NumberTextWatcherForThousand.trimCommaOfString(fromStr));
+                fromToClass.setFrom(fromLong);
+                t += ("از " + fromStr + "  ");
+            } else
+                fromToClass.setFrom(null);
+            if (!toStr.equals("")) {
+                toLong = Long.valueOf(NumberTextWatcherForThousand.trimCommaOfString(toStr));
+                fromToClass.setTo(toLong);
+                t += ("تا " + toStr);
+            } else
+                fromToClass.setTo(null);
             et.setText(t);
-
-            consumer.accept(fromToClass);
-            bottomSheetDialog.dismiss();
+            if (fromLong > toLong) {
+                Toasty.error(context, "اعداد انتخابی به نادرستی انتخاب شده است").show();
+            } else {
+                consumer.accept(fromToClass);
+                bottomSheetDialog.dismiss();
+            }
         });
         bottomSheetDialog.show();
     }
