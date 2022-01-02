@@ -28,7 +28,6 @@ public class NewEstateFragment5 extends BaseFragment {
 
     private static final int MAIN_IMAGE_REQ = 213;
 
-
     @Override
     public void onCreateFragment() {
         setContentView(R.layout.fragment_new_estate_5);
@@ -38,7 +37,6 @@ public class NewEstateFragment5 extends BaseFragment {
     public void onViewCreated(@androidx.annotation.NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViewById(R.id.selectMainImage).setOnClickListener(t -> selectMainImage());
-
     }
 
 

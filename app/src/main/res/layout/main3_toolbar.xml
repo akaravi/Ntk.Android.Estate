@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
+                android:maxLines="1"
                 android:padding="4dp"
                 android:hint="جست و جو ..."
                 android:textColorHint="@color/main3_toolbar_hint"
