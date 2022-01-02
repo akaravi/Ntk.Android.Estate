@@ -36,7 +36,9 @@ import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.ErrorExceptionBase;
+import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
+import ntk.android.base.entitymodel.enums.EnumSortType;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.AppUtil;
@@ -44,6 +46,7 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstateContractAdapter;
+import ntk.android.estate.adapter.EstatePropertiesInDetailAdapter;
 import ntk.android.estate.adapter.EstatePropertyAdapter;
 import ntk.android.estate.adapter.ImageSliderAdapter;
 import ntk.android.estate.adapter.PropertyDetailGroupsAdapter;
@@ -146,7 +149,9 @@ public class EstateDetailActivity extends BaseActivity {
                             bindContentData();
                             //get all related estate
                             FilterModel getAllFilter = new FilterModel();
-                            //todo witch filterModel
+                            getAllFilter.setSortType(EnumSortType.Descending.index());
+                            getAllFilter.addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeLanduseId")
+                                    .setStringValue(model.LinkPropertyTypeLanduseId));
                             getSimilar(getAllFilter);
                         }
 
@@ -169,7 +174,7 @@ public class EstateDetailActivity extends BaseActivity {
 
                     @Override
                     protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
-                        EstatePropertyAdapter adapter = new EstatePropertyAdapter( response.ListItems);
+                        EstatePropertiesInDetailAdapter adapter = new EstatePropertiesInDetailAdapter(response.ListItems);
                         RecyclerView rc = findViewById(R.id.RcAllEstate);
                         rc.setAdapter(adapter);
                         rc.setLayoutManager(new LinearLayoutManager(EstateDetailActivity.this, RecyclerView.HORIZONTAL, false));
@@ -186,7 +191,7 @@ public class EstateDetailActivity extends BaseActivity {
         if (model.AboutAgentTel != null) {
             findViewById(R.id.phoneButton).setVisibility(View.VISIBLE);
             findViewById(R.id.telPadding).setVisibility(View.VISIBLE);
-        
+
         }
         ((TextView) findViewById(R.id.txtArea)).setText(model.LinkLocationIdParentTitle + " - " + model.LinkLocationIdTitle);
         if (model.IsFavorite)

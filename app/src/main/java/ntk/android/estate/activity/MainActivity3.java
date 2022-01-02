@@ -161,8 +161,6 @@ public class MainActivity3 extends BaseMainActivity {
 
                         rc.setAdapter(new Main3EstatePropertyAdapter(response.ListItems));
                         rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
-//                        SnapHelper snapHelper = new PagerSnapHelper();
-//                        snapHelper.attachToRecyclerView(rc);
                         ViewCompat.setNestedScrollingEnabled(rc, false);
                         ShimmerFrameLayout shimmerFrameLayout = (ShimmerFrameLayout) view.findViewById(R.id.shimmer_rc);
                         shimmerFrameLayout.stopShimmerAnimation();
