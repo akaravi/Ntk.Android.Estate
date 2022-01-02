@@ -207,9 +207,10 @@ public class SearchEstateActivity extends BaseActivity {
                             filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPrice").setIntValue(((Long) rentFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
 
                     }
-            }else {
+            } else {
                 filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
-            }if (!priceCB.isChecked()) {
+            }
+            if (!priceCB.isChecked()) {
                 if (selectedContractType.HasSalePrice)
                     //for contract Type2
                     if ((saleFromTo) != null) {
@@ -219,7 +220,7 @@ public class SearchEstateActivity extends BaseActivity {
                             filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePrice").setIntValue(((Long) saleFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
 
                     }
-            }else{
+            } else {
                 filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
 
             }
@@ -231,48 +232,48 @@ public class SearchEstateActivity extends BaseActivity {
                     if (depositFromTo.getTo() != null)
                         filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
                 }
-            }else{
+            } else {
                 filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
 
             }
-            //for area filter
-            if (areaFromTo != null) {
-                if (areaFromTo.getFrom() != null)
-                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) areaFromTo.getFrom()).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
-                if (areaFromTo.getTo() != null)
-                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) areaFromTo.getTo()).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+        }
+        //for area filter
+        if (areaFromTo != null) {
+            if (areaFromTo.getFrom() != null)
+                filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) areaFromTo.getFrom()).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+            if (areaFromTo.getTo() != null)
+                filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) areaFromTo.getTo()).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
 
-            }
-            //for created year
-            if (createdYearFromTo != null) {
-                if (createdYearFromTo.getFrom() != null)
-                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) createdYearFromTo.getFrom()).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
-                if (createdYearFromTo.getTo() != null)
-                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) createdYearFromTo.getTo()).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
-            }
-            if (partitionFromTo != null) {
-                if (partitionFromTo.getFrom() != null)
-                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) partitionFromTo.getFrom()).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
-                if (partitionFromTo.getTo() != null)
-                    filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) partitionFromTo.getTo()).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
-            }
-            if (SelectedPropertyDetailGroupModel != null) {
-                FilterDataModel details = new FilterDataModel();
-                for (int i = 0; i < SelectedPropertyDetailGroupModel.size(); i++) {
-                    for (EstatePropertyDetailValueModel t : SelectedPropertyDetailGroupModel.get(i).PropertyValues) {
-                        if (t.Value != null && !t.Value.equals("") && !t.Value.equals("false")) {
-                            FilterDataModel detailFilterModels = new FilterDataModel();
-                            FilterDataModel f1 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("Id").setStringValue(t.Id).setClauseType(EnumClauseType.And);
-                            FilterDataModel f2 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("Value").setStringValue(t.Value).setClauseType(EnumClauseType.And);
-                            detailFilterModels.addInnerFilter(f1).addInnerFilter(f2);
-                            details.addInnerFilter(detailFilterModels);
-                        }
+        }
+        //for created year
+        if (createdYearFromTo != null) {
+            if (createdYearFromTo.getFrom() != null)
+                filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) createdYearFromTo.getFrom()).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+            if (createdYearFromTo.getTo() != null)
+                filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) createdYearFromTo.getTo()).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+        }
+        if (partitionFromTo != null) {
+            if (partitionFromTo.getFrom() != null)
+                filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) partitionFromTo.getFrom()).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+            if (partitionFromTo.getTo() != null)
+                filter.addFilter(new FilterDataModel().setPropertyName("Area").setIntValue((Long) partitionFromTo.getTo()).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+        }
+        if (SelectedPropertyDetailGroupModel != null) {
+            FilterDataModel details = new FilterDataModel();
+            for (int i = 0; i < SelectedPropertyDetailGroupModel.size(); i++) {
+                for (EstatePropertyDetailValueModel t : SelectedPropertyDetailGroupModel.get(i).PropertyValues) {
+                    if (t.Value != null && !t.Value.equals("") && !t.Value.equals("false")) {
+                        FilterDataModel detailFilterModels = new FilterDataModel();
+                        FilterDataModel f1 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("Id").setStringValue(t.Id).setClauseType(EnumClauseType.And);
+                        FilterDataModel f2 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("Value").setStringValue(t.Value).setClauseType(EnumClauseType.And);
+                        detailFilterModels.addInnerFilter(f1).addInnerFilter(f2);
+                        details.addInnerFilter(detailFilterModels);
                     }
                 }
-                filter.addFilter(details);
             }
-            EstateListWithFilterActivity.START_NEW(this, filter, "جست و جو پیشرفته");
+            filter.addFilter(details);
         }
+        EstateListWithFilterActivity.START_NEW(this, filter, "جست و جو پیشرفته");
     }
 
     private View.OnClickListener expandLister(View expandableView, ImageView arrowBtn) {
