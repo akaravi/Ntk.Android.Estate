@@ -442,21 +442,7 @@ public class SearchEstateActivity extends BaseActivity {
     private void ContractTypeSelecting(EstateContractTypeModel model) {
         clearAllInput();
         selectedContractType = model;
-        if (model.HasSalePrice || model.HasRentPrice || model.HasDepositPrice) {
-            if (findViewById(R.id.contractDetailCardView).getVisibility() == View.GONE) {
-                TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
-                findViewById(R.id.contractDetailCardView).setVisibility(View.VISIBLE);
-                findViewById(R.id.contractDetailCardView_seprator).setVisibility(View.VISIBLE);
-            }
-        } else {
-            //hide details
 
-            if (findViewById(R.id.contractDetailCardView).getVisibility() == View.VISIBLE) {
-                TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
-                findViewById(R.id.contractDetailCardView).setVisibility(View.GONE);
-                findViewById(R.id.contractDetailCardView_seprator).setVisibility(View.GONE);
-            }
-        }
         TextInputLayout et1 = findViewById(R.id.etl1);
         String preTitle = "محدوده ی مبلغ برای ";
         hintContractTitle1 = preTitle + model.TitleRentPrice;
@@ -479,6 +465,21 @@ public class SearchEstateActivity extends BaseActivity {
         (findViewById(R.id.et3)).setFocusable(false);
         findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
+        if (model.HasSalePrice || model.HasRentPrice || model.HasDepositPrice) {
+            if (findViewById(R.id.contractDetailCardView).getVisibility() == View.GONE) {
+                TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
+                findViewById(R.id.contractDetailCardView).setVisibility(View.VISIBLE);
+                findViewById(R.id.contractDetailCardView_seprator).setVisibility(View.VISIBLE);
+            }
+        } else {
+            //hide details
+
+            if (findViewById(R.id.contractDetailCardView).getVisibility() == View.VISIBLE) {
+                TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
+                findViewById(R.id.contractDetailCardView).setVisibility(View.GONE);
+                findViewById(R.id.contractDetailCardView_seprator).setVisibility(View.GONE);
+            }
+        }
     }
 
     private void clearAllInput() {

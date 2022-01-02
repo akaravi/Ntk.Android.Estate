@@ -102,7 +102,7 @@ public class FilterValuePickerDialog {
             } else
                 fromToClass.setTo(null);
             et.setText(t);
-            if (fromLong > toLong) {
+            if (toLong!=0&&fromLong > toLong) {
                 Toasty.error(context, "اعداد انتخابی به نادرستی انتخاب شده است").show();
             } else {
                 consumer.accept(fromToClass);
