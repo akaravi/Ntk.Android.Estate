@@ -26,7 +26,7 @@ import ntk.android.estate.activity.EstateDetailActivity;
 public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyModel, EstatePropertyAdapter.VH> {
     Date now;
 
-    public EstatePropertyAdapter( List<EstatePropertyModel> models) {
+    public EstatePropertyAdapter(List<EstatePropertyModel> models) {
         super(models);
         now = AppUtil.Now();
     }
@@ -80,7 +80,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
 
         public VH(@NonNull View itemView) {
             super(itemView);
-          creating();
+            creating();
         }
 
         protected void creating() {
@@ -126,14 +126,16 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
             for (EstateContractModel m :
                     item.Contracts) {
                 if (m.ContractType.HasSalePrice) {
-                    priceTitle1.setText(m.ContractType.Title);
+                    priceTitle1.setText(m.ContractType.Title+" :");
                     if (m.SalePrice != null || m.SalePriceByAgreement) {
                         priceTitle1.setVisibility(View.VISIBLE);
                         price1.setVisibility(View.VISIBLE);
+                        String price = "";
                         if (m.SalePrice != null && m.SalePrice != 0)
-                            price1.setText(NViewUtils.PriceFormat(m.SalePrice) + "  " + m.UnitSalePrice);
+                            price = NViewUtils.PriceFormat(m.SalePrice) + "  " + m.UnitSalePrice;
                         if (m.SalePriceByAgreement)
-                            price1.setText(price1.getText().toString().isEmpty() ? "توافقی" : price1.getText().toString() + "|| توافقی");
+                           price=(price.isEmpty() ? "توافقی" : price + "||" + " توافقی");
+                        price1.setText(price);
                     } else {
                         priceTitle1.setVisibility(View.VISIBLE);
                         priceTitle1.setText("جهت :" + m.ContractType.Title);
@@ -144,14 +146,16 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
 
                 }
                 if (m.ContractType.HasDepositPrice) {
-                    priceTitle2.setText(m.ContractType.Title);
+                    priceTitle2.setText(m.ContractType.Title+" :");
                     if (m.DepositPrice != null || m.DepositPriceByAgreement) {
                         priceTitle2.setVisibility(View.VISIBLE);
                         price2.setVisibility(View.VISIBLE);
+                        String price = "";
                         if (m.DepositPrice != null && m.DepositPrice != 0)
-                            price2.setText(NViewUtils.PriceFormat(m.DepositPrice) + "  " + m.UnitSalePrice);
+                            price=(NViewUtils.PriceFormat(m.DepositPrice) + "  " + m.UnitSalePrice);
                         if (m.DepositPriceByAgreement)
-                            price2.setText(price2.getText().toString().isEmpty() ? "توافقی" : price2.getText().toString() + "|| توافقی");
+                            price=(price.isEmpty() ? "توافقی" : price + "||" + " توافقی");
+                        price2.setText(price);
                     } else {
                         priceTitle2.setVisibility(View.VISIBLE);
                         priceTitle2.setText("جهت :" + m.ContractType.Title);
@@ -162,14 +166,16 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
 
                 }
                 if (m.ContractType.HasRentPrice) {
-                    priceTitle3.setText(m.ContractType.Title);
+                    priceTitle3.setText(m.ContractType.Title+" :");
                     if (m.RentPrice != null || m.RentPriceByAgreement) {
                         priceTitle3.setVisibility(View.VISIBLE);
                         price3.setVisibility(View.VISIBLE);
+                        String price = "";
                         if (m.RentPrice != null && m.RentPrice != 0)
-                            price3.setText(NViewUtils.PriceFormat(m.RentPrice) + "  " + m.UnitSalePrice);
+                            price=(NViewUtils.PriceFormat(m.RentPrice) + "  " + m.UnitSalePrice);
                         if (m.RentPriceByAgreement)
-                            price3.setText(price3.getText().toString().isEmpty() ? "توافقی" : price3.getText().toString() + "|| توافقی");
+                            price=(price.isEmpty() ? "توافقی" : price + "||" + " توافقی");
+                        price3.setText(price);
                     } else {
                         priceTitle3.setVisibility(View.VISIBLE);
                         priceTitle3.setText("جهت :" + m.ContractType.Title);
