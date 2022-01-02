@@ -442,7 +442,6 @@ public class SearchEstateActivity extends BaseActivity {
     private void ContractTypeSelecting(EstateContractTypeModel model) {
         clearAllInput();
         selectedContractType = model;
-
         TextInputLayout et1 = findViewById(R.id.etl1);
         String preTitle = "محدوده ی مبلغ برای ";
         hintContractTitle1 = preTitle + model.TitleRentPrice;
