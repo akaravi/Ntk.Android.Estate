@@ -194,31 +194,46 @@ public class SearchEstateActivity extends BaseActivity {
         //for contract
         if (selectedContractType != null) {
             filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("Id").setStringValue(selectedContractType.Id).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
+            CheckBox priceCB = (CheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb);
+            CheckBox rentCB = (CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb);
+            CheckBox depositCB = (CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb);
+            if (!rentCB.isChecked()) {
+                if (selectedContractType.HasRentPrice)
+                    //for contract Type1
+                    if (rentFromTo != null) {
+                        if (rentFromTo.getFrom() != null)
+                            filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPrice").setIntValue(((Long) rentFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+                        if (rentFromTo.getTo() != null)
+                            filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPrice").setIntValue(((Long) rentFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
 
-            if (selectedContractType.HasRentPrice)
-                //for contract Type1
-                if (rentFromTo != null) {
-                    if (rentFromTo.getFrom() != null)
-                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPrice").setIntValue(((Long) rentFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
-                    if (rentFromTo.getTo() != null)
-                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPrice").setIntValue(((Long) rentFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+                    }
+            }else {
+                filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
+            }if (!priceCB.isChecked()) {
+                if (selectedContractType.HasSalePrice)
+                    //for contract Type2
+                    if ((saleFromTo) != null) {
+                        if (saleFromTo.getFrom() != null)
+                            filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePrice").setIntValue(((Long) saleFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+                        if (saleFromTo.getTo() != null)
+                            filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePrice").setIntValue(((Long) saleFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
 
+                    }
+            }else{
+                filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
+
+            }
+            if (!depositCB.isChecked()) {
+                if (selectedContractType.HasDepositPrice) {
+                    //for contract Type3
+                    if (depositFromTo.getFrom() != null)
+                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+                    if (depositFromTo.getTo() != null)
+                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
                 }
-            if (selectedContractType.HasSalePrice)
-                //for contract Type2
-                if ((saleFromTo) != null) {
-                    if (saleFromTo.getFrom() != null)
-                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePrice").setIntValue(((Long) saleFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
-                    if (saleFromTo.getTo() != null)
-                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePrice").setIntValue(((Long) saleFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+            }else{
+                filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
 
-                }
-            if (selectedContractType.HasDepositPrice) {
-                //for contract Type3
-                if (depositFromTo.getFrom() != null)
-                    filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
-                if (depositFromTo.getTo() != null)
-                    filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
             }
             //for area filter
             if (areaFromTo != null) {
@@ -256,7 +271,7 @@ public class SearchEstateActivity extends BaseActivity {
                 }
                 filter.addFilter(details);
             }
-            EstateListWithFilterActivity.START_NEW(this,filter,"جست و جو پیشرفته");
+            EstateListWithFilterActivity.START_NEW(this, filter, "جست و جو پیشرفته");
         }
     }
 
