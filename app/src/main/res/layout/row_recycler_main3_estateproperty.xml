@@ -16,13 +16,15 @@
         <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"    android:text="  "
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minLines="2" />
+            android:minLines="2"
+            android:text="  " />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -47,8 +49,8 @@
                         android:layout_marginEnd="5.0dip"
                         android:layout_marginRight="5.0dip"
                         android:maxLines="1"
-                        android:text="  "
                         android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/gray"
                         android:textSize="12sp" />
 
@@ -56,9 +58,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="  "
                         android:maxLines="1"
                         android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/colorSecondaryDark"
                         android:textSize="15sp" />
                 </RelativeLayout>
@@ -75,8 +77,9 @@
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="5.0dip"
                         android:layout_marginRight="5.0dip"
-                        android:maxLines="1"    android:text="  "
+                        android:maxLines="1"
                         android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/gray"
                         android:textSize="15sp" />
 
@@ -85,8 +88,9 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@+id/t1"
-                        android:maxLines="1"    android:text="  "
+                        android:maxLines="1"
                         android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/colorSecondaryDark"
                         android:textSize="15sp" />
                 </RelativeLayout>
@@ -104,7 +108,8 @@
                         android:layout_marginEnd="5.0dip"
                         android:layout_marginRight="5.0dip"
                         android:maxLines="1"
-                        android:singleLine="true"    android:text="  "
+                        android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/gray"
                         android:textSize="15sp" />
 
@@ -113,8 +118,9 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@+id/t1"
-                        android:maxLines="1"    android:text="  "
+                        android:maxLines="1"
                         android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/colorSecondaryDark"
                         android:textSize="15sp" />
                 </RelativeLayout>
@@ -137,10 +143,11 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="5.0dip"    android:text="  "
+                        android:layout_marginEnd="5.0dip"
                         android:layout_marginRight="5.0dip"
                         android:maxLines="1"
                         android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/gray"
                         android:textSize="12sp" />
 
@@ -148,11 +155,12 @@
                         android:id="@+id/txtPrice1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"    android:text="  "
-
+                        android:layout_centerVertical="true"
                         android:layout_toLeftOf="@+id/txtPrice1Title1"
+
                         android:maxLines="1"
                         android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/colorSecondaryDark"
                         android:textSize="15sp" />
                 </RelativeLayout>
@@ -166,11 +174,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"    android:text="  "
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="5.0dip"
                         android:layout_marginRight="5.0dip"
                         android:maxLines="1"
                         android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/gray"
                         android:textSize="15sp" />
 
@@ -181,7 +190,8 @@
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@+id/txtPriceTitle2"
                         android:maxLines="1"
-                        android:singleLine="true"    android:text="  "
+                        android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/colorSecondaryDark"
                         android:textSize="15sp" />
                 </RelativeLayout>
@@ -199,7 +209,8 @@
                         android:layout_marginEnd="5.0dip"
                         android:layout_marginRight="5.0dip"
                         android:maxLines="1"
-                        android:singleLine="true"    android:text="  "
+                        android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/gray"
                         android:textSize="15sp" />
 
@@ -210,7 +221,8 @@
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@+id/txtPriceTitle3"
                         android:maxLines="1"
-                        android:singleLine="true"    android:text="  "
+                        android:singleLine="true"
+                        android:text="  "
                         android:textColor="@color/colorSecondaryDark"
                         android:textSize="15sp" />
                 </RelativeLayout>
