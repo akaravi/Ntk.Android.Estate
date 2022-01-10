@@ -193,7 +193,7 @@ public class SearchEstateActivity extends BaseActivity {
             filter.addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeUsageId").setStringValue(selectedPropertyTypeUsage.Id).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
         //for contract
         if (selectedContractType != null) {
-            filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("Id").setStringValue(selectedContractType.Id).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
+            filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("LinkEstateContractTypeId").setStringValue(selectedContractType.Id).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
             CheckBox priceCB = (CheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb);
             CheckBox rentCB = (CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb);
             CheckBox depositCB = (CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb);
