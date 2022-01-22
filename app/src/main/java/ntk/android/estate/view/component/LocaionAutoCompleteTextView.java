@@ -28,7 +28,7 @@ import ntk.android.estate.activity.GetLocationActivity;
 
 
 public class LocaionAutoCompleteTextView {
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public void addOnAutoCompleteTextViewTextChangedObserver(final AutoCompleteTextView autoCompleteTextView,Consumer<CoreLocationModel> func) {
         Observable<ErrorException<CoreLocationModel>> autocompleteResponseObservable =

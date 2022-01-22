@@ -57,9 +57,9 @@ public class FilterValuePickerDialog {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         bottomSheetDialog.setContentView(R.layout.search_value_picker_dialog);
         Typeface t1 = FontManager.T1_Typeface(context);
-        TextView titleTv = (TextView) bottomSheetDialog.findViewById(R.id.valueTitleTv);
-        TextInputEditText fromEt = (TextInputEditText) bottomSheetDialog.findViewById(R.id.fromEditText);
-        TextInputEditText toEt = (TextInputEditText) bottomSheetDialog.findViewById(R.id.toEditText);
+        TextView titleTv = bottomSheetDialog.findViewById(R.id.valueTitleTv);
+        TextInputEditText fromEt = bottomSheetDialog.findViewById(R.id.fromEditText);
+        TextInputEditText toEt = bottomSheetDialog.findViewById(R.id.toEditText);
         MaterialButton filterBtn = bottomSheetDialog.findViewById(R.id.setFilterBtn);
         //set font
         titleTv.setTypeface(t1);

@@ -27,8 +27,8 @@ public class GridMenuAdapter  extends ArrayAdapter<GridMenu> {
             convertView = mInflater.inflate(R.layout.item_grid_menu, null, false);
 
             holder = new Holder();
-            holder.menuTitle = (TextView) convertView.findViewById(R.id.item_grid_title);
-            holder.menuIcon = (SquaredImageView) convertView.findViewById(R.id.item_grid_icon);
+            holder.menuTitle = convertView.findViewById(R.id.item_grid_title);
+            holder.menuIcon = convertView.findViewById(R.id.item_grid_icon);
 
             convertView.setTag(holder);
         } else {

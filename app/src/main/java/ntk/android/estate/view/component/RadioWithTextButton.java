@@ -35,7 +35,7 @@ public class RadioWithTextButton extends View {
     private Rect f18233g = null;
 
     /* renamed from: h */
-    private Typeface f18234h = Typeface.createFromAsset(getContext().getAssets(), "fonts/IRAN-Sans-Regular.ttf");
+    private final Typeface f18234h = Typeface.createFromAsset(getContext().getAssets(), "fonts/IRAN-Sans-Regular.ttf");
 
     /* renamed from: i */
     private final Rect f18235i = new Rect();
@@ -73,7 +73,7 @@ public class RadioWithTextButton extends View {
     }
 
     public boolean isChecked() {
-        return (this.f18230d == null && this.f18232f == null) ? false : true;
+        return this.f18230d != null || this.f18232f != null;
     }
 
     /* access modifiers changed from: protected */

@@ -296,10 +296,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
                     item.Value = "false";
             });
             if (item.Value != null) {
-                if (item.Value.equals("true"))
-                    checkBox.setChecked(true);
-                else
-                    checkBox.setChecked(false);
+                checkBox.setChecked(item.Value.equals("true"));
             }
         }
     }

@@ -19,7 +19,7 @@ import ntk.android.estate.R;
 
 public class EstateContractAdapterSelector extends BaseRecyclerAdapter<EstateContractTypeModel, EstateContractAdapterSelector.VH> {
     int lastSelected;
-    private Consumer<EstateContractTypeModel> caller;
+    private final Consumer<EstateContractTypeModel> caller;
 
     public EstateContractAdapterSelector(List<EstateContractTypeModel> list, Consumer<EstateContractTypeModel> selector) {
         super(list);

@@ -20,7 +20,7 @@ public class CustomTextInputLayout extends TextInputLayout {
     public class TypefaceSpan extends MetricAffectingSpan {
 
         /* renamed from: a */
-        private Typeface f19145a;
+        private final Typeface f19145a;
 
         public TypefaceSpan(CustomTextInputLayout customTextInputLayout, Typeface typeface) {
             this.f19145a = typeface;

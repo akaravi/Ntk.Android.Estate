@@ -56,7 +56,7 @@ public class NewEstateFragment1 extends BaseFragment {
         count = 0;
         lastSelectedLandUse = estateActivity().model().PropertyTypeLanduse;
         //set editText separator
-        TextInputEditText AreaEditText = (TextInputEditText) findViewById(R.id.EstateAreaEditText);
+        TextInputEditText AreaEditText = findViewById(R.id.EstateAreaEditText);
         AreaEditText.addTextChangedListener(new NumberTextWatcherForThousand(AreaEditText));
         if (estateActivity().model().Area != 0) {
             AreaEditText.setText(String.valueOf(estateActivity().model().Area));

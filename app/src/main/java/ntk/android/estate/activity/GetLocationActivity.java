@@ -152,7 +152,7 @@ public class GetLocationActivity extends BaseActivity {
 
         //location button
         findViewById(R.id.lastLocationFab).setOnClickListener(view -> getPermission());
-        map = (MapView) findViewById(R.id.mapview);
+        map = findViewById(R.id.mapview);
         map.setOnMapClickListener(new MapView.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {

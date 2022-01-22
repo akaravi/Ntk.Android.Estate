@@ -13,46 +13,46 @@ public class SharedPreferencesHelper {
     public final String HELP_MAP = "helpMap";
 
     /* renamed from: a */
-    private SharedPreferences f16290a;
+    private final SharedPreferences f16290a;
 
     /* renamed from: b */
-    private SharedPreferences.Editor f16291b;
+    private final SharedPreferences.Editor f16291b;
 
     /* renamed from: c */
-    private SharedPreferences f16292c;
+    private final SharedPreferences f16292c;
 
     /* renamed from: d */
-    private SharedPreferences.Editor f16293d;
+    private final SharedPreferences.Editor f16293d;
 
     /* renamed from: e */
-    private SharedPreferences f16294e;
+    private final SharedPreferences f16294e;
 
     /* renamed from: f */
-    private SharedPreferences.Editor f16295f;
+    private final SharedPreferences.Editor f16295f;
 
     /* renamed from: g */
-    private SharedPreferences f16296g;
+    private final SharedPreferences f16296g;
 
     /* renamed from: h */
-    private SharedPreferences.Editor f16297h;
+    private final SharedPreferences.Editor f16297h;
 
     /* renamed from: i */
-    private SharedPreferences f16298i;
+    private final SharedPreferences f16298i;
 
     /* renamed from: j */
-    private SharedPreferences.Editor f16299j;
+    private final SharedPreferences.Editor f16299j;
 
     /* renamed from: k */
-    private SharedPreferences f16300k;
+    private final SharedPreferences f16300k;
 
     /* renamed from: l */
-    private SharedPreferences.Editor f16301l;
+    private final SharedPreferences.Editor f16301l;
 
     /* renamed from: m */
-    private SharedPreferences f16302m;
+    private final SharedPreferences f16302m;
 
     /* renamed from: n */
-    private SharedPreferences.Editor f16303n;
+    private final SharedPreferences.Editor f16303n;
 
     public SharedPreferencesHelper() {
         SharedPreferences sharedPreferences = Utility.getContext().getSharedPreferences("SignUpInfo", 0);
@@ -88,11 +88,11 @@ public class SharedPreferencesHelper {
     }
 
     public String getARAVMLat() {
-        return this.f16302m.getString("aravmLat", (String) null);
+        return this.f16302m.getString("aravmLat", null);
     }
 
     public String getARAVMLong() {
-        return this.f16302m.getString("aravmLong", (String) null);
+        return this.f16302m.getString("aravmLong", null);
     }
 
     public long getDefaultCityIdForSearch() {
@@ -116,15 +116,15 @@ public class SharedPreferencesHelper {
     }
 
     public String getPushNotificationPlayerId() {
-        return this.f16294e.getString("playerId", (String) null);
+        return this.f16294e.getString("playerId", null);
     }
 
     public String getSignUpPhoneNumber() {
-        return this.f16290a.getString("phone", (String) null);
+        return this.f16290a.getString("phone", null);
     }
 
     public String getToken() {
-        return this.f16296g.getString("token", (String) null);
+        return this.f16296g.getString("token", null);
     }
 
     public GetAccountResponse getUserInfo() {

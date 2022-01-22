@@ -42,10 +42,10 @@ public class GridMenuFragment extends Fragment implements AdapterView.OnItemClic
         int backgroundResourceID = getArguments().getInt(KEY_BG_RESOURCE_ID, 0);
         backgroundView.setBackgroundResource(backgroundResourceID);
 
-        BlurringView blurringView = (BlurringView) view.findViewById(R.id.blurring_view);
+        BlurringView blurringView = view.findViewById(R.id.blurring_view);
         blurringView.setBlurredView(backgroundView);
 
-        GridView gridView = (GridView) view.findViewById(R.id.menu_grid_view);
+        GridView gridView = view.findViewById(R.id.menu_grid_view);
         mGridMenuAdapter.addAll(this.mMenus);
         gridView.setAdapter(mGridMenuAdapter);
         gridView.setOnItemClickListener(this);

@@ -11,7 +11,7 @@
         android:orientation="horizontal">
 
         <include
-            android:id="@+id/checkbox_row1"
+            android:id="@+id/checkbox_rowSale"
             layout="@layout/item_check_box_row"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
             android:visibility="gone" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etl1"
+            android:id="@+id/etlSale"
             style="@style/new_estate_contract_textInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:visibility="gone">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et1"
+                android:id="@+id/etSale"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="bottom"
@@ -50,7 +50,7 @@
         android:orientation="horizontal">
 
         <include
-            android:id="@+id/checkbox_row2"
+            android:id="@+id/checkbox_rowRent"
             layout="@layout/item_check_box_row"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             android:visibility="gone" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etl2"
+            android:id="@+id/etlRent"
             style="@style/new_estate_contract_textInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
             android:visibility="gone">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et2"
+                android:id="@+id/etRent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
@@ -88,7 +88,7 @@
         android:orientation="horizontal">
 
         <include
-            android:id="@+id/checkbox_row3"
+            android:id="@+id/checkbox_rowDeposit"
             layout="@layout/item_check_box_row"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
             android:visibility="gone" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etl3"
+            android:id="@+id/etlDeposit"
             style="@style/new_estate_contract_textInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             android:visibility="gone">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et3"
+                android:id="@+id/etDeposit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"

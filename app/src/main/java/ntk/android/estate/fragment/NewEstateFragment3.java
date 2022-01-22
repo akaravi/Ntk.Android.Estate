@@ -67,7 +67,7 @@ public class NewEstateFragment3 extends BaseFragment {
             map.moveCamera(loc, 5);
         }
         //set custom color for custom hint Title
-        TextView hint = (TextView) findViewById(R.id.customHint);
+        TextView hint = findViewById(R.id.customHint);
         hint.setTextColor(codeEt.getHintTextColors());
         //get location listener
         findViewById(R.id.getLocationBtn).setOnClickListener(view1 -> getLocation());

@@ -19,7 +19,7 @@ import ntk.android.estate.R;
 
 public class ImageSliderAdapter extends SliderViewAdapter<ImageSliderAdapter.SliderAdapterVH> {
 
-    private Context context;
+    private final Context context;
     private List<sliderItem> mSliderItems = new ArrayList();
 
     public ImageSliderAdapter(Context context) {

@@ -101,17 +101,17 @@ public class SearchEstateActivity extends BaseActivity {
         ((TextView) findViewById(R.id.propertyTypeExpandTv)).setTypeface(t1);
         ((TextView) findViewById(R.id.areaExpandTv)).setTypeface(t1);
         //for textInput layout contract detail
-        ((TextInputLayout) findViewById(R.id.etl1)).setTypeface(t1);
-        ((TextInputLayout) findViewById(R.id.etl2)).setTypeface(t1);
-        ((TextInputLayout) findViewById(R.id.etl3)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.etlSale)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.etlRent)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.etlDeposit)).setTypeface(t1);
         //for TextInputEditText  contract detail
-        ((TextInputEditText) findViewById(R.id.et1)).setTypeface(t1);
-        ((TextInputEditText) findViewById(R.id.et2)).setTypeface(t1);
-        ((TextInputEditText) findViewById(R.id.et3)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.etSale)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.etRent)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.etDeposit)).setTypeface(t1);
         //for checkView  contract detail
-        ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setTypeface(t1);
-        ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setTypeface(t1);
-        ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setTypeface(t1);
+        ((TextView) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cbText)).setTypeface(t1);
+        ((TextView) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cbText)).setTypeface(t1);
+        ((TextView) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cbText)).setTypeface(t1);
 
         //for landUSe details
         //for textInput layout landUSe detail
@@ -152,19 +152,19 @@ public class SearchEstateActivity extends BaseActivity {
 
     private void contractDetailInit() {
         //click on all of view to affect on  toggling checkBox
-        findViewById(R.id.checkbox_row1).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
-        findViewById(R.id.checkbox_row2).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
-        findViewById(R.id.checkbox_row3).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
+        findViewById(R.id.checkbox_rowSale).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
+        findViewById(R.id.checkbox_rowRent).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
+        findViewById(R.id.checkbox_rowDeposit).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
         //toggle state of Edittext on toggling Checkbox
-        ((CheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et1).setEnabled(!b));
-        ((CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et2).setEnabled(!b));
-        ((CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.et3).setEnabled(!b));
-        findViewById(R.id.et1).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle1)
-                .setLable(findViewById(R.id.et1)).setPreviousValue(rentFromTo).setCallBack(o -> rentFromTo = o).show());
-        findViewById(R.id.et2).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle2)
-                .setLable(findViewById(R.id.et2)).setPreviousValue(saleFromTo).setCallBack(o -> saleFromTo = o).show());
-        findViewById(R.id.et3).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle3)
-                .setLable(findViewById(R.id.et3)).setPreviousValue(depositFromTo).setCallBack(o -> depositFromTo = o).show());
+        ((CheckBox) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.etSale).setEnabled(!b));
+        ((CheckBox) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.etRent).setEnabled(!b));
+        ((CheckBox) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.etDeposit).setEnabled(!b));
+        findViewById(R.id.etSale).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle1)
+                .setLable(findViewById(R.id.etSale)).setPreviousValue(rentFromTo).setCallBack(o -> rentFromTo = o).show());
+        findViewById(R.id.etRent).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle2)
+                .setLable(findViewById(R.id.etRent)).setPreviousValue(saleFromTo).setCallBack(o -> saleFromTo = o).show());
+        findViewById(R.id.etDeposit).setOnClickListener(view -> new FilterValuePickerDialog(SearchEstateActivity.this).setTitle(hintContractTitle3)
+                .setLable(findViewById(R.id.etDeposit)).setPreviousValue(depositFromTo).setCallBack(o -> depositFromTo = o).show());
     }
 
     private void landUedDetailInit() {
@@ -181,8 +181,9 @@ public class SearchEstateActivity extends BaseActivity {
         FilterModel filter = new FilterModel();
         String title = ((TextInputEditText) findViewById(R.id.EstateTitleEditText)).getText().toString().trim();
         if (!title.equalsIgnoreCase("")) {
-            filter.addFilter(new FilterDataModel().setPropertyName("Title").setStringValue(title).setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or)
-                    .addInnerFilter(new FilterDataModel().setPropertyName("Description").setStringValue(title).setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or)));
+            filter.addFilter(new FilterDataModel().setPropertyName("Title").setStringValue(title).setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or));
+            filter.addFilter(new FilterDataModel().setPropertyName("Description").setStringValue(title).setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or));
+
         }
         if (selectedLocation != null) {
             filter.addFilter(new FilterDataModel().setPropertyName("LinkLocationId").setIntValue(Long.valueOf(selectedLocation.Id)).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
@@ -194,47 +195,47 @@ public class SearchEstateActivity extends BaseActivity {
         //for contract
         if (selectedContractType != null) {
             filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("LinkEstateContractTypeId").setStringValue(selectedContractType.Id).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
-            CheckBox priceCB = (CheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb);
-            CheckBox rentCB = (CheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb);
-            CheckBox depositCB = (CheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb);
-            if (!rentCB.isChecked()) {
-                if (selectedContractType.HasRentPrice)
+            CheckBox priceCB = findViewById(R.id.checkbox_rowSale).findViewById(R.id.cb);
+            CheckBox rentCB = findViewById(R.id.checkbox_rowRent).findViewById(R.id.cb);
+            CheckBox depositCB = findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cb);
+            if (selectedContractType.HasRentPrice) {
+                if (!rentCB.isChecked()) {
                     //for contract Type1
                     if (rentFromTo != null) {
                         if (rentFromTo.getFrom() != null)
                             filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPrice").setIntValue(((Long) rentFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
                         if (rentFromTo.getTo() != null)
                             filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPrice").setIntValue(((Long) rentFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
-
                     }
-            } else {
-                filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
+                } else {
+                    filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("RentPriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
+                }
             }
-            if (!priceCB.isChecked()) {
-                if (selectedContractType.HasSalePrice)
+            if (selectedContractType.HasSalePrice) {
+                if (!priceCB.isChecked()) {
                     //for contract Type2
                     if ((saleFromTo) != null) {
                         if (saleFromTo.getFrom() != null)
                             filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePrice").setIntValue(((Long) saleFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
                         if (saleFromTo.getTo() != null)
                             filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePrice").setIntValue(((Long) saleFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
-
                     }
-            } else {
-                filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
-
-            }
-            if (!depositCB.isChecked()) {
-                if (selectedContractType.HasDepositPrice) {
-                    //for contract Type3
-                    if (depositFromTo.getFrom() != null)
-                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
-                    if (depositFromTo.getTo() != null)
-                        filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+                } else {
+                    filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("SalePriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
                 }
-            } else {
-                filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
-
+            }
+            if (selectedContractType.HasDepositPrice) {
+                if (!depositCB.isChecked()) {
+                    {
+                        //for contract Type3
+                        if (depositFromTo.getFrom() != null)
+                            filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+                        if (depositFromTo.getTo() != null)
+                            filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+                    }
+                } else {
+                    filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
+                }
             }
         }
         //for area filter
@@ -264,7 +265,7 @@ public class SearchEstateActivity extends BaseActivity {
                 for (EstatePropertyDetailValueModel t : SelectedPropertyDetailGroupModel.get(i).PropertyValues) {
                     if (t.Value != null && !t.Value.equals("") && !t.Value.equals("false")) {
                         FilterDataModel detailFilterModels = new FilterDataModel();
-                        FilterDataModel f1 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("Id").setStringValue(t.Id).setClauseType(EnumClauseType.And);
+                        FilterDataModel f1 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("LinkPropertyDetailId").setStringValue(t.LinkPropertyDetailId).setClauseType(EnumClauseType.And);
                         FilterDataModel f2 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("Value").setStringValue(t.Value).setClauseType(EnumClauseType.And);
                         detailFilterModels.addInnerFilter(f1).addInnerFilter(f2);
                         details.addInnerFilter(detailFilterModels);
@@ -443,28 +444,32 @@ public class SearchEstateActivity extends BaseActivity {
     private void ContractTypeSelecting(EstateContractTypeModel model) {
         clearAllInput();
         selectedContractType = model;
-        TextInputLayout et1 = findViewById(R.id.etl1);
+
+        TextInputLayout et1 = findViewById(R.id.etlSale);
         String preTitle = "محدوده ی مبلغ برای ";
-        hintContractTitle1 = preTitle + model.TitleRentPrice;
+        hintContractTitle1 = preTitle + model.TitleSalePrice;
         et1.setHint(hintContractTitle1);
-        et1.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
-        (findViewById(R.id.et1)).setFocusable(false);
-        findViewById(R.id.checkbox_row1).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
-        ((TextView) findViewById(R.id.checkbox_row1).findViewById(R.id.cbText)).setText("قیمت توافقی");
-        TextInputLayout et2 = findViewById(R.id.etl2);
-        et2.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
-        hintContractTitle2 = preTitle + model.TitleSalePrice;
+        et1.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
+        (findViewById(R.id.etSale)).setFocusable(false);
+        findViewById(R.id.checkbox_rowSale).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cbText)).setText("قیمت توافقی");
+
+        TextInputLayout et2 = findViewById(R.id.etlRent);
+        et2.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
+        hintContractTitle2 = preTitle + model.TitleRentPrice;
         et2.setHint(hintContractTitle2);
-        (findViewById(R.id.et2)).setFocusable(false);
-        findViewById(R.id.checkbox_row2).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
-        ((TextView) findViewById(R.id.checkbox_row2).findViewById(R.id.cbText)).setText("قیمت توافقی");
-        TextInputLayout et3 = findViewById(R.id.etl3);
+        (findViewById(R.id.etRent)).setFocusable(false);
+        findViewById(R.id.checkbox_rowRent).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cbText)).setText("قیمت توافقی");
+
+        TextInputLayout et3 = findViewById(R.id.etlDeposit);
         et3.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
         hintContractTitle3 = preTitle + model.TitleDepositPrice;
         et3.setHint(hintContractTitle3);
-        (findViewById(R.id.et3)).setFocusable(false);
-        findViewById(R.id.checkbox_row3).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
-        ((TextView) findViewById(R.id.checkbox_row3).findViewById(R.id.cbText)).setText("قیمت توافقی");
+        (findViewById(R.id.etDeposit)).setFocusable(false);
+        findViewById(R.id.checkbox_rowDeposit).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cbText)).setText("قیمت توافقی");
+
         if (model.HasSalePrice || model.HasRentPrice || model.HasDepositPrice) {
             if (findViewById(R.id.contractDetailCardView).getVisibility() == View.GONE) {
                 TransitionManager.beginDelayedTransition(findViewById(R.id.nestedScrool));
@@ -483,17 +488,17 @@ public class SearchEstateActivity extends BaseActivity {
     }
 
     private void clearAllInput() {
-        ((MaterialCheckBox) findViewById(R.id.checkbox_row1).findViewById(R.id.cb)).setChecked(false);
-        TextInputEditText et1 = (TextInputEditText) findViewById(R.id.et1);
-        et1.setText("");
-        et1.clearFocus();
-        ((MaterialCheckBox) findViewById(R.id.checkbox_row2).findViewById(R.id.cb)).setChecked(false);
-        TextInputEditText et2 = (TextInputEditText) findViewById(R.id.et2);
-        et2.setText("");
-        et2.clearFocus();
-        ((MaterialCheckBox) findViewById(R.id.checkbox_row3).findViewById(R.id.cb)).setChecked(false);
-        TextInputEditText et3 = (TextInputEditText) findViewById(R.id.et3);
-        et3.setText("");
-        et3.clearFocus();
+        ((MaterialCheckBox) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cb)).setChecked(false);
+        TextInputEditText etSale = findViewById(R.id.etSale);
+        etSale.setText("");
+        etSale.clearFocus();
+        ((MaterialCheckBox) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cb)).setChecked(false);
+        TextInputEditText etRent = findViewById(R.id.etRent);
+        etRent.setText("");
+        etRent.clearFocus();
+        ((MaterialCheckBox) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cb)).setChecked(false);
+        TextInputEditText etDeposit = findViewById(R.id.etDeposit);
+        etDeposit.setText("");
+        etDeposit.clearFocus();
     }
 }

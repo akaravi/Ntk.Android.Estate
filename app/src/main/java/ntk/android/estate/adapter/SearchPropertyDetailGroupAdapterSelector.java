@@ -22,7 +22,7 @@ import ntk.android.estate.R;
 
 public class SearchPropertyDetailGroupAdapterSelector extends BaseRecyclerAdapter<EstatePropertyDetailGroupModel, SearchPropertyDetailGroupAdapterSelector.VH> {
     ViewGroup root;
-    private FragmentManager fragmentManager;
+    private final FragmentManager fragmentManager;
 
     public SearchPropertyDetailGroupAdapterSelector(List<EstatePropertyDetailGroupModel> list, ViewGroup rootView, FragmentManager frag) {
         super(list);

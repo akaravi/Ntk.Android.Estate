@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 public class GalleryTextViewMedium extends AppCompatTextView {
 
     /* renamed from: e */
-    private Typeface f18181e = Typeface.createFromAsset(getContext().getAssets(), "fonts/IRAN-Sans-Medium.ttf");
+    private final Typeface f18181e = Typeface.createFromAsset(getContext().getAssets(), "fonts/IRAN-Sans-Medium.ttf");
 
     public GalleryTextViewMedium(Context context) {
         super(context);

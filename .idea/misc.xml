@@ -104,9 +104,11 @@
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.Estate/app/src/main/res/layout/fragment_new_estate_5.xml" value="0.1859375" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.Estate/app/src/main/res/layout/row_property_type_row.xml" value="0.18115942028985507" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.Estate/app/src/main/res/layout/row_recycler_news.xml" value="0.1519756838905775" />
+        <entry key="app/src/main/res/layout/item_check_box_row.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/sub_estate_contract_selector.xml" value="0.1" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

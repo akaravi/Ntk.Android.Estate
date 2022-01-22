@@ -74,7 +74,7 @@ public class MainActivity3 extends BaseMainActivity {
     }
 
     private void init() {
-        TextView seeMore = (TextView) findViewById(R.id.seeMore);
+        TextView seeMore = findViewById(R.id.seeMore);
         //see landUse list on new activity on click
         seeMore.setOnClickListener(view -> startActivity(new Intent(MainActivity3.this, LandUsedListActivity.class)));
         //click on humberger
@@ -171,7 +171,7 @@ public class MainActivity3 extends BaseMainActivity {
                         rc.setAdapter(new Main3EstatePropertyAdapter(response.ListItems));
                         rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
                         ViewCompat.setNestedScrollingEnabled(rc, false);
-                        ShimmerFrameLayout shimmerFrameLayout = (ShimmerFrameLayout) view.findViewById(R.id.shimmer_rc);
+                        ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
                         shimmerFrameLayout.stopShimmerAnimation();
                         shimmerFrameLayout.setVisibility(View.GONE);
                     }
@@ -196,7 +196,7 @@ public class MainActivity3 extends BaseMainActivity {
                         RecyclerView rc = findViewById(R.id
                                 .landUseAdapter);
                         rc.setAdapter(adapter);
-                        ShimmerFrameLayout shimmer = (ShimmerFrameLayout) findViewById(R.id.landUsed_shimmer);
+                        ShimmerFrameLayout shimmer = findViewById(R.id.landUsed_shimmer);
                         shimmer.stopShimmerAnimation();
                         shimmer.setVisibility(View.GONE);
                     }
@@ -220,7 +220,7 @@ public class MainActivity3 extends BaseMainActivity {
 
                     @Override
                     public void onNext(ErrorException<NewsContentModel> newsContentResponse) {
-                        ShimmerFrameLayout shimmerLayout = (ShimmerFrameLayout) findViewById(R.id.news_shimmer);
+                        ShimmerFrameLayout shimmerLayout = findViewById(R.id.news_shimmer);
                         shimmerLayout.stopShimmerAnimation();
                         shimmerLayout.setVisibility(View.GONE);
                         if (newsContentResponse.IsSuccess) {
