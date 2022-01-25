@@ -76,6 +76,7 @@ public class SearchEstateActivity extends BaseActivity {
     FromToClass areaFromTo;
     FromToClass createdYearFromTo;
     FromToClass partitionFromTo;
+    private int apiCall = 4;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,6 +84,7 @@ public class SearchEstateActivity extends BaseActivity {
         setContentView(R.layout.activity_estate_search);
 
         initView();
+        switcher.showProgressView();
         getEstateType();
         getContractTypes();
     }
@@ -308,22 +310,28 @@ public class SearchEstateActivity extends BaseActivity {
                         flowLayoutManager.setAutoMeasureEnabled(true);
                         flowLayoutManager.setAlignment(Alignment.RIGHT);
                         rc.setLayoutManager(flowLayoutManager);
+                        apiCall--;
+                        if (apiCall==0)
+                            switcher.showContentView();
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        switcher.showErrorView(e.getMessage(), () -> getEstateType());
                     }
                 });
         ServiceExecute.execute(new EstatePropertyTypeService(this).getAll(new FilterModel().setRowPerPage(100))).subscribe(new NtkObserver<ErrorException<EstatePropertyTypeModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyTypeModel> response) {
                 propertyType = response.ListItems;
+                apiCall--;
+                if (apiCall==0)
+                    switcher.showContentView();
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                switcher.showErrorView(e.getMessage(), () -> getEstateType());
             }
         });
         ServiceExecute.execute(new EstatePropertyTypeLanduseService(this).getAll(new FilterModel().setRowPerPage(100)))
@@ -331,11 +339,14 @@ public class SearchEstateActivity extends BaseActivity {
                     @Override
                     public void onNext(@NonNull ErrorException<EstatePropertyTypeLanduseModel> response) {
                         landUses = response.ListItems;
+                        apiCall--;
+                        if (apiCall==0)
+                            switcher.showContentView();
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        switcher.showErrorView(e.getMessage(), () -> getEstateType());
                     }
                 });
     }
@@ -431,12 +442,15 @@ public class SearchEstateActivity extends BaseActivity {
                 flowLayoutManager.setAutoMeasureEnabled(true);
                 flowLayoutManager.setAlignment(Alignment.RIGHT);
                 rc.setLayoutManager(flowLayoutManager);
+                apiCall--;
+                if (apiCall==0)
+                    switcher.showContentView();
             }
 
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                switcher.showErrorView(e.getMessage(), () -> getContractTypes());
             }
         });
     }

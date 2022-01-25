@@ -55,7 +55,7 @@ public class NewEstateFragment3 extends BaseFragment {
             titleEt.setText(model.Title);
         if (model.Description != null)
             descEt.setText(model.Description);
-        if (model.LinkLocationIdTitle!=null)
+        if (model.LinkLocationIdTitle != null)
             ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(model.LinkLocationIdTitle);
         if (model.Address != null)
             addressEt.setText(model.Address);
@@ -121,12 +121,13 @@ public class NewEstateFragment3 extends BaseFragment {
         locaionAutoCompleteTextView.addOnAutoCompleteTextViewTextChangedObserver(spinner,
                 selectedModel -> {
                     estateActivity().model().LinkLocationId = selectedModel.Id;
-                    estateActivity().model().LinkLocationIdTitle=selectedModel.Title;
+                    estateActivity().model().LinkLocationIdTitle = selectedModel.Title;
                     if (estateActivity().model().Geolocationlatitude == null) {
-                        if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null){
+                        if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
                             MapView map = findViewById(R.id.mapView);
                             map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
-                    }}
+                        }
+                    }
                 });
     }
 
@@ -139,11 +140,8 @@ public class NewEstateFragment3 extends BaseFragment {
         TextInputEditText titleEt = findViewById(R.id.EstateTitleEditText);
         TextInputEditText descEt = findViewById(R.id.EstateDescEditText);
         TextInputEditText addressEt = findViewById(R.id.EstateAddressEditText);
-        if (codeEt.getText().toString().trim().equals("")) {
-            Toasty.error(getContext(), "کد ملک را وارد نمایید", Toasty.LENGTH_LONG, true).show();
-            return false;
-        } else
-            estateActivity().model().CaseCode = codeEt.getText().toString().trim();
+
+        estateActivity().model().CaseCode = codeEt.getText().toString().trim();
         if (titleEt.getText().toString().trim().equals("")) {
             Toasty.error(getContext(), "عنوان  را وارد نمایید", Toasty.LENGTH_LONG, true).show();
             return false;
@@ -158,7 +156,8 @@ public class NewEstateFragment3 extends BaseFragment {
             Toasty.error(getContext(), "منظقه مورد نظر  را وارد نمایید", Toasty.LENGTH_LONG, true).show();
             return false;
 
-        }if (addressEt.getText().toString().trim().equals("")) {
+        }
+        if (addressEt.getText().toString().trim().equals("")) {
             Toasty.error(getContext(), " آدرس را وارد نمایید", Toasty.LENGTH_LONG, true).show();
             return false;
         } else

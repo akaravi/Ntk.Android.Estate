@@ -3,7 +3,6 @@ package ntk.android.estate.activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -81,6 +80,12 @@ public class MainActivity3 extends BaseMainActivity {
         findViewById(R.id.img_menu).setOnClickListener(v -> ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(true));
         //click share
         findViewById(R.id.shareQrCode).setOnClickListener(v -> onInviteMethod());
+        //add fab
+        findViewById(R.id.fabAdd).setOnClickListener(view -> NewEstateActivity.START_ACTIVITY(MainActivity3.this));
+        //search fab
+        findViewById(R.id.fabSearch).setOnClickListener(view ->
+                startActivity(new Intent(this, SearchEstateActivity.class)));
+
         //click search
         findViewById(R.id.searchBtn).setOnClickListener(view -> Search());
         ((EditText) findViewById(R.id.searchEt)).setOnEditorActionListener((v, actionId, event) -> {
