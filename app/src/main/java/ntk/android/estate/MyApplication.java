@@ -53,6 +53,7 @@ public class MyApplication extends NTKApplication {
     @Override
     protected ApplicationStaticParameter getConfig() {
         ApplicationStaticParameter applicationStaticParameter = new ApplicationStaticParameter();
+        //todo server ngrok replacement
         applicationStaticParameter.URL = "https://ae8c-94-183-160-75.ngrok.io/";
 //        http://
         return applicationStaticParameter;
