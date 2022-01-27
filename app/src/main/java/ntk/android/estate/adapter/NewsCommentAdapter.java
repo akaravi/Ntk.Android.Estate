@@ -35,6 +35,7 @@ public class NewsCommentAdapter extends BaseRecyclerAdapter<NewsCommentModel, Ne
     public NewsCommentAdapter(Context context, List<NewsCommentModel> arrayList) {
         super(arrayList);
         this.context = context;
+        drawable=R.drawable.sweet_error_center_x;
     }
 
     @Override

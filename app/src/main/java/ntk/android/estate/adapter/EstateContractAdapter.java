@@ -19,6 +19,7 @@ import ntk.android.estate.R;
 public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractModel, EstateContractAdapter.VH> {
     public EstateContractAdapter(List<EstateContractModel> list) {
         super(list);
+        drawable=R.drawable.sweet_error_center_x;
     }
 
     @NonNull

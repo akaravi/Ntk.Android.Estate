@@ -27,7 +27,7 @@ public class TabNewsAdapter extends BaseRecyclerAdapter<NewsContentOtherInfoMode
 
     public TabNewsAdapter(Context context, List<NewsContentOtherInfoModel> arrayList) {
         super(arrayList);
-        this.context = context;
+        this.context = context; drawable=R.drawable.sweet_error_center_x;
     }
 
     @NonNull

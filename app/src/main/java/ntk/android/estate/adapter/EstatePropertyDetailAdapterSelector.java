@@ -37,6 +37,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     public EstatePropertyDetailAdapterSelector(FragmentManager fragment, EstatePropertyDetailGroupModel item) {
         super(item.PropertyValues);
         frag = fragment;
+        drawable=R.drawable.sweet_error_center_x;
     }
 
     @Override

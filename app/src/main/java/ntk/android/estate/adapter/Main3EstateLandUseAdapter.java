@@ -18,7 +18,7 @@ import ntk.android.estate.activity.EstateListActivity;
 
 public class Main3EstateLandUseAdapter extends BaseRecyclerAdapter<EstatePropertyTypeLanduseModel, Main3EstateLandUseAdapter.VH> {
     public Main3EstateLandUseAdapter(List<EstatePropertyTypeLanduseModel> list) {
-        super(list);
+        super(list); drawable=R.drawable.sweet_error_center_x;
     }
 
     @NonNull

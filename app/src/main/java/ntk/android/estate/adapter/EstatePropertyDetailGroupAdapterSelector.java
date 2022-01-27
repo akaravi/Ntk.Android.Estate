@@ -24,6 +24,7 @@ public class EstatePropertyDetailGroupAdapterSelector extends BaseRecyclerAdapte
     public EstatePropertyDetailGroupAdapterSelector(FragmentManager fra, List<EstatePropertyDetailGroupModel> list) {
         super(list);
         fragmentManager=fra;
+        drawable=R.drawable.sweet_error_center_x;
     }
 
     @NonNull

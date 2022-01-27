@@ -25,6 +25,7 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
     public Main3EstatePropertyAdapter(List<EstatePropertyModel> list) {
         super(list);
         width = ITEM_WIDTH();
+        drawable=R.drawable.sweet_error_center_x;
     }
 
     public static int ITEM_WIDTH() {

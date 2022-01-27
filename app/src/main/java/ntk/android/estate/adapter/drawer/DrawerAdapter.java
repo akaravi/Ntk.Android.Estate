@@ -45,7 +45,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
     public DrawerAdapter(Context context, List<DrawerChildThemeDtoModel> children, FlowingDrawer drawer) {
         super(children);
         this.context = context;
-        this.Drawer = drawer;
+        this.Drawer = drawer; drawable=R.drawable.sweet_error_center_x;
     }
 
 

@@ -28,6 +28,7 @@ public class EstatePropertyLandUseAdapterSelector extends BaseRecyclerAdapter<Es
         if (Item != null) {
             lastSelected = list.indexOf(Item);
         }
+        drawable=R.drawable.sweet_error_center_x;
     }
 
     @NonNull

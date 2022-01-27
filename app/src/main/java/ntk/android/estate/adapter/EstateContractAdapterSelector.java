@@ -25,6 +25,7 @@ public class EstateContractAdapterSelector extends BaseRecyclerAdapter<EstateCon
         super(list);
         lastSelected = -1;
         caller = selector;
+        drawable=R.drawable.sweet_error_center_x;
     }
 
 

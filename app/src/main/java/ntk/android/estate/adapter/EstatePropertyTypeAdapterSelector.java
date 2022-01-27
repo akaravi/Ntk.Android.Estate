@@ -28,7 +28,7 @@ public class EstatePropertyTypeAdapterSelector extends BaseRecyclerAdapter<Estat
         lastSelected = -1;
         if (Item != null) {
             lastSelected = listItems.indexOf(Item);
-        }
+        } drawable=R.drawable.sweet_error_center_x;
     }
 
 

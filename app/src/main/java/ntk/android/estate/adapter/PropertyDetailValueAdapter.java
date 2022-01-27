@@ -17,7 +17,7 @@ import ntk.android.estate.R;
 
 public class PropertyDetailValueAdapter extends BaseRecyclerAdapter<EstatePropertyDetailValueModel, PropertyDetailValueAdapter.VH> {
     public PropertyDetailValueAdapter(List<EstatePropertyDetailValueModel> list) {
-        super(list);
+        super(list); drawable=R.drawable.sweet_error_center_x;
     }
 
 
