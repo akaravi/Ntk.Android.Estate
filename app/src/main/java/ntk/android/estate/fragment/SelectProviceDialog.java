@@ -68,10 +68,17 @@ public class SelectProviceDialog extends DialogFragment {
     }
 
     private void getProvince() {
+        View progress = getView().findViewById(R.id.progressView);
+        if (progress != null) {
+            progress.setVisibility(View.VISIBLE);
+        }
         ServiceExecute.execute(new CoreLocationService(getContext()).getAllProvinces(new FilterModel().setRowPerPage(100))).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<CoreLocationModel> model) {
-
+                View progress = getView().findViewById(R.id.progressView);
+                if (progress != null) {
+                    progress.setVisibility(View.GONE);
+                }
                 MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.EstateProvinceAutoComplete);
                 List<String> names = new ArrayList<>();
                 for (CoreLocationModel t : model.ListItems)
@@ -82,8 +89,10 @@ public class SelectProviceDialog extends DialogFragment {
                     names.add(0, "انتخاب کنید");
                 SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
                 spinner.setOnItemClickListener((parent, view, position, id) -> {
-                    if (position>0) {
-                        selectedProvince = model.ListItems.get(position+1);
+                    if (position > 0) {
+                        selectedProvince = model.ListItems.get(position - 1);
+                        ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateCityAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
+                        ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateAreaAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
                         selectedCity = null;
                         selectedArea = null;
                         getCity();
@@ -96,17 +105,28 @@ public class SelectProviceDialog extends DialogFragment {
 
             @Override
             public void onError(@NonNull Throwable e) {
+                View progress = getView().findViewById(R.id.progressView);
+                if (progress != null) {
+                    progress.setVisibility(View.GONE);
+                }
             }
         });
     }
 
     private void getCity() {
+        View progress = getView().findViewById(R.id.progressView);
+        if (progress != null) {
+            progress.setVisibility(View.VISIBLE);
+        }
         FilterModel filterModel = new FilterModel().setRowPerPage(1000);
         filterModel.addFilter(new FilterDataModel().setPropertyName("LinkParentId").setIntValue((long) selectedProvince.Id));
         ServiceExecute.execute(new CoreLocationService(getContext()).getAll(filterModel)).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<CoreLocationModel> model) {
-
+                View progress = getView().findViewById(R.id.progressView);
+                if (progress != null) {
+                    progress.setVisibility(View.GONE);
+                }
                 MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.EstateCityAutoComplete);
                 List<String> names = new ArrayList<>();
                 for (CoreLocationModel t : model.ListItems)
@@ -118,7 +138,8 @@ public class SelectProviceDialog extends DialogFragment {
                 SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
                 spinner.setOnItemClickListener((parent, view, position, id) -> {
                     if (position > 0) {
-                        selectedCity = model.ListItems.get(position + 1);
+                        selectedCity = model.ListItems.get(position - 1);
+                        ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateAreaAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
                         selectedArea = null;
                         getArea();
                     }
@@ -130,17 +151,28 @@ public class SelectProviceDialog extends DialogFragment {
 
             @Override
             public void onError(@NonNull Throwable e) {
+                View progress = getView().findViewById(R.id.progressView);
+                if (progress != null) {
+                    progress.setVisibility(View.GONE);
+                }
             }
         });
     }
 
     private void getArea() {
+        View progress = getView().findViewById(R.id.progressView);
+        if (progress != null) {
+            progress.setVisibility(View.VISIBLE);
+        }
         FilterModel filterModel = new FilterModel().setRowPerPage(1000);
         filterModel.addFilter(new FilterDataModel().setPropertyName("LinkParentId").setIntValue((long) selectedCity.Id));
         ServiceExecute.execute(new CoreLocationService(getContext()).getAll(filterModel)).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<CoreLocationModel> model) {
-
+                View progress = getView().findViewById(R.id.progressView);
+                if (progress != null) {
+                    progress.setVisibility(View.GONE);
+                }
                 MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.EstateAreaAutoComplete);
                 List<String> names = new ArrayList<>();
                 for (CoreLocationModel t : model.ListItems)
@@ -152,7 +184,7 @@ public class SelectProviceDialog extends DialogFragment {
                 SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
                 spinner.setOnItemClickListener((parent, view, position, id) -> {
                     if (position > 0) {
-                        selectedArea = model.ListItems.get(position + 1);
+                        selectedArea = model.ListItems.get(position - 1);
                     }
                 });
 
@@ -163,6 +195,10 @@ public class SelectProviceDialog extends DialogFragment {
 
             @Override
             public void onError(@NonNull Throwable e) {
+                View progress = getView().findViewById(R.id.progressView);
+                if (progress != null) {
+                    progress.setVisibility(View.GONE);
+                }
             }
         });
     }

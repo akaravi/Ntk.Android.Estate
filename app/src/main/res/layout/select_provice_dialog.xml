@@ -1,69 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/EstateProvinceTextInput"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+    <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        android:hint="@string/province"
-        app:helperTextEnabled="true"
-        app:hintEnabled="true">
-
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/EstateProvinceAutoComplete"
-            style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/EstateProvinceTextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="false"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/province"
+            android:padding="12dp"
+            app:helperTextEnabled="true"
+            app:hintEnabled="true">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/EstateCityTextInput"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/EstateProvinceAutoComplete"
+                style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/EstateCityTextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/city"
+            android:padding="12dp"
+            app:helperTextEnabled="true"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/EstateCityAutoComplete"
+                style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/EstateAreaTextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/mantaghe"
+            android:padding="12dp"
+            app:helperTextEnabled="true"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/EstateAreaAutoComplete"
+                style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sendLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32dp"
+                android:text="ثبت موقعیت" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancelLocation"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="انصراف " />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/progressView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/linear"
+        android:layout_alignBottom="@+id/linear"
+        android:background="#7E424242"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        android:hint="@string/province"
-        app:helperTextEnabled="true"
-        app:hintEnabled="true">
-
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/EstateCityAutoComplete"
-            style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/EstateAreaTextInput"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:hint="@string/province"
-        app:helperTextEnabled="true"
-        app:hintEnabled="true">
-
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/EstateAreaAutoComplete"
-            style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/sendLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        <ProgressBar
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+</RelativeLayout>

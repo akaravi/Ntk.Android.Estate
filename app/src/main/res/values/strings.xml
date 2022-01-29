@@ -8,11 +8,13 @@
     <string name="per_estate">املاک</string>
     <string name="title">عنوان</string>
     <string name="estate_code">کد ملک</string>
-    <string name="province">منطقه</string>
+    <string name="province">استان</string>
     <string name="area">مساحت (متر مربع)</string>
     <string name="per_my_estate">املاک من</string>
     <string name="per_my_favorite">" لیست علاقه مندی ها"</string>
     <string name="from">از</string>
     <string name="to">تا</string>
+    <string name="city">شهر</string>
+    <string name="mantaghe">منطقه</string>
 
 </resources>
