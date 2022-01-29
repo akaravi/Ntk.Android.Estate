@@ -118,17 +118,20 @@ public class NewEstateFragment3 extends BaseFragment {
     private void getData() {
         MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
         LocaionAutoCompleteTextView locaionAutoCompleteTextView = new LocaionAutoCompleteTextView();
-        locaionAutoCompleteTextView.addOnAutoCompleteTextViewTextChangedObserver(spinner,
-                selectedModel -> {
-                    estateActivity().model().LinkLocationId = selectedModel.Id;
-                    estateActivity().model().LinkLocationIdTitle = selectedModel.Title;
-                    if (estateActivity().model().Geolocationlatitude == null) {
-                        if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
-                            MapView map = findViewById(R.id.mapView);
-                            map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
+        spinner.setOnClickListener(view -> {
+            SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
+                    selectedModel -> {
+                        estateActivity().model().LinkLocationId = selectedModel.Id;
+                        estateActivity().model().LinkLocationIdTitle = selectedModel.Title;
+                        if (estateActivity().model().Geolocationlatitude == null) {
+                            if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
+                                MapView map = findViewById(R.id.mapView);
+                                map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
+                            }
                         }
-                    }
-                });
+                    });
+            dialog.show(getActivity().getSupportFragmentManager(), "dialog");
+        });
     }
 
     public NewEstateActivity estateActivity() {

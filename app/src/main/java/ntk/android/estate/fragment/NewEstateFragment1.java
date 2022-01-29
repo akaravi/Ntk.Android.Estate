@@ -106,7 +106,7 @@ public class NewEstateFragment1 extends BaseFragment {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        estateActivity().showErrorView();
                     }
                 });
     }

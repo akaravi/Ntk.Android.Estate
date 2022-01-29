@@ -2,8 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,8 +13,7 @@
         <androidx.cardview.widget.CardView
             style="@style/new_estate_cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-          >
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/EstateCodeTextInput"
@@ -44,8 +42,7 @@
             style="@style/new_estate_cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            >
+            android:visibility="visible">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/EstateTitleTextInput"
@@ -73,8 +70,7 @@
         <androidx.cardview.widget.CardView
             style="@style/new_estate_cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        >
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/EstateDescTextInput"
@@ -126,6 +122,7 @@
                         style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
                         android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -156,14 +153,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_marginTop="11dp"
-android:enabled="true"
+                        android:enabled="true"
                         app:hintEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:focusable="false"
                             android:enabled="false"
+                            android:focusable="false"
                             android:textSize="14sp"
                             android:theme="@style/new_estate_textInputEditText" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -179,14 +176,14 @@ android:enabled="true"
 
 
                         />
+
                     <TextView
                         android:id="@+id/customHint"
+                        style="@style/new_estate_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        style="@style/new_estate_title"
-                        android:text="موقعیت تقریبی"
-                         />
+                        android:text="موقعیت تقریبی" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/getLocationBtn"
@@ -204,8 +201,9 @@ android:enabled="true"
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

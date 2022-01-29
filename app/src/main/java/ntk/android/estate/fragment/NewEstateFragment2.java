@@ -83,7 +83,11 @@ public class NewEstateFragment2 extends BaseFragment {
     }
 
     public boolean isValidForm() {
-        estateActivity().model().PropertyDetailValues=new ArrayList<>();
+        estateActivity().model().PropertyDetailValues = new ArrayList<>();
+        for (EstatePropertyDetailGroupModel group : estateActivity().model().PropertyDetailGroups
+        ) {
+            estateActivity().model().PropertyDetailValues.addAll(group.PropertyValues);
+        }
         return true;
     }
 

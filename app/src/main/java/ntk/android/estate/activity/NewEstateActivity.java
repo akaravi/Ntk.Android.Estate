@@ -52,7 +52,7 @@ public class NewEstateActivity extends BaseActivity {
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
         });
         setFont();
-        showFragment1();
+        showFragment3();
     }
 
     private void setFont() {
@@ -144,6 +144,7 @@ public class NewEstateActivity extends BaseActivity {
 
     private void createModel() {
         showProgress();
+        model.PropertyDetailGroups = null;
         ServiceExecute.execute(new EstatePropertyService(this).add(model)).subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyModel> response) {
