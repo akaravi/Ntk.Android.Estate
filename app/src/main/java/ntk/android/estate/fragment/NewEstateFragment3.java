@@ -117,20 +117,22 @@ public class NewEstateFragment3 extends BaseFragment {
 
     private void getData() {
         MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
-        LocaionAutoCompleteTextView locaionAutoCompleteTextView = new LocaionAutoCompleteTextView();
         spinner.setOnClickListener(view -> {
-            SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
-                    selectedModel -> {
-                        estateActivity().model().LinkLocationId = selectedModel.Id;
-                        estateActivity().model().LinkLocationIdTitle = selectedModel.Title;
-                        if (estateActivity().model().Geolocationlatitude == null) {
-                            if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
-                                MapView map = findViewById(R.id.mapView);
-                                map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
+                SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
+                        selectedModel -> {
+                            if (selectedModel!=null) {
+                                ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);
+                                estateActivity().model().LinkLocationId = selectedModel.Id;
+                                estateActivity().model().LinkLocationIdTitle = selectedModel.Title;
+                                if (estateActivity().model().Geolocationlatitude == null) {
+                                    if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
+                                        MapView map = findViewById(R.id.mapView);
+                                        map.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
+                                    }
+                                }
                             }
-                        }
-                    });
-            dialog.show(getActivity().getSupportFragmentManager(), "dialog");
+                        });
+                dialog.show(getActivity().getSupportFragmentManager(), "dialog");
         });
     }
 

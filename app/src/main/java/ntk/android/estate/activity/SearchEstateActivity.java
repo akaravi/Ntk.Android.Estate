@@ -20,6 +20,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.xiaofeng.flowlayoutmanager.Alignment;
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
+import org.neshan.common.model.LatLng;
+import org.neshan.mapsdk.MapView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +56,7 @@ import ntk.android.estate.adapter.EstatePropertyLandUseAdapterSelector;
 import ntk.android.estate.adapter.EstatePropertyTypeAdapterSelector;
 import ntk.android.estate.adapter.SearchPropertyDetailGroupAdapterSelector;
 import ntk.android.estate.fragment.FilterValuePickerDialog;
+import ntk.android.estate.fragment.SelectProviceDialog;
 import ntk.android.estate.view.component.LocaionAutoCompleteTextView;
 
 public class SearchEstateActivity extends BaseActivity {
@@ -141,12 +145,20 @@ public class SearchEstateActivity extends BaseActivity {
             }
         });
         MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
-        LocaionAutoCompleteTextView locaionAutoCompleteTextView = new LocaionAutoCompleteTextView();
-        locaionAutoCompleteTextView.addOnAutoCompleteTextViewTextChangedObserver(spinner,
-                location -> {
-                    selectedLocation = location;
+        spinner.setOnClickListener(view -> {
+            SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
+                    selectedModel -> {
+                        if (selectedModel!=null) {
+                            ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);
+                           selectedLocation=selectedModel;
+                        }else{
+                            ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText("");
+                            selectedLocation=null;
 
-                });
+                        }
+                    });
+            dialog.show(getSupportFragmentManager(), "dialog");
+        });
         contractDetailInit();
         landUedDetailInit();
     }

@@ -13,8 +13,9 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
+import es.dmoral.toasty.Toasty;
+import java9.util.function.Consumer;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.adapter.SpinnerAdapter;
 import ntk.android.base.config.NtkObserver;
@@ -35,6 +36,7 @@ public class SelectProviceDialog extends DialogFragment {
 
     public static SelectProviceDialog START_DIALOG(Consumer<CoreLocationModel> func) {
         SelectProviceDialog fragment = new SelectProviceDialog();
+        fragment.setCancelable(false);
         fragment.setInterface(func);
         return fragment;
     }
@@ -60,11 +62,26 @@ public class SelectProviceDialog extends DialogFragment {
             sendLocation();
             view1.setEnabled(true);
         });
+        view.findViewById(R.id.cancelLocation).setOnClickListener(view1 -> {
+            func.accept(null);
+            dismiss();
+        });
         getProvince();
     }
 
     private void sendLocation() {
-
+        if (selectedArea != null) {
+            func.accept(selectedArea);
+            dismiss();
+        } else if (selectedCity != null) {
+            func.accept(selectedCity);
+            dismiss();
+        } else if (selectedProvince != null) {
+            func.accept(selectedProvince);
+            dismiss();
+        } else {
+            Toasty.error(getContext(), "مکانی انتخاب نشده است").show();
+        }
     }
 
     private void getProvince() {
@@ -75,39 +92,45 @@ public class SelectProviceDialog extends DialogFragment {
         ServiceExecute.execute(new CoreLocationService(getContext()).getAllProvinces(new FilterModel().setRowPerPage(100))).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<CoreLocationModel> model) {
-                View progress = getView().findViewById(R.id.progressView);
-                if (progress != null) {
-                    progress.setVisibility(View.GONE);
-                }
-                MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.EstateProvinceAutoComplete);
-                List<String> names = new ArrayList<>();
-                for (CoreLocationModel t : model.ListItems)
-                    names.add(t.Title);
-                if (names.size() == 0)
-                    names.add("موردی یافت نشد");
-                else
-                    names.add(0, "انتخاب کنید");
-                SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
-                spinner.setOnItemClickListener((parent, view, position, id) -> {
-                    if (position > 0) {
-                        selectedProvince = model.ListItems.get(position - 1);
-                        ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateCityAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
-                        ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateAreaAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
-                        selectedCity = null;
-                        selectedArea = null;
-                        getCity();
+                try {
+                    View progress = getView().findViewById(R.id.progressView);
+                    if (progress != null) {
+                        progress.setVisibility(View.GONE);
                     }
-                });
-                spinner.setAdapter(locationAdapter);
-                // Do something for lollipop and above versions
-                spinner.setText(locationAdapter.getItem(0), false);
+                    MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.EstateProvinceAutoComplete);
+                    List<String> names = new ArrayList<>();
+                    for (CoreLocationModel t : model.ListItems)
+                        names.add(t.Title);
+                    if (names.size() == 0)
+                        names.add("موردی یافت نشد");
+                    else
+                        names.add(0, "انتخاب کنید");
+                    SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
+                    spinner.setOnItemClickListener((parent, view, position, id) -> {
+                        if (position > 0) {
+                            selectedProvince = model.ListItems.get(position - 1);
+                            ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateCityAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
+                            ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateAreaAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
+                            selectedCity = null;
+                            selectedArea = null;
+                            getCity();
+                        }
+                    });
+                    spinner.setAdapter(locationAdapter);
+                    // Do something for lollipop and above versions
+                    spinner.setText(locationAdapter.getItem(0), false);
+                } catch (Exception e) {
+                }
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                View progress = getView().findViewById(R.id.progressView);
-                if (progress != null) {
-                    progress.setVisibility(View.GONE);
+                View errorView = getView();
+                if (errorView != null) {
+                    View progress = errorView.findViewById(R.id.progressView);
+                    if (progress != null) {
+                        progress.setVisibility(View.GONE);
+                    }
                 }
             }
         });
@@ -123,39 +146,47 @@ public class SelectProviceDialog extends DialogFragment {
         ServiceExecute.execute(new CoreLocationService(getContext()).getAll(filterModel)).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<CoreLocationModel> model) {
-                View progress = getView().findViewById(R.id.progressView);
-                if (progress != null) {
-                    progress.setVisibility(View.GONE);
-                }
-                MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.EstateCityAutoComplete);
-                List<String> names = new ArrayList<>();
-                for (CoreLocationModel t : model.ListItems)
-                    names.add(t.Title);
-                if (names.size() == 0)
-                    names.add("موردی یافت نشد");
-                else
-                    names.add(0, "انتخاب کنید");
-                SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
-                spinner.setOnItemClickListener((parent, view, position, id) -> {
-                    if (position > 0) {
-                        selectedCity = model.ListItems.get(position - 1);
-                        ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateAreaAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
-                        selectedArea = null;
-                        getArea();
+                try {
+                    View progress = getView().findViewById(R.id.progressView);
+                    if (progress != null) {
+                        progress.setVisibility(View.GONE);
                     }
-                });
-                spinner.setAdapter(locationAdapter);
-                // Do something for lollipop and above versions
-                spinner.setText(locationAdapter.getItem(0), false);
+                    MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.EstateCityAutoComplete);
+                    List<String> names = new ArrayList<>();
+                    for (CoreLocationModel t : model.ListItems)
+                        names.add(t.Title);
+                    if (names.size() == 0)
+                        names.add("موردی یافت نشد");
+                    else
+                        names.add(0, "انتخاب کنید");
+                    SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
+                    spinner.setOnItemClickListener((parent, view, position, id) -> {
+                        if (position > 0) {
+                            selectedCity = model.ListItems.get(position - 1);
+                            ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateAreaAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
+                            selectedArea = null;
+                            getArea();
+                        }
+                    });
+                    spinner.setAdapter(locationAdapter);
+                    // Do something for lollipop and above versions
+                    spinner.setText(locationAdapter.getItem(0), false);
+                } catch (Exception e) {
+                }
             }
+
 
             @Override
             public void onError(@NonNull Throwable e) {
-                View progress = getView().findViewById(R.id.progressView);
-                if (progress != null) {
-                    progress.setVisibility(View.GONE);
+                View errorView = getView();
+                if (errorView != null) {
+                    View progress = errorView.findViewById(R.id.progressView);
+                    if (progress != null) {
+                        progress.setVisibility(View.GONE);
+                    }
                 }
             }
+
         });
     }
 
@@ -169,35 +200,41 @@ public class SelectProviceDialog extends DialogFragment {
         ServiceExecute.execute(new CoreLocationService(getContext()).getAll(filterModel)).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<CoreLocationModel> model) {
-                View progress = getView().findViewById(R.id.progressView);
-                if (progress != null) {
-                    progress.setVisibility(View.GONE);
-                }
-                MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.EstateAreaAutoComplete);
-                List<String> names = new ArrayList<>();
-                for (CoreLocationModel t : model.ListItems)
-                    names.add(t.Title);
-                if (names.size() == 0)
-                    names.add("موردی یافت نشد");
-                else
-                    names.add(0, "انتخاب کنید");
-                SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
-                spinner.setOnItemClickListener((parent, view, position, id) -> {
-                    if (position > 0) {
-                        selectedArea = model.ListItems.get(position - 1);
+                try {
+                    View progress = getView().findViewById(R.id.progressView);
+                    if (progress != null) {
+                        progress.setVisibility(View.GONE);
                     }
-                });
+                    MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.EstateAreaAutoComplete);
+                    List<String> names = new ArrayList<>();
+                    for (CoreLocationModel t : model.ListItems)
+                        names.add(t.Title);
+                    if (names.size() == 0)
+                        names.add("موردی یافت نشد");
+                    else
+                        names.add(0, "انتخاب کنید");
+                    SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
+                    spinner.setOnItemClickListener((parent, view, position, id) -> {
+                        if (position > 0) {
+                            selectedArea = model.ListItems.get(position - 1);
+                        }
+                    });
 
-                spinner.setAdapter(locationAdapter);
-                // Do something for lollipop and above versions
-                spinner.setText(locationAdapter.getItem(0), false);
+                    spinner.setAdapter(locationAdapter);
+                    // Do something for lollipop and above versions
+                    spinner.setText(locationAdapter.getItem(0), false);
+                } catch (Exception e) {
+                }
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                View progress = getView().findViewById(R.id.progressView);
-                if (progress != null) {
-                    progress.setVisibility(View.GONE);
+                View errorView = getView();
+                if (errorView != null) {
+                    View progress = errorView.findViewById(R.id.progressView);
+                    if (progress != null) {
+                        progress.setVisibility(View.GONE);
+                    }
                 }
             }
         });
