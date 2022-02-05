@@ -206,7 +206,7 @@ public class NewEstateActivity extends BaseActivity {
 
     public static void START_ACTIVITY(Context c) {
         //user has logged in and saved his user Id
-        if (Preferences.with(c).UserInfo().userId() > 0)
+        if (Preferences.with(c).appVariableInfo().isLogin() && Preferences.with(c).UserInfo().userId() > 0)
             c.startActivity(new Intent(c, NewEstateActivity.class));
         else {
             //show dialog to go to login page
