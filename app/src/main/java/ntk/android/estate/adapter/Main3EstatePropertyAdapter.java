@@ -5,13 +5,17 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import ntk.android.base.Extras;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
+import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.view.NViewUtils;
@@ -25,7 +29,7 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
     public Main3EstatePropertyAdapter(List<EstatePropertyModel> list) {
         super(list);
         width = ITEM_WIDTH();
-        drawable=R.drawable.sweet_error_center_x;
+        drawable = R.drawable.sweet_error_center_x;
     }
 
     public static int ITEM_WIDTH() {
@@ -33,9 +37,11 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
         var width = w / 2 - (w / 15);
         return width;
     }
+
     public static int IMAGE_WIDTH(Context c) {
         return ITEM_WIDTH() - NViewUtils.dpToPx(c, 8);
     }
+
     @NonNull
     @Override
     public Main3EstatePropertyAdapter.VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,14 +65,20 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
         });
     }
 
-    public class VH extends EstatePropertyAdapter.VH {
+    public class VH extends RecyclerView.ViewHolder {
 
+        TextView title;
+        TextView price1;
+        TextView price2;
+        TextView priceTitle1;
+        ImageView favorite;
+        ImageView image;
 
         public VH(@NonNull View itemView) {
             super(itemView);
+            creating();
         }
 
-        @Override
         protected void creating() {
             image = itemView.findViewById(R.id.image);
             if (imageSize == -1)
@@ -77,10 +89,7 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
             title = itemView.findViewById(R.id.title);
             price1 = itemView.findViewById(R.id.txtPrice1);
             price2 = itemView.findViewById(R.id.txtPrice2);
-            price3 = itemView.findViewById(R.id.txtPrice3);
             priceTitle1 = itemView.findViewById(R.id.txtPrice1Title1);
-            priceTitle2 = itemView.findViewById(R.id.txtPriceTitle2);
-            priceTitle3 = itemView.findViewById(R.id.txtPriceTitle3);
             setFont();
         }
 
@@ -90,12 +99,74 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
             title.setTypeface(bold);
             price1.setTypeface(req);
             price2.setTypeface(req);
-            price3.setTypeface(req);
             priceTitle1.setTypeface(req);
-            priceTitle2.setTypeface(req);
-            priceTitle3.setTypeface(req);
         }
+
+
+        public void setContract(EstatePropertyModel item) {
+            price1.setVisibility(View.VISIBLE);
+            price2.setVisibility(View.VISIBLE);
+
+            for (EstateContractModel m :
+                    item.Contracts) {
+
+                priceTitle1.setText(m.ContractType.Title + " :");
+                //for rahn ejare
+                if (m.ContractType.HasDepositPrice && m.ContractType.HasRentPrice) {
+                    String price = "";
+                    if (m.DepositPrice != null || m.DepositPriceByAgreement) {
+                        if (m.DepositPrice != null && m.DepositPrice != 0)
+                            price = (NViewUtils.PriceFormat(m.DepositPrice) + "  " + m.UnitSalePrice);
+                        if (m.DepositPriceByAgreement)
+                            price = (price.isEmpty() ? "توافقی" : price + "||" + " توافقی");
+                        price1.setText(price);
+                    } else price1.setText("وارد نشده");
+                    price = "";
+                    if (m.RentPrice != null || m.RentPriceByAgreement) {
+                        if (m.RentPrice != null && m.RentPrice != 0)
+                            price = (NViewUtils.PriceFormat(m.RentPrice) + "  " + m.UnitSalePrice);
+                        if (m.RentPriceByAgreement)
+                            price = (price.isEmpty() ? "توافقی" : price + "||" + " توافقی");
+                        price2.setText(price);
+                    } else {
+                        price2.setText("وارد نشده");
+                    }
+                } else {
+                    price2.setVisibility(View.INVISIBLE);
+                    if (m.ContractType.HasDepositPrice) {
+                        String price = "";
+                        if (m.DepositPrice != null || m.DepositPriceByAgreement) {
+                            if (m.DepositPrice != null && m.DepositPrice != 0)
+                                price = (NViewUtils.PriceFormat(m.DepositPrice) + "  " + m.UnitSalePrice);
+                            if (m.DepositPriceByAgreement)
+                                price = (price.isEmpty() ? "توافقی" : price + "||" + " توافقی");
+                            price1.setText(price);
+                        } else price1.setText("وارد نشده");
+                    }
+                    if (m.ContractType.HasRentPrice) {
+                        String price = "";
+                        if (m.RentPrice != null || m.RentPriceByAgreement) {
+                            if (m.RentPrice != null && m.RentPrice != 0)
+                                price = (NViewUtils.PriceFormat(m.RentPrice) + "  " + m.UnitSalePrice);
+                            if (m.RentPriceByAgreement)
+                                price = (price.isEmpty() ? "توافقی" : price + "||" + " توافقی");
+                            price1.setText(price);
+                        } else price1.setText("وارد نشده");
+                    }
+                    if (m.ContractType.HasSalePrice) {
+                        String price = "";
+                        if (m.SalePrice != null || m.SalePriceByAgreement) {
+                            if (m.SalePrice != null && m.SalePrice != 0)
+                                price = (NViewUtils.PriceFormat(m.SalePrice) + "  " + m.UnitSalePrice);
+                            if (m.SalePriceByAgreement)
+                                price = (price.isEmpty() ? "توافقی" : price + "||" + " توافقی");
+                            price1.setText(price);
+                        } else price1.setText("وارد نشده");
+                    }
+                }
+            }
+        }
+
+
     }
-
-
 }
