@@ -10,7 +10,6 @@ import android.telephony.SmsMessage;
 import org.greenrobot.eventbus.EventBus;
 
 import ntk.android.base.event.MessageEvent;
-import ntk.android.estate.R;
 
 
 public class SmsService extends BroadcastReceiver {
@@ -26,9 +25,10 @@ public class SmsService extends BroadcastReceiver {
                         SmsMessage currentSMS = getIncomingMessage(aObject, bundle);
                         String senderNo = currentSMS.getDisplayOriginatingAddress();
                         String message = currentSMS.getDisplayMessageBody();
-                        if (senderNo.contains(context.getString(R.string.PhoneNumber))) {
+                        try {
                             String[] Message = message.split(":");
                             EventBus.getDefault().post(new MessageEvent(Message[1].trim()));
+                        } catch (Exception e) {
                         }
                         abortBroadcast();
                     }
