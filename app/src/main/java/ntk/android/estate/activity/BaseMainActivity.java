@@ -8,6 +8,7 @@ import ntk.android.base.activity.abstraction.AbstractMainActivity;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.enums.EnumSortType;
+import ntk.android.base.utill.prefrense.Preferences;
 
 abstract class BaseMainActivity extends AbstractMainActivity {
     FilterModel row1;
@@ -19,6 +20,7 @@ abstract class BaseMainActivity extends AbstractMainActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         generateFilterModel();
     }
 

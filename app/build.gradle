@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
-def BaseVersion = '1.5.66'
+def BaseVersion = '1.5.67'
 def incrementalVersion = '2'
 android {
     compileSdkVersion 31

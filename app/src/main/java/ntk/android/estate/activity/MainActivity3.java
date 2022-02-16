@@ -56,7 +56,7 @@ public class MainActivity3 extends BaseMainActivity {
         setContentView(R.layout.activity_main3);
         Slider = findViewById(R.id.rcNews);
         //show drawer
-        List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems();
+        List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems(updateInfo.allowDirectShareApp);
         RecyclerView drawerRecycler = findViewById(R.id.RecyclerDrawer);
         Drawer3Adapter adapter = new Drawer3Adapter(this, menus, findViewById(R.id.floaingDrawer));
         drawerRecycler.setAdapter(adapter);
@@ -79,7 +79,13 @@ public class MainActivity3 extends BaseMainActivity {
         //click on humberger
         findViewById(R.id.img_menu).setOnClickListener(v -> ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(true));
         //click share
-        findViewById(R.id.shareQrCode).setOnClickListener(v -> onInviteMethod());
+        if(!updateInfo.allowDirectShareApp  )
+        {
+            findViewById(R.id.shareQrCode).setVisibility(View.GONE);
+        }
+        else {
+            findViewById(R.id.shareQrCode).setOnClickListener(v -> onInviteMethod());
+        }
         //add fab
         findViewById(R.id.fabAdd).setOnClickListener(view -> NewEstateActivity.START_ACTIVITY(MainActivity3.this));
         //search fab
