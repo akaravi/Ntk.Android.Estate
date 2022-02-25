@@ -211,19 +211,7 @@ public class GetLocationActivity extends BaseActivity {
         }
     }
 
-//    public void getLastLocation() {
-//        fusedLocationClient.getLastLocation()
-//                .addOnSuccessListener(this, location -> {
-//                    // Got last known location. In some rare situations this can be null.
-//                    if (location != null) {
-//                        LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
-//                        map.moveCamera(myLoc, 500);
-//                        addLabel(myLoc);
-//                    }
-//                }).addOnFailureListener(runnable ->{
-//                    String s;
-//        });
-//    }
+
 
     public void getCurrentLocation() {
         fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY, new CancellationToken() {
@@ -248,16 +236,7 @@ public class GetLocationActivity extends BaseActivity {
 
     }
 
-//    private Label addLabel(LatLng latLng) {
-//        TextStyleBuilder textStyleBuilder = new TextStyleBuilder();
-//        textStyleBuilder.setFontSize(16f);
-//        textStyleBuilder.setColor(new Color((short) 0, (short) 0, (short) 0, (short) 255));
-//        TextStyle textStyle = textStyleBuilder.buildStyle();
-//
-//        // Creating label
-//        label = new Label(latLng, textStyle, "مکان تقریبی شما");
-//        return label;
-//    }
+
 
     private Marker addMarker(LatLng latLng) {
         // Creating animation for marker. We should use an object of type AnimationStyleBuilder, set

@@ -54,7 +54,6 @@ public class MainActivity3 extends BaseMainActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        NewEstateActivity.START_ACTIVITY(this);
         Slider = findViewById(R.id.rcNews);
         //show drawer
         List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems(updateInfo.allowDirectShareApp);

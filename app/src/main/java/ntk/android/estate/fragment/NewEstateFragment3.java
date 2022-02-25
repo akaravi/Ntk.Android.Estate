@@ -70,12 +70,13 @@ public class NewEstateFragment3 extends BaseFragment {
                 myMap=mapboxMap;
                 mapboxMap.setMinZoomPreference(12);
                 myMap.easeCamera(CameraUpdateFactory.newLatLng(new LatLng(35.689198,51.388973)));
+                if (model.Geolocationlatitude != null) {
+                    LatLng loc = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
+                    marker =myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), loc));
+                    myMap.animateCamera(CameraUpdateFactory.newLatLng(loc));
+                }
                 mapboxMap.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
-                    if (model.Geolocationlatitude != null) {
-                        LatLng loc = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
-                        marker =myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), loc));
-                        myMap.animateCamera(CameraUpdateFactory.newLatLng(loc));
-                    }
+
                 });
             }
         });
