@@ -169,9 +169,13 @@
                     <ir.map.sdk_map.maps.MapView
                         android:id="@+id/map_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="200dp"
+
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginRight="2dp"
                         mapbox:mapbox_cameraZoomMax="20"
-                        mapbox:mapbox_cameraZoomMin="1" />
+                        mapbox:mapbox_cameraZoomMin="12" />
 
                     <TextView
                         android:id="@+id/customHint"
