@@ -15,9 +15,6 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import org.neshan.common.model.LatLng;
-import org.neshan.mapsdk.MapView;
-import org.neshan.mapsdk.model.Marker;
 
 import es.dmoral.toasty.Toasty;
 import ntk.android.base.Extras;

@@ -19,8 +19,6 @@ import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnima
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
-import org.neshan.common.model.LatLng;
-import org.neshan.mapsdk.MapView;
 
 import java.util.ArrayList;
 import java.util.List;

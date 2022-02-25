@@ -20,8 +20,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.xiaofeng.flowlayoutmanager.Alignment;
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
-import org.neshan.common.model.LatLng;
-import org.neshan.mapsdk.MapView;
 
 import java.util.ArrayList;
 import java.util.List;

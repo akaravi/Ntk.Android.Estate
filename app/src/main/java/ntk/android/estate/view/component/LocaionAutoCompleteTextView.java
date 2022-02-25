@@ -7,8 +7,6 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.jakewharton.rxbinding2.widget.RxAutoCompleteTextView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
-import org.neshan.common.model.LatLng;
-import org.neshan.mapsdk.MapView;
 
 import java.util.ArrayList;
 import java.util.List;

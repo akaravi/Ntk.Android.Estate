@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:mapbox="http://schemas.android.com/tools">
 
     <include
         android:id="@+id/includeToolbar"
         layout="@layout/base_toolbar_back" />
 
-    <org.neshan.mapsdk.MapView
+    <ir.map.sdk_map.maps.MapView
+        android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/includeToolbar" />
+        mapbox:mapbox_cameraZoomMax="20"
+        mapbox:mapbox_cameraZoomMin="1" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/setPointBtn"

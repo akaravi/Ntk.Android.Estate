@@ -7,6 +7,7 @@ import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -19,13 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
-import com.carto.graphics.Color;
-import com.carto.styles.AnimationStyle;
-import com.carto.styles.AnimationStyleBuilder;
-import com.carto.styles.AnimationType;
-import com.carto.styles.MarkerStyleBuilder;
-import com.carto.styles.TextStyle;
-import com.carto.styles.TextStyleBuilder;
+
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationAvailability;
@@ -40,16 +35,12 @@ import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.gms.tasks.Task;
-
-import org.neshan.common.model.LatLng;
-import org.neshan.mapsdk.MapView;
-import org.neshan.mapsdk.internal.utils.BitmapUtils;
-import org.neshan.mapsdk.model.Label;
-import org.neshan.mapsdk.model.Marker;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import ir.map.sdk_map.maps.MapView;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.estate.R;
