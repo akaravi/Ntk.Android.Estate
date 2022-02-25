@@ -174,9 +174,9 @@ public class GetLocationActivity extends BaseActivity {
                 }
             });
             map.addOnCameraMoveListener(() ->  {
-                if (myMarker != null)
-                    map.removeMarker(myMarker);
-                addMarker(map.getCameraPosition().target);
+//                if (myMarker != null)
+//                    map.removeMarker(myMarker);
+//                addMarker(map.getCameraPosition().target);
             });
         });
 
