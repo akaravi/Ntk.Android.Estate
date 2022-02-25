@@ -13,14 +13,6 @@ import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstatePropertyAdapter;
 
-public class TestActivity extends NewEstateActivity {
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.abstraction_list);
-        RecyclerView rc = findViewById(R.id.recycler);
-        rc.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        EstatePropertyAdapter adapter = new EstatePropertyAdapter( Arrays.asList(new EstatePropertyModel(), new EstatePropertyModel()));
-        rc.setAdapter(adapter);
-    }
+public class TestActivity extends GetLocationActivity {
+
 }

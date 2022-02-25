@@ -15,16 +15,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
+import ir.map.sdk_map.MapirStyle;
+import ir.map.sdk_map.maps.MapView;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.appclass.UpdateClass;
@@ -45,7 +50,6 @@ import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstateContractAdapter;
 import ntk.android.estate.adapter.EstatePropertiesInDetailAdapter;
-import ntk.android.estate.adapter.EstatePropertyAdapter;
 import ntk.android.estate.adapter.ImageSliderAdapter;
 import ntk.android.estate.adapter.PropertyDetailGroupsAdapter;
 
@@ -53,6 +57,7 @@ public class EstateDetailActivity extends BaseActivity {
     public String Id = "";
     private EstatePropertyModel model;
     ImageSliderAdapter sliderAdapter;
+    MapboxMap map;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,7 +94,7 @@ public class EstateDetailActivity extends BaseActivity {
         //toggle map is gone until model get
         (findViewById(R.id.toggleMaps)).setVisibility(View.INVISIBLE);
         findViewById(R.id.toggleMaps).setOnClickListener(view -> {
-            View mapView = findViewById(R.id.map);
+            View mapView = findViewById(R.id.map_view);
             MaterialButton button = (findViewById(R.id.toggleMaps));
             SliderView slider = findViewById(R.id.imageSlider);
             if (mapView.getVisibility() == View.VISIBLE) {
@@ -127,6 +132,18 @@ public class EstateDetailActivity extends BaseActivity {
                 else
                     ServiceExecute.execute(new EstatePropertyService(EstateDetailActivity.this).addFavorite(model.Id)).subscribe(subscriptor);
 
+            }
+        });
+        MapView mapView = findViewById(R.id.map_view);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull MapboxMap mapboxMap) {
+                map = mapboxMap;
+                map.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), new Style.OnStyleLoaded() {
+                    @Override
+                    public void onStyleLoaded(@NonNull Style style) {
+                    }
+                });
             }
         });
         //call button
@@ -220,8 +237,11 @@ public class EstateDetailActivity extends BaseActivity {
         if (model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
             (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
             LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
-            ((MapView) findViewById(R.id.map)).addMarker(GetLocationActivity.MakeMarker(this, point));
+            if (map != null) {
 
+                map.addMarker(GetLocationActivity.MakeMarker(this, point));
+
+            }
         }
     }
 

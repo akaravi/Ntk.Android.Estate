@@ -206,23 +206,23 @@ public class NewEstateActivity extends BaseActivity {
 
     public static void START_ACTIVITY(Context c) {
         //user has logged in and saved his user Id
-        if (Preferences.with(c).appVariableInfo().isLogin() && Preferences.with(c).UserInfo().userId() > 0)
+//        if (Preferences.with(c).appVariableInfo().isLogin() && Preferences.with(c).UserInfo().userId() > 0)
             c.startActivity(new Intent(c, NewEstateActivity.class));
-        else {
-            //show dialog to go to login page
-            SweetAlertDialog dialog = new SweetAlertDialog(c, SweetAlertDialog.ERROR_TYPE);
-            dialog.setTitle("خطا در انجام عملیات");
-            dialog.setContentText("برای ثبت ملک نیاز است که به حساب خود وارد شوید. آیا مایلید به صفحه ی ورود هدایت شوید؟");
-            dialog.setConfirmButton("بلی", d -> {
-                Preferences.with(d.getContext()).appVariableInfo().set_registerNotInterested(false);
-                Intent i = new Intent(d.getContext(), AuthWithSmsActivity.class);
-                //clear all activity that open before
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                d.getContext().startActivity(i);
-                d.dismiss();
-            });
-            dialog.setCancelButton("تمایل ندارم", SweetAlertDialog::dismiss);
-            dialog.show();
-        }
+//        else {
+//            //show dialog to go to login page
+//            SweetAlertDialog dialog = new SweetAlertDialog(c, SweetAlertDialog.ERROR_TYPE);
+//            dialog.setTitle("خطا در انجام عملیات");
+//            dialog.setContentText("برای ثبت ملک نیاز است که به حساب خود وارد شوید. آیا مایلید به صفحه ی ورود هدایت شوید؟");
+//            dialog.setConfirmButton("بلی", d -> {
+//                Preferences.with(d.getContext()).appVariableInfo().set_registerNotInterested(false);
+//                Intent i = new Intent(d.getContext(), AuthWithSmsActivity.class);
+//                //clear all activity that open before
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                d.getContext().startActivity(i);
+//                d.dismiss();
+//            });
+//            dialog.setCancelButton("تمایل ندارم", SweetAlertDialog::dismiss);
+//            dialog.show();
+//        }
     }
 }

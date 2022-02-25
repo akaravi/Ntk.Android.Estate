@@ -54,6 +54,7 @@ public class MainActivity3 extends BaseMainActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        NewEstateActivity.START_ACTIVITY(this);
         Slider = findViewById(R.id.rcNews);
         //show drawer
         List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems(updateInfo.allowDirectShareApp);
@@ -238,7 +239,6 @@ public class MainActivity3 extends BaseMainActivity {
                             if (newsContentResponse.ListItems.size() > 0) {
                                 SnapHelper snapHelper = new PagerSnapHelper();
                                 Main3NewsAdapter adapter = new Main3NewsAdapter(MainActivity3.this, newsContentResponse.ListItems);
-                                Slider.setHasFixedSize(true);
                                 LinearLayoutManager manager = new LinearLayoutManager(MainActivity3.this, LinearLayoutManager.HORIZONTAL, false);
                                 Slider.setLayoutManager(manager);
                                 Slider.setAdapter(adapter);

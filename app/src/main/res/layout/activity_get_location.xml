@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         mapbox:mapbox_cameraZoomMax="20"
-        mapbox:mapbox_cameraZoomMin="1" />
+        mapbox:mapbox_cameraZoomMin="10" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/setLocationBtn"

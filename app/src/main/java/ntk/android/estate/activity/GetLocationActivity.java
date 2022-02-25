@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 
 import android.os.Bundle;
@@ -35,6 +34,11 @@ import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.gms.tasks.Task;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 
 import java.util.List;
@@ -45,10 +49,18 @@ import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.estate.R;
 
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+import ir.map.sdk_map.MapirStyle;
+
 public class GetLocationActivity extends BaseActivity {
-    private Marker marker;
-    private Label label;
-    MapView map;
+    MapboxMap  map;
+    Style mapStyle;
+    Marker myMarker;
+
+     Marker myLocalMarker;
+
     FusedLocationProviderClient fusedLocationClient;
     ActivityResultLauncher<String[]> locationPermissionRequest =
             registerForActivityResult(new ActivityResultContracts
@@ -114,15 +126,11 @@ public class GetLocationActivity extends BaseActivity {
                     //The last location in the list is the newest
                     Location location = locationList.get(locationList.size() - 1);
 
-                    if (label != null) {
-                        map.removeLabel(label);
-                    }
-
                     //Place current location marker
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    map.addLabel(addLabel(latLng));
+                    addMyLocationMarker(latLng);
                     //move map camera
-                    map.moveCamera(latLng, 2);
+                    map.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 }
             }
 
@@ -132,6 +140,7 @@ public class GetLocationActivity extends BaseActivity {
             }
         };
     }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -143,30 +152,42 @@ public class GetLocationActivity extends BaseActivity {
 
         //location button
         findViewById(R.id.lastLocationFab).setOnClickListener(view -> getPermission());
-        map = findViewById(R.id.mapview);
-        map.setOnMapClickListener(new MapView.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                if (marker != null)
-                    map.removeMarker(marker);
-                map.addMarker(addMarker(latLng));
-                map.moveCamera(latLng, 2);
-            }
+        MapView   mapView = findViewById(R.id.mapview);
+        mapView.getMapAsync(mapboxMap -> {
+            map = mapboxMap;
+            map.setMinZoomPreference(12);
+            map.easeCamera(CameraUpdateFactory.newLatLng(new LatLng(35.689198,51.388973)));
+            map.setStyle(new Style.Builder().fromUri(MapirStyle.LIGHT), new Style.OnStyleLoaded() {
+                @Override
+                public void onStyleLoaded(@NonNull Style style) {
+                    mapStyle = style;
+                }
+            });
+            map.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
+                @Override
+                public boolean onMapClick(@NonNull LatLng point) {
+                    if (myMarker != null)
+                        map.removeMarker(myMarker);
+                   addMarker(point);
+                    map.animateCamera(CameraUpdateFactory.newLatLng(point));
+                    return false;
+                }
+            });
+            map.addOnCameraMoveListener(() ->  {
+                if (myMarker != null)
+                    map.removeMarker(myMarker);
+                addMarker(map.getCameraPosition().target);
+            });
         });
-        map.setOnCameraMoveFinishedListener(i -> {
-            if (marker != null)
-                map.removeMarker(marker);
-            map.addMarker(addMarker(map.getCameraTargetPosition()));
-        });
-        map.setOnMapLongClickListener(latLng -> map.addLabel(addLabel(latLng)));
-        map.setMyLocationEnabled(false);
+
+
         findViewById(R.id.setLocationBtn).setOnClickListener(view -> {
-            if (marker == null)
+            if (myMarker == null)
                 Toasty.error(GetLocationActivity.this, "موقعیتی انتخاب نشده است").show();
             else {
                 Intent i = new Intent();
-                i.putExtra(Extras.EXTRA_FIRST_ARG, marker.getLatLng().getLatitude());
-                i.putExtra(Extras.EXTRA_SECOND_ARG, marker.getLatLng().getLongitude());
+                i.putExtra(Extras.EXTRA_FIRST_ARG, myMarker.getPosition().getLatitude());
+                i.putExtra(Extras.EXTRA_SECOND_ARG, myMarker.getPosition().getLongitude());
                 setResult(RESULT_OK, i);
                 finish();
             }
@@ -220,46 +241,62 @@ public class GetLocationActivity extends BaseActivity {
             // Got last known location. In some rare situations this can be null.
             if (location != null) {
                 LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
-                map.moveCamera(myLoc, 2);
-                addLabel(myLoc);
+                map.animateCamera(CameraUpdateFactory.newLatLng((myLoc)));
+//                addLabel(myLoc);
             }
         });
 
     }
 
-    private Label addLabel(LatLng latLng) {
-        TextStyleBuilder textStyleBuilder = new TextStyleBuilder();
-        textStyleBuilder.setFontSize(16f);
-        textStyleBuilder.setColor(new Color((short) 0, (short) 0, (short) 0, (short) 255));
-        TextStyle textStyle = textStyleBuilder.buildStyle();
-
-        // Creating label
-        label = new Label(latLng, textStyle, "مکان تقریبی شما");
-        return label;
-    }
+//    private Label addLabel(LatLng latLng) {
+//        TextStyleBuilder textStyleBuilder = new TextStyleBuilder();
+//        textStyleBuilder.setFontSize(16f);
+//        textStyleBuilder.setColor(new Color((short) 0, (short) 0, (short) 0, (short) 255));
+//        TextStyle textStyle = textStyleBuilder.buildStyle();
+//
+//        // Creating label
+//        label = new Label(latLng, textStyle, "مکان تقریبی شما");
+//        return label;
+//    }
 
     private Marker addMarker(LatLng latLng) {
         // Creating animation for marker. We should use an object of type AnimationStyleBuilder, set
         // all animation features on it and then call buildStyle() method that returns an object of type
         // AnimationStyle
-        marker = MakeMarker(this, latLng);
+        IconFactory iconFactory = IconFactory.getInstance(GetLocationActivity.this);
+        Icon icon = iconFactory.fromResource(R.drawable.logo);
 
-        return marker;
+        myMarker = map.addMarker(new MarkerOptions()
+                .position(latLng)
+                .title("مکان انتخابی")
+                .icon(icon)
+        );
+
+        return myMarker;
     }
 
-    public static Marker MakeMarker(Context context, LatLng loc) {
-        AnimationStyleBuilder animStBl = new AnimationStyleBuilder();
-        animStBl.setFadeAnimationType(AnimationType.ANIMATION_TYPE_SMOOTHSTEP);
-        animStBl.setSizeAnimationType(AnimationType.ANIMATION_TYPE_SPRING);
-        animStBl.setPhaseInDuration(0.5f);
-        animStBl.setPhaseOutDuration(0.5f);
-        AnimationStyle animStyle = animStBl.buildStyle();
-        MarkerStyleBuilder markStCr = new MarkerStyleBuilder();
-        markStCr.setSize(90f);
-        markStCr.setBitmap(BitmapUtils.createBitmapFromAndroidBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo)));
-        markStCr.setAnimationStyle(animStyle);
-        Marker marker = new Marker(loc, markStCr.buildStyle());
-        return marker;
+    private Marker addMyLocationMarker(LatLng latLng) {
+        IconFactory iconFactory = IconFactory.getInstance(GetLocationActivity.this);
+        Icon icon = iconFactory.fromResource(R.drawable.marker);
+        if (myLocalMarker!=null)
+            map.removeMarker(myLocalMarker);
+        myLocalMarker = map.addMarker(new MarkerOptions()
+                .position(latLng)
+                .title("مکان تقریبی")
+                .icon(icon)
+        );
+
+        return myMarker;
+    }
+    public static MarkerOptions MakeMarker(Context context, LatLng loc) {
+        IconFactory iconFactory = IconFactory.getInstance(context);
+        Icon icon = iconFactory.fromResource(R.drawable.logo);
+
+        MarkerOptions options =new MarkerOptions()
+                .position(loc)
+                .title("مکان انتخابی")
+                .icon(icon);
+        return  options;
     }
 
     public static void REGISTER_FOR_RESULT(BaseActivity activity, ActivityResultCallback<ActivityResult> callback) {
