@@ -105,13 +105,14 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
                     ClickFeedBack();
                     break;
                 case 10:
-                    ClickShare();
-                    break;
-                case 11:
                     ClickAbout();
                     break;
-                case 12:
+
+                case 11:
                     ClickIntro();
+                    break;
+                case 12:
+                    ClickShare();
                     break;
             }
         });
@@ -243,11 +244,11 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("صندوق پیام دریافتی").setDrawableIcon(R.drawable.notification2));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("پرسش های متداول").setDrawableIcon(R.drawable.faq2));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("بازخورد").setDrawableIcon(R.drawable.feedback2));
+        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("درباره ما").setDrawableIcon(R.drawable.about_us2));
+        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("راهنما").setDrawableIcon(R.drawable.intro2));
         if (allowDirectShareApp) {
             list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("دعوت از دوستان").setDrawableIcon(R.drawable.invite2));
         }
-        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("درباره ما").setDrawableIcon(R.drawable.about_us2));
-        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("راهنما").setDrawableIcon(R.drawable.intro2));
         return list;
     }
 }
