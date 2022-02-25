@@ -68,6 +68,7 @@ public class NewEstateFragment3 extends BaseFragment {
             @Override
             public void onMapReady(@NonNull MapboxMap mapboxMap) {
                 myMap=mapboxMap;
+                mapboxMap.setMinZoomPreference(12);
                 mapboxMap.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
                     if (model.Geolocationlatitude != null) {
                         LatLng loc = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
