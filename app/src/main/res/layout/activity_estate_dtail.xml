@@ -124,13 +124,38 @@
                     </com.balysv.materialripple.MaterialRippleLayout>
 
                     <com.balysv.materialripple.MaterialRippleLayout
-                        android:id="@+id/imgShareDetail"
+                        android:id="@+id/reportBtn"
                         android:layout_width="45dp"
                         android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
+                        app:mrl_rippleAlpha="0.05"
+                        app:mrl_rippleColor="#10000000"
+                        app:mrl_rippleRoundedCorners="100dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:contentDescription="@null"
+                                app:srcCompat="@android:drawable/ic_dialog_info"
+                                app:tint="?attr/toolbarColorText" />
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:id="@+id/imgShareDetail"
+                        android:layout_width="45dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/reportBtn"
                         app:mrl_rippleAlpha="0.05"
                         app:mrl_rippleColor="#10000000"
                         app:mrl_rippleRoundedCorners="100dp">
@@ -320,42 +345,21 @@
                     android:id="@+id/telPadding"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    />
+                    android:visibility="gone" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <LinearLayout
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/phoneButton"
+        style="@style/estate_detail_tel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="64dp"
         android:layout_marginRight="64dp"
         android:layout_marginBottom="16dp"
-
-        android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/phoneButton"
-            style="@style/estate_detail_tel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="شماره تماس"
-            android:visibility="gone" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/reportBtn"
-            style="@style/estate_detail_tel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_weight="1"
-            android:text="گزارش خطا"
-            android:textColor="@color/colorAccent"
-
-            app:icon="@android:drawable/ic_menu_info_details"
-            app:iconTint="@color/colorAccent" />
-    </LinearLayout>
+        android:text="شماره تماس"
+        android:visibility="gone" />
 </RelativeLayout>
