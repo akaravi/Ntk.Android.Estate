@@ -1,20 +1,28 @@
 package ntk.android.estate.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -37,6 +45,7 @@ import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.GenericErrors;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
+import ntk.android.base.dtomodel.core.CoreModuleReportAbuseDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.ErrorExceptionBase;
 import ntk.android.base.entitymodel.base.FilterDataModel;
@@ -149,6 +158,7 @@ public class EstateDetailActivity extends BaseActivity {
         });
         //call button
         findViewById(R.id.phoneButton).setOnClickListener(view -> call());
+        findViewById(R.id.reportBtn).setOnClickListener(view -> showReportDialog());
     }
 
 
@@ -271,5 +281,66 @@ public class EstateDetailActivity extends BaseActivity {
         this.startActivity(Intent.createChooser(shareIntent, getString(ntk.android.base.R.string.per_share_to)));
     }
 
+    public void showReportDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(true);
+        Window window = dialog.getWindow();
+        window.setLayout(LinearLayoutCompat.LayoutParams.WRAP_CONTENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
+        window.setGravity(Gravity.CENTER);
+        dialog.setContentView(ntk.android.base.R.layout.dialog_report_add);
+        TextView Lbl = dialog.findViewById(R.id.lblTitleDialogAddReport);
+        Lbl.setTypeface(FontManager.T1_Typeface(this));
 
+
+        EditText subject = dialog.findViewById(R.id.txtContentDialogAddReport);
+        subject.setTypeface(FontManager.T1_Typeface(this));
+
+
+        Button Btn = dialog.findViewById(ntk.android.base.R.id.btnSubmitDialogReportAdd);
+        Btn.setTypeface(FontManager.T1_Typeface(this));
+
+        Btn.setOnClickListener(v -> {
+                if (subject.getText().toString().isEmpty()) {
+                    Toast.makeText(this, ntk.android.base.R.string.per_insert_num, Toast.LENGTH_SHORT).show();
+                } else {
+                    if (AppUtil.isNetworkAvailable(this)) {
+//                        NewsCommentModel add = new NewsCommentModel();
+                        String text = subject.getText().toString();
+                        CoreModuleReportAbuseDtoModel m = new CoreModuleReportAbuseDtoModel();
+                        m.ModuleEntityId = model.Id;
+                        m.SubjectBody = text;
+                        ServiceExecute.execute(new EstatePropertyService(this).report(m))
+                                .subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
+                                    @Override
+                                    public void onNext(ErrorException<EstatePropertyModel> e) {
+                                        if (e.IsSuccess) {
+
+                                            dialog.dismiss();
+                                            Toasty.success(EstateDetailActivity.this, ntk.android.base.R.string.success_comment).show();
+                                        } else {
+                                            dialog.dismiss();
+                                            Toasty.warning(EstateDetailActivity.this, e.ErrorMessage).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError( Throwable e) {
+                                        Snackbar.make( findViewById(ntk.android.base.R.id.mainLayoutDetail), ntk.android.base.R.string.error_raised, Snackbar.LENGTH_INDEFINITE).setAction(ntk.android.base.R.string.try_again, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                //todo add
+                                            }
+                                        }).show();
+                                    }
+                                });
+                    } else {
+                        Toasty.error(EstateDetailActivity.this,"خطا در ارسال اطلاعات").show();
+
+                    }
+                }
+        });
+
+        dialog.show();
+    }
 }

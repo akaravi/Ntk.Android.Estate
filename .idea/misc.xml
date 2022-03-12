@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/comon_auth_activity.xml" value="0.26875" />
+        <entry key="..\:/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/dialog_comment_add.xml" value="0.26875" />
+        <entry key="..\:/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/dialog_report_add.xml" value="0.19746376811594202" />
+        <entry key="..\:/GitHub/Ntk.Android.Estate/app/src/main/res/layout/activity_estate_dtail.xml" value="0.5" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/drawable/ic_arrow.xml" value="0.3638888888888889" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/drawable/ic_arrow_rotate.xml" value="0.3638888888888889" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.BaseActivity/app/src/main/res/layout/abstraction_list.xml" value="0.18161094224924013" />
@@ -92,8 +96,6 @@
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/search_property_detail_group_selector.xml" value="0.26614583333333336" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/search_value_picker_dialog.xml" value="0.18110435663627153" />
         <entry key="..\:/Project/android/NTK/Ntk.Android.Estate/app/src/main/res/layout/sub_estate_contract_selector.xml" value="0.38333333333333336" />
-        <entry key="..\:/SourceKaravi/GitHub/Ntk.Android.Estate/app/src/main/res/layout/activity_main3.xml" value="0.20208333333333334" />
-        <entry key="..\:/SourceKaravi/GitHub/Ntk.Android.Estate/app/src/main/res/layout/main3_toolbar.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/base_toolbar_back.xml" value="0.18072916666666666" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/common_auth_confirm_activity.xml" value="0.1802536231884058" />
         <entry key="..\:/Users/parishani/Documents/GitHub/Ntk.Android.BaseActivity/app/src/main/res/layout/drawer_theme_1_item.xml" value="0.14513677811550152" />
@@ -117,5 +119,5 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>
