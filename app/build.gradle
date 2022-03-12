@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
-def BaseVersion = '1.5.70'
-def incrementalVersion = '2'
+def BaseVersion = '1.5.71'
+def incrementalVersion = '1'
 android {
     compileSdkVersion 31
     defaultConfig {
@@ -127,7 +127,7 @@ dependencies {
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
     //for location autocomplete
     implementation "com.jakewharton.rxbinding2:rxbinding:2.0.0"
-    api project(path: ':baseActivity')
-//     api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
+//    api project(path: ':baseActivity')
+     api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
 }
 
