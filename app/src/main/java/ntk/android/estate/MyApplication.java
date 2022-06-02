@@ -25,13 +25,13 @@ public class MyApplication extends NTKApplication {
     public void onCreate() {
         applicationStyle = new MyAppStyle();
         super.onCreate();
-        Mapir.init(this, "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjUwMGRmMjgyZjZkYjZkYmQ4ZDdjZTQxM2EyZDY0ZDg1NG" +
-                "ZmOTMyMTc3NWQxOGFkNWI4ODk4NTRjOTE5MjZlYWQ1MDk0ZmMzMWY2N2FmMzIxIn0.eyJhdWQiOiIxNzE5MiIsImp0aSI6IjUwMGRmMjg" +
-                "yZjZkYjZkYmQ4ZDdjZTQxM2EyZDY0ZDg1NGZmOTMyMTc3NWQxOGFkNWI4ODk4NTRjOTE5MjZlYWQ1MDk0ZmMzMWY2N2FmMzIxIiwiaWF0IjoxN" +
-                "jQ1ODA1MDMzLCJuYmYiOjE2NDU4MDUwMzMsImV4cCI6MTY0ODIyMDYzMywic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.GiAE2GIo0vz1RNF9JloT" +
-                "pB4WbpTS6y4P7KVH4QpuJWih4QBWhz9tZKSk9RXIODYkUe5qa8KZJfYjr4N0VOQVEQLSfhX-hn64Imjx1Y-4cW9x0hq8NskTgMtcovHg59qrVJdzM" +
-                "EcpJRWuUl3V8wyPfXj9lm-OY_h2Cp0AGlc9s2mKHA3UpNP5-JMYLX25r4HZGQBlkVI4xPiM_FY2CaX2lueY6xUFQZbcsII3kS-VNWYyy5aND6OB" +
-                "8O6139k1kxbQLz0xBwKBWsnLOKFqva6IHhr8xmY-Wmb06YPvYajZpbR1Vy8JflGKNFZ-pJUP_Uf0whhdrpqjhN_0jkdcu7Ci0Q");
+//        Mapir.init(this, "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjUwMGRmMjgyZjZkYjZkYmQ4ZDdjZTQxM2EyZDY0ZDg1NG" +
+//                "ZmOTMyMTc3NWQxOGFkNWI4ODk4NTRjOTE5MjZlYWQ1MDk0ZmMzMWY2N2FmMzIxIn0.eyJhdWQiOiIxNzE5MiIsImp0aSI6IjUwMGRmMjg" +
+//                "yZjZkYjZkYmQ4ZDdjZTQxM2EyZDY0ZDg1NGZmOTMyMTc3NWQxOGFkNWI4ODk4NTRjOTE5MjZlYWQ1MDk0ZmMzMWY2N2FmMzIxIiwiaWF0IjoxN" +
+//                "jQ1ODA1MDMzLCJuYmYiOjE2NDU4MDUwMzMsImV4cCI6MTY0ODIyMDYzMywic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.GiAE2GIo0vz1RNF9JloT" +
+//                "pB4WbpTS6y4P7KVH4QpuJWih4QBWhz9tZKSk9RXIODYkUe5qa8KZJfYjr4N0VOQVEQLSfhX-hn64Imjx1Y-4cW9x0hq8NskTgMtcovHg59qrVJdzM" +
+//                "EcpJRWuUl3V8wyPfXj9lm-OY_h2Cp0AGlc9s2mKHA3UpNP5-JMYLX25r4HZGQBlkVI4xPiM_FY2CaX2lueY6xUFQZbcsII3kS-VNWYyy5aND6OB" +
+//                "8O6139k1kxbQLz0xBwKBWsnLOKFqva6IHhr8xmY-Wmb06YPvYajZpbR1Vy8JflGKNFZ-pJUP_Uf0whhdrpqjhN_0jkdcu7Ci0Q");
 
         DEBUG = true;
         if (!new File(getCacheDir(), "image").exists()) {
@@ -63,7 +63,7 @@ public class MyApplication extends NTKApplication {
     protected ApplicationStaticParameter getConfig() {
         ApplicationStaticParameter applicationStaticParameter = new ApplicationStaticParameter();
         //todo server ngrok replacement
-//        applicationStaticParameter.URL = "http://7742-94-183-160-75.ngrok.io/";
+        //applicationStaticParameter.URL = "https://a7e6-162-55-141-53.ngrok.io/";
 //        http://
         return applicationStaticParameter;
     }

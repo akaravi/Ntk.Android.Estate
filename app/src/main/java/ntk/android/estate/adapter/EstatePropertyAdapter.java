@@ -1,5 +1,7 @@
 package ntk.android.estate.adapter;
 
+import static ntk.android.estate.utils.MapUtility.convertSizeThumbnailImage;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.View;
@@ -126,6 +128,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
         public void setContract(EstatePropertyModel item) {
             for (EstateContractModel m :
                     item.Contracts) {
+
                 if (m.ContractType.HasSalePrice) {
                     priceTitle1.setText(m.ContractType.Title+" :");
                     if (m.SalePrice != null || m.SalePriceByAgreement) {

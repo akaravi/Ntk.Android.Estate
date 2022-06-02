@@ -1,5 +1,7 @@
 package ntk.android.estate.activity;
 
+import static ntk.android.estate.utils.MapUtility.convertSizeThumbnailImage;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -178,7 +180,20 @@ public class MainActivity3 extends BaseMainActivity {
                     @Override
                     protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
                         RecyclerView rc = view.findViewById(R.id.rc);
-
+                        //image Optimaze
+if(response.IsSuccess)
+    for (EstatePropertyModel itemL : response.ListItems) {
+        itemL.LinkMainImageIdSrc=convertSizeThumbnailImage(itemL.LinkMainImageIdSrc,300,300);
+        if(itemL.LinkFileIdsSrc!=null && itemL.LinkFileIdsSrc.size()>0)
+            for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
+                itemL.LinkFileIdsSrc.set(i,convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i),300,300));
+            }
+        if(itemL.LinkExtraImageIdsSrc!=null && itemL.LinkExtraImageIdsSrc.size()>0)
+            for (int i = 0; i < itemL.LinkExtraImageIdsSrc.size(); i++) {
+                itemL.LinkExtraImageIdsSrc.set(i,convertSizeThumbnailImage(itemL.LinkExtraImageIdsSrc.get(i),300,300));
+            }
+    }
+//image Optimaze
                         rc.setAdapter(new Main3EstatePropertyAdapter(response.ListItems));
                         rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
                         ViewCompat.setNestedScrollingEnabled(rc, false);
@@ -236,6 +251,15 @@ public class MainActivity3 extends BaseMainActivity {
                         shimmerLayout.setVisibility(View.GONE);
                         if (newsContentResponse.IsSuccess) {
                             if (newsContentResponse.ListItems.size() > 0) {
+                                //image Optimaze
+                                    for (NewsContentModel itemL : newsContentResponse.ListItems) {
+                                        itemL.LinkMainImageIdSrc = convertSizeThumbnailImage(itemL.LinkMainImageIdSrc, 300, 300);
+                                        if (itemL.LinkFileIdsSrc != null && itemL.LinkFileIdsSrc.size() > 0)
+                                            for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
+                                                itemL.LinkFileIdsSrc.set(i, convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i), 300, 300));
+                                            }
+                                    }
+                                //image Optimaze
                                 SnapHelper snapHelper = new PagerSnapHelper();
                                 Main3NewsAdapter adapter = new Main3NewsAdapter(MainActivity3.this, newsContentResponse.ListItems);
                                 LinearLayoutManager manager = new LinearLayoutManager(MainActivity3.this, LinearLayoutManager.HORIZONTAL, false);
