@@ -1,6 +1,6 @@
 package ntk.android.estate.activity;
 
-import static ntk.android.estate.utils.MapUtility.convertSizeThumbnailImage;
+//import static ntk.android.estate.utils.MapUtility.convertSizeThumbnailImage;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -42,6 +42,7 @@ import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.services.estate.EstatePropertyTypeLanduseService;
 import ntk.android.base.services.news.NewsContentService;
 import ntk.android.base.utill.FontManager;
+import ntk.android.base.utill.imageCompressor;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.Main3EstateLandUseAdapter;
 import ntk.android.estate.adapter.Main3EstatePropertyAdapter;
@@ -81,11 +82,9 @@ public class MainActivity3 extends BaseMainActivity {
         //click on humberger
         findViewById(R.id.img_menu).setOnClickListener(v -> ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(true));
         //click share
-        if(!updateInfo.allowDirectShareApp  )
-        {
+        if (!updateInfo.allowDirectShareApp) {
             findViewById(R.id.shareQrCode).setVisibility(View.GONE);
-        }
-        else {
+        } else {
             findViewById(R.id.shareQrCode).setOnClickListener(v -> onInviteMethod());
         }
         //add fab
@@ -180,20 +179,21 @@ public class MainActivity3 extends BaseMainActivity {
                     @Override
                     protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
                         RecyclerView rc = view.findViewById(R.id.rc);
-                        //image Optimaze
-if(response.IsSuccess)
-    for (EstatePropertyModel itemL : response.ListItems) {
-        itemL.LinkMainImageIdSrc=convertSizeThumbnailImage(itemL.LinkMainImageIdSrc,300,300);
-        if(itemL.LinkFileIdsSrc!=null && itemL.LinkFileIdsSrc.size()>0)
-            for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
-                itemL.LinkFileIdsSrc.set(i,convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i),300,300));
-            }
-        if(itemL.LinkExtraImageIdsSrc!=null && itemL.LinkExtraImageIdsSrc.size()>0)
-            for (int i = 0; i < itemL.LinkExtraImageIdsSrc.size(); i++) {
-                itemL.LinkExtraImageIdsSrc.set(i,convertSizeThumbnailImage(itemL.LinkExtraImageIdsSrc.get(i),300,300));
-            }
-    }
-//image Optimaze
+
+                        if (response.IsSuccess)
+                            //image optimize
+                            for (EstatePropertyModel itemL : response.ListItems) {
+                                itemL.LinkMainImageIdSrc = imageCompressor.convertSizeThumbnailImage(itemL.LinkMainImageIdSrc, 300, 300);
+                                if (itemL.LinkFileIdsSrc != null && itemL.LinkFileIdsSrc.size() > 0)
+                                    for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
+                                        itemL.LinkFileIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i), 300, 300));
+                                    }
+                                if (itemL.LinkExtraImageIdsSrc != null && itemL.LinkExtraImageIdsSrc.size() > 0)
+                                    for (int i = 0; i < itemL.LinkExtraImageIdsSrc.size(); i++) {
+                                        itemL.LinkExtraImageIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkExtraImageIdsSrc.get(i), 300, 300));
+                                    }
+                            }
+
                         rc.setAdapter(new Main3EstatePropertyAdapter(response.ListItems));
                         rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
                         ViewCompat.setNestedScrollingEnabled(rc, false);
@@ -252,13 +252,13 @@ if(response.IsSuccess)
                         if (newsContentResponse.IsSuccess) {
                             if (newsContentResponse.ListItems.size() > 0) {
                                 //image Optimaze
-                                    for (NewsContentModel itemL : newsContentResponse.ListItems) {
-                                        itemL.LinkMainImageIdSrc = convertSizeThumbnailImage(itemL.LinkMainImageIdSrc, 300, 300);
-                                        if (itemL.LinkFileIdsSrc != null && itemL.LinkFileIdsSrc.size() > 0)
-                                            for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
-                                                itemL.LinkFileIdsSrc.set(i, convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i), 300, 300));
-                                            }
-                                    }
+                                for (NewsContentModel itemL : newsContentResponse.ListItems) {
+                                    itemL.LinkMainImageIdSrc = imageCompressor.convertSizeThumbnailImage(itemL.LinkMainImageIdSrc, 300, 300);
+                                    if (itemL.LinkFileIdsSrc != null && itemL.LinkFileIdsSrc.size() > 0)
+                                        for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
+                                            itemL.LinkFileIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i), 300, 300));
+                                        }
+                                }
                                 //image Optimaze
                                 SnapHelper snapHelper = new PagerSnapHelper();
                                 Main3NewsAdapter adapter = new Main3NewsAdapter(MainActivity3.this, newsContentResponse.ListItems);

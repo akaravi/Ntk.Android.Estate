@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
 
                     android:layout_height="wrap_content"
-                    android:text="تصویر اصلی" />
+                    android:text="عکس اصلی" />
 
                 <RelativeLayout
                     android:id="@+id/selectMainImage"
@@ -46,7 +46,62 @@
                         android:id="@+id/selectedImageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/deleteImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_margin="8dp"
+                        android:text="حذف"
+                        app:tint="@color/colorGrayText" />
                 </RelativeLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <View
+            style="@style/new_estate_padding"
+            android:layout_width="match_parent" />
+
+        <androidx.cardview.widget.CardView
+            style="@style/new_estate_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentPadding="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/addOtherImageBtn"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_plus"
+                    app:iconSize="20dp"/>
+                <TextView
+                    android:id="@+id/tv1"
+                    style="@style/new_estate_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="عکس های بیشتر" />
+            </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/imageRecycler"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

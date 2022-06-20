@@ -1,6 +1,5 @@
 package ntk.android.estate.adapter;
 
-import static ntk.android.estate.utils.MapUtility.convertSizeThumbnailImage;
 
 import android.content.Intent;
 import android.graphics.Typeface;
