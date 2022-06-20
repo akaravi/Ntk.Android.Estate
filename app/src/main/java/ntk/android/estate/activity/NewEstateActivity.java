@@ -17,12 +17,15 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import ntk.android.base.activity.BaseActivity;
+import ntk.android.base.activity.common.AuthWithSmsActivity;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.FontManager;
+import ntk.android.base.utill.prefrense.Preferences;
+import ntk.android.base.view.dialog.SweetAlertDialog;
 import ntk.android.estate.R;
 import ntk.android.estate.fragment.NewEstateFragment1;
 import ntk.android.estate.fragment.NewEstateFragment2;
@@ -54,7 +57,7 @@ public class NewEstateActivity extends BaseActivity {
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
         });
         setFont();
-        showFragment5();
+        showFragment1();
     }
 
     private void setFont() {
@@ -215,23 +218,23 @@ public class NewEstateActivity extends BaseActivity {
 
     public static void START_ACTIVITY(Context c) {
         //user has logged in and saved his user Id
-//        if (Preferences.with(c).appVariableInfo().isLogin() && Preferences.with(c).UserInfo().userId() > 0)
+        if (Preferences.with(c).appVariableInfo().isLogin() && Preferences.with(c).UserInfo().userId() > 0)
         c.startActivity(new Intent(c, NewEstateActivity.class));
-//        else {
-//            //show dialog to go to login page
-//            SweetAlertDialog dialog = new SweetAlertDialog(c, SweetAlertDialog.ERROR_TYPE);
-//            dialog.setTitle("خطا در انجام عملیات");
-//            dialog.setContentText("برای ثبت ملک نیاز است که به حساب خود وارد شوید. آیا مایلید به صفحه ی ورود هدایت شوید؟");
-//            dialog.setConfirmButton("بلی", d -> {
-//                Preferences.with(d.getContext()).appVariableInfo().set_registerNotInterested(false);
-//                Intent i = new Intent(d.getContext(), AuthWithSmsActivity.class);
-//                //clear all activity that open before
-//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                d.getContext().startActivity(i);
-//                d.dismiss();
-//            });
-//            dialog.setCancelButton("تمایل ندارم", SweetAlertDialog::dismiss);
-//            dialog.show();
-//        }
+        else {
+            //show dialog to go to login page
+            SweetAlertDialog dialog = new SweetAlertDialog(c, SweetAlertDialog.ERROR_TYPE);
+            dialog.setTitle("خطا در انجام عملیات");
+            dialog.setContentText("برای ثبت ملک نیاز است که به حساب خود وارد شوید. آیا مایلید به صفحه ی ورود هدایت شوید؟");
+            dialog.setConfirmButton("بلی", d -> {
+                Preferences.with(d.getContext()).appVariableInfo().set_registerNotInterested(false);
+                Intent i = new Intent(d.getContext(), AuthWithSmsActivity.class);
+                //clear all activity that open before
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                d.getContext().startActivity(i);
+                d.dismiss();
+            });
+            dialog.setCancelButton("تمایل ندارم", SweetAlertDialog::dismiss);
+            dialog.show();
+        }
     }
 }
