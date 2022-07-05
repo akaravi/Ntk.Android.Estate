@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.gson.Gson;
 
 import java.util.Date;
 import java.util.List;
@@ -65,7 +64,7 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
         });
         holder.edit.setOnClickListener(view -> {
             Intent i = new Intent(view.getContext(), EditEstateActivity.class);
-            i.putExtra(Extras.EXTRA_FIRST_ARG,(item.Id));
+            i.putExtra(Extras.EXTRA_FIRST_ARG, (item.Id));
             view.getContext().startActivity(i);
         });
         holder.title.setText(item.Title);
@@ -90,12 +89,13 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
                 @Override
                 public void onNext(@NonNull ErrorException<EstatePropertyModel> response) {
                     if (response.IsSuccess) {
+                        dialog.dismiss();
                         Toasty.success(c, "ملک شماحذف گردید").show();
                         int pos = list.indexOf(item);
                         list.remove(item);
                         notifyItemRemoved(pos);
                     } else {
-                        Toasty.error(c, "هنگام ثبت خطا رخ داد مجددا تلاش نمایید" + "\n+" +
+                        Toasty.error(c, "هنگام حذف خطا رخ داد مجددا تلاش نمایید" + "\n+" +
                                 response.ErrorMessage).show();
                     }
                 }
