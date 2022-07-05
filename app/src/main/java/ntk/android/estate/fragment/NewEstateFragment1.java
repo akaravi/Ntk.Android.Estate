@@ -54,7 +54,6 @@ public class NewEstateFragment1 extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         count = 0;
-        lastSelectedLandUse = estateActivity().model().PropertyTypeLanduse;
         //set editText separator
         TextInputEditText AreaEditText = findViewById(R.id.EstateAreaEditText);
         AreaEditText.addTextChangedListener(new NumberTextWatcherForThousand(AreaEditText));
@@ -101,6 +100,12 @@ public class NewEstateFragment1 extends BaseFragment {
                     @Override
                     public void onNext(@NonNull ErrorException<EstatePropertyTypeLanduseModel> response) {
                         landUses = response.ListItems;
+                        if (estateActivity().model().LinkPropertyTypeLanduseId != null) {
+                            EstatePropertyTypeLanduseModel find =
+                                    StreamSupport.stream(landUses).filter(t -> t.Id.equals(estateActivity().model().LinkPropertyTypeLanduseId)).findFirst().orElse(null);
+                            estateActivity().model().PropertyTypeLanduse = (find);
+                            lastSelectedLandUse = find;
+                        }
                         showData();
                     }
 
@@ -116,6 +121,7 @@ public class NewEstateFragment1 extends BaseFragment {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyTypeModel> response) {
                 propertyType = response.ListItems;
+
                 showData();
             }
 
@@ -133,6 +139,13 @@ public class NewEstateFragment1 extends BaseFragment {
                     @Override
                     public void onNext(@NonNull ErrorException<EstatePropertyTypeUsageModel> response) {
                         typeUsages = response.ListItems;
+
+                        if (estateActivity().model().LinkPropertyTypeUsageId != null) {
+                            EstatePropertyTypeUsageModel find =
+                                    StreamSupport.stream(typeUsages).filter(t -> t.Id.equals(estateActivity().model().LinkPropertyTypeUsageId)).findFirst().orElse(null);
+                            estateActivity().model().PropertyTypeUsage = (find);
+
+                        }
                         showData();
                     }
 
@@ -218,8 +231,8 @@ public class NewEstateFragment1 extends BaseFragment {
             Toasty.error(getContext(), "نوع ملک را انتخاب نمایید", Toasty.LENGTH_LONG, true).show();
             return false;
         }
-        estateActivity().model().LinkPropertyTypeLanduseId=estateActivity().model().PropertyTypeLanduse.Id;
-        estateActivity().model().LinkPropertyTypeUsageId=estateActivity().model().PropertyTypeUsage.Id;
+        estateActivity().model().LinkPropertyTypeLanduseId = estateActivity().model().PropertyTypeLanduse.Id;
+        estateActivity().model().LinkPropertyTypeUsageId = estateActivity().model().PropertyTypeUsage.Id;
         if (!((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim().equals(""))
             estateActivity().model().Area = Integer.parseInt(NumberTextWatcherForThousand.trimCommaOfString(((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim()));
 

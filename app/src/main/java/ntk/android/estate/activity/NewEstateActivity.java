@@ -38,7 +38,7 @@ public class NewEstateActivity extends BaseActivity {
     public String MainImage_FilePath;
     public List<String> OtherImageIds = new ArrayList<>();
     public List<String> OtherImageSrc = new ArrayList<>();
-    EstatePropertyModel model;
+    EstatePropertyModel model = new EstatePropertyModel();
     TextView title;
     private int stepNumber;
     //boolean used for prevent add model until uploading pic finished
@@ -48,7 +48,6 @@ public class NewEstateActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_estate);
-        model = new EstatePropertyModel();
         title = findViewById(R.id.txtToolbarTitle);
         findViewById(R.id.imgToolbarBack).setOnClickListener(view -> finish());
         findViewById(R.id.backBtn).setOnClickListener(view -> {
@@ -57,6 +56,10 @@ public class NewEstateActivity extends BaseActivity {
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
         });
         setFont();
+        afterCreate();
+    }
+
+    protected void afterCreate() {
         showFragment1();
     }
 
@@ -69,7 +72,7 @@ public class NewEstateActivity extends BaseActivity {
     }
 
 
-    private void showFragment1() {
+    protected void showFragment1() {
         stepNumber = 1;
         title.setText("مشخصات ملک");
         findViewById(R.id.backBtn).setVisibility(View.GONE);
@@ -83,7 +86,7 @@ public class NewEstateActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
     }
 
-    private void showFragment2() {
+    protected void showFragment2() {
         stepNumber = 2;
         title.setText("جزئیات و مشخصات");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
@@ -96,7 +99,7 @@ public class NewEstateActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
     }
 
-    private void showFragment3() {
+    protected void showFragment3() {
         stepNumber = 3;
         title.setText("مشخصات آگهی");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
@@ -109,7 +112,7 @@ public class NewEstateActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
     }
 
-    private void showFragment4() {
+    protected void showFragment4() {
         stepNumber = 4;
         title.setText("شرایط معامله");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
@@ -125,7 +128,7 @@ public class NewEstateActivity extends BaseActivity {
 
     }
 
-    private void showFragment5() {
+    protected void showFragment5() {
         stepNumber = 5;
         title.setText("تصاویر ملک");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
@@ -147,7 +150,7 @@ public class NewEstateActivity extends BaseActivity {
 
     }
 
-    private void createModel() {
+    protected void createModel() {
         showProgress();
         model.PropertyDetailGroups = null;
         if (MainImage_GUID != null && !MainImage_GUID.equalsIgnoreCase(""))
@@ -155,8 +158,9 @@ public class NewEstateActivity extends BaseActivity {
         for (String guid : OtherImageIds) {
             model.LinkFileIds += guid + ",";
         }
-        if (model.LinkFileIds.length() > 0)
+        if (model.LinkFileIds!=null&&model.LinkFileIds.length() > 0)
             model.LinkFileIds = model.LinkFileIds.substring(0, model.LinkFileIds.lastIndexOf(","));
+
         ServiceExecute.execute(new EstatePropertyService(this).add(model)).subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyModel> response) {
@@ -219,7 +223,7 @@ public class NewEstateActivity extends BaseActivity {
     public static void START_ACTIVITY(Context c) {
         //user has logged in and saved his user Id
         if (Preferences.with(c).appVariableInfo().isLogin() && Preferences.with(c).UserInfo().userId() > 0)
-        c.startActivity(new Intent(c, NewEstateActivity.class));
+            c.startActivity(new Intent(c, NewEstateActivity.class));
         else {
             //show dialog to go to login page
             SweetAlertDialog dialog = new SweetAlertDialog(c, SweetAlertDialog.ERROR_TYPE);

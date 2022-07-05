@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10.0dip"
+        android:layout_marginTop="8.0dip"
+        android:layout_marginEnd="10.0dip"
+        android:layout_marginBottom="8.0dip"
+        app:cardBackgroundColor="@color/colorWhite"
+        app:cardCornerRadius="10.0dip"
+        app:cardElevation="3.0dip">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:id="@+id/rlPhoto"
+                    android:layout_width="140.0dip"
+                    android:layout_height="140dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8.0dip"
+                    android:layout_marginEnd="8.0dip"
+                    android:layout_marginRight="8.0dip"
+                    android:layout_marginBottom="8.0dip">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/imgPhoto"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/curve_8_gray_image_bg"
+                        app:riv_corner_radius="8dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/rlArchive"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/curve_normal_archive_bg"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:padding="3.0dip"
+                            android:text="آرشیو شده"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+
+                    <ntk.android.estate.view.component.CustomImageView
+                        android:id="@+id/imgFavorite"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerVertical="true"
+                        android:paddingStart="8.0dip"
+                        android:paddingLeft="8.0dip"
+                        android:paddingTop="8.0dip"
+                        android:paddingEnd="10.0dip"
+                        android:paddingRight="10.0dip"
+                        android:paddingBottom="10.0dip"
+                        app:srcCompat="@drawable/ic_fav" />
+
+                    <LinearLayout
+                        android:id="@+id/llCamera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"
+                        android:paddingStart="8.0dip"
+                        android:paddingLeft="8.0dip"
+                        android:paddingTop="8.0dip"
+                        android:paddingEnd="10.0dip"
+                        android:paddingRight="10.0dip"
+                        android:paddingBottom="10.0dip">
+
+                        <TextView
+                            android:id="@+id/txtCamera"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="1.0dip"
+                            android:layout_marginRight="1.0dip"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="1"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="12sp" />
+
+                        <ntk.android.estate.view.component.CustomImageView
+                            android:id="@+id/imgCamera"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/btn_camera_white" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlShadow"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/gradient_curve_8_gray_bottom_to_top"
+                        android:paddingStart="3.0dip"
+                        android:paddingTop="20.0dip"
+                        android:paddingEnd="3.0dip"
+                        android:paddingBottom="5.0dip">
+
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="3.0dip"
+                            android:layout_marginEnd="3.0dip"
+
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/txtArea"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginStart="-1dp"
+                                android:layout_marginLeft="-1dp"
+                                android:maxLines="2"
+                                android:paddingLeft="4dp"
+                                android:text="asd"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="4dp"
+                                android:paddingRight="4dp"
+                                android:text=" - "
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/txtAreaParent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginStart="-1dp"
+                                android:layout_marginLeft="-1dp"
+                                android:maxLines="2"
+                                android:text="awdasd"
+
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <ntk.android.estate.view.component.CustomImageView
+                    android:id="@+id/imgOccasion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="16.0dip"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_occasion_left_to_right" />
+
+                <RelativeLayout
+                    android:id="@+id/rlInfo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/rlPhoto"
+                    android:layout_toLeftOf="@+id/rlPhoto">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginStart="8.0dip"
+                        android:layout_marginLeft="8.0dip"
+                        android:layout_marginTop="22.0dip"
+                        android:layout_marginEnd="4.0dip"
+                        android:layout_marginRight="4.0dip"
+                        android:layout_marginBottom="22.0dip"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:maxLines="2"
+                            android:minLines="2"
+                            android:text="منطقه ۲ مرزداران غربی"
+                            android:textColor="@color/gray"
+                            android:textSize="15sp" />
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16.0dip">
+
+                            <TextView
+                                android:id="@+id/txtPrice1Title1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="5.0dip"
+                                android:layout_marginRight="5.0dip"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="رهن:"
+                                android:textColor="@color/gray"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/txtPrice1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+
+                                android:layout_toLeftOf="@+id/txtPrice1Title1"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textColor="@color/colorSecondaryDark"
+                                android:textSize="15sp" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/txtPriceTitle2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="5.0dip"
+                                android:layout_marginRight="5.0dip"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="اجاره:"
+                                android:textColor="@color/gray"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/txtPrice2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@+id/txtPriceTitle2"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textColor="@color/colorSecondaryDark"
+                                android:textSize="15sp" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/txtPriceTitle3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="5.0dip"
+                                android:layout_marginRight="5.0dip"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="اجاره:"
+                                android:textColor="@color/gray"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/txtPrice3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@+id/txtPriceTitle3"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textColor="@color/colorSecondaryDark"
+                                android:textSize="15sp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.5dip"
+                android:background="@color/background" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2.0dip"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingTop="5.0dip"
+                    android:paddingBottom="5.0dip"
+                    android:singleLine="true"
+                    android:text="۲ روز قبل"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="1.5dip"
+                    android:layout_height="fill_parent"
+                    android:background="@color/background" />
+
+                <TextView
+                    android:id="@+id/txtProperty3"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2.0dip"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingTop="5.0dip"
+                    android:paddingBottom="5.0dip"
+                    android:singleLine="true"
+                    android:text="۲ خوابه"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="1.5dip"
+                    android:layout_height="fill_parent"
+                    android:background="@color/background" />
+
+                <TextView
+                    android:id="@+id/txtProperty2"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2.0dip"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingTop="5.0dip"
+                    android:paddingBottom="5.0dip"
+                    android:singleLine="true"
+                    android:text="۸۵۱۱ متر"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="1.5dip"
+                    android:layout_height="fill_parent"
+                    android:background="@color/background" />
+
+                <TextView
+                    android:id="@+id/txtProperty1"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2.0dip"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingTop="5.0dip"
+                    android:paddingBottom="5.0dip"
+                    android:singleLine="true"
+                    android:text="مسکونی"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/deleteEstate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_weight="1"
+                    android:text="حذف ملک" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_weight=".3" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/editEstate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:layout_weight="1"
+                    android:text="ویرایش" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

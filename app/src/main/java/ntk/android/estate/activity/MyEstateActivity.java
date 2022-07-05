@@ -14,6 +14,7 @@ import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstatePropertyAdapter;
+import ntk.android.estate.adapter.MyEstatePropertyAdapter;
 
 public class MyEstateActivity extends BaseFilterModelListActivity<EstatePropertyModel> {
     @Override
@@ -25,7 +26,7 @@ public class MyEstateActivity extends BaseFilterModelListActivity<EstateProperty
 
     @Override
     public RecyclerView.Adapter createAdapter() {
-        return new EstatePropertyAdapter(models);
+        return new MyEstatePropertyAdapter(models);
     }
 
     @Override
