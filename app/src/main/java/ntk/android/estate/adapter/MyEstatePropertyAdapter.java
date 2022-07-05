@@ -106,9 +106,9 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
 
                 }
             });
-            dialog.setCancelButton("خیر", SweetAlertDialog::dismiss);
-            dialog.show();
         });
+        dialog.setCancelButton("خیر", SweetAlertDialog::dismiss);
+        dialog.show();
     }
 
     public static class VH extends RecyclerView.ViewHolder {
