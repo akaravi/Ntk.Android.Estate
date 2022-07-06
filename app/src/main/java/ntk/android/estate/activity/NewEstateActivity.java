@@ -40,7 +40,7 @@ public class NewEstateActivity extends BaseActivity {
     public List<String> OtherImageSrc = new ArrayList<>();
     EstatePropertyModel model = new EstatePropertyModel();
     TextView title;
-    private int stepNumber;
+    protected int stepNumber;
     //boolean used for prevent add model until uploading pic finished
     boolean uploadProcess = false;
 

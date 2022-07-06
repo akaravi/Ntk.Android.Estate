@@ -39,12 +39,14 @@ import ntk.android.estate.adapter.EstatePropertyTypeAdapterSelector;
 import ntk.android.estate.view.NumberTextWatcherForThousand;
 
 public class NewEstateFragment1 extends BaseFragment {
+    //share variable between edit and new prevent change adapter
+    boolean isAllAdapterClickable=true;
     //to remove all selected value if landUse change
     EstatePropertyTypeLanduseModel lastSelectedLandUse;
-    private int count;
-    private List<EstatePropertyTypeUsageModel> typeUsages;
-    private List<EstatePropertyTypeModel> propertyType;
-    private List<EstatePropertyTypeLanduseModel> landUses;
+     int count;
+     List<EstatePropertyTypeUsageModel> typeUsages;
+     List<EstatePropertyTypeModel> propertyType;
+     List<EstatePropertyTypeLanduseModel> landUses;
 
     @Override
     public void onCreateFragment() {
@@ -158,9 +160,9 @@ public class NewEstateFragment1 extends BaseFragment {
     }
 
 
-    private synchronized void showData() {
+    protected synchronized void showData() {
         if (count == 2) {
-            EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(typeUsages, estateActivity().model().PropertyTypeUsage,
+            EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(isAllAdapterClickable,typeUsages, estateActivity().model().PropertyTypeUsage,
                     estatePropertyTypeUsageModel -> {
                         findViewById(R.id.cardLandUsesView).setVisibility(View.VISIBLE);
                         estateActivity().model().PropertyTypeUsage = estatePropertyTypeUsageModel;
@@ -181,7 +183,7 @@ public class NewEstateFragment1 extends BaseFragment {
         } else ++count;
     }
 
-    private void setTypeUsage(EstatePropertyTypeUsageModel estatePropertyTypeUsageModel) {
+     void setTypeUsage(EstatePropertyTypeUsageModel estatePropertyTypeUsageModel) {
         changeUi();
         List<EstatePropertyTypeModel> mappers = StreamSupport.stream(propertyType)
                 .filter(t -> t.LinkPropertyTypeUsageId.equals(estatePropertyTypeUsageModel.Id))
@@ -191,7 +193,7 @@ public class NewEstateFragment1 extends BaseFragment {
                         .anyMatch(k -> k.LinkPropertyTypeLanduseId.equals(t.Id)))
                 .collect(Collectors.toList());
         RecyclerView rc = findViewById(R.id.EstateLandUsedRc);
-        rc.setAdapter(new EstatePropertyLandUseAdapterSelector(models, estateActivity().model().PropertyTypeLanduse,
+        rc.setAdapter(new EstatePropertyLandUseAdapterSelector(isAllAdapterClickable,models, estateActivity().model().PropertyTypeLanduse,
                 t -> {
                     estateActivity().model().PropertyTypeLanduse = t;
                     changeUi();
@@ -205,7 +207,7 @@ public class NewEstateFragment1 extends BaseFragment {
 
     }
 
-    private void changeUi() {
+     void changeUi() {
         EstatePropertyTypeLanduseModel lastSelectedLandUse = estateActivity().model().PropertyTypeLanduse;
         if (lastSelectedLandUse == null) {
             findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.GONE);
@@ -262,7 +264,7 @@ public class NewEstateFragment1 extends BaseFragment {
         return true;
     }
 
-    private NewEstateActivity estateActivity() {
+     NewEstateActivity estateActivity() {
         return ((NewEstateActivity) getActivity());
     }
 

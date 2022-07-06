@@ -20,15 +20,27 @@ import ntk.android.estate.R;
 public class EstatePropertyLandUseAdapterSelector extends BaseRecyclerAdapter<EstatePropertyTypeLanduseModel, EstatePropertyLandUseAdapterSelector.VH> {
     int lastSelected;
     Consumer<EstatePropertyTypeLanduseModel> caller;
+    boolean Clickable = true;
 
-    public EstatePropertyLandUseAdapterSelector(List<EstatePropertyTypeLanduseModel> list,EstatePropertyTypeLanduseModel Item, Consumer<EstatePropertyTypeLanduseModel> selector) {
+    public EstatePropertyLandUseAdapterSelector(List<EstatePropertyTypeLanduseModel> list, EstatePropertyTypeLanduseModel Item, Consumer<EstatePropertyTypeLanduseModel> selector) {
         super(list);
         caller = selector;
         lastSelected = -1;
         if (Item != null) {
             lastSelected = list.indexOf(Item);
         }
-        drawable=R.drawable.sweet_error_center_x;
+        drawable = R.drawable.sweet_error_center_x;
+    }
+
+    public EstatePropertyLandUseAdapterSelector(boolean canClick, List<EstatePropertyTypeLanduseModel> list, EstatePropertyTypeLanduseModel Item, Consumer<EstatePropertyTypeLanduseModel> selector) {
+        super(list);
+        Clickable = canClick;
+        caller = selector;
+        lastSelected = -1;
+        if (Item != null) {
+            lastSelected = list.indexOf(Item);
+        }
+        drawable = R.drawable.sweet_error_center_x;
     }
 
     @NonNull
@@ -44,16 +56,19 @@ public class EstatePropertyLandUseAdapterSelector extends BaseRecyclerAdapter<Es
         holder.title.setChecked(position == lastSelected);
         holder.title.setTag(position);
         holder.title.setSelected(position == lastSelected);
-        holder.title.setOnClickListener(view -> {
-            int copyOfLastCheckedPosition = lastSelected;
-            lastSelected = ((Integer) view.getTag());
-            if (lastSelected != copyOfLastCheckedPosition) {
-                notifyItemChanged(copyOfLastCheckedPosition);
-                notifyItemChanged(lastSelected);
-            }else
-                ((Chip) view).setChecked(true);
-            caller.accept(item);
-        });
+        if (Clickable)
+            holder.title.setOnClickListener(view -> {
+                int copyOfLastCheckedPosition = lastSelected;
+                lastSelected = ((Integer) view.getTag());
+                if (lastSelected != copyOfLastCheckedPosition) {
+                    notifyItemChanged(copyOfLastCheckedPosition);
+                    notifyItemChanged(lastSelected);
+                } else
+                    ((Chip) view).setChecked(true);
+                caller.accept(item);
+            });
+        else
+            holder.title.setEnabled(false);
     }
 
     public class VH extends RecyclerView.ViewHolder {

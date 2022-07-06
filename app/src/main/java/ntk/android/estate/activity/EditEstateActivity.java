@@ -1,6 +1,7 @@
 package ntk.android.estate.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +21,8 @@ import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.AppUtil;
-import ntk.android.estate.adapter.PropertyDetailGroupsAdapter;
+import ntk.android.estate.R;
+import ntk.android.estate.fragment.EditEstateFragment1;
 
 public class EditEstateActivity extends NewEstateActivity {
     String Id;
@@ -33,6 +35,22 @@ public class EditEstateActivity extends NewEstateActivity {
     }
 
     @Override
+    protected void showFragment1() {
+            stepNumber = 1;
+            title.setText("مشخصات ملک");
+            findViewById(R.id.backBtn).setVisibility(View.GONE);
+
+            EditEstateFragment1 fragment = new EditEstateFragment1();
+            findViewById(R.id.continueBtn).setOnClickListener(view -> {
+                if (fragment.isValidForm())
+                    showFragment2();
+            });
+            fragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
+        }
+
+
+    @Override
     protected void afterCreate() {
         if (AppUtil.isNetworkAvailable(this)) {
             switcher.showProgressView();
@@ -42,18 +60,6 @@ public class EditEstateActivity extends NewEstateActivity {
                         @Override
                         protected void SuccessResponse(ErrorException<EstatePropertyModel> ContentResponse) {
                             model = ContentResponse.Item;
-                            //create list of values base on details
-//                            StreamSupport.stream(model.PropertyDetailGroups).
-//                                    forEach(estatePropertyDetailGroupModel -> {
-//                                        estatePropertyDetailGroupModel.PropertyValues = new ArrayList<>();
-//                                        StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails)
-//                                                .forEach(estatePropertyDetailModel -> {
-//                                                    EstatePropertyDetailValueModel value = new EstatePropertyDetailValueModel();
-//                                                    value.LinkPropertyDetailId = estatePropertyDetailModel.Id;
-//                                                    value.PropertyDetail = estatePropertyDetailModel;
-//                                                    estatePropertyDetailGroupModel.PropertyValues.add(value);
-//                                                });
-//                                    });
                             //sync property and its values
                             for (EstatePropertyDetailGroupModel detail :
                                     model.PropertyDetailGroups) {
