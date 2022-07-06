@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 import es.dmoral.toasty.Toasty;
 import ntk.android.base.Extras;
 import ntk.android.base.config.ErrorExceptionObserver;
@@ -61,14 +63,11 @@ public class EditEstateActivity extends NewEstateActivity {
     protected void createModel() {
         showProgress();
         model.PropertyDetailGroups = null;
+        model.UploadFileGUID = new ArrayList<>();
         if (MainImage_GUID != null && !MainImage_GUID.equalsIgnoreCase(""))
-            model.LinkFileIds = MainImage_GUID + ",";
-        for (String guid : OtherImageIds) {
-            model.LinkFileIds += guid + ",";
-        }
-        if (model.LinkFileIds != null && model.LinkFileIds.length() > 0)
-            model.LinkFileIds = model.LinkFileIds.substring(0, model.LinkFileIds.lastIndexOf(","));
-
+            model.UploadFileGUID.add(MainImage_GUID);
+        model.UploadFileGUID.addAll(OtherImageIds);
+        
         ServiceExecute.execute(new EstatePropertyService(this).edit(model)).subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyModel> response) {

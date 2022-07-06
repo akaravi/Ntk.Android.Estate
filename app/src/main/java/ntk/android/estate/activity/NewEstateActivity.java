@@ -153,13 +153,10 @@ public class NewEstateActivity extends BaseActivity {
     protected void createModel() {
         showProgress();
         model.PropertyDetailGroups = null;
+        model.UploadFileGUID = new ArrayList<>();
         if (MainImage_GUID != null && !MainImage_GUID.equalsIgnoreCase(""))
-            model.LinkFileIds = MainImage_GUID + ",";
-        for (String guid : OtherImageIds) {
-            model.LinkFileIds += guid + ",";
-        }
-        if (model.LinkFileIds!=null&&model.LinkFileIds.length() > 0)
-            model.LinkFileIds = model.LinkFileIds.substring(0, model.LinkFileIds.lastIndexOf(","));
+            model.UploadFileGUID.add(MainImage_GUID);
+        model.UploadFileGUID.addAll(OtherImageIds);
 
         ServiceExecute.execute(new EstatePropertyService(this).add(model)).subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
             @Override
