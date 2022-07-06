@@ -3,6 +3,7 @@ package ntk.android.estate.fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -209,15 +210,23 @@ public class NewEstateFragment1 extends BaseFragment {
         if (lastSelectedLandUse == null) {
             findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.GONE);
             findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.GONE);
+            ((EditText) findViewById(R.id.EstatePropertyOneEditText)).setText("");
+            ((EditText) findViewById(R.id.EstatePropertyTowEditText)).setText("");
         } else {
             if (lastSelectedLandUse.TitleCreatedYaer != null && !lastSelectedLandUse.TitleCreatedYaer.equals("") && !lastSelectedLandUse.TitleCreatedYaer.equals("---")) {
                 findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.VISIBLE);
                 ((TextInputLayout) findViewById(R.id.EstatePropertyOneTextInput)).setHint(lastSelectedLandUse.TitleCreatedYaer);
-            } else findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.GONE);
+            } else {
+                findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.GONE);
+                ((EditText) findViewById(R.id.EstatePropertyOneEditText)).setText("");
+            }
             if (lastSelectedLandUse.TitlePartition != null && !lastSelectedLandUse.TitlePartition.equals("") && !lastSelectedLandUse.TitlePartition.equals("---")) {
                 findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.VISIBLE);
                 ((TextInputLayout) findViewById(R.id.EstatePropertyTowTextInput)).setHint(lastSelectedLandUse.TitlePartition);
-            } else findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.GONE);
+            } else {
+                findViewById(R.id.EstatePropertyTowTextInput).setVisibility(View.GONE);
+                ((EditText) findViewById(R.id.EstatePropertyTowEditText)).setText("");
+            }
         }
     }
 
@@ -235,12 +244,17 @@ public class NewEstateFragment1 extends BaseFragment {
         estateActivity().model().LinkPropertyTypeUsageId = estateActivity().model().PropertyTypeUsage.Id;
         if (!((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim().equals(""))
             estateActivity().model().Area = Integer.parseInt(NumberTextWatcherForThousand.trimCommaOfString(((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim()));
-
+        else
+            estateActivity().model().Area = 0;
         if (!(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim().equals("")))
             estateActivity().model().CreatedYaer = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim());
+        else
+            estateActivity().model().CreatedYaer = 0;
 
-        if (!((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim().equals(""))
-            estateActivity().model().Partition = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim());
+        if (!((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).getText().toString().trim().equals(""))
+            estateActivity().model().Partition = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).getText().toString().trim());
+        else
+            estateActivity().model().Partition = 0;
         if (lastSelectedLandUse != null && !lastSelectedLandUse.Id.equals(estateActivity().model().PropertyTypeLanduse.Id)) {
             estateActivity().model().PropertyDetailGroups = null;
             estateActivity().model().PropertyDetailValues = null;

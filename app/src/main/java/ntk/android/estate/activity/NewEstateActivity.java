@@ -139,6 +139,7 @@ public class NewEstateActivity extends BaseActivity {
         findViewById(R.id.addNewBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
                 if (!uploadProcess) {
+                    Toasty.info(NewEstateActivity.this, "فایل انتخابی شما در حال بارگزاری است دقایقی دیگر مجدد تلاش فرمایید", Toasty.LENGTH_LONG).show();
                     createModel();
                 } else {
                     Toasty.info(NewEstateActivity.this, "در حال بارگذاری...", Toasty.LENGTH_LONG).show();

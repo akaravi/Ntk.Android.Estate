@@ -67,7 +67,7 @@ public class EditEstateActivity extends NewEstateActivity {
         if (MainImage_GUID != null && !MainImage_GUID.equalsIgnoreCase(""))
             model.UploadFileGUID.add(MainImage_GUID);
         model.UploadFileGUID.addAll(OtherImageIds);
-        
+
         ServiceExecute.execute(new EstatePropertyService(this).edit(model)).subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyModel> response) {
