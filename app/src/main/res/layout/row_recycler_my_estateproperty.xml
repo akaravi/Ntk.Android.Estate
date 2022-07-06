@@ -415,7 +415,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp"
                     android:layout_weight="1"
-                    android:text="حذف ملک" />
+                    android:text="حذف ملک"
+                    app:backgroundTint="@color/colorRed"
+                    app:icon="@drawable/delete_image"
+                    app:iconSize="23dp" />
 
                 <View
                     android:layout_width="0dp"
@@ -428,7 +431,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="32dp"
                     android:layout_weight="1"
-                    android:text="ویرایش" />
+                    android:text="ویرایش"
+                    app:backgroundTint="@color/colorGreen" />
 
             </LinearLayout>
         </LinearLayout>
