@@ -42,7 +42,7 @@ public class EditEstateActivity extends NewEstateActivity {
                             //sync property and its values
                             PropertyDetailGroupsAdapter.INIT(model.PropertyDetailGroups, model.PropertyDetailValues);
                             switcher.showContentView();
-                            showFragment2();
+                            showFragment1();
 
                         }
 
