@@ -133,7 +133,7 @@
                         android:id="@+id/EstateAreaEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:textSize="14sp"
                         android:theme="@style/new_estate_textInputEditText" />
                 </com.google.android.material.textfield.TextInputLayout>

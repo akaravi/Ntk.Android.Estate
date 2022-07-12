@@ -245,7 +245,7 @@ public class NewEstateFragment1 extends BaseFragment {
         estateActivity().model().LinkPropertyTypeLanduseId = estateActivity().model().PropertyTypeLanduse.Id;
         estateActivity().model().LinkPropertyTypeUsageId = estateActivity().model().PropertyTypeUsage.Id;
         if (!((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim().equals(""))
-            estateActivity().model().Area = Integer.parseInt(NumberTextWatcherForThousand.trimCommaOfString(((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim()));
+            estateActivity().model().Area = Double.parseDouble(NumberTextWatcherForThousand.trimCommaOfString(((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim()));
         else
             estateActivity().model().Area = 0;
         if (!(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim().equals("")))
