@@ -52,10 +52,16 @@ public class NewEstateFragment4 extends BaseFragment {
         findViewById(R.id.checkbox_rowSale).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
         findViewById(R.id.checkbox_rowRent).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
         findViewById(R.id.checkbox_rowDeposit).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
+        findViewById(R.id.checkbox_rowPeriodPayment).setOnClickListener(v -> ((CheckBox) v.findViewById(R.id.cb)).toggle());
         //toggle state of Edittext on toggling Checkbox
         ((CheckBox) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.etSale).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.etRent).setEnabled(!b));
         ((CheckBox) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cb)).setOnCheckedChangeListener((compoundButton, b) -> findViewById(R.id.etDeposit).setEnabled(!b));
+        ((CheckBox) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cb)).setOnCheckedChangeListener(
+                (compoundButton, b) -> {
+                    findViewById(R.id.etPeriodPayment).setEnabled(!b);
+                    findViewById(R.id.etPeriodPaymentCount).setEnabled(!b);
+                });
         //add separator to editText
         TextInputEditText et1 = findViewById(R.id.etSale);
         et1.addTextChangedListener(new NumberTextWatcherForThousand(et1));
@@ -63,6 +69,8 @@ public class NewEstateFragment4 extends BaseFragment {
         et2.addTextChangedListener(new NumberTextWatcherForThousand(et2));
         TextInputEditText et3 = findViewById(R.id.etDeposit);
         et3.addTextChangedListener(new NumberTextWatcherForThousand(et3));
+        TextInputEditText et4 = findViewById(R.id.etPeriodPayment);
+        et4.addTextChangedListener(new NumberTextWatcherForThousand(et4));
 
         RecyclerView editContractsRc = findViewById(R.id.contractsEditRc);
         editContractsRc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
@@ -86,14 +94,19 @@ public class NewEstateFragment4 extends BaseFragment {
         ((TextInputLayout) findViewById(R.id.etlSale)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.etlRent)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.etlDeposit)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.etlPeriodPayment)).setTypeface(t1);
+        ((TextInputLayout) findViewById(R.id.etlPeriodPaymentCount)).setTypeface(t1);
         //for TextInputEditText
         ((TextInputEditText) findViewById(R.id.etSale)).setTypeface(t1);
         ((TextInputEditText) findViewById(R.id.etRent)).setTypeface(t1);
         ((TextInputEditText) findViewById(R.id.etDeposit)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.etPeriodPayment)).setTypeface(t1);
+        ((TextInputEditText) findViewById(R.id.etPeriodPaymentCount)).setTypeface(t1);
         //for checkView
         ((TextView) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cbText)).setTypeface(t1);
         ((TextView) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cbText)).setTypeface(t1);
         ((TextView) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cbText)).setTypeface(t1);
+        ((TextView) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cbText)).setTypeface(t1);
         //for button
         ((MaterialButton) findViewById(R.id.addNewEstateBtn)).setTypeface(t1);
     }
@@ -145,6 +158,15 @@ public class NewEstateFragment4 extends BaseFragment {
         et3.setHint(model.TitleDepositPrice);
         findViewById(R.id.checkbox_rowDeposit).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cbText)).setText("قیمت توافقی");
+
+        TextInputLayout et4 = findViewById(R.id.etlPeriodPayment);
+        TextInputLayout et5 = findViewById(R.id.etlPeriodPaymentCount);
+        et4.setVisibility(model.HasPeriodPrice ? View.VISIBLE : View.GONE);
+        et5.setVisibility(model.HasPeriodPrice ? View.VISIBLE : View.GONE);
+        et4.setHint(model.TitlePeriodPrice);
+        et5.setHint("تعداد");
+        findViewById(R.id.checkbox_rowPeriodPayment).setVisibility(model.PeriodPriceAllowAgreement ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cbText)).setText("قیمت توافقی");
     }
 
     private void clearAllInput() {
@@ -157,6 +179,11 @@ public class NewEstateFragment4 extends BaseFragment {
         ((MaterialCheckBox) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cb)).setChecked(false);
         TextInputEditText et3 = findViewById(R.id.etDeposit);
         et3.setText("");
+        ((MaterialCheckBox) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cb)).setChecked(false);
+        TextInputEditText et4 = findViewById(R.id.etPeriodPayment);
+        TextInputEditText et5 = findViewById(R.id.etPeriodPaymentCount);
+        et4.setText("");
+        et5.setText("");
     }
 
     private void addItem() {
