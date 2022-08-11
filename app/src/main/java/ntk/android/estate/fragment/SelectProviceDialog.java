@@ -30,6 +30,7 @@ import ntk.android.estate.R;
 public class SelectProviceDialog extends DialogFragment {
 
     private Consumer<CoreLocationModel> func;
+    private CoreLocationModel selectedCountry;
     private CoreLocationModel selectedProvince;
     private CoreLocationModel selectedCity;
     private CoreLocationModel selectedArea;
@@ -66,8 +67,10 @@ public class SelectProviceDialog extends DialogFragment {
             func.accept(null);
             dismiss();
         });
-        getProvince();
+        getCountry();
     }
+
+
 
     private void sendLocation() {
         if (selectedArea != null) {
@@ -79,9 +82,69 @@ public class SelectProviceDialog extends DialogFragment {
         } else if (selectedProvince != null) {
             func.accept(selectedProvince);
             dismiss();
-        } else {
+        }else if (selectedCountry!=null){
+            func.accept(selectedCountry);
+            dismiss();
+        } else{
             Toasty.error(getContext(), "مکانی انتخاب نشده است").show();
         }
+    }
+
+    private void getCountry() {
+        View progress = getView().findViewById(R.id.progressView);
+        if (progress != null) {
+            progress.setVisibility(View.VISIBLE);
+        }
+        FilterModel filterModel = new FilterModel().setRowPerPage(1000);
+        filterModel.addFilter(new FilterDataModel().setPropertyName("LinkParentId").setIntValue((long) selectedCountry.Id));
+
+        ServiceExecute.execute(new CoreLocationService(getContext()).getAllCountry(filterModel)).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
+            @Override
+            public void onNext(@NonNull ErrorException<CoreLocationModel> model) {
+                try {
+                    View progress = getView().findViewById(R.id.progressView);
+                    if (progress != null) {
+                        progress.setVisibility(View.GONE);
+                    }
+                    MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.EstateCountryAutoComplete);
+                    List<String> names = new ArrayList<>();
+                    for (CoreLocationModel t : model.ListItems)
+                        names.add(t.Title);
+                    if (names.size() == 0)
+                        names.add("موردی یافت نشد");
+                    else
+                        names.add(0, "انتخاب کنید");
+                    SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
+                    spinner.setOnItemClickListener((parent, view, position, id) -> {
+                        if (position > 0) {
+                            selectedCountry = model.ListItems.get(position - 1);
+                            ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateProvinceAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
+                            ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateCityAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
+                            ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateAreaAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
+                            selectedProvince = null;
+                            selectedCity = null;
+                            selectedArea = null;
+                            getProvince();
+                        }
+                    });
+                    spinner.setAdapter(locationAdapter);
+                    // Do something for lollipop and above versions
+                    spinner.setText(locationAdapter.getItem(0), false);
+                } catch (Exception e) {
+                }
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                View errorView = getView();
+                if (errorView != null) {
+                    View progress = errorView.findViewById(R.id.progressView);
+                    if (progress != null) {
+                        progress.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
     }
 
     private void getProvince() {
@@ -239,4 +302,5 @@ public class SelectProviceDialog extends DialogFragment {
             }
         });
     }
+
 }

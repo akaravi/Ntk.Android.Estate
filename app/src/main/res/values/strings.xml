@@ -16,5 +16,6 @@
     <string name="to">تا</string>
     <string name="city">شهر</string>
     <string name="mantaghe">منطقه</string>
+    <string name="country">کشور</string>
 
 </resources>
