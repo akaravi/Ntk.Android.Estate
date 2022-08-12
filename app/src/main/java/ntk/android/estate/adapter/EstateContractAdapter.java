@@ -19,7 +19,7 @@ import ntk.android.estate.R;
 public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractModel, EstateContractAdapter.VH> {
     public EstateContractAdapter(List<EstateContractModel> list) {
         super(list);
-        drawable=R.drawable.sweet_error_center_x;
+        drawable = R.drawable.sweet_error_center_x;
     }
 
     @NonNull
@@ -44,6 +44,9 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
         TextView price3;
         TextView title3;
         ImageView icon3;
+        TextView price4;
+        TextView title4;
+        ImageView icon4;
 
         public VH(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +60,9 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
             title3 = itemView.findViewById(R.id.txtPriceTitle3);
             price3 = itemView.findViewById(R.id.txtPrice3);
             icon3 = itemView.findViewById(R.id.priceImage3);
+            title4 = itemView.findViewById(R.id.txtPriceTitle4);
+            price4 = itemView.findViewById(R.id.txtPrice4);
+            icon4 = itemView.findViewById(R.id.priceImage4);
             icon1.setImageResource(R.drawable.contracts);
             icon2.setImageResource(R.drawable.contracts);
             icon3.setImageResource(R.drawable.contracts);
@@ -86,8 +92,9 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
                         price1.setText("توافقی");
 
                 }
-            } else
+            } else {
                 itemView.findViewById(R.id.linear1).setVisibility(View.GONE);
+            }
             if (item.ContractType.HasDepositPrice) {
                 itemView.findViewById(R.id.linear2).setVisibility(View.VISIBLE);
                 title2.setText(item.ContractType.TitleDepositPrice + "  :   ");
@@ -116,8 +123,19 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
                     else if (item.RentPriceByAgreement)
                         price3.setText("توافقی");
                 }
-            } else
+            } else {
                 itemView.findViewById(R.id.linear3).setVisibility(View.GONE);
+            }
+            if (item.ContractType.HasPeriodPrice) {
+                itemView.findViewById(R.id.linear4).setVisibility(View.VISIBLE);
+                title3.setText(item.ContractType.TitlePeriodPrice + "  :   ");
+                    if (item.PeriodPrice != null && item.PeriodPrice != 0)
+                            price3.setText(NViewUtils.PriceFormat(item.PeriodPrice) + "  " + item.UnitSalePrice + "    "+item.PeriodCount +" عدد ");
+
+                }
+             else {
+                itemView.findViewById(R.id.linear4).setVisibility(View.GONE);
+            }
         }
     }
 }
