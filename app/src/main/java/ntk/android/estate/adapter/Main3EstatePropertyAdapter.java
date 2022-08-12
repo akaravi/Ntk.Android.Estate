@@ -131,6 +131,18 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
                     } else {
                         price2.setText("وارد نشده");
                     }
+                } else if (m.ContractType.HasPeriodPrice) {
+                    String price = "";
+                    if (m.PeriodPrice != null || m.PeriodPriceByAgreement) {
+                        if (m.PeriodPrice != null && m.PeriodPrice != 0)
+                            price = (NViewUtils.PriceFormat(m.PeriodPrice) + "  " +m.UnitSalePrice);
+                        if (m.DepositPriceByAgreement)
+                            price = (price.isEmpty() ? "توافقی" : price + "||" + " توافقی");
+                        price1.setText(price);
+                    } else price1.setText("وارد نشده");
+                    if (m.PeriodCount != 0) {
+                        price2.setText(m.PeriodCount + " " + "عدد");
+                    }
                 } else {
                     price2.setVisibility(View.INVISIBLE);
                     if (m.ContractType.HasDepositPrice) {
