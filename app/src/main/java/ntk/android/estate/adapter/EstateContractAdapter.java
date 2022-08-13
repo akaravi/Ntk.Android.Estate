@@ -79,7 +79,7 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
         }
 
         public void setData(EstateContractModel item) {
-            contractTitle.setText(item.ContractType.Title);
+            contractTitle.setText(item.ContractType.TitleML);
             if (item.ContractType.HasSalePrice) {
                 itemView.findViewById(R.id.linear1).setVisibility(View.VISIBLE);
                 title1.setText(item.ContractType.TitleSalePriceML + "  :   ");

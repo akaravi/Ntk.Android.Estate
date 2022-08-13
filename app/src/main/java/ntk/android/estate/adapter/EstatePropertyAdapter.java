@@ -129,7 +129,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
                     item.Contracts) {
 
                 if (m.ContractType.HasSalePrice) {
-                    priceTitle1.setText(m.ContractType.Title+" :");
+                    priceTitle1.setText(m.ContractType.TitleML+" :");
                     if (m.SalePrice != null || m.SalePriceByAgreement) {
                         priceTitle1.setVisibility(View.VISIBLE);
                         price1.setVisibility(View.VISIBLE);
@@ -141,7 +141,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
                         price1.setText(price);
                     } else {
                         priceTitle1.setVisibility(View.VISIBLE);
-                        priceTitle1.setText("جهت :" + m.ContractType.Title);
+                        priceTitle1.setText("جهت :" + m.ContractType.TitleML);
                     }
                 } else {
                     priceTitle1.setVisibility(View.GONE);
@@ -149,7 +149,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
 
                 }
                 if (m.ContractType.HasDepositPrice) {
-                    priceTitle2.setText(m.ContractType.Title+" :");
+                    priceTitle2.setText(m.ContractType.TitleML+" :");
                     if (m.DepositPrice != null || m.DepositPriceByAgreement) {
                         priceTitle2.setVisibility(View.VISIBLE);
                         price2.setVisibility(View.VISIBLE);
@@ -161,7 +161,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
                         price2.setText(price);
                     } else {
                         priceTitle2.setVisibility(View.VISIBLE);
-                        priceTitle2.setText("جهت :" + m.ContractType.Title);
+                        priceTitle2.setText("جهت :" + m.ContractType.TitleML);
                     }
                 } else {
                     priceTitle2.setVisibility(View.GONE);
@@ -169,7 +169,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
 
                 }
                 if (m.ContractType.HasRentPrice) {
-                    priceTitle3.setText(m.ContractType.Title+" :");
+                    priceTitle3.setText(m.ContractType.TitleML+" :");
                     if (m.RentPrice != null || m.RentPriceByAgreement) {
                         priceTitle3.setVisibility(View.VISIBLE);
                         price3.setVisibility(View.VISIBLE);
@@ -181,7 +181,7 @@ public class EstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyMod
                         price3.setText(price);
                     } else {
                         priceTitle3.setVisibility(View.VISIBLE);
-                        priceTitle3.setText("جهت :" + m.ContractType.Title);
+                        priceTitle3.setText("جهت :" + m.ContractType.TitleML);
                     }
                 } else {
                     priceTitle3.setVisibility(View.GONE);
