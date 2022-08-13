@@ -471,7 +471,7 @@ public class SearchEstateActivity extends BaseActivity {
 
         TextInputLayout et1 = findViewById(R.id.etlSale);
         String preTitle = "محدوده ی مبلغ برای ";
-        hintContractTitle1 = preTitle + model.TitleSalePrice;
+        hintContractTitle1 = preTitle + model.TitleSalePriceML;
         et1.setHint(hintContractTitle1);
         et1.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
         (findViewById(R.id.etSale)).setFocusable(false);
@@ -480,7 +480,7 @@ public class SearchEstateActivity extends BaseActivity {
 
         TextInputLayout et2 = findViewById(R.id.etlRent);
         et2.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
-        hintContractTitle2 = preTitle + model.TitleRentPrice;
+        hintContractTitle2 = preTitle + model.TitleRentPriceML;
         et2.setHint(hintContractTitle2);
         (findViewById(R.id.etRent)).setFocusable(false);
         findViewById(R.id.checkbox_rowRent).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
@@ -488,7 +488,7 @@ public class SearchEstateActivity extends BaseActivity {
 
         TextInputLayout et3 = findViewById(R.id.etlDeposit);
         et3.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
-        hintContractTitle3 = preTitle + model.TitleDepositPrice;
+        hintContractTitle3 = preTitle + model.TitleDepositPriceML;
         et3.setHint(hintContractTitle3);
         (findViewById(R.id.etDeposit)).setFocusable(false);
         findViewById(R.id.checkbox_rowDeposit).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);

@@ -66,22 +66,23 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
             icon1.setImageResource(R.drawable.contracts);
             icon2.setImageResource(R.drawable.contracts);
             icon3.setImageResource(R.drawable.contracts);
-            setFont(price1, price2, price3);
-            setFont(title1, title2, title3);
+            setFont(price1, price2, price3,price4);
+            setFont(title1, title2, title3,title4);
             contractTitle.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
         }
 
-        private void setFont(TextView t1, TextView t2, TextView t3) {
+        private void setFont(TextView t1, TextView t2, TextView t3,TextView t4) {
             t1.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
             t2.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
             t3.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
+            t4.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
         }
 
         public void setData(EstateContractModel item) {
             contractTitle.setText(item.ContractType.Title);
             if (item.ContractType.HasSalePrice) {
                 itemView.findViewById(R.id.linear1).setVisibility(View.VISIBLE);
-                title1.setText(item.ContractType.TitleSalePrice + "  :   ");
+                title1.setText(item.ContractType.TitleSalePriceML + "  :   ");
                 if (item.SalePrice != null || item.SalePriceByAgreement) {
                     if (item.SalePrice != null && item.SalePrice != 0)
                         if (item.SalePriceByAgreement)
@@ -97,7 +98,7 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
             }
             if (item.ContractType.HasDepositPrice) {
                 itemView.findViewById(R.id.linear2).setVisibility(View.VISIBLE);
-                title2.setText(item.ContractType.TitleDepositPrice + "  :   ");
+                title2.setText(item.ContractType.TitleDepositPriceML + "  :   ");
                 if (item.DepositPrice != null || item.DepositPriceByAgreement) {
 
                     if (item.DepositPrice != null && item.DepositPrice != 0)
@@ -113,7 +114,7 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
             }
             if (item.ContractType.HasRentPrice) {
                 itemView.findViewById(R.id.linear3).setVisibility(View.VISIBLE);
-                title3.setText(item.ContractType.TitleRentPrice + "  :   ");
+                title3.setText(item.ContractType.TitleRentPriceML + "  :   ");
                 if (item.RentPrice != null || item.RentPriceByAgreement) {
                     if (item.RentPrice != null && item.RentPrice != 0)
                         if (item.RentPriceByAgreement)
