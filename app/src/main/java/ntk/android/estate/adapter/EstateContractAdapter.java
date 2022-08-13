@@ -129,7 +129,7 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
             }
             if (item.ContractType.HasPeriodPrice) {
                 itemView.findViewById(R.id.linear4).setVisibility(View.VISIBLE);
-                title3.setText(item.ContractType.TitlePeriodPrice + "  :   ");
+                title3.setText(item.ContractType.TitlePeriodPriceML + "  :   ");
                     if (item.PeriodPrice != null && item.PeriodPrice != 0)
                             price3.setText(NViewUtils.PriceFormat(item.PeriodPrice) + "  " + item.UnitSalePrice + "    "+item.PeriodCount +" عدد ");
 

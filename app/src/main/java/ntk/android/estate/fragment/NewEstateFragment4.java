@@ -163,7 +163,7 @@ public class NewEstateFragment4 extends BaseFragment {
         TextInputLayout et5 = findViewById(R.id.etlPeriodPaymentCount);
         et4.setVisibility(model.HasPeriodPrice ? View.VISIBLE : View.GONE);
         et5.setVisibility(model.HasPeriodPrice ? View.VISIBLE : View.GONE);
-        et4.setHint(model.TitlePeriodPrice);
+        et4.setHint(model.TitlePeriodPriceML);
         et5.setHint("تعداد");
         findViewById(R.id.checkbox_rowPeriodPayment).setVisibility(model.PeriodPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cbText)).setText("قیمت توافقی");
