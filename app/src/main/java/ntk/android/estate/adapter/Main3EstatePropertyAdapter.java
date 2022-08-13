@@ -110,7 +110,7 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
             for (EstateContractModel m :
                     item.Contracts) {
 
-                priceTitle1.setText(m.ContractType.Title + " :");
+                priceTitle1.setText(m.ContractType.TitleML + " :");
                 //for rahn ejare
                 if (m.ContractType.HasDepositPrice && m.ContractType.HasRentPrice) {
                     String price = "";
