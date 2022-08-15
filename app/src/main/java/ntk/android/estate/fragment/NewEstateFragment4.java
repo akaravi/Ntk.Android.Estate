@@ -142,20 +142,20 @@ public class NewEstateFragment4 extends BaseFragment {
         findViewById(R.id.addNewEstateBtn).setVisibility(View.VISIBLE);
 
         TextInputLayout et1 = findViewById(R.id.etlSale);
-        et1.setHint(model.TitleSalePrice);
+        et1.setHint(model.TitleSalePriceML);
         et1.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
         findViewById(R.id.checkbox_rowSale).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cbText)).setText("قیمت توافقی");
 
         TextInputLayout et2 = findViewById(R.id.etlRent);
         et2.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
-        et2.setHint(model.TitleRentPrice);
+        et2.setHint(model.TitleRentPriceML);
         findViewById(R.id.checkbox_rowRent).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cbText)).setText("قیمت توافقی");
 
         TextInputLayout et3 = findViewById(R.id.etlDeposit);
         et3.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
-        et3.setHint(model.TitleDepositPrice);
+        et3.setHint(model.TitleDepositPriceML);
         findViewById(R.id.checkbox_rowDeposit).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cbText)).setText("قیمت توافقی");
 
@@ -163,7 +163,7 @@ public class NewEstateFragment4 extends BaseFragment {
         TextInputLayout et5 = findViewById(R.id.etlPeriodPaymentCount);
         et4.setVisibility(model.HasPeriodPrice ? View.VISIBLE : View.GONE);
         et5.setVisibility(model.HasPeriodPrice ? View.VISIBLE : View.GONE);
-        et4.setHint(model.TitlePeriodPrice);
+        et4.setHint(model.TitlePeriodPriceML);
         et5.setHint("تعداد");
         findViewById(R.id.checkbox_rowPeriodPayment).setVisibility(model.PeriodPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cbText)).setText("قیمت توافقی");
@@ -198,7 +198,7 @@ public class NewEstateFragment4 extends BaseFragment {
 
                     TextInputEditText et = findViewById(R.id.etRent);
                     if (et.getText().toString().trim().equals("")) {
-                        Toasty.info(getContext(), selectedModel.TitleRentPrice + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+                        Toasty.info(getContext(), selectedModel.TitleRentPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
                         return;
                     } else {
                         contract.RentPriceByAgreement = false;
@@ -213,7 +213,7 @@ public class NewEstateFragment4 extends BaseFragment {
                 else {
                     TextInputEditText et = findViewById(R.id.etSale);
                     if (et.getText().toString().trim().equals("")) {
-                        Toasty.info(getContext(), selectedModel.TitleSalePrice + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+                        Toasty.info(getContext(), selectedModel.TitleSalePriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
                         return;
                     } else {
                         contract.SalePriceByAgreement = false;
@@ -229,7 +229,7 @@ public class NewEstateFragment4 extends BaseFragment {
                 else {
                     TextInputEditText et = findViewById(R.id.etDeposit);
                     if (et.getText().toString().trim().equals("")) {
-                        Toasty.info(getContext(), selectedModel.TitleDepositPrice + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+                        Toasty.info(getContext(), selectedModel.TitleDepositPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
                         return;
                     } else {
                         contract.DepositPriceByAgreement = false;

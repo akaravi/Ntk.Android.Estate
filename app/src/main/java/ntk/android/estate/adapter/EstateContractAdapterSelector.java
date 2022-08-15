@@ -38,7 +38,7 @@ public class EstateContractAdapterSelector extends BaseRecyclerAdapter<EstateCon
     @Override
     public void onBindViewHolder(@NonNull EstateContractAdapterSelector.VH holder, int position) {
         EstateContractTypeModel item = getItem(position);
-        holder.title.setText(item.Title);
+        holder.title.setText(item.TitleML);
         holder.title.setChecked(position == lastSelected);
         holder.title.setTag(position);
         holder.title.setSelected(position == lastSelected);
