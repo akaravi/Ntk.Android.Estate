@@ -96,7 +96,6 @@ public class SelectProviceDialog extends DialogFragment {
             progress.setVisibility(View.VISIBLE);
         }
         FilterModel filterModel = new FilterModel().setRowPerPage(1000);
-        filterModel.addFilter(new FilterDataModel().setPropertyName("LinkParentId").setIntValue((long) selectedCountry.Id));
 
         ServiceExecute.execute(new CoreLocationService(getContext()).getAllCountry(filterModel)).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
             @Override
@@ -152,7 +151,10 @@ public class SelectProviceDialog extends DialogFragment {
         if (progress != null) {
             progress.setVisibility(View.VISIBLE);
         }
-        ServiceExecute.execute(new CoreLocationService(getContext()).getAllProvinces(new FilterModel().setRowPerPage(100))).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
+        FilterModel filterModel = new FilterModel().setRowPerPage(100);
+        filterModel.addFilter(new FilterDataModel().setPropertyName("LinkParentId").setIntValue((long) selectedCountry.Id));
+
+        ServiceExecute.execute(new CoreLocationService(getContext()).getAllProvinces(filterModel)).subscribe(new NtkObserver<ErrorException<CoreLocationModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<CoreLocationModel> model) {
                 try {
