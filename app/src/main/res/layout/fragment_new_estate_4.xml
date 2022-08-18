@@ -58,6 +58,24 @@
                         android:layout_alignParentRight="true"
                         android:text="نوع معامله" />
                 </RelativeLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/CurrencyTextInput"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="واحد پولی معامله "
+                    android:padding="12dp"
+                    app:helperTextEnabled="true"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/CurrencyAutoComplete"
+                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <include
                     layout="@layout/sub_estate_contract_selector"

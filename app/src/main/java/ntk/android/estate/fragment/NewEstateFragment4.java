@@ -13,21 +13,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.xiaofeng.flowlayoutmanager.Alignment;
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import ntk.android.base.adapter.SpinnerAdapter;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
+import ntk.android.base.entitymodel.core.CoreLocationModel;
+import ntk.android.base.entitymodel.coremain.CoreCurrencyModel;
 import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstateContractTypeModel;
 import ntk.android.base.fragment.BaseFragment;
+import ntk.android.base.services.core.CoreCurrencyService;
 import ntk.android.base.services.estate.EstateContractTypeService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
@@ -39,6 +45,8 @@ import ntk.android.estate.view.NumberTextWatcherForThousand;
 public class NewEstateFragment4 extends BaseFragment {
 
     private EstateContractTypeModel selectedModel;
+    private int stepData = 0;
+
 
     @Override
     public void onCreateFragment() {
@@ -118,7 +126,9 @@ public class NewEstateFragment4 extends BaseFragment {
         ServiceExecute.execute(new EstateContractTypeService(getContext()).getAll(new FilterModel())).subscribe(new NtkObserver<ErrorException<EstateContractTypeModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstateContractTypeModel> model) {
-                estateActivity().showContent();
+                stepData++;
+                if (stepData == 2)
+                    estateActivity().showContent();
                 EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, NewEstateFragment4.this::changeView);
                 RecyclerView rc = findViewById(R.id.contractsRc);
                 rc.setAdapter(adapter);
@@ -126,6 +136,39 @@ public class NewEstateFragment4 extends BaseFragment {
                 flowLayoutManager.setAutoMeasureEnabled(true);
                 flowLayoutManager.setAlignment(Alignment.RIGHT);
                 rc.setLayoutManager(flowLayoutManager);
+            }
+
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                estateActivity().showErrorView();
+            }
+        });
+        ServiceExecute.execute(new CoreCurrencyService(getContext()).getAll(new FilterModel())).subscribe(new NtkObserver<ErrorException<CoreCurrencyModel>>() {
+            @Override
+            public void onNext(@NonNull ErrorException<CoreCurrencyModel> model) {
+                stepData++;
+                if (stepData == 2)
+                    estateActivity().showContent();
+                try {
+                    MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.CurrencyAutoComplete);
+                    List<CoreCurrencyModel> currencyList = model.ListItems;
+                    List<String> names = new ArrayList<>();
+                    for (CoreCurrencyModel t : currencyList)
+                        names.add(t.Title);
+                    if (names.size() == 0)
+                        names.add("موردی یافت نشد");
+                    else
+                        estateActivity().selectedCurrency=currencyList.get(0);
+                    SpinnerAdapter<CoreCurrencyModel> currencyAdapter = new SpinnerAdapter<CoreCurrencyModel>(getContext(), names);
+                    spinner.setOnItemClickListener((parent, view, position, id) -> {
+                        estateActivity().selectedCurrency = currencyList.get(position);
+                    });
+                    spinner.setAdapter(currencyAdapter);
+                    // Do something for lollipop and above versions
+                    spinner.setText(currencyAdapter.getItem(0), false);
+                } catch (Exception e) {
+                }
             }
 
 

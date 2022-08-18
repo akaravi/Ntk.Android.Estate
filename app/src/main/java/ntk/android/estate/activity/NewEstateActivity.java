@@ -21,6 +21,8 @@ import ntk.android.base.activity.common.AuthWithSmsActivity;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.coremain.CoreCurrencyModel;
+import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.FontManager;
@@ -39,6 +41,7 @@ public class NewEstateActivity extends BaseActivity {
     public List<String> OtherImageIds = new ArrayList<>();
     public List<String> OtherImageSrc = new ArrayList<>();
     EstatePropertyModel model = new EstatePropertyModel();
+    public CoreCurrencyModel selectedCurrency;
     TextView title;
     protected int stepNumber;
     //boolean used for prevent add model until uploading pic finished
@@ -157,7 +160,10 @@ public class NewEstateActivity extends BaseActivity {
         if (MainImage_GUID != null && !MainImage_GUID.equalsIgnoreCase(""))
             model.UploadFileGUID.add(MainImage_GUID);
         model.UploadFileGUID.addAll(OtherImageIds);
-
+        for (EstateContractModel model :
+                model.Contracts) {
+            model.LinkCoreCurrencyId = selectedCurrency.Id;
+        }
         ServiceExecute.execute(new EstatePropertyService(this).add(model)).subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyModel> response) {

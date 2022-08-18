@@ -16,6 +16,7 @@ import ntk.android.base.config.GenericErrors;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
@@ -97,7 +98,10 @@ public class EditEstateActivity extends NewEstateActivity {
         if (MainImage_GUID != null && !MainImage_GUID.equalsIgnoreCase(""))
             model.UploadFileGUID.add(MainImage_GUID);
         model.UploadFileGUID.addAll(OtherImageIds);
-
+        for (EstateContractModel model :
+                model.Contracts) {
+            model.LinkCoreCurrencyId = selectedCurrency.Id;
+        }
         ServiceExecute.execute(new EstatePropertyService(this).edit(model)).subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyModel> response) {
