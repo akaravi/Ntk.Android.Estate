@@ -34,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/province"
+            android:visibility="gone"
             android:padding="12dp"
             app:helperTextEnabled="true"
             app:hintEnabled="true">
@@ -52,7 +53,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/city"
+            android:hint="@string/city"  android:visibility="gone"
             android:padding="12dp"
             app:helperTextEnabled="true"
             app:hintEnabled="true">
@@ -71,7 +72,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/mantaghe"
+            android:hint="@string/mantaghe"   android:visibility="gone"
             android:padding="12dp"
             app:helperTextEnabled="true"
             app:hintEnabled="true">

@@ -40,20 +40,36 @@ public class NewEstateFragment5 extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         findViewById(R.id.selectMainImage).setOnClickListener(t -> selectMainImage());
         findViewById(R.id.deleteImage).setOnClickListener(t -> deleteMainPage());
-        findViewById(R.id.addOtherImageBtn).setOnClickListener(t -> ClickAttachOther());
+        findViewById(R.id.addOtherImageBtn).setOnClickListener(t -> selectOtherImage());
     }
 
+
     private void deleteMainPage() {
-        estateActivity().MainImage_GUID = "";
-        ((ImageView) findViewById(R.id.selectedImageView)).setImageResource(0);
-        findViewById(R.id.deleteImage).setVisibility(View.GONE);
+        if (estateActivity().isUploaded()) {
+            estateActivity().MainImage_GUID = "";
+            ((ImageView) findViewById(R.id.selectedImageView)).setImageResource(0);
+            findViewById(R.id.deleteImage).setVisibility(View.GONE);
+        } else {
+            Toasty.info(getContext(), "فایل انتخابی قبلی در حال بارگزاری است...", Toasty.LENGTH_LONG).show();
+        }
     }
 
 
     private void selectMainImage() {
-        ClickAttach(MAIN_IMAGE_REQ);
+        if (estateActivity().isUploaded()) {
+            ClickAttach(MAIN_IMAGE_REQ);
+        } else {
+            Toasty.info(getContext(), "فایل انتخابی قبلی در حال بارگزاری است...", Toasty.LENGTH_LONG).show();
+        }
     }
 
+    private void selectOtherImage() {
+        if (estateActivity().isUploaded()) {
+            ClickAttachOther();
+        } else {
+            Toasty.info(getContext(), "فایل انتخابی قبلی در حال بارگزاری است...", Toasty.LENGTH_LONG).show();
+        }
+    }
 
     public void ClickAttach(int REQ) {
         new FileManagerService().clickAttach(estateActivity(), result -> {
@@ -89,7 +105,8 @@ public class NewEstateFragment5 extends BaseFragment {
                                     flowLayoutManager.setAutoMeasureEnabled(true);
                                     flowLayoutManager.setAlignment(Alignment.RIGHT);
                                     rc.setLayoutManager(flowLayoutManager);
-                                    rc.setAdapter(new OtherImageAdapter(estateActivity().OtherImageIds, estateActivity().OtherImageSrc));
+                                    rc.setAdapter(new OtherImageAdapter(estateActivity(),
+                                            estateActivity().OtherImageIds, estateActivity().OtherImageSrc));
                                 }
                             });
                 }

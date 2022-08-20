@@ -166,10 +166,18 @@ public class SelectProviceDialog extends DialogFragment {
                     List<String> names = new ArrayList<>();
                     for (CoreLocationModel t : model.ListItems)
                         names.add(t.Title);
-                    if (names.size() == 0)
+                    if (names.size() == 0){
                         names.add("موردی یافت نشد");
-                    else
+                        getView().findViewById(R.id.EstateProvinceTextInput).setVisibility(View.GONE);
+                        getView().findViewById(R.id.EstateCityTextInput).setVisibility(View.GONE);
+                        getView().findViewById(R.id.EstateAreaTextInput).setVisibility(View.GONE);
+
+                    }
+                    else{
                         names.add(0, "انتخاب کنید");
+                        getView().findViewById(R.id.EstateProvinceTextInput).setVisibility(View.VISIBLE);
+
+                    }
                     SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
                     spinner.setOnItemClickListener((parent, view, position, id) -> {
                         if (position > 0) {
@@ -220,10 +228,17 @@ public class SelectProviceDialog extends DialogFragment {
                     List<String> names = new ArrayList<>();
                     for (CoreLocationModel t : model.ListItems)
                         names.add(t.Title);
-                    if (names.size() == 0)
+                    if (names.size() == 0){
                         names.add("موردی یافت نشد");
-                    else
+                        getView().findViewById(R.id.EstateCityTextInput).setVisibility(View.GONE);
+                        getView().findViewById(R.id.EstateAreaTextInput).setVisibility(View.GONE);
+
+                    }
+                    else{
                         names.add(0, "انتخاب کنید");
+                        getView().findViewById(R.id.EstateCityTextInput).setVisibility(View.VISIBLE);
+
+                    }
                     SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
                     spinner.setOnItemClickListener((parent, view, position, id) -> {
                         if (position > 0) {
@@ -274,10 +289,16 @@ public class SelectProviceDialog extends DialogFragment {
                     List<String> names = new ArrayList<>();
                     for (CoreLocationModel t : model.ListItems)
                         names.add(t.Title);
-                    if (names.size() == 0)
+                    if (names.size() == 0){
                         names.add("موردی یافت نشد");
-                    else
+                        getView().findViewById(R.id.EstateAreaTextInput).setVisibility(View.GONE);
+
+                    }
+                    else{
                         names.add(0, "انتخاب کنید");
+                        getView().findViewById(R.id.EstateAreaTextInput).setVisibility(View.VISIBLE);
+
+                    }
                     SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
                     spinner.setOnItemClickListener((parent, view, position, id) -> {
                         if (position > 0) {

@@ -63,7 +63,7 @@ public class NewEstateActivity extends BaseActivity {
     }
 
     protected void afterCreate() {
-        showFragment1();
+        showFragment5();
     }
 
     private void setFont() {
@@ -191,6 +191,9 @@ public class NewEstateActivity extends BaseActivity {
 
     public void uploadFinished() {
         uploadProcess = false;
+    }
+    public boolean isUploaded() {
+       return !uploadProcess ;
     }
 
     @Override

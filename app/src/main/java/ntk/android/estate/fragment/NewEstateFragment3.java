@@ -21,6 +21,8 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
+import java.util.Random;
+
 import es.dmoral.toasty.Toasty;
 import ir.map.sdk_map.MapirStyle;
 import ir.map.sdk_map.maps.MapView;
@@ -54,6 +56,8 @@ public class NewEstateFragment3 extends BaseFragment {
         EstatePropertyModel model = estateActivity().model();
         if (model.CaseCode != null)
             codeEt.setText(model.CaseCode);
+        else
+            codeEt.setText(new Random().nextInt(900000)+100000+"");
         if (model.Title != null)
             titleEt.setText(model.Title);
         if (model.Description != null)

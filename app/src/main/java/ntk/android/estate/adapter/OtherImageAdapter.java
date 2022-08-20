@@ -12,16 +12,20 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+import io.reactivex.functions.Function;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.estate.R;
+import ntk.android.estate.activity.NewEstateActivity;
 
 public class OtherImageAdapter extends BaseRecyclerAdapter<String, OtherImageAdapter.ViewHolder> {
-
     List<String> src;
-
-    public OtherImageAdapter(List<String> src, List<String> list) {
+    NewEstateActivity activity;
+    public OtherImageAdapter(NewEstateActivity act, List<String> src, List<String> list) {
         super(list);
         this.src = src;
+        activity=act;
+
     }
 
     @NonNull
@@ -34,9 +38,12 @@ public class OtherImageAdapter extends BaseRecyclerAdapter<String, OtherImageAda
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ImageLoader.getInstance().displayImage(getItem(position), holder.image);
         holder.delete.setOnClickListener(view -> {
-            src.remove(position);
-            list.remove(position);
-            notifyItemRemoved(position);
+
+            if (activity.isUploaded()) {
+                src.remove(position);
+                list.remove(position);
+                notifyItemRemoved(position);
+            }else    Toasty.info(view.getContext(), "فایل انتخابی قبلی در حال بارگزاری است...", Toasty.LENGTH_LONG).show();
         });
     }
 
