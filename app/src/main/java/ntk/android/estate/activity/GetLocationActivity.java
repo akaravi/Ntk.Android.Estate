@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
-
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -18,7 +17,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-
 
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -40,26 +38,24 @@ import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import ir.map.sdk_map.MapirStyle;
 import ir.map.sdk_map.maps.MapView;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.estate.R;
 
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.maps.Style;
-import ir.map.sdk_map.MapirStyle;
-
 public class GetLocationActivity extends BaseActivity {
-    MapboxMap  map;
+    MapboxMap map;
     Style mapStyle;
     Marker myMarker;
 
-     Marker myLocalMarker;
+    Marker myLocalMarker;
 
     FusedLocationProviderClient fusedLocationClient;
     ActivityResultLauncher<String[]> locationPermissionRequest =
@@ -116,7 +112,6 @@ public class GetLocationActivity extends BaseActivity {
     }
 
 
-
     private LocationCallback getLocationCallback() {
         return new LocationCallback() {
             @Override
@@ -152,11 +147,11 @@ public class GetLocationActivity extends BaseActivity {
 
         //location button
         findViewById(R.id.lastLocationFab).setOnClickListener(view -> getPermission());
-        MapView   mapView = findViewById(R.id.mapview);
+        MapView mapView = findViewById(R.id.mapview);
         mapView.getMapAsync(mapboxMap -> {
             map = mapboxMap;
-            map.setMinZoomPreference(12);
-            map.easeCamera(CameraUpdateFactory.newLatLng(new LatLng(35.689198,51.388973)));
+//            map.setMinZoomPreference(12);
+            map.easeCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.689198, 51.388973), 12));
             map.setStyle(new Style.Builder().fromUri(MapirStyle.LIGHT), new Style.OnStyleLoaded() {
                 @Override
                 public void onStyleLoaded(@NonNull Style style) {
@@ -168,12 +163,12 @@ public class GetLocationActivity extends BaseActivity {
                 public boolean onMapClick(@NonNull LatLng point) {
                     if (myMarker != null)
                         map.removeMarker(myMarker);
-                   addMarker(point);
+                    addMarker(point);
                     map.animateCamera(CameraUpdateFactory.newLatLng(point));
                     return false;
                 }
             });
-            map.addOnCameraMoveListener(() ->  {
+            map.addOnCameraMoveListener(() -> {
 //                if (myMarker != null)
 //                    map.removeMarker(myMarker);
 //                addMarker(map.getCameraPosition().target);
@@ -212,7 +207,6 @@ public class GetLocationActivity extends BaseActivity {
     }
 
 
-
     public void getCurrentLocation() {
         fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY, new CancellationToken() {
             @Override
@@ -237,7 +231,6 @@ public class GetLocationActivity extends BaseActivity {
     }
 
 
-
     private Marker addMarker(LatLng latLng) {
         // Creating animation for marker. We should use an object of type AnimationStyleBuilder, set
         // all animation features on it and then call buildStyle() method that returns an object of type
@@ -257,7 +250,7 @@ public class GetLocationActivity extends BaseActivity {
     private Marker addMyLocationMarker(LatLng latLng) {
         IconFactory iconFactory = IconFactory.getInstance(GetLocationActivity.this);
         Icon icon = iconFactory.fromResource(R.drawable.marker);
-        if (myLocalMarker!=null)
+        if (myLocalMarker != null)
             map.removeMarker(myLocalMarker);
         myLocalMarker = map.addMarker(new MarkerOptions()
                 .position(latLng)
@@ -267,15 +260,16 @@ public class GetLocationActivity extends BaseActivity {
 
         return myMarker;
     }
+
     public static MarkerOptions MakeMarker(Context context, LatLng loc) {
         IconFactory iconFactory = IconFactory.getInstance(context);
         Icon icon = iconFactory.fromResource(R.drawable.logo);
 
-        MarkerOptions options =new MarkerOptions()
+        MarkerOptions options = new MarkerOptions()
                 .position(loc)
                 .title("مکان انتخابی")
                 .icon(icon);
-        return  options;
+        return options;
     }
 
     public static void REGISTER_FOR_RESULT(BaseActivity activity, ActivityResultCallback<ActivityResult> callback) {
