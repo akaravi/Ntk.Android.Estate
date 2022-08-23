@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
-def BaseVersion = '1.5.96'
+def BaseVersion = '1.5.97'
 def incrementalVersion = '1'
 android {
     compileSdkVersion 31
