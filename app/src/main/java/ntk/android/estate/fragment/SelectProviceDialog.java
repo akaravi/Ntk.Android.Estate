@@ -25,7 +25,6 @@ import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.core.CoreLocationModel;
-import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.services.core.CoreLocationService;
 import ntk.android.estate.R;
 
@@ -120,13 +119,12 @@ public class SelectProviceDialog extends DialogFragment {
                         names.add(t.Title);
                     if (names.size() == 0)
                         names.add("موردی یافت نشد");
-                    else
-                        names.add(0, "انتخاب کنید");
+
                     SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
                     spinner.setOnItemClickListener((parent, view, position, id) -> {
-                            selectedCountry =
-                                    StreamSupport.stream(countries).filter(t -> t.Title.equals(parent.getSelectedItem().toString())).findFirst().orElse(null);
-                            if (selectedCountry!=null){
+                        selectedCountry =
+                                StreamSupport.stream(countries).filter(t -> t.Title.equals(parent.getItemAtPosition(position).toString())).findFirst().orElse(null);
+                        if (selectedCountry != null) {
                             ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateProvinceAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
                             ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateCityAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
                             ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateAreaAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
@@ -141,7 +139,7 @@ public class SelectProviceDialog extends DialogFragment {
                     });
                     spinner.setAdapter(locationAdapter);
                     // Do something for lollipop and above versions
-                    spinner.setText(locationAdapter.getItem(0), false);
+                    if ( model.ListItems.size() == 0)  spinner.setText(locationAdapter.getItem(0), false);
                 } catch (Exception e) {
                 }
             }
@@ -188,13 +186,12 @@ public class SelectProviceDialog extends DialogFragment {
                         getView().findViewById(R.id.EstateAreaTextInput).setVisibility(View.GONE);
 
                     } else {
-                        names.add(0, "انتخاب کنید");
                         getView().findViewById(R.id.EstateProvinceTextInput).setVisibility(View.VISIBLE);
 
                     }
                     SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
                     spinner.setOnItemClickListener((parent, view, position, id) -> {
-                        selectedProvince = StreamSupport.stream(provinces).filter(t -> t.Title.equals(parent.getSelectedItem().toString())).findFirst().orElse(null);
+                        selectedProvince = StreamSupport.stream(provinces).filter(t -> t.Title.equals(parent.getItemAtPosition(position).toString())).findFirst().orElse(null);
                         if (selectedProvince != null) {
                             ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateCityAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
                             ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateAreaAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
@@ -207,7 +204,7 @@ public class SelectProviceDialog extends DialogFragment {
                     });
                     spinner.setAdapter(locationAdapter);
                     // Do something for lollipop and above versions
-                    spinner.setText(locationAdapter.getItem(0), false);
+                    if ( model.ListItems.size() == 0)   spinner.setText(locationAdapter.getItem(0), false);
                 } catch (Exception e) {
                 }
             }
@@ -252,13 +249,12 @@ public class SelectProviceDialog extends DialogFragment {
                         getView().findViewById(R.id.EstateAreaTextInput).setVisibility(View.GONE);
 
                     } else {
-                        names.add(0, "انتخاب کنید");
                         getView().findViewById(R.id.EstateCityTextInput).setVisibility(View.VISIBLE);
 
                     }
                     SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
                     spinner.setOnItemClickListener((parent, view, position, id) -> {
-                        selectedCity = StreamSupport.stream(cities).filter(t -> t.Title.equals(parent.getSelectedItem().toString())).findFirst().orElse(null);
+                        selectedCity = StreamSupport.stream(cities).filter(t -> t.Title.equals(parent.getItemAtPosition(position).toString())).findFirst().orElse(null);
                         if (selectedCity != null) {
                             ((MaterialAutoCompleteTextView) getView().findViewById(R.id.EstateAreaAutoComplete)).setAdapter(new SpinnerAdapter<>(getContext(), new ArrayList<>()));
                             areas = new ArrayList<>();
@@ -268,7 +264,7 @@ public class SelectProviceDialog extends DialogFragment {
                     });
                     spinner.setAdapter(locationAdapter);
                     // Do something for lollipop and above versions
-                    spinner.setText(locationAdapter.getItem(0), false);
+                    if ( model.ListItems.size() == 0)  spinner.setText(locationAdapter.getItem(0), false);
                 } catch (Exception e) {
                 }
             }
@@ -312,19 +308,18 @@ public class SelectProviceDialog extends DialogFragment {
                         getView().findViewById(R.id.EstateAreaTextInput).setVisibility(View.GONE);
 
                     } else {
-                        names.add(0, "انتخاب کنید");
                         getView().findViewById(R.id.EstateAreaTextInput).setVisibility(View.VISIBLE);
 
                     }
                     SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
                     spinner.setOnItemClickListener((parent, view, position, id) -> {
-                        selectedArea = StreamSupport.stream(areas).filter(t -> t.Title.equals(parent.getSelectedItem().toString())).findFirst().orElse(null);
+                        selectedArea = StreamSupport.stream(areas).filter(t -> t.Title.equals(parent.getItemAtPosition(position).toString())).findFirst().orElse(null);
 
                     });
 
                     spinner.setAdapter(locationAdapter);
                     // Do something for lollipop and above versions
-                    spinner.setText(locationAdapter.getItem(0), false);
+                    if ( model.ListItems.size() == 0) spinner.setText(locationAdapter.getItem(0), false);
                 } catch (Exception e) {
                 }
             }
