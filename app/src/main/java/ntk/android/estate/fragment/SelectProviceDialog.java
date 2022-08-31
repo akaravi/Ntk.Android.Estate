@@ -319,7 +319,7 @@ public class SelectProviceDialog extends DialogFragment {
 
                     spinner.setAdapter(locationAdapter);
                     // Do something for lollipop and above versions
-                    if ( model.ListItems.size() == 0) spinner.setText(locationAdapter.getItem(0), false);
+                    if ( model.ListItems.size() == 0)   getView().findViewById(R.id.EstateProvinceTextInput).setVisibility(View.VISIBLE);
                 } catch (Exception e) {
                 }
             }
