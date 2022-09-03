@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
-def BaseVersion = '1.5.98'
+def BaseVersion = '1.6.10'
 def incrementalVersion = '2'
 android {
     compileSdkVersion 31
@@ -130,7 +130,7 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding:2.0.0"
     //for locale
     implementation 'com.akexorcist:localization:1.2.11'
-    api project(path: ':baseActivity')
-//     api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
+//    api project(path: ':baseActivity')
+     api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
 }
 
