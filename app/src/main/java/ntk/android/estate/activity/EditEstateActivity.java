@@ -55,7 +55,7 @@ public class EditEstateActivity extends NewEstateActivity {
     protected void afterCreate() {
         if (AppUtil.isNetworkAvailable(this)) {
             switcher.showProgressView();
-            ServiceExecute.execute(new EstatePropertyService(this).getOne(Id))
+            ServiceExecute.execute(new EstatePropertyService(this).getOneByEdit(Id))
                     .subscribe(new ErrorExceptionObserver<EstatePropertyModel>(switcher::showErrorView) {
 
                         @Override
