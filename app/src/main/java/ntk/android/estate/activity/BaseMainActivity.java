@@ -16,6 +16,7 @@ abstract class BaseMainActivity extends AbstractMainActivity {
     FilterModel row3;
     FilterModel row4;
     FilterModel row5;
+    FilterModel row6;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ abstract class BaseMainActivity extends AbstractMainActivity {
         row3=new FilterModel();
         row4=new FilterModel();
         row5=new FilterModel();
+        row6=new FilterModel();
         //base on last item
         row1.setSortType(EnumSortType.Descending.index());
         row1.setSortColumn("CreatedDate");
@@ -60,6 +62,8 @@ abstract class BaseMainActivity extends AbstractMainActivity {
        row5.addFilter(new FilterDataModel().setPropertyName("Contracts")
                 .setPropertyAnyName("LinkEstateContractTypeId")
                 .setStringValue("db4bf96d-f485-410f-12e5-08d92cf7fe11"));
+        // articles
+        row6.setSortType(EnumSortType.Descending.index());
 
     }
 }

@@ -30,6 +30,7 @@ import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.dtomodel.theme.DrawerChildThemeDtoModel;
+import ntk.android.base.entitymodel.article.ArticleContentModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
@@ -38,12 +39,14 @@ import ntk.android.base.entitymodel.enums.EnumSearchType;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.entitymodel.news.NewsContentModel;
+import ntk.android.base.services.article.ArticleContentService;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.services.estate.EstatePropertyTypeLanduseService;
 import ntk.android.base.services.news.NewsContentService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.imageCompressor;
 import ntk.android.estate.R;
+import ntk.android.estate.adapter.Main3ArticleAdapter;
 import ntk.android.estate.adapter.Main3EstateLandUseAdapter;
 import ntk.android.estate.adapter.Main3EstatePropertyAdapter;
 import ntk.android.estate.adapter.Main3NewsAdapter;
@@ -73,6 +76,8 @@ public class MainActivity3 extends BaseMainActivity {
         getData(row1, findViewById(R.id.row1));
         getData(row2, findViewById(R.id.row2));
         getData(row3, findViewById(R.id.row3));
+        //get articles
+        getArticles();
     }
 
     private void init() {
@@ -108,16 +113,21 @@ public class MainActivity3 extends BaseMainActivity {
         TextView rowSeeMore2 = findViewById(R.id.row2).findViewById(R.id.seeMore);
         TextView rowTitle3 = findViewById(R.id.row3).findViewById(R.id.title);
         TextView rowSeeMore3 = findViewById(R.id.row3).findViewById(R.id.seeMore);
+        TextView rowTitle4 = findViewById(R.id.row4).findViewById(R.id.title);
+        TextView rowSeeMore4 = findViewById(R.id.row4).findViewById(R.id.seeMore);
         //special list
         String title1 = "جدیدترین ";
         String title2 = "پیشنهادی ";
         String title3 = "اجاره روزانه ";
+        String title4 = "آخرین مقالات";
         rowTitle1.setText(title1);
         rowTitle2.setText(title2);
         rowTitle3.setText(title3);
+        rowTitle4.setText(title4);
         rowSeeMore1.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this, row1, title1));
         rowSeeMore2.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this, row2, title2));
         rowSeeMore3.setOnClickListener(view -> EstateListWithFilterActivity.START_NEW(MainActivity3.this, row3, title3));
+        rowSeeMore4.setOnClickListener(view -> startActivity(new Intent(MainActivity3.this, ArticleListActivity.class)));
 
         //set font
         Typeface t1 = FontManager.T1_Typeface(this);
@@ -131,7 +141,8 @@ public class MainActivity3 extends BaseMainActivity {
         rowSeeMore2.setTypeface(t1);
         rowTitle3.setTypeface(t1);
         rowSeeMore3.setTypeface(t1);
-
+        rowTitle4.setTypeface(t1);
+        rowSeeMore4.setTypeface(t1);
         //show shimmer
         findViewById(R.id.shimmer_news1).getLayoutParams().width = Main3NewsAdapter.ITEM_WIDTH();
         findViewById(R.id.shimmer_news2).getLayoutParams().width = Main3NewsAdapter.ITEM_WIDTH();
@@ -193,13 +204,15 @@ public class MainActivity3 extends BaseMainActivity {
                                         itemL.LinkExtraImageIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkExtraImageIdsSrc.get(i), 300, 300));
                                     }
                             }
-
-                        rc.setAdapter(new Main3EstatePropertyAdapter(response.ListItems));
-                        rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
-                        ViewCompat.setNestedScrollingEnabled(rc, false);
-                        ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
-                        shimmerFrameLayout.stopShimmerAnimation();
-                        shimmerFrameLayout.setVisibility(View.GONE);
+                        if (response.ListItems.size()>0) {
+                            rc.setAdapter(new Main3EstatePropertyAdapter(response.ListItems));
+                            rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
+                            ViewCompat.setNestedScrollingEnabled(rc, false);
+                            ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
+                            shimmerFrameLayout.stopShimmerAnimation();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+                        }else
+                            view.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -276,4 +289,47 @@ public class MainActivity3 extends BaseMainActivity {
                     }
                 });
     }
+
+    private void getArticles() {
+        ServiceExecute.execute(new ArticleContentService(this).getAll(row6))
+                .subscribe(new ErrorExceptionObserver<ArticleContentModel>(switcher::showErrorView) {
+
+                    @Override
+                    protected void SuccessResponse(ErrorException<ArticleContentModel> response) {
+                        View view = findViewById(R.id.row4);
+                        RecyclerView rc = view.findViewById(R.id.row4).findViewById(R.id.rc);
+                        //hide shimmer
+                        ViewCompat.setNestedScrollingEnabled(rc, false);
+                        ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
+                        shimmerFrameLayout.stopShimmerAnimation();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+                        if (response.IsSuccess)
+                            //image optimize
+                            if (response.ListItems.size() > 0) {
+                                //image Optimaze
+                                for (ArticleContentModel itemL : response.ListItems) {
+                                    itemL.LinkMainImageIdSrc = imageCompressor.convertSizeThumbnailImage(itemL.LinkMainImageIdSrc, 300, 300);
+                                    if (itemL.LinkFileIdsSrc != null && itemL.LinkFileIdsSrc.size() > 0)
+                                        for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
+                                            itemL.LinkFileIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i), 300, 300));
+                                        }
+                                }
+                                SnapHelper snapHelper = new PagerSnapHelper();
+                                Main3ArticleAdapter adapter = new Main3ArticleAdapter(MainActivity3.this, response.ListItems);
+                                rc.setAdapter(adapter);
+                                rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
+                                snapHelper.attachToRecyclerView(rc);
+                                adapter.notifyDataSetChanged();
+                            }
+                    }
+
+                    @Override
+                    protected Runnable tryAgainMethod() {
+                        return () -> getArticles();
+                    }
+                });
+
+
+    }
+
 }

@@ -163,6 +163,10 @@
                     <include
                         android:id="@+id/row3"
                         layout="@layout/sub_main_activity3_row" />
+
+                    <include
+                        android:id="@+id/row4"
+                        layout="@layout/sub_main_activity3_row" />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 

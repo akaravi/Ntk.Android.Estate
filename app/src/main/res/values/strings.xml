@@ -17,5 +17,7 @@
     <string name="city">شهر</string>
     <string name="mantaghe">منطقه</string>
     <string name="country">کشور</string>
+    <string name="addNew">ثبت ملک</string>
+    <string name="location">موقعیت</string>
 
 </resources>

@@ -9,7 +9,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-sdk tools:overrideLibrary="org.neshan.servicessdk,org.neshan.mapsdk,org.neshan.common"/>
+
+    <uses-sdk tools:overrideLibrary="org.neshan.servicessdk,org.neshan.mapsdk,org.neshan.common" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -21,42 +22,90 @@
         tools:ignore="GoogleAppIndexingWarning"
 
         tools:replace="android:supportsRtl,android:icon">
-        <meta-data android:name="io.sentry.dsn" android:value="https://9ca63cfdc64341d9b9b95ca0f41b52bc@o1135344.ingest.sentry.io/6232546" />
+        <meta-data
+            android:name="io.sentry.dsn"
+            android:value="https://9ca63cfdc64341d9b9b95ca0f41b52bc@o1135344.ingest.sentry.io/6232546" />
         <!-- Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
            We recommend adjusting this value in production. -->
-        <meta-data android:name="io.sentry.traces.sample-rate" android:value="1.0" />
-        <meta-data android:name="io.sentry.auto-init" android:value="true" />
-        <activity android:screenOrientation="portrait"
+        <meta-data
+            android:name="io.sentry.traces.sample-rate"
+            android:value="1.0" />
+        <meta-data
+            android:name="io.sentry.auto-init"
+            android:value="true" />
+
+        <activity
             android:name=".activity.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-                <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.NewsListActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".activity.NewsSearchActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.NewsDetailActivity"
             android:screenOrientation="portrait" />
 
+   <activity
+            android:name=".activity.ArticleListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ArticleSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ArticleDetailActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".activity.EstateListActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.EstateDetailActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SearchEstateActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.AboutUsActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.NewEstateActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.GetLocationActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MyEstateActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.FavoriteEstateListActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MainActivity2" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MainActivity3" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.LandUsedListActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.EstateListWithFilterActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.EditEstateActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.EstateListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EstateDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SearchEstateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NewEstateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GetLocationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyEstateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FavoriteEstateListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MainActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MainActivity3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LandUsedListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EstateListWithFilterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditEstateActivity"
+            android:screenOrientation="portrait" />
+
+
 
 
         <provider
