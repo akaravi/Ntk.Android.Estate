@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -26,8 +27,11 @@ import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.dtomodel.theme.DrawerChildThemeDtoModel;
 import ntk.android.base.room.NotificationStorageService;
 import ntk.android.base.utill.FontManager;
+import ntk.android.base.utill.prefrense.Preferences;
+import ntk.android.estate.MyApplication;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.AboutUsActivity;
+import ntk.android.estate.activity.ArticleListActivity;
 import ntk.android.estate.activity.EstateListActivity;
 import ntk.android.estate.activity.FavoriteEstateListActivity;
 import ntk.android.estate.activity.MyEstateActivity;
@@ -35,7 +39,7 @@ import ntk.android.estate.activity.NewEstateActivity;
 import ntk.android.estate.activity.NewsListActivity;
 
 
-public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel, DrawerAdapter.ViewHolder> {
+public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel, RecyclerView.ViewHolder> {
 
 
     private final Context context;
@@ -51,14 +55,29 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
 
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = inflate(viewGroup, R.layout.drawer_theme_1_item);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        if (viewType == 0) {
+            View view = inflate(viewGroup, R.layout.drawer_theme_1_header);
+            return new HeaderViewHolder(view);
+        } else {
+            View view = inflate(viewGroup, R.layout.drawer_theme_1_item);
+            return new ViewHolder(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder mholder, final int position) {
+        if (position == 0) {
+            bindHeader((HeaderViewHolder) mholder, position);
+        } else {
+            bindMenu((ViewHolder) mholder, position);
+        }
+    }
+
+    private void bindMenu(ViewHolder holder, int position) {
+
         DrawerChildThemeDtoModel item = getItem(position);
+
         if (item.Icon != null)
             ImageLoader.getInstance().displayImage(item.Icon, holder.icon);
         else if (item.drawableIcon != 0)
@@ -90,32 +109,46 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
                     ClickNews();
                     break;
                 case 5:
-                    ClickContact();
+                    ClickArticle();
                     break;
                 case 6:
-                    ClickPooling();
+                    ClickContact();
                     break;
                 case 7:
-                    ClickInboxNotification();
+                    ClickPooling();
                     break;
                 case 8:
-                    ClickQuestion();
+                    ClickInboxNotification();
                     break;
                 case 9:
-                    ClickFeedBack();
+                    ClickQuestion();
                     break;
                 case 10:
+                    ClickFeedBack();
+                    break;
+                case 11:
                     ClickAbout();
                     break;
-
-                case 11:
+                case 12:
                     ClickIntro();
                     break;
-                case 12:
+                case 13:
                     ClickShare();
                     break;
             }
         });
+    }
+
+    private void bindHeader(HeaderViewHolder holder, int position) {
+        Long userid = Preferences.with(MyApplication.getAppContext()).UserInfo().userId();
+        if (userid > 0) {
+            holder.userId.setText("شناسه کاربری : " + userid);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     private void ClickEstateList() {
@@ -148,6 +181,13 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
 
     private void ClickNews() {
         context.startActivity(new Intent(context, NewsListActivity.class));
+        if (Drawer != null) {
+            Drawer.closeMenu(true);
+        }
+    }
+
+    private void ClickArticle() {
+        context.startActivity(new Intent(context, ArticleListActivity.class));
         if (Drawer != null) {
             Drawer.closeMenu(true);
         }
@@ -230,15 +270,36 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         }
     }
 
+    public class HeaderViewHolder extends RecyclerView.ViewHolder {
+        ImageView userImage;
+
+        TextView name;
+        TextView userId;
+        MaterialButton loginBtn;
+
+        public HeaderViewHolder(View view) {
+            super(view);
+            userImage = view.findViewById(R.id.userImage);
+            name = view.findViewById(R.id.usernameTv);
+            userId = view.findViewById(R.id.userIdTv);
+            loginBtn = view.findViewById(R.id.loginBtn);
+            name.setTypeface(FontManager.T1_Typeface(context));
+            userId.setTypeface(FontManager.T1_Typeface(context));
+            loginBtn.setTypeface(FontManager.T1_Typeface(context));
+        }
+    }
+
     public static List<DrawerChildThemeDtoModel> createDrawerItems(boolean allowDirectShareApp) {
 
         ArrayList<DrawerChildThemeDtoModel> list = new ArrayList<>();
         int i = 0;
+        list.add(new DrawerChildThemeDtoModel().setId(-1).setTitle("سربرگ").setDrawableIcon(R.drawable.default_icon));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("آخرین ملک های ثبت شده").setDrawableIcon(R.drawable.estate));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("ثبت ملک جدید").setDrawableIcon(R.drawable.add));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("لیست علاقه مندی").setDrawableIcon(R.drawable.favorites_folder));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("املاک من").setDrawableIcon(R.drawable.favorites_folder));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("اخبار").setDrawableIcon(R.drawable.news2));
+        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("مقالات").setDrawableIcon(R.drawable.article_place_holder));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("پشتیبانی").setDrawableIcon(R.drawable.inbox));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("نظرسنجی").setDrawableIcon(R.drawable.polling2));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("صندوق پیام دریافتی").setDrawableIcon(R.drawable.notification2));
