@@ -4,11 +4,11 @@ apply plugin: 'com.google.gms.google-services'
 def BaseVersion = '1.5.98'
 def incrementalVersion = '2'
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     defaultConfig {
         applicationId "ntk.android.estate.APPNTK"//change for packagename for api
         minSdkVersion 17
-        targetSdkVersion 31
+        targetSdkVersion 32
         multiDexEnabled true
         versionCode 1  //Build Version NTK
         versionName "${BaseVersion}${incrementalVersion}"//Splash Version Label
