@@ -39,7 +39,7 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
     }
 
     public static int IMAGE_WIDTH(Context c) {
-        return ITEM_WIDTH() - NViewUtils.dpToPx(c, 8);
+        return ITEM_WIDTH() - NViewUtils.dpToPx(c, 16);
     }
 
     @NonNull
