@@ -188,6 +188,8 @@
             android:layout_toRightOf="@+id/fabSearch"
             android:layout_marginLeft="8dp"
             android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:text="@string/addNew"
             android:textColor="@color/colorWhite"
             app:fabSize="normal"

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import java.util.List;
@@ -133,6 +134,7 @@ public class MainActivity3 extends BaseMainActivity {
         Typeface t1 = FontManager.T1_Typeface(this);
         ((EditText) findViewById(R.id.searchEt)).setTypeface(t1);
         ((TextView) findViewById(R.id.title1)).setTypeface(t1);
+        ((ExtendedFloatingActionButton)  findViewById(R.id.fabAdd)).setTypeface(t1);
 
         seeMore.setTypeface(t1);
         rowTitle1.setTypeface(t1);
