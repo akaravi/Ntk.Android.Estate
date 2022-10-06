@@ -186,7 +186,10 @@
             android:layout_marginRight="12dp"
             android:layout_marginBottom="32dp"
             android:layout_toRightOf="@+id/fabSearch"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
             android:text="@string/addNew"
+            android:textColor="@color/colorWhite"
             app:fabSize="normal"
             app:icon="@drawable/ic_plus"
             app:iconTint="@color/colorWhite" />
@@ -197,9 +200,10 @@
             android:layout_height="56dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="32dp"
-            app:fabSize="normal"
             android:layout_marginLeft="16dp"
+            android:layout_marginBottom="32dp"
+
+            app:fabSize="normal"
             app:icon="@drawable/ic_search"
             app:iconTint="@color/colorWhite" />
 
