@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <uses-sdk tools:overrideLibrary="org.neshan.servicessdk,org.neshan.mapsdk,org.neshan.common" />
+    <uses-sdk tools:overrideLibrary="org.neshan.servicessdk,org.neshan.mapsdk,org.neshan.common,com.google.firebase.messaging" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"

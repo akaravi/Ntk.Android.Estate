@@ -4,11 +4,11 @@ apply plugin: 'com.google.gms.google-services'
 def BaseVersion = '1.5.98'
 def incrementalVersion = '2'
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     defaultConfig {
         applicationId "ntk.android.estate.APPNTK"//change for packagename for api
         minSdkVersion 17
-        targetSdkVersion 32
+        targetSdkVersion 33
         multiDexEnabled true
         versionCode 1  //Build Version NTK
         versionName "${BaseVersion}${incrementalVersion}"//Splash Version Label
@@ -63,7 +63,7 @@ configurations.all {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //for result
-    implementation "androidx.activity:activity:1.4.0"
+    implementation "androidx.activity:activity:1.6.0"
     // Add the  Crashlytics SDK.
     implementation 'io.sentry:sentry-android:5.6.1'
     //rounded imageView
@@ -78,13 +78,13 @@ dependencies {
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
 
     //noinspection GradleCompatible
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
     //butteryfly
     implementation 'com.jakewharton:butterknife:10.0.0'
-    implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
@@ -94,11 +94,11 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.github.GrenderG:Toasty:1.4.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.nineoldandroids:library:2.4.0'
-    implementation 'com.google.android.material:material:1.4.0'//karavi:dont change
+    implementation 'com.google.android.material:material:1.6.1'//karavi:dont change
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
@@ -130,7 +130,7 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding:2.0.0"
     //for locale
     implementation 'com.akexorcist:localization:1.2.11'
-    api project(path: ':baseActivity')
-//     api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
+//    api project(path: ':baseActivity')
+     api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
 }
 
