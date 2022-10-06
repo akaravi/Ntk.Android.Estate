@@ -169,9 +169,10 @@
                         android:id="@+id/row4"
                         layout="@layout/sub_main_activity3_row" />
 
-                    <View android:layout_width="match_parent"
-android:layout_marginTop="16dp"
-                        android:layout_height="100dp"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="16dp" />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 
@@ -179,24 +180,26 @@ android:layout_marginTop="16dp"
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fabAdd"
-            android:layout_width="43dp"
-            android:layout_height="43dp"
-            android:layout_alignParentRight="true"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="12dp"
             android:layout_marginBottom="32dp"
+            android:layout_toRightOf="@+id/fabSearch"
+            android:text="@string/addNew"
             app:fabSize="normal"
             app:icon="@drawable/ic_plus"
             app:iconTint="@color/colorWhite" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fabSearch"
-            android:layout_width="43dp"
-            android:layout_height="43dp"
-            android:layout_above="@+id/fabAdd"
-            android:layout_alignParentRight="true"
-            android:layout_margin="32dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="32dp"
             app:fabSize="normal"
+            android:layout_marginLeft="16dp"
             app:icon="@drawable/ic_search"
             app:iconTint="@color/colorWhite" />
 
