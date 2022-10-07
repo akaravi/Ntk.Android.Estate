@@ -23,7 +23,7 @@ public class Drawer3Adapter extends DrawerAdapter {
     public void onBindViewHolder(RecyclerView.ViewHolder mholder, int position) {
         super.onBindViewHolder(mholder, position);
         if (position > 0) {
-            ViewHolder holder = (ViewHolder) mholder;
+            MenuViewHolder holder = (MenuViewHolder) mholder;
             if (color == -1)
                 color = ContextCompat.getColor(holder.itemView.getContext(), R.color.main3_primary_text);
             holder.title.setTextColor(color);

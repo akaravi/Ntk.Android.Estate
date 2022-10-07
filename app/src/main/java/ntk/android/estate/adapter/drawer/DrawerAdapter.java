@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ntk.android.base.activity.abstraction.AbstractMainActivity;
+import ntk.android.base.activity.common.AuthWithSmsActivity;
 import ntk.android.base.activity.common.IntroActivity;
 import ntk.android.base.activity.common.NotificationsActivity;
 import ntk.android.base.activity.poling.PolingActivity;
@@ -54,6 +56,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
     }
 
 
+    @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         if (viewType == 0) {
@@ -61,7 +64,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             return new HeaderViewHolder(view);
         } else {
             View view = inflate(viewGroup, R.layout.drawer_theme_1_item);
-            return new ViewHolder(view);
+            return new MenuViewHolder(view);
         }
     }
 
@@ -70,11 +73,11 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         if (position == 0) {
             bindHeader((HeaderViewHolder) mholder, position);
         } else {
-            bindMenu((ViewHolder) mholder, position);
+            bindMenu((MenuViewHolder) mholder, position);
         }
     }
 
-    private void bindMenu(ViewHolder holder, int position) {
+    private void bindMenu(MenuViewHolder holder, int position) {
 
         DrawerChildThemeDtoModel item = getItem(position);
 
@@ -142,7 +145,29 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
     private void bindHeader(HeaderViewHolder holder, int position) {
         Long userid = Preferences.with(MyApplication.getAppContext()).UserInfo().userId();
         if (userid > 0) {
+            String name = " تلفن همراه : " + Preferences.with(context).UserInfo().mobile();
+            holder.name.setText(name);
             holder.userId.setText("شناسه کاربری : " + userid);
+            holder.loginBtn.setText("خروج");
+            holder.loginBtn.setOnClickListener(v -> {
+                Preferences.with(v.getContext()).appVariableInfo().set_registerNotInterested(false);
+                Preferences.with(v.getContext()).appVariableInfo().setIsLogin(false);
+                Intent i = new Intent(v.getContext(), AuthWithSmsActivity.class);
+                //clear all activity that open before
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                v.getContext().startActivity(i);
+            });
+        } else {
+            holder.name.setText("کاربر مهمان");
+            holder.userId.setText("فاقد شناسه کاربری");
+            holder.loginBtn.setText("ورود");
+            holder.loginBtn.setOnClickListener(v -> {
+                Preferences.with(v.getContext()).appVariableInfo().set_registerNotInterested(false);
+                Intent i = new Intent(v.getContext(), AuthWithSmsActivity.class);
+                //clear all activity that open before
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                v.getContext().startActivity(i);
+            });
         }
     }
 
@@ -251,7 +276,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class MenuViewHolder extends RecyclerView.ViewHolder {
         ImageView icon;
 
         TextView title;
@@ -259,7 +284,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
 
         RelativeLayout Root;
 
-        public ViewHolder(View view) {
+        public MenuViewHolder( View view) {
             super(view);
             icon = view.findViewById(R.id.ImgRecyclerDrawerChild);
             title = view.findViewById(R.id.lblRecyclerDrawerChild);
