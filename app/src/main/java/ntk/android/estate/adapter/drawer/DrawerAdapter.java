@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -300,7 +300,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
 
         TextView name;
         TextView userId;
-        MaterialButton loginBtn;
+        ExtendedFloatingActionButton loginBtn;
 
         public HeaderViewHolder(View view) {
             super(view);

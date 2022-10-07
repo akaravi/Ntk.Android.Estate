@@ -22,23 +22,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="کاربر مهمان"
+        android:textColor="@color/main3_toolbar_icon_bg"
         android:textSize="18sp"
+
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/userIdTv"
         android:layout_width="wrap_content"
+        android:textColor="@color/main3_toolbar_icon_bg"
         android:layout_height="wrap_content"
-        android:text="شناسه کاربری"
+        android:text="شناسه کاربری" android:layout_margin="8dp"
         android:textSize="14sp"
         android:textStyle="bold" />
-
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/userImage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:text="ورود " />
+        android:layout_height="56dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="ورود "
+        android:textColor="@color/colorWhite"
+        app:fabSize="normal"
+        app:icon="@drawable/ic_plus"
+        app:iconTint="@color/colorWhite" />
+
 </LinearLayout>
