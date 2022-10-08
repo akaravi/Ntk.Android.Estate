@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.gson.Gson;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import java.util.List;
@@ -28,9 +29,11 @@ import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.config.ErrorExceptionObserver;
+import ntk.android.base.config.ListOfJson;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.dtomodel.theme.DrawerChildThemeDtoModel;
+import ntk.android.base.entitymodel.application.ApplicationAppModel;
 import ntk.android.base.entitymodel.article.ArticleContentModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
@@ -46,6 +49,7 @@ import ntk.android.base.services.estate.EstatePropertyTypeLanduseService;
 import ntk.android.base.services.news.NewsContentService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.imageCompressor;
+import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.Main3ArticleAdapter;
 import ntk.android.estate.adapter.Main3EstateLandUseAdapter;
@@ -53,6 +57,7 @@ import ntk.android.estate.adapter.Main3EstatePropertyAdapter;
 import ntk.android.estate.adapter.Main3NewsAdapter;
 import ntk.android.estate.adapter.drawer.Drawer3Adapter;
 import ntk.android.estate.adapter.drawer.DrawerAdapter;
+import ntk.android.estate.models.RowModel;
 
 public class MainActivity3 extends BaseMainActivity {
     RecyclerView Slider;
@@ -77,8 +82,25 @@ public class MainActivity3 extends BaseMainActivity {
         getData(row1, findViewById(R.id.row1));
         getData(row2, findViewById(R.id.row2));
         getData(row3, findViewById(R.id.row3));
+        //get runTime Json
+        getRuntimeJson();
         //get articles
         getArticles();
+
+    }
+
+    private void getRuntimeJson() {
+        String config = Preferences.with(this).appVariableInfo().applicationAppModel().ConfigRuntimeSiteJsonValues;
+        if (!config.equals("") && !config.equals("null")) {
+            List<RowModel> row=new Gson().fromJson(config ,new ListOfJson<RowModel>(RowModel.class));
+            if (row.size()>0){
+                RowModel rowModel = row.get(0);
+                //init rows1
+            }
+            if (row.size()>1){
+                RowModel rowModel = row.get(1);
+            }
+        }
     }
 
     private void init() {
@@ -134,7 +156,7 @@ public class MainActivity3 extends BaseMainActivity {
         Typeface t1 = FontManager.T1_Typeface(this);
         ((EditText) findViewById(R.id.searchEt)).setTypeface(t1);
         ((TextView) findViewById(R.id.title1)).setTypeface(t1);
-        ((ExtendedFloatingActionButton)  findViewById(R.id.fabAdd)).setTypeface(t1);
+        ((ExtendedFloatingActionButton) findViewById(R.id.fabAdd)).setTypeface(t1);
 
         seeMore.setTypeface(t1);
         rowTitle1.setTypeface(t1);
@@ -206,14 +228,14 @@ public class MainActivity3 extends BaseMainActivity {
                                         itemL.LinkExtraImageIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkExtraImageIdsSrc.get(i), 300, 300));
                                     }
                             }
-                        if (response.ListItems.size()>0) {
+                        if (response.ListItems.size() > 0) {
                             rc.setAdapter(new Main3EstatePropertyAdapter(response.ListItems));
                             rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
                             ViewCompat.setNestedScrollingEnabled(rc, false);
                             ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
                             shimmerFrameLayout.stopShimmerAnimation();
                             shimmerFrameLayout.setVisibility(View.GONE);
-                        }else
+                        } else
                             view.setVisibility(View.GONE);
                     }
 
