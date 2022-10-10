@@ -61,6 +61,7 @@ import ntk.android.estate.adapter.Main3NewsAdapter;
 import ntk.android.estate.adapter.drawer.Drawer3Adapter;
 import ntk.android.estate.adapter.drawer.DrawerAdapter;
 import ntk.android.estate.models.RowModel;
+import ntk.android.estate.models.RuntimeJsonModel;
 
 public class MainActivity3 extends BaseMainActivity {
     RecyclerView Slider;
@@ -95,13 +96,14 @@ public class MainActivity3 extends BaseMainActivity {
     private void getRuntimeJson() {
         String config = Preferences.with(this).appVariableInfo().applicationAppModel().ConfigRuntimeSiteJsonValues;
         if (!config.equals("") && !config.equals("null")) {
-            List<RowModel> dataRow = new Gson().fromJson(config, new ListOfJson<RowModel>(RowModel.class));
+            List<RowModel> dataRow = (new Gson().fromJson(RowModel.Id(), RuntimeJsonModel.class)).ListItems;
             List<View> viewRow = Arrays.asList(findViewById(R.id.includeRow1), findViewById(R.id.includedRow2));
             for (int i = 0; i < dataRow.size() && i < 2; i++) {
                 RowModel model = dataRow.get(i);
                 View view = viewRow.get(i);
+                view.setVisibility(View.VISIBLE);
                 //set header
-                if (model.HeaderString.equals("")) {
+                if (!model.HeaderString.equals("")) {
                     ((TextView) view.findViewById(R.id.title)).setText(model.HeaderString);
                 } else
                     ((TextView) view.findViewById(R.id.title)).setVisibility(View.INVISIBLE);
@@ -122,6 +124,9 @@ public class MainActivity3 extends BaseMainActivity {
                         RecyclerView rc = view.findViewById(R.id.rc);
                         rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
                         rc.setAdapter(new Main3EstateSpecialAdapter(model.Items));
+                        ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
+                        shimmerFrameLayout.stopShimmerAnimation();
+                        shimmerFrameLayout.setVisibility(View.GONE);
                     }
                 }
             }
