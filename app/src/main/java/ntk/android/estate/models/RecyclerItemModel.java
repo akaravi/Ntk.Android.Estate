@@ -6,12 +6,12 @@ import ntk.android.base.entitymodel.base.FilterModel;
 
 public class RecyclerItemModel {
     @SerializedName("Image")
-    String Image;
+    public String Image;
     @SerializedName("Title")
-    String Title;
+    public String Title;
     @SerializedName("Id")
-    String Id;
+    public String Id;
     @SerializedName("Filter")
-    FilterModel Filter;
+    public FilterModel Filter;
 
 }

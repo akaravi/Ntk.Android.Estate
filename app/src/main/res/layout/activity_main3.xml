@@ -74,7 +74,6 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         app:cardElevation="8dp">
 
                         <RelativeLayout
@@ -166,6 +165,16 @@
                         layout="@layout/sub_main_activity3_row" />
 
                     <include
+                        android:id="@+id/includeRow1"
+                        layout="@layout/sub_main_activity3_row"
+                        android:visibility="gone" />
+
+                    <include
+                        android:id="@+id/includedRow2"
+                        layout="@layout/sub_main_activity3_row"
+                        android:visibility="gone" />
+
+                    <include
                         android:id="@+id/row4"
                         layout="@layout/sub_main_activity3_row" />
 
@@ -183,15 +192,15 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginLeft="8dp"
             android:layout_marginRight="12dp"
             android:layout_marginBottom="32dp"
             android:layout_toRightOf="@+id/fabSearch"
-            android:layout_marginLeft="8dp"
             android:gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
             android:text="@string/addNew"
             android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:fabSize="normal"
             app:icon="@drawable/ic_plus"
             app:iconTint="@color/colorWhite" />

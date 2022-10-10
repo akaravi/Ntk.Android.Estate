@@ -23,11 +23,13 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.gson.Gson;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
+import java.util.Arrays;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import ntk.android.base.Extras;
 import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.ListOfJson;
 import ntk.android.base.config.NtkObserver;
@@ -54,6 +56,7 @@ import ntk.android.estate.R;
 import ntk.android.estate.adapter.Main3ArticleAdapter;
 import ntk.android.estate.adapter.Main3EstateLandUseAdapter;
 import ntk.android.estate.adapter.Main3EstatePropertyAdapter;
+import ntk.android.estate.adapter.Main3EstateSpecialAdapter;
 import ntk.android.estate.adapter.Main3NewsAdapter;
 import ntk.android.estate.adapter.drawer.Drawer3Adapter;
 import ntk.android.estate.adapter.drawer.DrawerAdapter;
@@ -92,16 +95,39 @@ public class MainActivity3 extends BaseMainActivity {
     private void getRuntimeJson() {
         String config = Preferences.with(this).appVariableInfo().applicationAppModel().ConfigRuntimeSiteJsonValues;
         if (!config.equals("") && !config.equals("null")) {
-            List<RowModel> row=new Gson().fromJson(config ,new ListOfJson<RowModel>(RowModel.class));
-            if (row.size()>0){
-                RowModel rowModel = row.get(0);
-                //init rows1
-            }
-            if (row.size()>1){
-                RowModel rowModel = row.get(1);
+            List<RowModel> dataRow = new Gson().fromJson(config, new ListOfJson<RowModel>(RowModel.class));
+            List<View> viewRow = Arrays.asList(findViewById(R.id.includeRow1), findViewById(R.id.includedRow2));
+            for (int i = 0; i < dataRow.size() && i < 2; i++) {
+                RowModel model = dataRow.get(i);
+                View view = viewRow.get(i);
+                //set header
+                if (model.HeaderString.equals("")) {
+                    ((TextView) view.findViewById(R.id.title)).setText(model.HeaderString);
+                } else
+                    ((TextView) view.findViewById(R.id.title)).setVisibility(View.INVISIBLE);
+                //set seeMore
+                if (model.Filter != null && !model.Filter.equals("")) {
+                    //add clickListener
+                    (view.findViewById(R.id.seeMore)).setOnClickListener(v -> {
+                        Intent intent = new Intent(MainActivity3.this, EstateListActivity.class);
+                        intent.putExtra(Extras.EXTRA_FIRST_ARG, new Gson().toJson(model.Filter));
+                        startActivity(intent);
+                    });
+                    //load data
+                    getData(model.Filter, view);
+                } else {
+                    (view.findViewById(R.id.seeMore)).setVisibility(View.INVISIBLE);
+                    if (model.Items != null && model.Items.size() > 0) {
+                        //show custom dataRow
+                        RecyclerView rc = view.findViewById(R.id.rc);
+                        rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
+                        rc.setAdapter(new Main3EstateSpecialAdapter(model.Items));
+                    }
+                }
             }
         }
     }
+
 
     private void init() {
         TextView seeMore = findViewById(R.id.seeMore);
@@ -118,8 +144,7 @@ public class MainActivity3 extends BaseMainActivity {
         //add fab
         findViewById(R.id.fabAdd).setOnClickListener(view -> NewEstateActivity.START_ACTIVITY(MainActivity3.this));
         //search fab
-        findViewById(R.id.fabSearch).setOnClickListener(view ->
-                startActivity(new Intent(this, SearchEstateActivity.class)));
+        findViewById(R.id.fabSearch).setOnClickListener(view -> startActivity(new Intent(this, SearchEstateActivity.class)));
 
         //click search
         findViewById(R.id.searchBtn).setOnClickListener(view -> Search());
@@ -179,8 +204,7 @@ public class MainActivity3 extends BaseMainActivity {
 
     private void Search() {
         String text = ((EditText) findViewById(R.id.searchEt)).getText().toString();
-        if (text.trim().equals(""))
-            Toasty.info(this, "عنوان مورد نظر خود را وارد کنید").show();
+        if (text.trim().equals("")) Toasty.info(this, "عنوان مورد نظر خود را وارد کنید").show();
         else {
             FilterModel filterModel = new FilterModel();
             filterModel.addFilter(new FilterDataModel().setPropertyName("Title").setSearchType(EnumSearchType.Contains).setClauseType(EnumClauseType.Or.index()).setStringValue(text));
@@ -208,66 +232,62 @@ public class MainActivity3 extends BaseMainActivity {
     }
 
     private void getData(FilterModel filter, View view) {
-        ServiceExecute.execute(new EstatePropertyService(this).getAll(filter))
-                .subscribe(new ErrorExceptionObserver<EstatePropertyModel>(switcher::showErrorView) {
+        ServiceExecute.execute(new EstatePropertyService(this).getAll(filter)).subscribe(new ErrorExceptionObserver<EstatePropertyModel>(switcher::showErrorView) {
 
-                    @Override
-                    protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
-                        RecyclerView rc = view.findViewById(R.id.rc);
+            @Override
+            protected void SuccessResponse(ErrorException<EstatePropertyModel> response) {
+                RecyclerView rc = view.findViewById(R.id.rc);
 
-                        if (response.IsSuccess)
-                            //image optimize
-                            for (EstatePropertyModel itemL : response.ListItems) {
-                                itemL.LinkMainImageIdSrc = imageCompressor.convertSizeThumbnailImage(itemL.LinkMainImageIdSrc, 300, 300);
-                                if (itemL.LinkFileIdsSrc != null && itemL.LinkFileIdsSrc.size() > 0)
-                                    for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
-                                        itemL.LinkFileIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i), 300, 300));
-                                    }
-                                if (itemL.LinkExtraImageIdsSrc != null && itemL.LinkExtraImageIdsSrc.size() > 0)
-                                    for (int i = 0; i < itemL.LinkExtraImageIdsSrc.size(); i++) {
-                                        itemL.LinkExtraImageIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkExtraImageIdsSrc.get(i), 300, 300));
-                                    }
+                if (response.IsSuccess)
+                    //image optimize
+                    for (EstatePropertyModel itemL : response.ListItems) {
+                        itemL.LinkMainImageIdSrc = imageCompressor.convertSizeThumbnailImage(itemL.LinkMainImageIdSrc, 300, 300);
+                        if (itemL.LinkFileIdsSrc != null && itemL.LinkFileIdsSrc.size() > 0)
+                            for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
+                                itemL.LinkFileIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i), 300, 300));
                             }
-                        if (response.ListItems.size() > 0) {
-                            rc.setAdapter(new Main3EstatePropertyAdapter(response.ListItems));
-                            rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
-                            ViewCompat.setNestedScrollingEnabled(rc, false);
-                            ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
-                            shimmerFrameLayout.stopShimmerAnimation();
-                            shimmerFrameLayout.setVisibility(View.GONE);
-                        } else
-                            view.setVisibility(View.GONE);
+                        if (itemL.LinkExtraImageIdsSrc != null && itemL.LinkExtraImageIdsSrc.size() > 0)
+                            for (int i = 0; i < itemL.LinkExtraImageIdsSrc.size(); i++) {
+                                itemL.LinkExtraImageIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkExtraImageIdsSrc.get(i), 300, 300));
+                            }
                     }
+                if (response.ListItems.size() > 0) {
+                    rc.setAdapter(new Main3EstatePropertyAdapter(response.ListItems));
+                    rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
+                    ViewCompat.setNestedScrollingEnabled(rc, false);
+                    ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
+                    shimmerFrameLayout.stopShimmerAnimation();
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                } else view.setVisibility(View.GONE);
+            }
 
-                    @Override
-                    protected Runnable tryAgainMethod() {
-                        return () -> getData(filter, view);
-                    }
-                });
+            @Override
+            protected Runnable tryAgainMethod() {
+                return () -> getData(filter, view);
+            }
+        });
 
 
     }
 
 
     private void getLandUsedProperty() {
-        ServiceExecute.execute(new EstatePropertyTypeLanduseService(this).getAll(new FilterModel().setRowPerPage(100)))
-                .subscribe(new NtkObserver<>() {
-                    @Override
-                    public void onNext(@NonNull ErrorException<EstatePropertyTypeLanduseModel> response) {
+        ServiceExecute.execute(new EstatePropertyTypeLanduseService(this).getAll(new FilterModel().setRowPerPage(100))).subscribe(new NtkObserver<>() {
+            @Override
+            public void onNext(@NonNull ErrorException<EstatePropertyTypeLanduseModel> response) {
 
-                        Main3EstateLandUseAdapter adapter = new Main3EstateLandUseAdapter(response.ListItems);
-                        RecyclerView rc = findViewById(R.id
-                                .landUseAdapter);
-                        rc.setAdapter(adapter);
-                        ShimmerFrameLayout shimmer = findViewById(R.id.landUsed_shimmer);
-                        shimmer.stopShimmerAnimation();
-                        shimmer.setVisibility(View.GONE);
-                    }
+                Main3EstateLandUseAdapter adapter = new Main3EstateLandUseAdapter(response.ListItems);
+                RecyclerView rc = findViewById(R.id.landUseAdapter);
+                rc.setAdapter(adapter);
+                ShimmerFrameLayout shimmer = findViewById(R.id.landUsed_shimmer);
+                shimmer.stopShimmerAnimation();
+                shimmer.setVisibility(View.GONE);
+            }
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                    }
-                });
+            @Override
+            public void onError(@NonNull Throwable e) {
+            }
+        });
     }
 
     private void HandelSlider() {
@@ -276,82 +296,78 @@ public class MainActivity3 extends BaseMainActivity {
         request.RowPerPage = 5;
         request.SortColumn = "Id";
         request.CurrentPageNumber = 1;
-        new NewsContentService(this).getAll(request).
-                observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new NtkObserver<ErrorException<NewsContentModel>>() {
+        new NewsContentService(this).getAll(request).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new NtkObserver<ErrorException<NewsContentModel>>() {
 
-                    @Override
-                    public void onNext(ErrorException<NewsContentModel> newsContentResponse) {
-                        ShimmerFrameLayout shimmerLayout = findViewById(R.id.news_shimmer);
-                        shimmerLayout.stopShimmerAnimation();
-                        shimmerLayout.setVisibility(View.GONE);
-                        if (newsContentResponse.IsSuccess) {
-                            if (newsContentResponse.ListItems.size() > 0) {
-                                //image Optimaze
-                                for (NewsContentModel itemL : newsContentResponse.ListItems) {
-                                    itemL.LinkMainImageIdSrc = imageCompressor.convertSizeThumbnailImage(itemL.LinkMainImageIdSrc, 300, 300);
-                                    if (itemL.LinkFileIdsSrc != null && itemL.LinkFileIdsSrc.size() > 0)
-                                        for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
-                                            itemL.LinkFileIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i), 300, 300));
-                                        }
+            @Override
+            public void onNext(ErrorException<NewsContentModel> newsContentResponse) {
+                ShimmerFrameLayout shimmerLayout = findViewById(R.id.news_shimmer);
+                shimmerLayout.stopShimmerAnimation();
+                shimmerLayout.setVisibility(View.GONE);
+                if (newsContentResponse.IsSuccess) {
+                    if (newsContentResponse.ListItems.size() > 0) {
+                        //image Optimaze
+                        for (NewsContentModel itemL : newsContentResponse.ListItems) {
+                            itemL.LinkMainImageIdSrc = imageCompressor.convertSizeThumbnailImage(itemL.LinkMainImageIdSrc, 300, 300);
+                            if (itemL.LinkFileIdsSrc != null && itemL.LinkFileIdsSrc.size() > 0)
+                                for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
+                                    itemL.LinkFileIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i), 300, 300));
                                 }
-                                //image Optimaze
-                                SnapHelper snapHelper = new PagerSnapHelper();
-                                Main3NewsAdapter adapter = new Main3NewsAdapter(MainActivity3.this, newsContentResponse.ListItems);
-                                LinearLayoutManager manager = new LinearLayoutManager(MainActivity3.this, LinearLayoutManager.HORIZONTAL, false);
-                                Slider.setLayoutManager(manager);
-                                Slider.setAdapter(adapter);
-                                snapHelper.attachToRecyclerView(Slider);
-                                adapter.notifyDataSetChanged();
-                            }
                         }
+                        //image Optimaze
+                        SnapHelper snapHelper = new PagerSnapHelper();
+                        Main3NewsAdapter adapter = new Main3NewsAdapter(MainActivity3.this, newsContentResponse.ListItems);
+                        LinearLayoutManager manager = new LinearLayoutManager(MainActivity3.this, LinearLayoutManager.HORIZONTAL, false);
+                        Slider.setLayoutManager(manager);
+                        Slider.setAdapter(adapter);
+                        snapHelper.attachToRecyclerView(Slider);
+                        adapter.notifyDataSetChanged();
                     }
+                }
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-                });
+            @Override
+            public void onError(Throwable e) {
+            }
+        });
     }
 
     private void getArticles() {
-        ServiceExecute.execute(new ArticleContentService(this).getAll(row6))
-                .subscribe(new ErrorExceptionObserver<ArticleContentModel>(switcher::showErrorView) {
+        ServiceExecute.execute(new ArticleContentService(this).getAll(row6)).subscribe(new ErrorExceptionObserver<ArticleContentModel>(switcher::showErrorView) {
 
-                    @Override
-                    protected void SuccessResponse(ErrorException<ArticleContentModel> response) {
-                        View view = findViewById(R.id.row4);
-                        RecyclerView rc = view.findViewById(R.id.row4).findViewById(R.id.rc);
-                        //hide shimmer
-                        ViewCompat.setNestedScrollingEnabled(rc, false);
-                        ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
-                        shimmerFrameLayout.stopShimmerAnimation();
-                        shimmerFrameLayout.setVisibility(View.GONE);
-                        if (response.IsSuccess)
-                            //image optimize
-                            if (response.ListItems.size() > 0) {
-                                //image Optimaze
-                                for (ArticleContentModel itemL : response.ListItems) {
-                                    itemL.LinkMainImageIdSrc = imageCompressor.convertSizeThumbnailImage(itemL.LinkMainImageIdSrc, 300, 300);
-                                    if (itemL.LinkFileIdsSrc != null && itemL.LinkFileIdsSrc.size() > 0)
-                                        for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
-                                            itemL.LinkFileIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i), 300, 300));
-                                        }
+            @Override
+            protected void SuccessResponse(ErrorException<ArticleContentModel> response) {
+                View view = findViewById(R.id.row4);
+                RecyclerView rc = view.findViewById(R.id.row4).findViewById(R.id.rc);
+                //hide shimmer
+                ViewCompat.setNestedScrollingEnabled(rc, false);
+                ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
+                shimmerFrameLayout.stopShimmerAnimation();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                if (response.IsSuccess)
+                    //image optimize
+                    if (response.ListItems.size() > 0) {
+                        //image Optimaze
+                        for (ArticleContentModel itemL : response.ListItems) {
+                            itemL.LinkMainImageIdSrc = imageCompressor.convertSizeThumbnailImage(itemL.LinkMainImageIdSrc, 300, 300);
+                            if (itemL.LinkFileIdsSrc != null && itemL.LinkFileIdsSrc.size() > 0)
+                                for (int i = 0; i < itemL.LinkFileIdsSrc.size(); i++) {
+                                    itemL.LinkFileIdsSrc.set(i, imageCompressor.convertSizeThumbnailImage(itemL.LinkFileIdsSrc.get(i), 300, 300));
                                 }
-                                SnapHelper snapHelper = new PagerSnapHelper();
-                                Main3ArticleAdapter adapter = new Main3ArticleAdapter(MainActivity3.this, response.ListItems);
-                                rc.setAdapter(adapter);
-                                rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
-                                snapHelper.attachToRecyclerView(rc);
-                                adapter.notifyDataSetChanged();
-                            }
+                        }
+                        SnapHelper snapHelper = new PagerSnapHelper();
+                        Main3ArticleAdapter adapter = new Main3ArticleAdapter(MainActivity3.this, response.ListItems);
+                        rc.setAdapter(adapter);
+                        rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
+                        snapHelper.attachToRecyclerView(rc);
+                        adapter.notifyDataSetChanged();
                     }
+            }
 
-                    @Override
-                    protected Runnable tryAgainMethod() {
-                        return () -> getArticles();
-                    }
-                });
+            @Override
+            protected Runnable tryAgainMethod() {
+                return () -> getArticles();
+            }
+        });
 
 
     }
