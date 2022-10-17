@@ -66,4 +66,7 @@ abstract class BaseMainActivity extends AbstractMainActivity {
         row6.setSortType(EnumSortType.Descending.index());
 
     }
+    public boolean isLogin(){
+        return (Preferences.with(this).appVariableInfo().isLogin() && Preferences.with(this).UserInfo().userId() > 0);
+    }
 }

@@ -31,7 +31,7 @@ public class MainActivity2 extends BaseMainActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems(updateInfo.allowDirectShareApp);
+        List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems(updateInfo.allowDirectShareApp,isLogin());
         RecyclerView drawerRecycler = findViewById(R.id.RecyclerDrawer);
         DrawerAdapter adapter = new DrawerAdapter(this, menus, findViewById(R.id.floaingDrawer));
         drawerRecycler.setAdapter(adapter);

@@ -43,7 +43,8 @@ import ntk.android.estate.activity.NewsListActivity;
 
 public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel, RecyclerView.ViewHolder> {
 
-
+    protected final static int ID_LOGOUT = 1092;
+    protected final static int ID_INVITE = 1095;
     private final Context context;
 
     private final FlowingDrawer Drawer;
@@ -135,12 +136,16 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
                 case 12:
                     ClickIntro();
                     break;
-                case 13:
+                case ID_INVITE:
                     ClickShare();
+                    break;
+                case ID_LOGOUT:
+                    logout();
                     break;
             }
         });
     }
+
 
     private void bindHeader(HeaderViewHolder holder, int position) {
         Long userid = Preferences.with(MyApplication.getAppContext()).UserInfo().userId();
@@ -276,6 +281,15 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         }
     }
 
+    private void logout() {
+        Preferences.with(context).appVariableInfo().set_registerNotInterested(false);
+        Preferences.with(context).appVariableInfo().setIsLogin(false);
+        Intent i = new Intent(context, AuthWithSmsActivity.class);
+        //clear all activity that open before
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(i);
+    }
+
     public class MenuViewHolder extends RecyclerView.ViewHolder {
         ImageView icon;
 
@@ -284,7 +298,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
 
         RelativeLayout Root;
 
-        public MenuViewHolder( View view) {
+        public MenuViewHolder(View view) {
             super(view);
             icon = view.findViewById(R.id.ImgRecyclerDrawerChild);
             title = view.findViewById(R.id.lblRecyclerDrawerChild);
@@ -314,11 +328,11 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         }
     }
 
-    public static List<DrawerChildThemeDtoModel> createDrawerItems(boolean allowDirectShareApp) {
+    public static List<DrawerChildThemeDtoModel> createDrawerItems(boolean allowDirectShareApp, boolean isLogin) {
 
         ArrayList<DrawerChildThemeDtoModel> list = new ArrayList<>();
         int i = 0;
-        list.add(new DrawerChildThemeDtoModel().setId(-1).setTitle("سربرگ").setDrawableIcon(R.drawable.default_icon));
+        list.add(new DrawerChildThemeDtoModel().setId(-1).setTitle("سربرگ").setDrawableIcon(R.drawable.add));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("آخرین ملک های ثبت شده").setDrawableIcon(R.drawable.estate));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("ثبت ملک جدید").setDrawableIcon(R.drawable.add));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("لیست علاقه مندی").setDrawableIcon(R.drawable.favorites_folder));
@@ -333,7 +347,10 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("درباره ما").setDrawableIcon(R.drawable.about_us2));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("راهنما").setDrawableIcon(R.drawable.intro2));
         if (allowDirectShareApp) {
-            list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("دعوت از دوستان").setDrawableIcon(R.drawable.invite2));
+            list.add(new DrawerChildThemeDtoModel().setId(ID_INVITE).setTitle("دعوت از دوستان").setDrawableIcon(R.drawable.invite2));
+        }
+        if (isLogin) {
+            list.add(new DrawerChildThemeDtoModel().setId(ID_LOGOUT).setTitle("دعوت از دوستان").setDrawableIcon(R.drawable.invite2));
         }
         return list;
     }
