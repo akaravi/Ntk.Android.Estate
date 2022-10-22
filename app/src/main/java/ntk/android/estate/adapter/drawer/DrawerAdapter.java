@@ -30,6 +30,7 @@ import ntk.android.base.dtomodel.theme.DrawerChildThemeDtoModel;
 import ntk.android.base.room.NotificationStorageService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.prefrense.Preferences;
+import ntk.android.base.view.dialog.SweetAlertDialog;
 import ntk.android.estate.MyApplication;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.AboutUsActivity;
@@ -203,7 +204,24 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
     }
 
     private void clickMyEstates() {
-        context.startActivity(new Intent(context, MyEstateActivity.class));
+        if (Preferences.with(context).appVariableInfo().isLogin() && Preferences.with(context).UserInfo().userId() > 0)
+            context.startActivity(new Intent(context, NewEstateActivity.class));
+        else {
+            //show dialog to go to login page
+            SweetAlertDialog dialog = new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE);
+            dialog.setTitle("خطا در انجام عملیات");
+            dialog.setContentText("برای دیدین لیست املاک حود نیاز است که به حساب خود وارد شوید. آیا مایلید به صفحه ی ورود هدایت شوید؟");
+            dialog.setConfirmButton("بلی", d -> {
+                Preferences.with(d.getContext()).appVariableInfo().set_registerNotInterested(false);
+                Intent i = new Intent(d.getContext(), MyEstateActivity.class);
+                //clear all activity that open before
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                d.getContext().startActivity(i);
+                d.dismiss();
+            });
+            dialog.setCancelButton("تمایل ندارم", SweetAlertDialog::dismiss);
+            dialog.show();
+        }
         if (Drawer != null) {
             Drawer.closeMenu(true);
         }
