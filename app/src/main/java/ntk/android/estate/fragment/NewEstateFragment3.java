@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -38,6 +39,7 @@ import ntk.android.estate.activity.NewEstateActivity;
 public class NewEstateFragment3 extends BaseFragment {
     Marker marker;
     MapboxMap myMap;
+
     @Override
     public void onCreateFragment() {
         setContentView(R.layout.fragment_new_estate_3);
@@ -57,26 +59,28 @@ public class NewEstateFragment3 extends BaseFragment {
         if (model.CaseCode != null)
             codeEt.setText(model.CaseCode);
         else
-            codeEt.setText(new Random().nextInt(900000)+100000+"");
+            codeEt.setText(new Random().nextInt(900000) + 100000 + "");
         if (model.Title != null)
             titleEt.setText(model.Title);
         if (model.Description != null)
             descEt.setText(model.Description);
+        if (model.ViewConfigHiddenInList)
+            ((MaterialCheckBox) findViewById(R.id.checkBox)).setChecked(true);
         if (model.LinkLocationIdTitle != null)
             ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(model.LinkLocationIdTitle);
         if (model.Address != null)
             addressEt.setText(model.Address);
 
-       MapView mapView = findViewById(R.id.map_view);
+        MapView mapView = findViewById(R.id.map_view);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull MapboxMap mapboxMap) {
-                myMap=mapboxMap;
+                myMap = mapboxMap;
                 mapboxMap.setMinZoomPreference(12);
-                myMap.easeCamera(CameraUpdateFactory.newLatLng(new LatLng(35.689198,51.388973)));
+                myMap.easeCamera(CameraUpdateFactory.newLatLng(new LatLng(35.689198, 51.388973)));
                 if (model.Geolocationlatitude != null) {
                     LatLng loc = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
-                    marker =myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), loc));
+                    marker = myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), loc));
                     myMap.animateCamera(CameraUpdateFactory.newLatLng(loc));
                 }
                 mapboxMap.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
@@ -89,6 +93,10 @@ public class NewEstateFragment3 extends BaseFragment {
         hint.setTextColor(codeEt.getHintTextColors());
         //get location listener
         findViewById(R.id.getLocationBtn).setOnClickListener(view1 -> getLocation());
+        //set hide estate listener
+        TextView title = (TextView) findViewById(R.id.txt);
+        title.setText("این ملک به صورت مخفی ثبت شود و به صورت عمومی نمایش داده نشود");
+        title.setOnClickListener(v -> ((MaterialCheckBox) findViewById(R.id.checkBox)).toggle());
         getData();
     }
 
@@ -103,13 +111,13 @@ public class NewEstateFragment3 extends BaseFragment {
 
                     //remove previous marker
                     if (marker != null)
-                        if (myMap!=null)
+                        if (myMap != null)
                             myMap.removeMarker(marker);
-                   if (myMap!=null){
-                       marker =myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), latLng));
-                       myMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                    if (myMap != null) {
+                        marker = myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), latLng));
+                        myMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 
-                   }
+                    }
                 }
             }
         });
@@ -119,6 +127,8 @@ public class NewEstateFragment3 extends BaseFragment {
         Typeface t1 = FontManager.T1_Typeface(getContext());
         //textview
         ((TextView) findViewById(R.id.customHint)).setTypeface(t1);
+        ((TextView) findViewById(R.id.hideEstateTv)).setTypeface(t1);
+        ((TextView) findViewById(R.id.txt)).setTypeface(t1);
         //button
         ((MaterialButton) findViewById(R.id.getLocationBtn)).setTypeface(t1);
         //input layout
@@ -139,21 +149,21 @@ public class NewEstateFragment3 extends BaseFragment {
     private void getData() {
         MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
         spinner.setOnClickListener(view -> {
-                SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
-                        selectedModel -> {
-                            if (selectedModel!=null) {
-                                ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);
-                                estateActivity().model().LinkLocationId = selectedModel.Id;
-                                estateActivity().model().LinkLocationIdTitle = selectedModel.Title;
-                                if (estateActivity().model().Geolocationlatitude == null) {
-                                    if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
-                                        if (myMap!=null)
-                                        marker=myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
-                                    }
+            SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
+                    selectedModel -> {
+                        if (selectedModel != null) {
+                            ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);
+                            estateActivity().model().LinkLocationId = selectedModel.Id;
+                            estateActivity().model().LinkLocationIdTitle = selectedModel.Title;
+                            if (estateActivity().model().Geolocationlatitude == null) {
+                                if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
+                                    if (myMap != null)
+                                        marker = myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
                                 }
                             }
-                        });
-                dialog.show(getActivity().getSupportFragmentManager(), "dialog");
+                        }
+                    });
+            dialog.show(getActivity().getSupportFragmentManager(), "dialog");
         });
     }
 
@@ -186,9 +196,10 @@ public class NewEstateFragment3 extends BaseFragment {
         if (addressEt.getText().toString().trim().equals("")) {
             Toasty.error(getContext(), " آدرس را وارد نمایید", Toasty.LENGTH_LONG, true).show();
             return false;
-        } else
+        } else {
             estateActivity().model().Address = addressEt.getText().toString().trim();
-
+            estateActivity().model().ViewConfigHiddenInList = ((MaterialCheckBox) findViewById(R.id.checkBox)).isChecked();
+        }
         return true;
     }
 }

@@ -56,8 +56,6 @@ public class NewEstateActivity extends BaseActivity {
         findViewById(R.id.backBtn).setOnClickListener(view -> {
             onBackPressed();
         });
-        findViewById(R.id.continueBtn).setOnClickListener(view -> {
-        });
         setFont();
         afterCreate();
     }

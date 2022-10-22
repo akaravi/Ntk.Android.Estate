@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:mapbox="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -96,6 +96,69 @@
             style="@style/new_estate_padding"
             android:layout_width="match_parent" />
 
+        <androidx.cardview.widget.CardView
+            style="@style/new_estate_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/new_estate_textInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignTop="@+id/hideEstateLinear"
+                    android:layout_alignBottom="@+id/hideEstateLinear"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+
+                        android:textSize="14sp"
+                        android:theme="@style/new_estate_textInputEditText" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/hideEstateLinear"
+                    android:layout_width="match_parent"
+                    android:paddingVertical="15dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|right"
+                        android:layout_marginRight="8dp"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@+id/checkBox" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layoutDirection="rtl" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/hideEstateTv"
+                    style="@style/new_estate_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="حالت نمایش" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <View
+            style="@style/new_estate_padding"
+            android:layout_width="match_parent" />
 
         <androidx.cardview.widget.CardView
             style="@style/new_estate_cardView"

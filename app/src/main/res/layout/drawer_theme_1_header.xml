@@ -7,15 +7,14 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <com.makeramen.roundedimageview.RoundedImageView
+    <ImageView
         android:id="@+id/userImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
         android:scaleType="fitXY"
-        app:riv_border_color="@color/main3_card_bg"
-        app:riv_border_width="2.5dp"
-        app:riv_corner_radius="12dp" />
+        android:src="@drawable/person"
+        app:tint="@color/main3_toolbar_icon_bg" />
 
     <TextView
         android:id="@+id/usernameTv"
@@ -30,21 +29,23 @@
     <TextView
         android:id="@+id/userIdTv"
         android:layout_width="wrap_content"
-        android:textColor="@color/main3_toolbar_icon_bg"
         android:layout_height="wrap_content"
-        android:text="شناسه کاربری" android:layout_margin="8dp"
+        android:layout_margin="8dp"
+        android:text="شناسه کاربری"
+        android:textColor="@color/main3_toolbar_icon_bg"
         android:textSize="14sp"
         android:textStyle="bold" />
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
+        android:layout_height="46dp"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
         android:text="ورود "
         android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:fabSize="normal"
         app:icon="@drawable/ic_plus"
         app:iconTint="@color/colorWhite" />

@@ -1,13 +1,16 @@
 package ntk.android.estate.fragment;
 
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xiaofeng.flowlayoutmanager.Alignment;
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
@@ -22,6 +25,7 @@ import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.service.FileManagerService;
 import ntk.android.base.services.file.FileUploaderService;
 import ntk.android.base.utill.AppUtil;
+import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.NewEstateActivity;
 import ntk.android.estate.adapter.OtherImageAdapter;
@@ -38,9 +42,17 @@ public class NewEstateFragment5 extends BaseFragment {
     @Override
     public void onViewCreated(@androidx.annotation.NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setFont();
         findViewById(R.id.selectMainImage).setOnClickListener(t -> selectMainImage());
         findViewById(R.id.deleteImage).setOnClickListener(t -> deleteMainPage());
         findViewById(R.id.addOtherImageBtn).setOnClickListener(t -> selectOtherImage());
+    }
+
+    private void setFont() {
+        Typeface t1 = FontManager.T1_Typeface(getContext());
+        ((TextView) findViewById(R.id.tv1)).setTypeface(t1);
+        ((TextView) findViewById(R.id.tv2)).setTypeface(t1);
+        ((MaterialButton) findViewById(R.id.deleteImage)).setTypeface(t1);
     }
 
 

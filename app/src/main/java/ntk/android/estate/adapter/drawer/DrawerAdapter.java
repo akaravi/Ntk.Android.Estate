@@ -154,13 +154,10 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             String name = " تلفن همراه : " + Preferences.with(context).UserInfo().mobile();
             holder.name.setText(name);
             holder.userId.setText("شناسه کاربری : " + userid);
-            holder.loginBtn.setText("خروج");
+            holder.loginBtn.setText("حساب کاربری");
             holder.loginBtn.setOnClickListener(v -> {
-                Preferences.with(v.getContext()).appVariableInfo().set_registerNotInterested(false);
-                Preferences.with(v.getContext()).appVariableInfo().setIsLogin(false);
                 Intent i = new Intent(v.getContext(), AuthWithSmsActivity.class);
                 //clear all activity that open before
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 v.getContext().startActivity(i);
             });
         } else {
@@ -368,7 +365,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             list.add(new DrawerChildThemeDtoModel().setId(ID_INVITE).setTitle("دعوت از دوستان").setDrawableIcon(R.drawable.invite2));
         }
         if (isLogin) {
-            list.add(new DrawerChildThemeDtoModel().setId(ID_LOGOUT).setTitle("دعوت از دوستان").setDrawableIcon(R.drawable.invite2));
+            list.add(new DrawerChildThemeDtoModel().setId(ID_LOGOUT).setTitle("خروج").setDrawableIcon(R.drawable.ic_back));
         }
         return list;
     }
