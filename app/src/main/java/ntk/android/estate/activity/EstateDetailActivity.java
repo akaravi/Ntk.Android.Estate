@@ -124,10 +124,13 @@ public class EstateDetailActivity extends BaseActivity {
                     public void onNext(@NonNull ErrorExceptionBase errorExceptionBase) {
                         if (errorExceptionBase.IsSuccess) {
                             model.IsFavorite = !model.IsFavorite;
-                            if (model.IsFavorite)
+                            if (model.IsFavorite) {
                                 ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav_full);
-                            else
+                                Toasty.success(view.getContext(), "به لیست علافه مندی اضافه شد", Toasty.LENGTH_SHORT).show();
+                            } else {
                                 ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav);
+                                Toasty.success(view.getContext(), "از لیست علافه مندی خارج شد", Toasty.LENGTH_SHORT).show();
+                            }
                         }
                     }
 
@@ -301,44 +304,44 @@ public class EstateDetailActivity extends BaseActivity {
         Btn.setTypeface(FontManager.T1_Typeface(this));
 
         Btn.setOnClickListener(v -> {
-                if (subject.getText().toString().isEmpty()) {
-                    Toast.makeText(this, ntk.android.base.R.string.per_insert_num, Toast.LENGTH_SHORT).show();
-                } else {
-                    if (AppUtil.isNetworkAvailable(this)) {
+            if (subject.getText().toString().isEmpty()) {
+                Toast.makeText(this, ntk.android.base.R.string.per_insert_num, Toast.LENGTH_SHORT).show();
+            } else {
+                if (AppUtil.isNetworkAvailable(this)) {
 //                        NewsCommentModel add = new NewsCommentModel();
-                        String text = subject.getText().toString();
-                        CoreModuleReportAbuseDtoModel m = new CoreModuleReportAbuseDtoModel();
-                        m.ModuleEntityId = model.Id;
-                        m.SubjectBody = text;
-                        ServiceExecute.execute(new EstatePropertyService(this).report(m))
-                                .subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
-                                    @Override
-                                    public void onNext(ErrorException<EstatePropertyModel> e) {
-                                        if (e.IsSuccess) {
+                    String text = subject.getText().toString();
+                    CoreModuleReportAbuseDtoModel m = new CoreModuleReportAbuseDtoModel();
+                    m.ModuleEntityId = model.Id;
+                    m.SubjectBody = text;
+                    ServiceExecute.execute(new EstatePropertyService(this).report(m))
+                            .subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
+                                @Override
+                                public void onNext(ErrorException<EstatePropertyModel> e) {
+                                    if (e.IsSuccess) {
 
-                                            dialog.dismiss();
-                                            Toasty.success(EstateDetailActivity.this, ntk.android.base.R.string.success_comment).show();
-                                        } else {
-                                            dialog.dismiss();
-                                            Toasty.warning(EstateDetailActivity.this, e.ErrorMessage).show();
+                                        dialog.dismiss();
+                                        Toasty.success(EstateDetailActivity.this, ntk.android.base.R.string.success_comment).show();
+                                    } else {
+                                        dialog.dismiss();
+                                        Toasty.warning(EstateDetailActivity.this, e.ErrorMessage).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    Snackbar.make(findViewById(ntk.android.base.R.id.mainLayoutDetail), ntk.android.base.R.string.error_raised, Snackbar.LENGTH_INDEFINITE).setAction(ntk.android.base.R.string.try_again, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            //todo add
                                         }
-                                    }
+                                    }).show();
+                                }
+                            });
+                } else {
+                    Toasty.error(EstateDetailActivity.this, "خطا در ارسال اطلاعات").show();
 
-                                    @Override
-                                    public void onError( Throwable e) {
-                                        Snackbar.make( findViewById(ntk.android.base.R.id.mainLayoutDetail), ntk.android.base.R.string.error_raised, Snackbar.LENGTH_INDEFINITE).setAction(ntk.android.base.R.string.try_again, new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                //todo add
-                                            }
-                                        }).show();
-                                    }
-                                });
-                    } else {
-                        Toasty.error(EstateDetailActivity.this,"خطا در ارسال اطلاعات").show();
-
-                    }
                 }
+            }
         });
 
         dialog.show();
