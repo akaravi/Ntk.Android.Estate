@@ -5,6 +5,7 @@ package ntk.android.estate.activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -72,7 +73,7 @@ public class MainActivity3 extends BaseMainActivity {
         setContentView(R.layout.activity_main3);
         Slider = findViewById(R.id.rcNews);
         //show drawer
-        List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems(updateInfo.allowDirectShareApp,isLogin());
+        List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems(updateInfo.allowDirectShareApp, isLogin());
         RecyclerView drawerRecycler = findViewById(R.id.RecyclerDrawer);
         Drawer3Adapter adapter = new Drawer3Adapter(this, menus, findViewById(R.id.floaingDrawer));
         drawerRecycler.setAdapter(adapter);
@@ -95,40 +96,48 @@ public class MainActivity3 extends BaseMainActivity {
 
     private void getRuntimeJson() {
         String config = Preferences.with(this).appVariableInfo().applicationAppModel().ConfigRuntimeSiteJsonValues;
+        List<View> viewRow = Arrays.asList(findViewById(R.id.includeRow1), findViewById(R.id.includedRow2));
         if (!config.equals("") && !config.equals("null")) {
-            List<RowModel> dataRow = (new Gson().fromJson(RowModel.Id(), RuntimeJsonModel.class)).ListItems;
-            List<View> viewRow = Arrays.asList(findViewById(R.id.includeRow1), findViewById(R.id.includedRow2));
-            for (int i = 0; i < dataRow.size() && i < 2; i++) {
-                RowModel model = dataRow.get(i);
-                View view = viewRow.get(i);
-                view.setVisibility(View.VISIBLE);
-                //set header
-                if (!model.HeaderString.equals("")) {
-                    ((TextView) view.findViewById(R.id.title)).setText(model.HeaderString);
-                } else
-                    ((TextView) view.findViewById(R.id.title)).setVisibility(View.INVISIBLE);
-                //set seeMore
-                if (model.Filter != null && !model.Filter.equals("")) {
-                    //add clickListener
-                    (view.findViewById(R.id.seeMore)).setOnClickListener(v -> {
-                        Intent intent = new Intent(MainActivity3.this, EstateListActivity.class);
-                        intent.putExtra(Extras.EXTRA_FIRST_ARG, new Gson().toJson(model.Filter));
-                        startActivity(intent);
-                    });
-                    //load data
-                    getData(model.Filter, view);
-                } else {
-                    (view.findViewById(R.id.seeMore)).setVisibility(View.INVISIBLE);
-                    if (model.Items != null && model.Items.size() > 0) {
-                        //show custom dataRow
-                        RecyclerView rc = view.findViewById(R.id.rc);
-                        rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
-                        rc.setAdapter(new Main3EstateSpecialAdapter(model.Items));
-                        ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
-                        shimmerFrameLayout.stopShimmerAnimation();
-                        shimmerFrameLayout.setVisibility(View.GONE);
+            try {
+                List<RowModel> dataRow = (new Gson().fromJson(config, RuntimeJsonModel.class)).ListItems;
+
+                for (int i = 0; i < dataRow.size() && i < 2; i++) {
+                    RowModel model = dataRow.get(i);
+                    View view = viewRow.get(i);
+                    view.setVisibility(View.VISIBLE);
+                    //set header
+                    if (!model.HeaderString.equals("")) {
+                        ((TextView) view.findViewById(R.id.title)).setText(model.HeaderString);
+                    } else
+                        ((TextView) view.findViewById(R.id.title)).setVisibility(View.INVISIBLE);
+                    //set seeMore
+                    if (model.Filter != null && !model.Filter.equals("")) {
+                        //add clickListener
+                        (view.findViewById(R.id.seeMore)).setOnClickListener(v -> {
+                            Intent intent = new Intent(MainActivity3.this, EstateListActivity.class);
+                            intent.putExtra(Extras.EXTRA_FIRST_ARG, new Gson().toJson(model.Filter));
+                            startActivity(intent);
+                        });
+                        //load data
+                        getData(model.Filter, view);
+                    } else {
+                        (view.findViewById(R.id.seeMore)).setVisibility(View.INVISIBLE);
+                        if (model.Items != null && model.Items.size() > 0) {
+                            //show custom dataRow
+                            RecyclerView rc = view.findViewById(R.id.rc);
+                            rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
+                            rc.setAdapter(new Main3EstateSpecialAdapter(model.Items));
+                            ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
+                            shimmerFrameLayout.stopShimmerAnimation();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+                        }
                     }
                 }
+            } catch (Exception e) {
+                Log.d("RUNTIME_CONFIG_JSON", config);
+                Log.d("RUNTIME_CONFIG_JSON", e.toString());
+                viewRow.get(0).setVisibility(View.GONE);
+                viewRow.get(1).setVisibility(View.GONE);
             }
         }
     }

@@ -149,7 +149,15 @@
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
+                    <include
+                        android:id="@+id/includeRow1"
+                        layout="@layout/sub_main_activity3_row"
+                        android:visibility="gone" />
 
+                    <include
+                        android:id="@+id/includedRow2"
+                        layout="@layout/sub_main_activity3_row"
+                        android:visibility="gone" />
                     <include
                         android:id="@+id/row1"
 
@@ -164,15 +172,6 @@
                         android:id="@+id/row3"
                         layout="@layout/sub_main_activity3_row" />
 
-                    <include
-                        android:id="@+id/includeRow1"
-                        layout="@layout/sub_main_activity3_row"
-                        android:visibility="gone" />
-
-                    <include
-                        android:id="@+id/includedRow2"
-                        layout="@layout/sub_main_activity3_row"
-                        android:visibility="gone" />
 
                     <include
                         android:id="@+id/row4"
