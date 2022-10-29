@@ -12,7 +12,7 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
 
-        app:lottie_rawRes="@raw/erorr" />
+        app:lottie_rawRes="@raw/circle_reval" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/AnimationActSplash2"
