@@ -7,8 +7,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import io.reactivex.Observable;
 import java9.util.function.Function;
+import ntk.android.base.Extras;
 import ntk.android.base.activity.common.BaseFilterModelWithCategoryActivity;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
@@ -47,7 +50,14 @@ public class NewsListActivity extends BaseFilterModelWithCategoryActivity<NewsCo
     protected void onCategoryResponse(ErrorException<NewsCategoryModel> response, Dialog dialog) {
         RecyclerView rc = dialog.findViewById(R.id.rc);
         rc.setLayoutManager(new LinearLayoutManager(NewsListActivity.this, LinearLayoutManager.VERTICAL, false));
-        rc.setAdapter(new NewsCategoryAdapter(response.ListItems));
+        rc.setAdapter(new NewsCategoryAdapter(response.ListItems, newsCategoryModel -> {
+            Intent i = new Intent(NewsListActivity.this, NewsWithCategoryUsedActivity.class);
+            i.putExtra(Extras.EXTRA_FIRST_ARG, new Gson().toJson(request));
+            i.putExtra(Extras.EXTRA_SECOND_ARG, newsCategoryModel.Id);
+            i.putExtra(Extras.Extra_THIRD_ARG, "مرتبط با  " + newsCategoryModel.Title);
+            startActivity(i);
+            return null;
+        }));
     }
 
     @Override

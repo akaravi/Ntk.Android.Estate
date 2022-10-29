@@ -40,13 +40,13 @@ import ntk.android.estate.view.NumberTextWatcherForThousand;
 
 public class NewEstateFragment1 extends BaseFragment {
     //share variable between edit and new prevent change adapter
-    boolean isAllAdapterClickable=true;
+    boolean isAllAdapterClickable = true;
     //to remove all selected value if landUse change
     EstatePropertyTypeLanduseModel lastSelectedLandUse;
-     int count;
-     List<EstatePropertyTypeUsageModel> typeUsages;
-     List<EstatePropertyTypeModel> propertyType;
-     List<EstatePropertyTypeLanduseModel> landUses;
+    int count;
+    List<EstatePropertyTypeUsageModel> typeUsages;
+    List<EstatePropertyTypeModel> propertyType;
+    List<EstatePropertyTypeLanduseModel> landUses;
 
     @Override
     public void onCreateFragment() {
@@ -162,7 +162,7 @@ public class NewEstateFragment1 extends BaseFragment {
 
     protected synchronized void showData() {
         if (count == 2) {
-            EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(isAllAdapterClickable,typeUsages, estateActivity().model().PropertyTypeUsage,
+            EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(isAllAdapterClickable, typeUsages, estateActivity().model().PropertyTypeUsage,
                     estatePropertyTypeUsageModel -> {
                         findViewById(R.id.cardLandUsesView).setVisibility(View.VISIBLE);
                         estateActivity().model().PropertyTypeUsage = estatePropertyTypeUsageModel;
@@ -183,7 +183,7 @@ public class NewEstateFragment1 extends BaseFragment {
         } else ++count;
     }
 
-     void setTypeUsage(EstatePropertyTypeUsageModel estatePropertyTypeUsageModel) {
+    void setTypeUsage(EstatePropertyTypeUsageModel estatePropertyTypeUsageModel) {
         changeUi();
         List<EstatePropertyTypeModel> mappers = StreamSupport.stream(propertyType)
                 .filter(t -> t.LinkPropertyTypeUsageId.equals(estatePropertyTypeUsageModel.Id))
@@ -193,7 +193,7 @@ public class NewEstateFragment1 extends BaseFragment {
                         .anyMatch(k -> k.LinkPropertyTypeLanduseId.equals(t.Id)))
                 .collect(Collectors.toList());
         RecyclerView rc = findViewById(R.id.EstateLandUsedRc);
-        rc.setAdapter(new EstatePropertyLandUseAdapterSelector(isAllAdapterClickable,models, estateActivity().model().PropertyTypeLanduse,
+        rc.setAdapter(new EstatePropertyLandUseAdapterSelector(isAllAdapterClickable, models, estateActivity().model().PropertyTypeLanduse,
                 t -> {
                     estateActivity().model().PropertyTypeLanduse = t;
                     changeUi();
@@ -207,7 +207,7 @@ public class NewEstateFragment1 extends BaseFragment {
 
     }
 
-     void changeUi() {
+    void changeUi() {
         EstatePropertyTypeLanduseModel lastSelectedLandUse = estateActivity().model().PropertyTypeLanduse;
         if (lastSelectedLandUse == null) {
             findViewById(R.id.EstatePropertyOneTextInput).setVisibility(View.GONE);
@@ -249,12 +249,23 @@ public class NewEstateFragment1 extends BaseFragment {
         else
             estateActivity().model().Area = 0;
         if (!(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim().equals("")))
-            estateActivity().model().CreatedYaer = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim());
+            try {
+                estateActivity().model().CreatedYaer = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim());
+            } catch (Exception e) {
+                Toasty.error(getContext(), "فرمت عدد وارده در قسمت "+ lastSelectedLandUse.TitleCreatedYaer+"اشتباه است", Toasty.LENGTH_LONG, true).show();
+
+                return false;
+            }
         else
             estateActivity().model().CreatedYaer = 0;
 
         if (!((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).getText().toString().trim().equals(""))
-            estateActivity().model().Partition = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).getText().toString().trim());
+            try {
+                estateActivity().model().Partition = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).getText().toString().trim());
+            } catch (Exception e) {
+                Toasty.error(getContext(), "فرمت عدد وارده در قسمت "+ lastSelectedLandUse.TitlePartition+"اشتباه است", Toasty.LENGTH_LONG, true).show();
+                return false;
+            }
         else
             estateActivity().model().Partition = 0;
         if (lastSelectedLandUse != null && !lastSelectedLandUse.Id.equals(estateActivity().model().PropertyTypeLanduse.Id)) {
@@ -264,7 +275,7 @@ public class NewEstateFragment1 extends BaseFragment {
         return true;
     }
 
-     NewEstateActivity estateActivity() {
+    NewEstateActivity estateActivity() {
         return ((NewEstateActivity) getActivity());
     }
 

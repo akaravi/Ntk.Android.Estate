@@ -53,8 +53,11 @@
         <activity
             android:name=".activity.NewsDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NewsWithCategoryUsedActivity"
+            android:screenOrientation="portrait" />
 
-   <activity
+        <activity
             android:name=".activity.ArticleListActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -62,6 +65,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ArticleDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ArticleWithCategoryUsedActivity"
             android:screenOrientation="portrait" />
 
 
@@ -104,8 +110,6 @@
         <activity
             android:name=".activity.EditEstateActivity"
             android:screenOrientation="portrait" />
-
-
 
 
         <provider

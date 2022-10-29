@@ -19,5 +19,6 @@
     <string name="country">کشور</string>
     <string name="addNew">ثبت ملک</string>
     <string name="location">موقعیت</string>
+    <string name="per_article">"مقالات "</string>
 
 </resources>
