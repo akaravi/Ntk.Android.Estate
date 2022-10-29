@@ -237,7 +237,7 @@ public class NewEstateActivity extends BaseActivity {
                 Preferences.with(d.getContext()).appVariableInfo().set_registerNotInterested(false);
                 Intent i = new Intent(d.getContext(), AuthWithSmsActivity.class);
                 //clear all activity that open before
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 d.getContext().startActivity(i);
                 d.dismiss();
             });

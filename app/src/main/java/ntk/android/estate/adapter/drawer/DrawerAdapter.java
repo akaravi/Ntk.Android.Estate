@@ -351,7 +351,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("آخرین ملک های ثبت شده").setDrawableIcon(R.drawable.estate));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("ثبت ملک جدید").setDrawableIcon(R.drawable.add));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("لیست علاقه مندی").setDrawableIcon(R.drawable.favorites_folder));
-        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("املاک من").setDrawableIcon(R.drawable.favorites_folder));
+        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("املاک من").setDrawableIcon(R.drawable.my_estate));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("اخبار").setDrawableIcon(R.drawable.news2));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("مقالات").setDrawableIcon(R.drawable.article_place_holder));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("پشتیبانی").setDrawableIcon(R.drawable.inbox));
@@ -365,7 +365,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             list.add(new DrawerChildThemeDtoModel().setId(ID_INVITE).setTitle("دعوت از دوستان").setDrawableIcon(R.drawable.invite2));
         }
         if (isLogin) {
-            list.add(new DrawerChildThemeDtoModel().setId(ID_LOGOUT).setTitle("خروج").setDrawableIcon(R.drawable.ic_back));
+            list.add(new DrawerChildThemeDtoModel().setId(ID_LOGOUT).setTitle("خروج").setDrawableIcon(R.drawable.exit));
         }
         return list;
     }
