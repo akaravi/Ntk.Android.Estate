@@ -12,8 +12,10 @@
         <item name="colorTextSecondary">@color/colorTextSecondary</item>
         <item name="ntk_base_logo">@drawable/logo</item>
         <item name="ntk_splash_background">@drawable/splash</item>
-        <item name="ntk_splash_lottie_loading">@raw/back</item>
-        <item name="ntk_splash_lottie_logo">@raw/lottie_splash_background</item>
+        <item name="ntk_splash_lottie_loading">@raw/circle_reval</item>
+        <item name="ntk_splash_lottie_logo">@raw/lottie_splash_logo</item>
+        <item name="ntk_auth_sms">@raw/auth_sms</item>
+        <item name="ntk_auth_sms_confirm">@raw/auth_confirm_sms</item>
         <item name="ntk_splash_logo">@drawable/logo</item>
         <item name="ntk_notification_color">@color/colorWhite</item>
         <item name="Theme_NTK_Intro">@style/AppTheme</item>
