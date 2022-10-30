@@ -61,7 +61,7 @@ public class NewEstateActivity extends BaseActivity {
     }
 
     protected void afterCreate() {
-        showFragment4();
+        showFragment1();
     }
 
     private void setFont() {
