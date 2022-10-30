@@ -66,6 +66,7 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
             icon1.setImageResource(R.drawable.contracts);
             icon2.setImageResource(R.drawable.contracts);
             icon3.setImageResource(R.drawable.contracts);
+            icon4.setImageResource(R.drawable.contracts);
             setFont(price1, price2, price3,price4);
             setFont(title1, title2, title3,title4);
             contractTitle.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
@@ -129,9 +130,9 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
             }
             if (item.ContractType.HasPeriodPrice) {
                 itemView.findViewById(R.id.linear4).setVisibility(View.VISIBLE);
-                title3.setText(item.ContractType.TitlePeriodPriceML + "  :   ");
+                title4.setText(item.ContractType.TitlePeriodPriceML + "  :   ");
                     if (item.PeriodPrice != null && item.PeriodPrice != 0)
-                            price3.setText(NViewUtils.PriceFormat(item.PeriodPrice) + "  " + item.UnitSalePrice + "    "+item.PeriodCount +" عدد ");
+                            price4.setText(NViewUtils.PriceFormat(item.PeriodPrice) + "  " + item.UnitSalePrice );
 
                 }
              else {

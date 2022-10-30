@@ -140,9 +140,6 @@ public class Main3EstatePropertyAdapter extends BaseRecyclerAdapter<EstateProper
                             price = (price.isEmpty() ? "توافقی" : price + "||" + " توافقی");
                         price1.setText(price);
                     } else price1.setText("وارد نشده");
-                    if (m.PeriodCount != 0) {
-                        price2.setText(m.PeriodCount + " " + "عدد");
-                    }
                 } else {
                     price2.setVisibility(View.INVISIBLE);
                     if (m.ContractType.HasDepositPrice) {

@@ -68,7 +68,6 @@ public class NewEstateFragment4 extends BaseFragment {
         ((CheckBox) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cb)).setOnCheckedChangeListener(
                 (compoundButton, b) -> {
                     findViewById(R.id.etPeriodPayment).setEnabled(!b);
-                    findViewById(R.id.etPeriodPaymentCount).setEnabled(!b);
                 });
         //add separator to editText
         TextInputEditText et1 = findViewById(R.id.etSale);
@@ -103,13 +102,11 @@ public class NewEstateFragment4 extends BaseFragment {
         ((TextInputLayout) findViewById(R.id.etlRent)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.etlDeposit)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.etlPeriodPayment)).setTypeface(t1);
-        ((TextInputLayout) findViewById(R.id.etlPeriodPaymentCount)).setTypeface(t1);
         //for TextInputEditText
         ((TextInputEditText) findViewById(R.id.etSale)).setTypeface(t1);
         ((TextInputEditText) findViewById(R.id.etRent)).setTypeface(t1);
         ((TextInputEditText) findViewById(R.id.etDeposit)).setTypeface(t1);
         ((TextInputEditText) findViewById(R.id.etPeriodPayment)).setTypeface(t1);
-        ((TextInputEditText) findViewById(R.id.etPeriodPaymentCount)).setTypeface(t1);
         //for checkView
         ((TextView) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cbText)).setTypeface(t1);
         ((TextView) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cbText)).setTypeface(t1);
@@ -203,11 +200,8 @@ public class NewEstateFragment4 extends BaseFragment {
         ((TextView) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cbText)).setText("قیمت توافقی");
 
         TextInputLayout et4 = findViewById(R.id.etlPeriodPayment);
-        TextInputLayout et5 = findViewById(R.id.etlPeriodPaymentCount);
         et4.setVisibility(model.HasPeriodPrice ? View.VISIBLE : View.GONE);
-        et5.setVisibility(model.HasPeriodPrice ? View.VISIBLE : View.GONE);
         et4.setHint(model.TitlePeriodPriceML);
-        et5.setHint("تعداد");
         findViewById(R.id.checkbox_rowPeriodPayment).setVisibility(model.PeriodPriceAllowAgreement ? View.VISIBLE : View.GONE);
         ((TextView) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cbText)).setText("قیمت توافقی");
     }
@@ -224,9 +218,7 @@ public class NewEstateFragment4 extends BaseFragment {
         et3.setText("");
         ((MaterialCheckBox) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cb)).setChecked(false);
         TextInputEditText et4 = findViewById(R.id.etPeriodPayment);
-        TextInputEditText et5 = findViewById(R.id.etPeriodPaymentCount);
         et4.setText("");
-        et5.setText("");
     }
 
     private void addItem() {
@@ -285,19 +277,12 @@ public class NewEstateFragment4 extends BaseFragment {
                     contract.PeriodPriceByAgreement = true;
                 else {
                     TextInputEditText et4 = findViewById(R.id.etPeriodPayment);
-                    TextInputEditText et5 = findViewById(R.id.etPeriodPaymentCount);
                     if (et4.getText().toString().equals("")) {
                         Toasty.info(getContext(), selectedModel.TitlePeriodPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
                         return;
                     } else {
                         contract.PeriodPriceByAgreement = false;
                         contract.PeriodPrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et4.getText().toString()));
-                        if (et5.getText().toString().equals("")) {
-                            Toasty.info(getContext(), "تعداد " + selectedModel.TitlePeriodPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
-                            return;
-                        } else {
-                            contract.PeriodCount = Integer.parseInt(NumberTextWatcherForThousand.trimCommaOfString(et4.getText().toString()));
-                        }
                     }
                 }
             } else
