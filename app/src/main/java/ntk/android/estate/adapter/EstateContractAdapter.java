@@ -67,12 +67,12 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
             icon2.setImageResource(R.drawable.contracts);
             icon3.setImageResource(R.drawable.contracts);
             icon4.setImageResource(R.drawable.contracts);
-            setFont(price1, price2, price3,price4);
-            setFont(title1, title2, title3,title4);
+            setFont(price1, price2, price3, price4);
+            setFont(title1, title2, title3, title4);
             contractTitle.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
         }
 
-        private void setFont(TextView t1, TextView t2, TextView t3,TextView t4) {
+        private void setFont(TextView t1, TextView t2, TextView t3, TextView t4) {
             t1.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
             t2.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
             t3.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
@@ -131,12 +131,17 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
             if (item.ContractType.HasPeriodPrice) {
                 itemView.findViewById(R.id.linear4).setVisibility(View.VISIBLE);
                 title4.setText(item.ContractType.TitlePeriodPriceML + "  :   ");
+                if (item.PeriodPrice != null || item.PeriodPriceByAgreement) {
                     if (item.PeriodPrice != null && item.PeriodPrice != 0)
-                            price4.setText(NViewUtils.PriceFormat(item.PeriodPrice) + "  " + item.UnitSalePrice );
-
+                        if (item.PeriodPriceByAgreement)
+                            price4.setText(NViewUtils.PriceFormat(item.PeriodPrice) + "  " + item.UnitSalePrice + "|| توافقی");
+                        else
+                            price4.setText(NViewUtils.PriceFormat(item.PeriodPrice) + "  " + item.UnitSalePrice);
+                    else if (item.PeriodPriceByAgreement)
+                        price4.setText("توافقی");
+                } else {
+                    itemView.findViewById(R.id.linear4).setVisibility(View.GONE);
                 }
-             else {
-                itemView.findViewById(R.id.linear4).setVisibility(View.GONE);
             }
         }
     }
