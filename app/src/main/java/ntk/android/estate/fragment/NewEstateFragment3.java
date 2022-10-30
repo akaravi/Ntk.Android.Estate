@@ -28,9 +28,11 @@ import es.dmoral.toasty.Toasty;
 import ir.map.sdk_map.MapirStyle;
 import ir.map.sdk_map.maps.MapView;
 import ntk.android.base.Extras;
+import ntk.android.base.entitymodel.enums.EnumManageUserAccessUserTypes;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.utill.FontManager;
+import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.GetLocationActivity;
 import ntk.android.estate.activity.NewEstateActivity;
@@ -64,8 +66,12 @@ public class NewEstateFragment3 extends BaseFragment {
             titleEt.setText(model.Title);
         if (model.Description != null)
             descEt.setText(model.Description);
-        if (model.ViewConfigHiddenInList)
-            ((MaterialCheckBox) findViewById(R.id.checkBox)).setChecked(true);
+        if (EnumManageUserAccessUserTypes.isAdmin(Preferences.with(getContext()).UserInfo().getTokenInfo().UserAccessUserType)) {
+            findViewById(R.id.hideEstateCardView).setVisibility(View.VISIBLE);
+            findViewById(R.id.hideEstatePadding).setVisibility(View.VISIBLE);
+            if (model.ViewConfigHiddenInList)
+                ((MaterialCheckBox) findViewById(R.id.checkBox)).setChecked(true);
+        }
         if (model.LinkLocationIdTitle != null)
             ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(model.LinkLocationIdTitle);
         if (model.Address != null)
