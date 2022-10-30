@@ -299,6 +299,7 @@ public class SelectProviceDialog extends DialogFragment {
                     if (progress != null) {
                         progress.setVisibility(View.GONE);
                     }
+                    areas= model.ListItems;
                     MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.EstateAreaAutoComplete);
                     List<String> names = new ArrayList<>();
                     for (CoreLocationModel t : model.ListItems)
@@ -314,7 +315,6 @@ public class SelectProviceDialog extends DialogFragment {
                     SpinnerAdapter<CoreLocationModel> locationAdapter = new SpinnerAdapter<CoreLocationModel>(getContext(), names);
                     spinner.setOnItemClickListener((parent, view, position, id) -> {
                         selectedArea = StreamSupport.stream(areas).filter(t -> t.Title.equals(parent.getItemAtPosition(position).toString())).findFirst().orElse(null);
-
                     });
 
                     spinner.setAdapter(locationAdapter);
