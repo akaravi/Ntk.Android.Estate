@@ -159,7 +159,7 @@ public class NewEstateFragment4 extends BaseFragment {
                     if (names.size() == 0)
                         names.add("موردی یافت نشد");
                     else
-                        estateActivity().selectedCurrency=currencyList.get(0);
+                        estateActivity().selectedCurrency = currencyList.get(0);
                     SpinnerAdapter<CoreCurrencyModel> currencyAdapter = new SpinnerAdapter<CoreCurrencyModel>(getContext(), names);
                     spinner.setOnItemClickListener((parent, view, position, id) -> {
                         estateActivity().selectedCurrency = currencyList.get(position);
@@ -265,7 +265,6 @@ public class NewEstateFragment4 extends BaseFragment {
                 }
             } else
                 contract.SalePriceByAgreement = false;
-
             if (selectedModel.HasDepositPrice || selectedModel.DepositPriceAllowAgreement) {
                 if (((MaterialCheckBox) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cb)).isChecked())
                     contract.DepositPriceByAgreement = true;
@@ -281,6 +280,30 @@ public class NewEstateFragment4 extends BaseFragment {
                 }
             } else
                 contract.DepositPriceByAgreement = false;
+            if (selectedModel.HasPeriodPrice || selectedModel.PeriodPriceAllowAgreement) {
+                if (((MaterialCheckBox) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cb)).isChecked())
+                    contract.PeriodPriceByAgreement = true;
+                else {
+                    TextInputEditText et4 = findViewById(R.id.etPeriodPayment);
+                    TextInputEditText et5 = findViewById(R.id.etPeriodPaymentCount);
+                    if (et4.getText().toString().equals("")) {
+                        Toasty.info(getContext(), selectedModel.TitlePeriodPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+                        return;
+                    } else {
+                        contract.PeriodPriceByAgreement = false;
+                        contract.PeriodPrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et4.getText().toString()));
+                        if (et5.getText().toString().equals("")) {
+                            Toasty.info(getContext(), "تعداد " + selectedModel.TitlePeriodPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+                            return;
+                        } else {
+                            contract.PeriodCount = Integer.parseInt(NumberTextWatcherForThousand.trimCommaOfString(et4.getText().toString()));
+                        }
+                    }
+                }
+            } else
+                contract.PeriodPriceByAgreement = false;
+
+
             if (estateActivity().model().Contracts == null)
                 estateActivity().model().Contracts = new ArrayList<>();
             estateActivity().model().Contracts.add(contract);
