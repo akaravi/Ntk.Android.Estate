@@ -27,6 +27,6 @@ public class ArticleWithCategoryUsedActivity extends BaseFilterModelCategoryUsed
 
     @Override
     public BiFunction<Long, FilterModel, Observable<ErrorException<ArticleContentModel>>> getService() {
-        return new ArticleContentService(this)::getAllWithCategoryUsedInContent;
+        return new ArticleContentService(this)::getAllWithHierarchyCategoryId;
     }
 }

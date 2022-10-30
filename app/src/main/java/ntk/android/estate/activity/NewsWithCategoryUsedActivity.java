@@ -31,6 +31,6 @@ public class NewsWithCategoryUsedActivity extends BaseFilterModelCategoryUsedLis
 
     @Override
     public BiFunction<Long, FilterModel, Observable<ErrorException<NewsContentModel>>> getService() {
-        return new NewsContentService(this)::getAllWithCategoryUsedInContent;
+        return new NewsContentService(this)::getAllWithHierarchyCategoryId;
     }
 }

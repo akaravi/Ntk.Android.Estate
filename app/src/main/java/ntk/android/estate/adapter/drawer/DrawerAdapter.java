@@ -40,6 +40,7 @@ import ntk.android.estate.activity.FavoriteEstateListActivity;
 import ntk.android.estate.activity.MyEstateActivity;
 import ntk.android.estate.activity.NewEstateActivity;
 import ntk.android.estate.activity.NewsListActivity;
+import ntk.android.estate.activity.ProfileActivity;
 
 
 public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel, RecyclerView.ViewHolder> {
@@ -156,7 +157,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             holder.userId.setText("شناسه کاربری : " + userid);
             holder.loginBtn.setText("حساب کاربری");
             holder.loginBtn.setOnClickListener(v -> {
-                Intent i = new Intent(v.getContext(), AuthWithSmsActivity.class);
+                Intent i = new Intent(v.getContext(), ProfileActivity.class);
                 //clear all activity that open before
                 v.getContext().startActivity(i);
             });

@@ -99,7 +99,7 @@ public class MainActivity3 extends BaseMainActivity {
         List<View> viewRow = Arrays.asList(findViewById(R.id.includeRow1), findViewById(R.id.includedRow2));
         if (!config.equals("") && !config.equals("null")) {
             try {
-                List<RowModel> dataRow = (new Gson().fromJson(config, RuntimeJsonModel.class)).ListItems;
+                List<RowModel> dataRow = (new Gson().fromJson(RowModel.Id(), RuntimeJsonModel.class)).ListItems;
 
                 for (int i = 0; i < dataRow.size() && i < 2; i++) {
                     RowModel model = dataRow.get(i);

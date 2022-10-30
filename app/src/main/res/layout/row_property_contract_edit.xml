@@ -9,21 +9,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/delete"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="65dp"
+            android:layout_height="45dp"
             android:layout_gravity="center"
-            android:text="حذف"
-            android:textSize="13sp"
             android:textColor="@color/colorTextPrimary"
             app:icon="@android:drawable/ic_menu_delete"
-            app:iconTint="@color/colorTextPrimary"
-            app:strokeColor="@color/colorAccent" />
+            app:iconGravity="textStart"
+            app:iconSize="32dp"
+            app:iconTint="@color/colorRed"
+            app:strokeColor="@color/colorRed" />
 
         <include
             layout="@layout/row_recycler_contract"
@@ -40,9 +39,9 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/dash_line" />
+
     <View
         android:id="@+id/paddingView"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-         />
+        android:layout_height="20dp" />
 </LinearLayout>

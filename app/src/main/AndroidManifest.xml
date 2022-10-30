@@ -110,6 +110,9 @@
         <activity
             android:name=".activity.EditEstateActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:screenOrientation="portrait" />
 
 
         <provider

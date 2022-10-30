@@ -49,7 +49,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginRight="16dp"
-                android:padding="8dp" />
+              />
         </LinearLayout>
 
         <LinearLayout
