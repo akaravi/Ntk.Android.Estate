@@ -100,44 +100,44 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         holder.Root.setOnClickListener(v -> {
             switch (item.Id) {
                 case 0:
-                    ClickEstateList();
-                    break;
-                case 1:
-                    ClickNewEstate();
-                    break;
-                case 2:
-                    ClickFavoriteEstateList();
-                    break;
-                case 3:
                     clickMyEstates();
                     break;
-                case 4:
+                case 1:
+                    ClickFavoriteEstateList();
+                    break;
+                case 2:
                     ClickNews();
                     break;
-                case 5:
+                case 3:
                     ClickArticle();
                     break;
-                case 6:
+                case 4:
                     ClickContact();
                     break;
-                case 7:
+                case 5:
                     ClickPooling();
                     break;
-                case 8:
+                case 6:
                     ClickInboxNotification();
                     break;
-                case 9:
+                case 7:
                     ClickQuestion();
                     break;
-                case 10:
+                case 8:
                     ClickFeedBack();
                     break;
-                case 11:
+                case 9:
                     ClickAbout();
                     break;
-                case 12:
+                case 10:
                     ClickIntro();
                     break;
+//                case 11:
+//
+//                    break;
+//                case 12:
+//
+//                    break;
                 case ID_INVITE:
                     ClickShare();
                     break;
@@ -203,7 +203,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
 
     private void clickMyEstates() {
         if (Preferences.with(context).appVariableInfo().isLogin() && Preferences.with(context).UserInfo().userId() > 0)
-            context.startActivity(new Intent(context, NewEstateActivity.class));
+            context.startActivity(new Intent(context, MyEstateActivity.class));
         else {
             //show dialog to go to login page
             SweetAlertDialog dialog = new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE);
@@ -211,7 +211,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             dialog.setContentText("برای دیدین لیست املاک حود نیاز است که به حساب خود وارد شوید. آیا مایلید به صفحه ی ورود هدایت شوید؟");
             dialog.setConfirmButton("بلی", d -> {
                 Preferences.with(d.getContext()).appVariableInfo().set_registerNotInterested(false);
-                Intent i = new Intent(d.getContext(), MyEstateActivity.class);
+                Intent i = new Intent(d.getContext(), AuthWithSmsActivity.class);
                 //clear all activity that open before
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 d.getContext().startActivity(i);
@@ -349,10 +349,10 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         ArrayList<DrawerChildThemeDtoModel> list = new ArrayList<>();
         int i = 0;
         list.add(new DrawerChildThemeDtoModel().setId(-1).setTitle("سربرگ").setDrawableIcon(R.drawable.add));
-        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("آخرین ملک های ثبت شده").setDrawableIcon(R.drawable.estate));
-        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("ثبت ملک جدید").setDrawableIcon(R.drawable.add));
-        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("لیست علاقه مندی").setDrawableIcon(R.drawable.favorites_folder));
+//        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("آخرین ملک های ثبت شده").setDrawableIcon(R.drawable.estate));
+//        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("ثبت ملک جدید").setDrawableIcon(R.drawable.add));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("املاک من").setDrawableIcon(R.drawable.my_estate));
+        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("لیست علاقه مندی").setDrawableIcon(R.drawable.favorites_folder));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("اخبار").setDrawableIcon(R.drawable.news2));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("مقالات").setDrawableIcon(R.drawable.article_place_holder));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("پشتیبانی").setDrawableIcon(R.drawable.inbox));
