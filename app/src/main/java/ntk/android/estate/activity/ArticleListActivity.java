@@ -12,20 +12,16 @@ import com.google.gson.Gson;
 import io.reactivex.Observable;
 import java9.util.function.Function;
 import ntk.android.base.Extras;
-import ntk.android.base.activity.common.BaseFilterModelListActivity;
 import ntk.android.base.activity.common.BaseFilterModelWithCategoryActivity;
 import ntk.android.base.entitymodel.article.ArticleCategoryModel;
 import ntk.android.base.entitymodel.article.ArticleContentModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
-import ntk.android.base.entitymodel.news.NewsCategoryModel;
 import ntk.android.base.services.article.ArticleCategoryService;
 import ntk.android.base.services.article.ArticleContentService;
-import ntk.android.base.services.news.NewsCategoryService;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.ArticleAdapter;
-import ntk.android.estate.adapter.ArticleCategoryAdapter;
-import ntk.android.estate.adapter.NewsCategoryAdapter;
+import ntk.android.estate.adapter.ArticleCategoryContentAdapter;
 
 public class ArticleListActivity extends BaseFilterModelWithCategoryActivity<ArticleContentModel, ArticleCategoryModel> {
     @Override
@@ -53,7 +49,7 @@ public class ArticleListActivity extends BaseFilterModelWithCategoryActivity<Art
     protected void onCategoryResponse(ErrorException<ArticleCategoryModel> response, Dialog dialog) {
         RecyclerView rc = dialog.findViewById(R.id.rc);
         rc.setLayoutManager(new LinearLayoutManager(ArticleListActivity.this, LinearLayoutManager.VERTICAL, false));
-        rc.setAdapter(new ArticleCategoryAdapter(response.ListItems, articleCategoryModel -> {
+        rc.setAdapter(new ArticleCategoryContentAdapter(response.ListItems, articleCategoryModel -> {
             Intent i = new Intent(ArticleListActivity.this, ArticleWithCategoryUsedActivity.class);
             i.putExtra(Extras.EXTRA_FIRST_ARG, new Gson().toJson(request));
             i.putExtra(Extras.EXTRA_SECOND_ARG, articleCategoryModel.Id);

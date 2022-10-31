@@ -21,7 +21,7 @@ import ntk.android.base.services.news.NewsCategoryService;
 import ntk.android.base.services.news.NewsContentService;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.NewsAdapter;
-import ntk.android.estate.adapter.NewsCategoryAdapter;
+import ntk.android.estate.adapter.NewsCategoryContentAdapter;
 
 public class NewsListActivity extends BaseFilterModelWithCategoryActivity<NewsContentModel, NewsCategoryModel> {
     @Override
@@ -50,7 +50,7 @@ public class NewsListActivity extends BaseFilterModelWithCategoryActivity<NewsCo
     protected void onCategoryResponse(ErrorException<NewsCategoryModel> response, Dialog dialog) {
         RecyclerView rc = dialog.findViewById(R.id.rc);
         rc.setLayoutManager(new LinearLayoutManager(NewsListActivity.this, LinearLayoutManager.VERTICAL, false));
-        rc.setAdapter(new NewsCategoryAdapter(response.ListItems, newsCategoryModel -> {
+        rc.setAdapter(new NewsCategoryContentAdapter(response.ListItems, newsCategoryModel -> {
             Intent i = new Intent(NewsListActivity.this, NewsWithCategoryUsedActivity.class);
             i.putExtra(Extras.EXTRA_FIRST_ARG, new Gson().toJson(request));
             i.putExtra(Extras.EXTRA_SECOND_ARG, newsCategoryModel.Id);
