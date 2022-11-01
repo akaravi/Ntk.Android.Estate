@@ -23,6 +23,7 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mobileTl"
                 style="@style/profile_textInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,12 +35,14 @@
                 app:boxCornerRadiusTopStart="32dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mobileEt"
                     style="@style/profile_textInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameTl"
                 style="@style/profile_textInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -56,6 +59,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lastNameTl"
                 style="@style/profile_textInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,6 +76,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailTl"
                 style="@style/profile_textInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,6 +93,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/companyTl"
                 style="@style/profile_textInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -120,7 +126,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/img"
+            android:id="@+id/image"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_centerInParent="true"
