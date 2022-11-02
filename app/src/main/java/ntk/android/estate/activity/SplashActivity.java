@@ -1,19 +1,30 @@
 package ntk.android.estate.activity;
 
+import android.content.Intent;
+
 import com.airbnb.lottie.LottieAnimationView;
 
 import io.sentry.Sentry;
+import ntk.android.base.Extras;
 import ntk.android.base.activity.common.AuthWithSmsActivity;
 import ntk.android.base.activity.common.AuthWithSmsConfirmActivity;
 import ntk.android.base.activity.common.BaseSplashActivity;
 import ntk.android.estate.R;
 
-public class SplashActivity extends ProfileActivity {
+public class SplashActivity extends BaseSplashActivity {
+    @Override
+    protected void onCreated() {
+        setContentView(R.layout.activity_estate_splash);
+        LottieAnimationView lottieAnimationView = (LottieAnimationView) findViewById(R.id.AnimationActSplash2);
+        lottieAnimationView.setImageAssetsFolder("images/");
+        findViewById(R.id.splash_debugView).setOnClickListener(v -> showDebugView(v));
+    }
+
 //    @Override
 //    protected void onCreated() {
-//        setContentView(R.layout.activity_estate_splash);
-//        LottieAnimationView lottieAnimationView = (LottieAnimationView) findViewById(R.id.AnimationActSplash2);
-//        lottieAnimationView.setImageAssetsFolder("images/");
-//        findViewById(R.id.splash_debugView).setOnClickListener(v -> showDebugView(v));
+//        super.onCreated();
+//        Intent intent = new Intent(this, ProfileActivity.class);
+//        intent.putExtra(Extras.EXTRA_FIRST_ARG, 91356);
+//        startActivity(intent);
 //    }
 }

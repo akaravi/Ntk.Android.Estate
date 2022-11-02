@@ -14,7 +14,7 @@
         android:layout_height="200dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/lottie_splash_logo" />
+        app:lottie_rawRes="@raw/loader" />
 
     <TextView
         android:id="@+id/sub_loading_text"

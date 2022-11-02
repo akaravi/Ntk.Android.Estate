@@ -18,6 +18,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import ntk.android.base.Extras;
 import ntk.android.base.activity.abstraction.AbstractMainActivity;
 import ntk.android.base.activity.common.AuthWithSmsActivity;
 import ntk.android.base.activity.common.IntroActivity;
@@ -158,7 +159,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             holder.loginBtn.setText("حساب کاربری");
             holder.loginBtn.setOnClickListener(v -> {
                 Intent i = new Intent(v.getContext(), ProfileActivity.class);
-                //clear all activity that open before
+                i.putExtra(Extras.EXTRA_FIRST_ARG,userid);
                 v.getContext().startActivity(i);
             });
         } else {

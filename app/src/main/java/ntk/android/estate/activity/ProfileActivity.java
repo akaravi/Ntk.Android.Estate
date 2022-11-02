@@ -17,6 +17,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.annotations.NonNull;
 import java9.util.function.Consumer;
+import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
@@ -43,7 +44,7 @@ public class ProfileActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-//        id = getIntent().getExtras().getLong(Extras.EXTRA_FIRST_ARG);
+        id = getIntent().getExtras().getLong(Extras.EXTRA_FIRST_ARG);
         ViewCompat.setTranslationZ(findViewById(R.id.rv), 1);
         ViewCompat.setTranslationZ(findViewById(R.id.cardView), .03f);
         MaterialButton saveBtn = findViewById(R.id.saveBtn);
@@ -131,7 +132,7 @@ public class ProfileActivity extends BaseActivity {
             ((TextInputEditText) findViewById(R.id.lastNameEt)).setText(user.LastName);
         }
         if (user.Email != null) {
-            ((TextInputEditText) findViewById(R.id.emailEt)).setText(user.LastName);
+            ((TextInputEditText) findViewById(R.id.emailEt)).setText(user.Email);
         }
         if (user.CompanyName != null) {
             ((TextInputEditText) findViewById(R.id.companyEt)).setText(user.CompanyName);
