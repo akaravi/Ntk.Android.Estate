@@ -48,11 +48,14 @@ public class ProfileActivity extends BaseActivity {
         ViewCompat.setTranslationZ(findViewById(R.id.rv), 1);
         ViewCompat.setTranslationZ(findViewById(R.id.cardView), .03f);
         MaterialButton saveBtn = findViewById(R.id.saveBtn);
+        MaterialButton backBtn = findViewById(R.id.backBtn);
         getUser();
         saveBtn.setOnClickListener(v -> updateUserData());
+        backBtn.setOnClickListener(v -> finish());
         findViewById(R.id.image).setOnClickListener(v -> ClickAttach());
         ////set font
         saveBtn.setTypeface(FontManager.T1_Typeface(this));
+        backBtn.setTypeface(FontManager.T1_Typeface(this));
         ((TextInputEditText) findViewById(R.id.mobileEt)).setTypeface(FontManager.T1_Typeface(this));
         ((TextInputEditText) findViewById(R.id.nameEt)).setTypeface(FontManager.T1_Typeface(this));
         ((TextInputEditText) findViewById(R.id.lastNameEt)).setTypeface(FontManager.T1_Typeface(this));
@@ -137,6 +140,11 @@ public class ProfileActivity extends BaseActivity {
         if (user.CompanyName != null) {
             ((TextInputEditText) findViewById(R.id.companyEt)).setText(user.CompanyName);
         }
+        if (user.LinkMainImageIdSrc != null && !user.LinkMainImageIdSrc.equals("")) {
+            findViewById(R.id.noImage).setVisibility(View.GONE);
+            ImageLoader.getInstance().displayImage(user.LinkMainImageIdSrc, (ImageView) findViewById(R.id.image));
+            findViewById(R.id.image).setVisibility(View.VISIBLE);
+        }
     }
 
     private void ClickAttach() {
@@ -149,11 +157,10 @@ public class ProfileActivity extends BaseActivity {
                     uri = result.getData().getData();
                     if (uri != null) {
                         ImageLoader.getInstance().displayImage(uri.toString(), (ImageView) findViewById(R.id.image));
-                        UploadFileToServer(FileManagerService.getFilePath(this, uri),
-                                fileUploadModel -> {
-                                    image_GUID = fileUploadModel.FileKey;
-                                    image_FilePath = uri.toString();
-                                });
+                        UploadFileToServer(FileManagerService.getFilePath(this, uri), fileUploadModel -> {
+                            image_GUID = fileUploadModel.FileKey;
+                            image_FilePath = uri.toString();
+                        });
                     }
                 }
             });
@@ -164,20 +171,19 @@ public class ProfileActivity extends BaseActivity {
         if (AppUtil.isNetworkAvailable(this)) {
             uploadInProgress = true;
             Toasty.info(this, "در حال بارگذاری...", Toasty.LENGTH_LONG).show();
-            ServiceExecute.execute(new FileUploaderService(this).uploadFile(url))
-                    .subscribe(new NtkObserver<FileUploadModel>() {
-                        @Override
-                        public void onNext(@NonNull FileUploadModel fileUploadModel) {
-                            uploadInProgress = false;
-                            consumer.accept(fileUploadModel);
-                        }
+            ServiceExecute.execute(new FileUploaderService(this).uploadFile(url)).subscribe(new NtkObserver<FileUploadModel>() {
+                @Override
+                public void onNext(@NonNull FileUploadModel fileUploadModel) {
+                    uploadInProgress = false;
+                    consumer.accept(fileUploadModel);
+                }
 
-                        @Override
-                        public void onError(Throwable e) {
-                            uploadInProgress = false;
-                            Toasty.error(ProfileActivity.this, "خطا در آپلود فایل").show();
-                        }
-                    });
+                @Override
+                public void onError(Throwable e) {
+                    uploadInProgress = false;
+                    Toasty.error(ProfileActivity.this, "خطا در آپلود فایل").show();
+                }
+            });
         } else {
             Toasty.error(this, "انترنت در دسترس نیست").show();
         }

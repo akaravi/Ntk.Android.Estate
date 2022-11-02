@@ -157,6 +157,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             holder.name.setText(name);
             holder.userId.setText("شناسه کاربری : " + userid);
             holder.loginBtn.setText("حساب کاربری");
+            holder.loginBtn.setIconResource(R.drawable.person_outline);
             holder.loginBtn.setOnClickListener(v -> {
                 Intent i = new Intent(v.getContext(), ProfileActivity.class);
                 i.putExtra(Extras.EXTRA_FIRST_ARG,userid);

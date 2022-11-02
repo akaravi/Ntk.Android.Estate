@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout5"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
     android:clipChildren="false">
 
     <androidx.cardview.widget.CardView
@@ -125,12 +126,38 @@
         app:layout_constraintRight_toRightOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="parent">
 
+        <FrameLayout
+            android:id="@+id/noImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/circle_primary" />
+
+            <ImageView
+
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:src="@drawable/person"
+                app:tint="@color/main3_toolbar_icon_bg" />
+
+        </FrameLayout>
+
+
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/image"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/person" />
+            android:src="@drawable/person"
+            android:visibility="gone"
+            app:tint="@color/main3_toolbar_icon_bg" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -143,10 +170,18 @@
         app:layout_constraintTop_toBottomOf="@id/cardView">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/backBtn"
+            android:layout_width="128dp"
+            android:layout_height="54dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/back" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/saveBtn"
             android:layout_width="128dp"
             android:layout_height="54dp"
+            android:layout_toRightOf="@+id/backBtn"
             android:text="ذخیره"
-            app:elevation="35dp" />
+            android:textColor="@color/colorAccent" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
