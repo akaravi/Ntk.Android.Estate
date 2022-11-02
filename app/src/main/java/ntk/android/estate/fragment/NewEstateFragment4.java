@@ -28,7 +28,6 @@ import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
-import ntk.android.base.entitymodel.core.CoreLocationModel;
 import ntk.android.base.entitymodel.coremain.CoreCurrencyModel;
 import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstateContractTypeModel;

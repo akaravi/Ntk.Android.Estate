@@ -139,10 +139,11 @@ public class EstateContractAdapter extends BaseRecyclerAdapter<EstateContractMod
                             price4.setText(NViewUtils.PriceFormat(item.PeriodPrice) + "  " + item.UnitSalePrice);
                     else if (item.PeriodPriceByAgreement)
                         price4.setText("توافقی");
-                } else {
-                    itemView.findViewById(R.id.linear4).setVisibility(View.GONE);
                 }
+            } else {
+                itemView.findViewById(R.id.linear4).setVisibility(View.GONE);
             }
+
         }
     }
 }
