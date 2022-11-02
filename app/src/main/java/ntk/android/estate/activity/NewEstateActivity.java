@@ -37,7 +37,7 @@ import ntk.android.estate.fragment.NewEstateFragment5;
 
 public class NewEstateActivity extends BaseActivity {
     public String MainImage_GUID;
-    public String MainImage_FilePath;
+    public String MainImage_FilePath="";
     public List<String> OtherImageIds = new ArrayList<>();
     public List<String> OtherImageSrc = new ArrayList<>();
     EstatePropertyModel model = new EstatePropertyModel();
@@ -61,7 +61,7 @@ public class NewEstateActivity extends BaseActivity {
     }
 
     protected void afterCreate() {
-        showFragment1();
+        showFragment5();
     }
 
     private void setFont() {

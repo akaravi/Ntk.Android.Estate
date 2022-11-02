@@ -18,6 +18,7 @@ import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.annotations.NonNull;
 import java9.util.function.Consumer;
+import java9.util.stream.StreamSupport;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.file.FileUploadModel;
@@ -89,13 +90,17 @@ public class NewEstateFragment5 extends BaseFragment {
             if (result.getData() != null) {
                 uri = result.getData().getData();
                 if (uri != null) {
-                    ImageLoader.getInstance().displayImage(uri.toString(), (ImageView) findViewById(R.id.selectedImageView));
-                    findViewById(R.id.deleteImage).setVisibility(View.VISIBLE);
-                    UploadFileToServer(FileManagerService.getFilePath(getContext(), uri),
-                            fileUploadModel -> {
-                                estateActivity().MainImage_GUID = fileUploadModel.FileKey;
-                                estateActivity().MainImage_FilePath = uri.toString();
-                            });
+                    if (uploadedBefore(uri.toString()))
+                        Toasty.error(getContext(), "این فایل قبلا انتخاب شده است").show();
+                    else {
+                        ImageLoader.getInstance().displayImage(uri.toString(), (ImageView) findViewById(R.id.selectedImageView));
+                        findViewById(R.id.deleteImage).setVisibility(View.VISIBLE);
+                        UploadFileToServer(FileManagerService.getFilePath(getContext(), uri),
+                                fileUploadModel -> {
+                                    estateActivity().MainImage_GUID = fileUploadModel.FileKey;
+                                    estateActivity().MainImage_FilePath = uri.toString();
+                                });
+                    }
                 }
             }
         });
@@ -107,23 +112,30 @@ public class NewEstateFragment5 extends BaseFragment {
             if (result.getData() != null) {
                 uri = result.getData().getData();
                 if (uri != null) {
-                    UploadFileToServer(FileManagerService.getFilePath(getContext(), uri),
-                            fileUploadModel -> {
-                                estateActivity().OtherImageIds.add(fileUploadModel.FileKey);
-                                estateActivity().OtherImageSrc.add(uri.toString());
-                                if (isSafeFragment(this)) {
-                                    RecyclerView rc = (RecyclerView) findViewById(R.id.imageRecycler);
-                                    FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
-                                    flowLayoutManager.setAutoMeasureEnabled(true);
-                                    flowLayoutManager.setAlignment(Alignment.RIGHT);
-                                    rc.setLayoutManager(flowLayoutManager);
-                                    rc.setAdapter(new OtherImageAdapter(estateActivity(),
-                                            estateActivity().OtherImageIds, estateActivity().OtherImageSrc));
-                                }
-                            });
+                    if (uploadedBefore(uri.toString()))
+                        Toasty.error(getContext(), "این فایل قبلا انتخاب شده است").show();
+                    else
+                        UploadFileToServer(FileManagerService.getFilePath(getContext(), uri),
+                                fileUploadModel -> {
+                                    estateActivity().OtherImageIds.add(fileUploadModel.FileKey);
+                                    estateActivity().OtherImageSrc.add(uri.toString());
+                                    if (isSafeFragment(this)) {
+                                        RecyclerView rc = (RecyclerView) findViewById(R.id.imageRecycler);
+                                        FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+                                        flowLayoutManager.setAutoMeasureEnabled(true);
+                                        flowLayoutManager.setAlignment(Alignment.RIGHT);
+                                        rc.setLayoutManager(flowLayoutManager);
+                                        rc.setAdapter(new OtherImageAdapter(estateActivity(),
+                                                estateActivity().OtherImageIds, estateActivity().OtherImageSrc));
+                                    }
+                                });
                 }
             }
         });
+    }
+
+    private boolean uploadedBefore(String newSelectedPath) {
+        return (StreamSupport.stream(estateActivity().OtherImageSrc).anyMatch(s1 -> s1 != null && s1.equals(newSelectedPath)) || estateActivity().MainImage_FilePath.equals(newSelectedPath));
     }
 
     private void UploadFileToServer(String url, Consumer<FileUploadModel> consumer) {
