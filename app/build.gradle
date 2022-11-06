@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
-def BaseVersion = '1.5.98'
+def BaseVersion = '1.6.30'
 def incrementalVersion = '3'
 android {
     compileSdkVersion 33
@@ -63,9 +63,9 @@ configurations.all {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //for result
-    implementation "androidx.activity:activity:1.6.0"
+    implementation "androidx.activity:activity:1.6.1"
     // Add the  Crashlytics SDK.
-    implementation 'io.sentry:sentry-android:5.6.1'
+    implementation 'io.sentry:sentry-android:6.6.0'
     //rounded imageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
     //for transition
