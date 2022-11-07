@@ -1,13 +1,7 @@
 package ntk.android.estate.activity;
 
-import android.content.Intent;
-
 import com.airbnb.lottie.LottieAnimationView;
 
-import io.sentry.Sentry;
-import ntk.android.base.Extras;
-import ntk.android.base.activity.common.AuthWithSmsActivity;
-import ntk.android.base.activity.common.AuthWithSmsConfirmActivity;
 import ntk.android.base.activity.common.BaseSplashActivity;
 import ntk.android.estate.R;
 

@@ -169,6 +169,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             holder.loginBtn.setText("ورود");
             holder.loginBtn.setOnClickListener(v -> {
                 Preferences.with(v.getContext()).appVariableInfo().set_registerNotInterested(false);
+                Preferences.with(d.getContext()).appVariableInfo().setIsLogin(false);
                 Intent i = new Intent(v.getContext(), AuthWithSmsActivity.class);
                 //clear all activity that open before
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -213,6 +214,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             dialog.setContentText("برای دیدین لیست املاک حود نیاز است که به حساب خود وارد شوید. آیا مایلید به صفحه ی ورود هدایت شوید؟");
             dialog.setConfirmButton("بلی", d -> {
                 Preferences.with(d.getContext()).appVariableInfo().set_registerNotInterested(false);
+                Preferences.with(d.getContext()).appVariableInfo().setIsLogin(false);
                 Intent i = new Intent(d.getContext(), AuthWithSmsActivity.class);
                 //clear all activity that open before
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

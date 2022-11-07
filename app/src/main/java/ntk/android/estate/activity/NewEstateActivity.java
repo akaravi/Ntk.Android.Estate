@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import ntk.android.base.NTKApplication;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.activity.common.AuthWithSmsActivity;
 import ntk.android.base.config.NtkObserver;
@@ -37,7 +38,7 @@ import ntk.android.estate.fragment.NewEstateFragment5;
 
 public class NewEstateActivity extends BaseActivity {
     public String MainImage_GUID;
-    public String MainImage_FilePath="";
+    public String MainImage_FilePath = "";
     public List<String> OtherImageIds = new ArrayList<>();
     public List<String> OtherImageSrc = new ArrayList<>();
     EstatePropertyModel model = new EstatePropertyModel();
@@ -190,8 +191,9 @@ public class NewEstateActivity extends BaseActivity {
     public void uploadFinished() {
         uploadProcess = false;
     }
+
     public boolean isUploaded() {
-       return !uploadProcess ;
+        return !uploadProcess;
     }
 
     @Override
@@ -235,10 +237,11 @@ public class NewEstateActivity extends BaseActivity {
             dialog.setContentText("برای ثبت ملک نیاز است که به حساب خود وارد شوید. آیا مایلید به صفحه ی ورود هدایت شوید؟");
             dialog.setConfirmButton("بلی", d -> {
                 Preferences.with(d.getContext()).appVariableInfo().set_registerNotInterested(false);
-                Intent i = new Intent(d.getContext(), AuthWithSmsActivity.class);
+                Preferences.with(d.getContext()).appVariableInfo().setIsLogin(false);
+                Intent i = new Intent( d.getContext(), AuthWithSmsActivity.class);
                 //clear all activity that open before
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                d.getContext().startActivity(i);
+                NTKApplication.get().startActivity(i);
                 d.dismiss();
             });
             dialog.setCancelButton("تمایل ندارم", SweetAlertDialog::dismiss);
