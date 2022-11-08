@@ -25,7 +25,7 @@ public class MyApplication extends NTKApplication {
     public void onCreate() {
         applicationStyle = new MyAppStyle();
         super.onCreate();
-        Mapir.init(this, "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjUwMGRmMjgyZjZkYjZkYmQ4ZDdjZTQxM2EyZDY0ZDg1NG" +
+        Mapir.getInstance(this, "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjUwMGRmMjgyZjZkYjZkYmQ4ZDdjZTQxM2EyZDY0ZDg1NG" +
                 "ZmOTMyMTc3NWQxOGFkNWI4ODk4NTRjOTE5MjZlYWQ1MDk0ZmMzMWY2N2FmMzIxIn0.eyJhdWQiOiIxNzE5MiIsImp0aSI6IjUwMGRmMjg" +
                 "yZjZkYjZkYmQ4ZDdjZTQxM2EyZDY0ZDg1NGZmOTMyMTc3NWQxOGFkNWI4ODk4NTRjOTE5MjZlYWQ1MDk0ZmMzMWY2N2FmMzIxIiwiaWF0IjoxN" +
                 "jQ1ODA1MDMzLCJuYmYiOjE2NDU4MDUwMzMsImV4cCI6MTY0ODIyMDYzMywic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.GiAE2GIo0vz1RNF9JloT" +

@@ -111,7 +111,7 @@ dependencies {
     //for ripple
     implementation 'com.balysv:material-ripple:1.0.2'
     //for  map
-    implementation 'ir.map:map-sdk:4.5.2'
+    implementation 'ir.map:map-sdk:4.0.0'
     //for icon fonts
     implementation "com.mikepenz:iconics-core:5.3.0"
     implementation "com.mikepenz:iconics-views:5.3.0"
