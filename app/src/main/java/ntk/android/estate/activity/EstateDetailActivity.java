@@ -274,11 +274,10 @@ public class EstateDetailActivity extends BaseActivity {
     }
 
     public void ClickShare() {
-        UpdateClass updateInfo = Preferences.with(this).appVariableInfo().updateInfo();
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         String message = createShareMassage();
-        shareIntent.putExtra(Intent.EXTRA_TEXT, message + "\n\n\n" + this.getString(ntk.android.base.R.string.app_name) + "\n" + getString(ntk.android.base.R.string.per_download_link) + "\n" + updateInfo.url);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, message + "\n\n\n" + this.getString(ntk.android.base.R.string.app_name) + "\n" + getString(ntk.android.base.R.string.per_download_link) + "\n" + model.UrlViewContent);
         shareIntent.setType("text/txt");
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         this.startActivity(Intent.createChooser(shareIntent, getString(ntk.android.base.R.string.per_share_to)));

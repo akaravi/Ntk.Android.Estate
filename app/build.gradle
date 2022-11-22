@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
-def BaseVersion = '1.6.46'
+def BaseVersion = '1.6.51'
 def incrementalVersion = '3'
 android {
-    compileSdkVersion 33
+    compileSdk 33
     defaultConfig {
         applicationId "ntk.android.estate.APPNTK"//change for packagename for api
         minSdkVersion 17
@@ -56,6 +56,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    buildToolsVersion '33.0.0'
 }
 configurations.all {
     resolutionStrategy.force 'androidx.annotation:annotation:1.2.0'
