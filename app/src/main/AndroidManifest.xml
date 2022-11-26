@@ -111,10 +111,15 @@
             android:name=".activity.EditEstateActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ProfileActivity" android:theme="@style/Theme.UserDialog"
+            android:name=".activity.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UserDialog" />
+        <activity
+            android:name=".activity.NewCustomerOrderActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.NewCustomerOrderActivity" />
-        <activity android:name=".activity.EstateCustomerOrderListActivity" />
+        <activity
+            android:name=".activity.EstateCustomerOrderListActivity"
+            android:screenOrientation="portrait" />
 
 
         <provider

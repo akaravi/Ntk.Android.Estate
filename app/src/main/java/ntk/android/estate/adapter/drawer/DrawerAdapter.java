@@ -36,6 +36,7 @@ import ntk.android.estate.MyApplication;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.AboutUsActivity;
 import ntk.android.estate.activity.ArticleListActivity;
+import ntk.android.estate.activity.EstateCustomerOrderListActivity;
 import ntk.android.estate.activity.EstateListActivity;
 import ntk.android.estate.activity.FavoriteEstateListActivity;
 import ntk.android.estate.activity.MyEstateActivity;
@@ -107,38 +108,35 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
                     ClickFavoriteEstateList();
                     break;
                 case 2:
-                    ClickNews();
+                    ClickCustomerOrderList();
                     break;
                 case 3:
-                    ClickArticle();
+                    ClickNews();
                     break;
                 case 4:
-                    ClickContact();
+                    ClickArticle();
                     break;
                 case 5:
-                    ClickPooling();
+                    ClickContact();
                     break;
                 case 6:
-                    ClickInboxNotification();
+                    ClickPooling();
                     break;
                 case 7:
-                    ClickQuestion();
+                    ClickInboxNotification();
                     break;
                 case 8:
-                    ClickFeedBack();
+                    ClickQuestion();
                     break;
                 case 9:
-                    ClickAbout();
+                    ClickFeedBack();
                     break;
                 case 10:
+                    ClickAbout();
+                    break;
+                case 11:
                     ClickIntro();
                     break;
-//                case 11:
-//
-//                    break;
-//                case 12:
-//
-//                    break;
                 case ID_INVITE:
                     ClickShare();
                     break;
@@ -160,7 +158,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             holder.loginBtn.setIconResource(R.drawable.person_outline);
             holder.loginBtn.setOnClickListener(v -> {
                 Intent i = new Intent(v.getContext(), ProfileActivity.class);
-                i.putExtra(Extras.EXTRA_FIRST_ARG,userid);
+                i.putExtra(Extras.EXTRA_FIRST_ARG, userid);
                 v.getContext().startActivity(i);
             });
         } else {
@@ -185,6 +183,13 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
 
     private void ClickEstateList() {
         context.startActivity(new Intent(context, EstateListActivity.class));
+        if (Drawer != null) {
+            Drawer.closeMenu(true);
+        }
+    }
+
+    private void ClickCustomerOrderList() {
+        context.startActivity(new Intent(context, EstateCustomerOrderListActivity.class));
         if (Drawer != null) {
             Drawer.closeMenu(true);
         }
@@ -356,6 +361,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
 //        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("آخرین ملک های ثبت شده").setDrawableIcon(R.drawable.estate));
 //        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("ثبت ملک جدید").setDrawableIcon(R.drawable.add));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("املاک من").setDrawableIcon(R.drawable.my_estate));
+        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("سفارشات").setDrawableIcon(R.drawable.my_estate));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("لیست علاقه مندی").setDrawableIcon(R.drawable.favorites_folder));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("اخبار").setDrawableIcon(R.drawable.news2));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("مقالات").setDrawableIcon(R.drawable.article_place_holder));

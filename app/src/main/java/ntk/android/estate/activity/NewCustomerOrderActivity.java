@@ -36,6 +36,7 @@ import ntk.android.estate.fragment.NewEstateFragment4;
 import ntk.android.estate.fragment.NewEstateFragment5;
 import ntk.android.estate.fragment.NewOrderFragment1;
 import ntk.android.estate.fragment.NewOrderFragment2;
+import ntk.android.estate.fragment.NewOrderFragment3;
 
 public class NewCustomerOrderActivity extends BaseActivity {
 
@@ -103,7 +104,7 @@ public class NewCustomerOrderActivity extends BaseActivity {
         stepNumber = 3;
         title.setText("شرایط معامله");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
-        NewOrderFragment3 fragment = new NewEstateFragment3();
+        NewOrderFragment3 fragment = new NewOrderFragment3();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
                 showFragment4();
@@ -114,11 +115,11 @@ public class NewCustomerOrderActivity extends BaseActivity {
 
     protected void showFragment4() {
         stepNumber = 4;
-        title.setText("شرایط معامله");
+        title.setText("سایر مشخصات");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
         findViewById(R.id.addNewBtn).setVisibility(View.GONE);
         findViewById(R.id.continueBtn).setVisibility(View.VISIBLE);
-        NewEstateFragment4 fragment = new NewEstateFragment4();
+        NewOrderFragment4 fragment = new NewOrderFragment4();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
                 showFragment5();
@@ -182,17 +183,6 @@ public class NewCustomerOrderActivity extends BaseActivity {
         });
     }
 
-    public void onUploadingStep() {
-        uploadProcess = true;
-    }
-
-    public void uploadFinished() {
-        uploadProcess = false;
-    }
-
-    public boolean isUploaded() {
-        return !uploadProcess;
-    }
 
     @Override
     public void onBackPressed() {

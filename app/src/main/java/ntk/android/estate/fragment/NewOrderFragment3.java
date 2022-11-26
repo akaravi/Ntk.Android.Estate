@@ -38,7 +38,7 @@ import ntk.android.estate.adapter.EstateContractAdapterSelector;
 import ntk.android.estate.adapter.RemovableContractsAdapter;
 import ntk.android.estate.view.NumberTextWatcherForThousand;
 
-class NewOrderFragment3 extends BaseFragment {
+public class NewOrderFragment3 extends BaseFragment {
 
     private EstateContractTypeModel selectedModel;
     private int stepData = 0;
