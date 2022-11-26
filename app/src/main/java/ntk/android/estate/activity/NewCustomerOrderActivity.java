@@ -25,6 +25,7 @@ import ntk.android.base.entitymodel.coremain.CoreCurrencyModel;
 import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstateCustomerOrderModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
+import ntk.android.base.services.estate.EstateCustomerOrderService;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.prefrense.Preferences;
@@ -37,6 +38,7 @@ import ntk.android.estate.fragment.NewEstateFragment5;
 import ntk.android.estate.fragment.NewOrderFragment1;
 import ntk.android.estate.fragment.NewOrderFragment2;
 import ntk.android.estate.fragment.NewOrderFragment3;
+import ntk.android.estate.fragment.NewOrderFragment4;
 
 public class NewCustomerOrderActivity extends BaseActivity {
 
@@ -153,18 +155,18 @@ public class NewCustomerOrderActivity extends BaseActivity {
 
     protected void createModel() {
         showProgress();
-        model.PropertyDetailGroups = null;
-        model.UploadFileGUID = new ArrayList<>();
-        if (MainImage_GUID != null && !MainImage_GUID.equalsIgnoreCase(""))
-            model.UploadFileGUID.add(MainImage_GUID);
-        model.UploadFileGUID.addAll(OtherImageIds);
-        for (EstateContractModel model :
-                model.Contracts) {
-            model.LinkCoreCurrencyId = selectedCurrency.Id;
-        }
-        ServiceExecute.execute(new EstatePropertyService(this).add(model)).subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
+//        model.PropertyDetailGroups = null;
+//        model.UploadFileGUID = new ArrayList<>();
+//        if (MainImage_GUID != null && !MainImage_GUID.equalsIgnoreCase(""))
+//            model.UploadFileGUID.add(MainImage_GUID);
+//        model.UploadFileGUID.addAll(OtherImageIds);
+//        for (EstateContractModel model :
+//                model.Contracts) {
+//            model.LinkCoreCurrencyId = selectedCurrency.Id;
+//        }
+        ServiceExecute.execute(new EstateCustomerOrderService(this).add(model)).subscribe(new NtkObserver<ErrorException<EstateCustomerOrderModel>>() {
             @Override
-            public void onNext(@NonNull ErrorException<EstatePropertyModel> response) {
+            public void onNext(@NonNull ErrorException<EstateCustomerOrderModel> response) {
                 if (response.IsSuccess) {
                     Toasty.success(NewCustomerOrderActivity.this, "ملک شما ثبت شد").show();
                     finish();
@@ -238,4 +240,4 @@ public class NewCustomerOrderActivity extends BaseActivity {
     }
 }
 
-}
+
