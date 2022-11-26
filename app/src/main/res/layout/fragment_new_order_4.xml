@@ -100,21 +100,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/EstateAddressTextInput"
-                    style="@style/new_estate_textInputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/address">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/EstateAddressEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        android:textSize="14sp"
-                        android:theme="@style/new_estate_textInputEditText" />
-                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
