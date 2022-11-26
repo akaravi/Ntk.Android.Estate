@@ -112,8 +112,7 @@ class NewOrderFragment3 extends BaseFragment {
             @Override
             public void onNext(@NonNull ErrorException<EstateContractTypeModel> model) {
                 stepData++;
-                if (stepData == 2)
-                    estateActivity().showContent();
+                if (stepData == 2) estateActivity().showContent();
                 EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, NewOrderFragment3.this::changeView);
                 RecyclerView rc = findViewById(R.id.contractsRc);
                 rc.setAdapter(adapter);
@@ -133,18 +132,15 @@ class NewOrderFragment3 extends BaseFragment {
             @Override
             public void onNext(@NonNull ErrorException<CoreCurrencyModel> model) {
                 stepData++;
-                if (stepData == 2)
-                    estateActivity().showContent();
+                if (stepData == 2) estateActivity().showContent();
                 try {
                     MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.CurrencyAutoComplete);
                     List<CoreCurrencyModel> currencyList = model.ListItems;
                     List<String> names = new ArrayList<>();
                     for (CoreCurrencyModel t : currencyList)
                         names.add(t.Title);
-                    if (names.size() == 0)
-                        names.add("موردی یافت نشد");
-                    else
-                        estateActivity().selectedCurrency = currencyList.get(0);
+                    if (names.size() == 0) names.add("موردی یافت نشد");
+                    else estateActivity().selectedCurrency = currencyList.get(0);
                     SpinnerAdapter<CoreCurrencyModel> currencyAdapter = new SpinnerAdapter<CoreCurrencyModel>(getContext(), names);
                     spinner.setOnItemClickListener((parent, view, position, id) -> {
                         estateActivity().selectedCurrency = currencyList.get(position);
@@ -170,122 +166,126 @@ class NewOrderFragment3 extends BaseFragment {
         findViewById(R.id.addNewEstateBtn).setVisibility(View.VISIBLE);
 
         TextInputLayout et1 = findViewById(R.id.etlSale);
-        et1.setHint(model.TitleSalePriceML);
+        TextInputLayout et2 = findViewById(R.id.etlSale2);
+        et1.setHint("حداکثر " + model.TitleSalePriceML);
+        et2.setHint("حداقل " + model.TitleSalePriceML);
         et1.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
-        findViewById(R.id.checkbox_rowSale).setVisibility(model.SalePriceAllowAgreement ? View.VISIBLE : View.GONE);
-        ((TextView) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cbText)).setText("قیمت توافقی");
+        et2.setVisibility(model.HasSalePrice ? View.VISIBLE : View.GONE);
 
-        TextInputLayout et2 = findViewById(R.id.etlRent);
-        et2.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
-        et2.setHint(model.TitleRentPriceML);
-        findViewById(R.id.checkbox_rowRent).setVisibility(model.RentPriceAllowAgreement ? View.VISIBLE : View.GONE);
-        ((TextView) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cbText)).setText("قیمت توافقی");
+        TextInputLayout et3 = findViewById(R.id.etlRent);
+        TextInputLayout et4 = findViewById(R.id.etlRent2);
+        et3.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
+        et4.setVisibility(model.HasRentPrice ? View.VISIBLE : View.GONE);
+        et3.setHint("حداکثر " + model.TitleRentPriceML);
+        et4.setHint("حداقل " + model.TitleRentPriceML);
 
-        TextInputLayout et3 = findViewById(R.id.etlDeposit);
-        et3.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
-        et3.setHint(model.TitleDepositPriceML);
-        findViewById(R.id.checkbox_rowDeposit).setVisibility(model.DepositPriceAllowAgreement ? View.VISIBLE : View.GONE);
-        ((TextView) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cbText)).setText("قیمت توافقی");
+        TextInputLayout et5 = findViewById(R.id.etlDeposit);
+        TextInputLayout et6 = findViewById(R.id.etlDeposit2);
+        et5.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
+        et6.setVisibility(model.HasDepositPrice ? View.VISIBLE : View.GONE);
+        et5.setHint("حداکثر " + model.TitleDepositPriceML);
+        et6.setHint("حداقل " + model.TitleDepositPriceML);
 
-        TextInputLayout et4 = findViewById(R.id.etlPeriodPayment);
-        et4.setVisibility(model.HasPeriodPrice ? View.VISIBLE : View.GONE);
-        et4.setHint(model.TitlePeriodPriceML);
-        findViewById(R.id.checkbox_rowPeriodPayment).setVisibility(model.PeriodPriceAllowAgreement ? View.VISIBLE : View.GONE);
-        ((TextView) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cbText)).setText("قیمت توافقی");
+        TextInputLayout et7 = findViewById(R.id.etlPeriodPayment);
+        TextInputLayout et8 = findViewById(R.id.etlPeriodPayment2);
+        et7.setVisibility(model.HasPeriodPrice ? View.VISIBLE : View.GONE);
+        et8.setVisibility(model.HasPeriodPrice ? View.VISIBLE : View.GONE);
+        et7.setHint("حداکثر " + model.TitlePeriodPriceML);
+        et8.setHint("حداقل " + model.TitlePeriodPriceML);
     }
 
     private void clearAllInput() {
-        ((MaterialCheckBox) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cb)).setChecked(false);
         TextInputEditText et1 = findViewById(R.id.etSale);
         et1.setText("");
-        ((MaterialCheckBox) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cb)).setChecked(false);
-        TextInputEditText et2 = findViewById(R.id.etRent);
+        TextInputEditText et2 = findViewById(R.id.etSale2);
         et2.setText("");
-        ((MaterialCheckBox) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cb)).setChecked(false);
-        TextInputEditText et3 = findViewById(R.id.etDeposit);
+        TextInputEditText et3 = findViewById(R.id.etRent);
         et3.setText("");
-        ((MaterialCheckBox) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cb)).setChecked(false);
-        TextInputEditText et4 = findViewById(R.id.etPeriodPayment);
+        TextInputEditText et4 = findViewById(R.id.etRent2);
         et4.setText("");
+        TextInputEditText et5 = findViewById(R.id.etDeposit);
+        et5.setText("");
+        TextInputEditText et6 = findViewById(R.id.etDeposit2);
+        et6.setText("");
+        TextInputEditText et7 = findViewById(R.id.etPeriodPayment);
+        et7.setText("");
+        TextInputEditText et8 = findViewById(R.id.etPeriodPayment2);
+        et8.setText("");
     }
 
-    private void addItem() {
-        if (selectedModel != null) {
-            EstateContractModel contract = new EstateContractModel();
-            contract.ContractType = selectedModel;
-            contract.LinkEstateContractTypeId = selectedModel.Id;
-            if (selectedModel.HasRentPrice || selectedModel.RentPriceAllowAgreement) {
-                if (((MaterialCheckBox) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cb)).isChecked())
-                    contract.RentPriceByAgreement = true;
-                else {
-
-                    TextInputEditText et = findViewById(R.id.etRent);
-                    if (et.getText().toString().trim().equals("")) {
-                        Toasty.info(getContext(), selectedModel.TitleRentPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
-                        return;
-                    } else {
-                        contract.RentPriceByAgreement = false;
-                        contract.RentPrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et.getText().toString()));
-                    }
-                }
-            } else
-                contract.RentPriceByAgreement = false;
-            if (selectedModel.HasSalePrice || selectedModel.SalePriceAllowAgreement) {
-                if (((MaterialCheckBox) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cb)).isChecked())
-                    contract.SalePriceByAgreement = true;
-                else {
-                    TextInputEditText et = findViewById(R.id.etSale);
-                    if (et.getText().toString().trim().equals("")) {
-                        Toasty.info(getContext(), selectedModel.TitleSalePriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
-                        return;
-                    } else {
-                        contract.SalePriceByAgreement = false;
-                        contract.SalePrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et.getText().toString()));
-                    }
-                }
-            } else
-                contract.SalePriceByAgreement = false;
-            if (selectedModel.HasDepositPrice || selectedModel.DepositPriceAllowAgreement) {
-                if (((MaterialCheckBox) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cb)).isChecked())
-                    contract.DepositPriceByAgreement = true;
-                else {
-                    TextInputEditText et = findViewById(R.id.etDeposit);
-                    if (et.getText().toString().trim().equals("")) {
-                        Toasty.info(getContext(), selectedModel.TitleDepositPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
-                        return;
-                    } else {
-                        contract.DepositPriceByAgreement = false;
-                        contract.DepositPrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et.getText().toString()));
-                    }
-                }
-            } else
-                contract.DepositPriceByAgreement = false;
-            if (selectedModel.HasPeriodPrice || selectedModel.PeriodPriceAllowAgreement) {
-                if (((MaterialCheckBox) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cb)).isChecked())
-                    contract.PeriodPriceByAgreement = true;
-                else {
-                    TextInputEditText et4 = findViewById(R.id.etPeriodPayment);
-                    if (et4.getText().toString().equals("")) {
-                        Toasty.info(getContext(), selectedModel.TitlePeriodPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
-                        return;
-                    } else {
-                        contract.PeriodPriceByAgreement = false;
-                        contract.PeriodPrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et4.getText().toString()));
-                    }
-                }
-            } else
-                contract.PeriodPriceByAgreement = false;
-
-
-            if (estateActivity().model().Contracts == null)
-                estateActivity().model().Contracts = new ArrayList<>();
-            estateActivity().model().Contracts.add(contract);
-            ((RecyclerView) findViewById(R.id.contractsEditRc)).setAdapter(new RemovableContractsAdapter(estateActivity().model().Contracts));
-            Toasty.success(getContext(), "به لیست معاملات اضافه شد", Toasty.LENGTH_LONG, true).show();
-
-        } else
-            Toasty.info(getContext(), "نوع معامله ی مورد نظر خود را انتخاب کنید", Toasty.LENGTH_LONG, true).show();
-    }
+//    private void addItem() {
+//        if (selectedModel != null) {
+//            EstateContractModel contract = new EstateContractModel();
+//            contract.ContractType = selectedModel;
+//            contract.LinkEstateContractTypeId = selectedModel.Id;
+//            if (selectedModel.HasRentPrice || selectedModel.RentPriceAllowAgreement) {
+//                if (((MaterialCheckBox) findViewById(R.id.checkbox_rowRent).findViewById(R.id.cb)).isChecked())
+//                    contract.RentPriceByAgreement = true;
+//                else {
+//
+//                    TextInputEditText et = findViewById(R.id.etRent);
+//                    if (et.getText().toString().trim().equals("")) {
+//                        Toasty.info(getContext(), selectedModel.TitleRentPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+//                        return;
+//                    } else {
+//                        contract.RentPriceByAgreement = false;
+//                        contract.RentPrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et.getText().toString()));
+//                    }
+//                }
+//            } else contract.RentPriceByAgreement = false;
+//            if (selectedModel.HasSalePrice || selectedModel.SalePriceAllowAgreement) {
+//                if (((MaterialCheckBox) findViewById(R.id.checkbox_rowSale).findViewById(R.id.cb)).isChecked())
+//                    contract.SalePriceByAgreement = true;
+//                else {
+//                    TextInputEditText et = findViewById(R.id.etSale);
+//                    if (et.getText().toString().trim().equals("")) {
+//                        Toasty.info(getContext(), selectedModel.TitleSalePriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+//                        return;
+//                    } else {
+//                        contract.SalePriceByAgreement = false;
+//                        contract.SalePrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et.getText().toString()));
+//                    }
+//                }
+//            } else contract.SalePriceByAgreement = false;
+//            if (selectedModel.HasDepositPrice || selectedModel.DepositPriceAllowAgreement) {
+//                if (((MaterialCheckBox) findViewById(R.id.checkbox_rowDeposit).findViewById(R.id.cb)).isChecked())
+//                    contract.DepositPriceByAgreement = true;
+//                else {
+//                    TextInputEditText et = findViewById(R.id.etDeposit);
+//                    if (et.getText().toString().trim().equals("")) {
+//                        Toasty.info(getContext(), selectedModel.TitleDepositPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+//                        return;
+//                    } else {
+//                        contract.DepositPriceByAgreement = false;
+//                        contract.DepositPrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et.getText().toString()));
+//                    }
+//                }
+//            } else contract.DepositPriceByAgreement = false;
+//            if (selectedModel.HasPeriodPrice || selectedModel.PeriodPriceAllowAgreement) {
+//                if (((MaterialCheckBox) findViewById(R.id.checkbox_rowPeriodPayment).findViewById(R.id.cb)).isChecked())
+//                    contract.PeriodPriceByAgreement = true;
+//                else {
+//                    TextInputEditText et4 = findViewById(R.id.etPeriodPayment);
+//                    if (et4.getText().toString().equals("")) {
+//                        Toasty.info(getContext(), selectedModel.TitlePeriodPriceML + " مورد نظر خود را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+//                        return;
+//                    } else {
+//                        contract.PeriodPriceByAgreement = false;
+//                        contract.PeriodPrice = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et4.getText().toString()));
+//                    }
+//                }
+//            } else contract.PeriodPriceByAgreement = false;
+//
+//
+//            if (estateActivity().model().Contracts == null)
+//                estateActivity().model().Contracts = new ArrayList<>();
+//            estateActivity().model().Contracts.add(contract);
+//            ((RecyclerView) findViewById(R.id.contractsEditRc)).setAdapter(new RemovableContractsAdapter(estateActivity().model().Contracts));
+//            Toasty.success(getContext(), "به لیست معاملات اضافه شد", Toasty.LENGTH_LONG, true).show();
+//
+//        } else
+//            Toasty.info(getContext(), "نوع معامله ی مورد نظر خود را انتخاب کنید", Toasty.LENGTH_LONG, true).show();
+//    }
 
     private NewEstateActivity estateActivity() {
         return ((NewEstateActivity) getActivity());
