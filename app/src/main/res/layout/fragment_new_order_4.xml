@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+
+        <androidx.cardview.widget.CardView
+            style="@style/new_estate_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/EstateTitleTextInput"
+                style="@style/new_estate_textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/title">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EstateTitleEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textSize="14sp"
+                    android:theme="@style/new_estate_textInputEditText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            style="@style/new_estate_padding"
+            android:layout_width="match_parent" />
+
+        <androidx.cardview.widget.CardView
+            style="@style/new_estate_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/EstateDescTextInput"
+                style="@style/new_estate_textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/Description">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EstateDescEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="140dp"
+                    android:textSize="14sp"
+                    android:theme="@style/new_estate_textInputEditText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            style="@style/new_estate_padding"
+            android:layout_width="match_parent" />
+
+        <androidx.cardview.widget.CardView
+            style="@style/new_estate_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentPadding="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/EstateProvinceTextInput"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="@string/location"
+                    app:helperTextEnabled="true"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/EstateProvinceAutoComplete"
+                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/EstateAddressTextInput"
+                    style="@style/new_estate_textInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/address">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/EstateAddressEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:textSize="14sp"
+                        android:theme="@style/new_estate_textInputEditText" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
