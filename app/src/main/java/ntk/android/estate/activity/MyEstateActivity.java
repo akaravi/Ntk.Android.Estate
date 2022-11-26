@@ -5,6 +5,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
+
 import io.reactivex.Observable;
 import java9.util.function.Function;
 import ntk.android.base.activity.common.BaseFilterModelListActivity;
@@ -26,11 +28,11 @@ public class MyEstateActivity extends BaseFilterModelListActivity<EstateProperty
         super.onCreated();
         ((TextView) findViewById(R.id.lblTitle)).setText(R.string.per_my_estate);
         findViewById(ntk.android.base.R.id.imgSearch).setVisibility(View.GONE);
-        findViewById(R.id.addNew).setOnClickListener(view -> {
-            finish();
+        MaterialButton newBtn = findViewById(R.id.addNew);
+        newBtn.setText("ثبت سفارش جدید");
+        newBtn.setOnClickListener(view -> {
             NewEstateActivity.START_ACTIVITY(view.getContext());
         });
-        findViewById(R.id.addNew).setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -41,5 +43,10 @@ public class MyEstateActivity extends BaseFilterModelListActivity<EstateProperty
     @Override
     public Function<FilterModel, Observable<ErrorException<EstatePropertyModel>>> getService() {
         return (new EstatePropertyService(this))::getAllEditor;
+    }
+
+    @Override
+    protected void onShowNewItem() {
+        findViewById(R.id.addNew).setVisibility(View.VISIBLE);
     }
 }

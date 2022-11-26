@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -26,16 +25,14 @@ import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.coremain.CoreCurrencyModel;
-import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstateContractTypeModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.core.CoreCurrencyService;
 import ntk.android.base.services.estate.EstateContractTypeService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
-import ntk.android.estate.activity.NewEstateActivity;
+import ntk.android.estate.activity.NewCustomerOrderActivity;
 import ntk.android.estate.adapter.EstateContractAdapterSelector;
-import ntk.android.estate.adapter.RemovableContractsAdapter;
 import ntk.android.estate.view.NumberTextWatcherForThousand;
 
 public class NewOrderFragment3 extends BaseFragment {
@@ -107,12 +104,12 @@ public class NewOrderFragment3 extends BaseFragment {
 
     private void getData() {
         //show loading
-        estateActivity().showProgress();
+        orderActivity().showProgress();
         ServiceExecute.execute(new EstateContractTypeService(getContext()).getAll(new FilterModel())).subscribe(new NtkObserver<ErrorException<EstateContractTypeModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstateContractTypeModel> model) {
                 stepData++;
-                if (stepData == 2) estateActivity().showContent();
+                if (stepData == 2) orderActivity().showContent();
                 EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, NewOrderFragment3.this::changeView);
                 RecyclerView rc = findViewById(R.id.contractsRc);
                 rc.setAdapter(adapter);
@@ -125,14 +122,14 @@ public class NewOrderFragment3 extends BaseFragment {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                estateActivity().showErrorView();
+                orderActivity().showErrorView();
             }
         });
         ServiceExecute.execute(new CoreCurrencyService(getContext()).getAll(new FilterModel())).subscribe(new NtkObserver<ErrorException<CoreCurrencyModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<CoreCurrencyModel> model) {
                 stepData++;
-                if (stepData == 2) estateActivity().showContent();
+                if (stepData == 2) orderActivity().showContent();
                 try {
                     MaterialAutoCompleteTextView spinner = getView().findViewById(R.id.CurrencyAutoComplete);
                     List<CoreCurrencyModel> currencyList = model.ListItems;
@@ -140,10 +137,10 @@ public class NewOrderFragment3 extends BaseFragment {
                     for (CoreCurrencyModel t : currencyList)
                         names.add(t.Title);
                     if (names.size() == 0) names.add("موردی یافت نشد");
-                    else estateActivity().selectedCurrency = currencyList.get(0);
+                    else orderActivity().selectedCurrency = currencyList.get(0);
                     SpinnerAdapter<CoreCurrencyModel> currencyAdapter = new SpinnerAdapter<CoreCurrencyModel>(getContext(), names);
                     spinner.setOnItemClickListener((parent, view, position, id) -> {
-                        estateActivity().selectedCurrency = currencyList.get(position);
+                        orderActivity().selectedCurrency = currencyList.get(position);
                     });
                     spinner.setAdapter(currencyAdapter);
                     // Do something for lollipop and above versions
@@ -155,7 +152,7 @@ public class NewOrderFragment3 extends BaseFragment {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                estateActivity().showErrorView();
+                orderActivity().showErrorView();
             }
         });
     }
@@ -163,7 +160,6 @@ public class NewOrderFragment3 extends BaseFragment {
     private void changeView(EstateContractTypeModel model) {
         clearAllInput();
         selectedModel = model;
-        findViewById(R.id.addNewEstateBtn).setVisibility(View.VISIBLE);
 
         TextInputLayout et1 = findViewById(R.id.etlSale);
         TextInputLayout et2 = findViewById(R.id.etlSale2);
@@ -287,16 +283,94 @@ public class NewOrderFragment3 extends BaseFragment {
 //            Toasty.info(getContext(), "نوع معامله ی مورد نظر خود را انتخاب کنید", Toasty.LENGTH_LONG, true).show();
 //    }
 
-    private NewEstateActivity estateActivity() {
-        return ((NewEstateActivity) getActivity());
+    private NewCustomerOrderActivity orderActivity() {
+        return ((NewCustomerOrderActivity) getActivity());
     }
 
     public boolean isValidForm() {
         //if contracts add can go to next page
-        if (estateActivity().model().Contracts.size() == 0) {
+        if (selectedModel == null) {
             Toasty.error(getContext(), "لطفا برای این ملک حداقل یک نوع معامله وارد نمایید", Toasty.LENGTH_LONG).show();
             return false;
         }
+
+        TextInputEditText et1 = findViewById(R.id.etSale);
+        TextInputEditText et2 = findViewById(R.id.etSale2);
+        TextInputEditText et3 = findViewById(R.id.etRent);
+        TextInputEditText et4 = findViewById(R.id.etRent2);
+        TextInputEditText et5 = findViewById(R.id.etDeposit);
+        TextInputEditText et6 = findViewById(R.id.etDeposit2);
+        TextInputEditText et7 = findViewById(R.id.etPeriodPayment);
+        TextInputEditText et8 = findViewById(R.id.etPeriodPayment2);
+        orderActivity().model().LinkContractTypeId = selectedModel.Id;
+        double SalePriceMax = 0, SalePriceMin = 0, RentPriceMax = 0, RentPriceMin = 0,
+                DepositPriceMax = 0, DepositPriceMin = 0,
+                PeriodPriceMax = 0, PeriodPriceMin = 0;
+        if (!et1.getText().toString().equals(""))
+            SalePriceMax = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et1.getText().toString()));
+        if (!et2.getText().toString().equals(""))
+            SalePriceMin = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et2.getText().toString()));
+        if (!et3.getText().toString().equals(""))
+            RentPriceMax = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et3.getText().toString()));
+        if (!et4.getText().toString().equals(""))
+            RentPriceMin = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et4.getText().toString()));
+        if (!et5.getText().toString().equals(""))
+            DepositPriceMax = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et5.getText().toString()));
+        if (!et6.getText().toString().equals(""))
+            DepositPriceMin = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et6.getText().toString()));
+        if (!et7.getText().toString().equals(""))
+            PeriodPriceMax = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et7.getText().toString()));
+        if (!et8.getText().toString().equals(""))
+            PeriodPriceMin = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et8.getText().toString()));
+
+        if (SalePriceMin != 0 && SalePriceMax != 0 && SalePriceMax < SalePriceMin) {
+            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitleSalePriceML + "باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
+            return false;
+        }
+        if (RentPriceMin != 0 && RentPriceMax != 0 && RentPriceMax < RentPriceMin) {
+            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitleRentPriceML + "باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
+            return false;
+        }
+        if (DepositPriceMin != 0 && DepositPriceMax != 0 && DepositPriceMax < DepositPriceMin) {
+            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitleDepositPriceML + "باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
+            return false;
+        }
+        if (PeriodPriceMin != 0 && PeriodPriceMax != 0 && PeriodPriceMax < PeriodPriceMin) {
+            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitlePeriodPriceML + "باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
+            return false;
+        }
+        if (SalePriceMin != 0)
+            orderActivity().model().SalePriceMin = SalePriceMin;
+        else
+            orderActivity().model().SalePriceMin = null;
+        if (SalePriceMax != 0)
+            orderActivity().model().SalePriceMax = SalePriceMax;
+        else
+            orderActivity().model().SalePriceMax = null;
+        if (RentPriceMin != 0)
+            orderActivity().model().RentPriceMin = RentPriceMin;
+        else
+            orderActivity().model().RentPriceMin = null;
+        if (RentPriceMax != 0)
+            orderActivity().model().RentPriceMax = RentPriceMax;
+        else
+            orderActivity().model().RentPriceMax = null;
+        if (DepositPriceMin != 0)
+            orderActivity().model().DepositPriceMin = DepositPriceMin;
+        else
+            orderActivity().model().DepositPriceMin = null;
+        if (DepositPriceMax != 0)
+            orderActivity().model().DepositPriceMax = DepositPriceMax;
+        else
+            orderActivity().model().DepositPriceMax = null;
+       if (PeriodPriceMin != 0)
+            orderActivity().model().PeriodPriceMin = PeriodPriceMin;
+        else
+            orderActivity().model().PeriodPriceMin = null;
+       if (PeriodPriceMax != 0)
+            orderActivity().model().PeriodPriceMax = PeriodPriceMax;
+        else
+            orderActivity().model().PeriodPriceMax = null;
         return true;
     }
 }
