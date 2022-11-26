@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import ntk.android.base.NTKApplication;
@@ -24,24 +23,23 @@ import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.coremain.CoreCurrencyModel;
 import ntk.android.base.entitymodel.estate.EstateContractModel;
+import ntk.android.base.entitymodel.estate.EstateCustomerOrderModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.base.view.dialog.SweetAlertDialog;
 import ntk.android.estate.R;
-import ntk.android.estate.fragment.NewEstateFragment1;
 import ntk.android.estate.fragment.NewEstateFragment2;
 import ntk.android.estate.fragment.NewEstateFragment3;
 import ntk.android.estate.fragment.NewEstateFragment4;
 import ntk.android.estate.fragment.NewEstateFragment5;
+import ntk.android.estate.fragment.NewOrderFragment1;
+import ntk.android.estate.fragment.NewOrderFragment2;
 
-public class NewEstateActivity extends BaseActivity {
-    public String MainImage_GUID;
-    public String MainImage_FilePath = "";
-    public List<String> OtherImageIds = new ArrayList<>();
-    public List<String> OtherImageSrc = new ArrayList<>();
-    EstatePropertyModel model = new EstatePropertyModel();
+public class NewCustomerOrderActivity extends BaseActivity {
+
+    EstateCustomerOrderModel model = new EstateCustomerOrderModel();
     public CoreCurrencyModel selectedCurrency;
     TextView title;
     protected int stepNumber;
@@ -76,10 +74,10 @@ public class NewEstateActivity extends BaseActivity {
 
     protected void showFragment1() {
         stepNumber = 1;
-        title.setText("مشخصات ملک");
+        title.setText("مشخصات اصلی");
         findViewById(R.id.backBtn).setVisibility(View.GONE);
 
-        NewEstateFragment1 fragment = new NewEstateFragment1();
+        NewOrderFragment1 fragment = new NewOrderFragment1();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
                 showFragment2();
@@ -92,7 +90,7 @@ public class NewEstateActivity extends BaseActivity {
         stepNumber = 2;
         title.setText("جزئیات و مشخصات");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
-        NewEstateFragment2 fragment = new NewEstateFragment2();
+        NewOrderFragment2 fragment = new NewOrderFragment2();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
                 showFragment3();
@@ -103,9 +101,9 @@ public class NewEstateActivity extends BaseActivity {
 
     protected void showFragment3() {
         stepNumber = 3;
-        title.setText("مشخصات آگهی");
+        title.setText("شرایط معامله");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
-        NewEstateFragment3 fragment = new NewEstateFragment3();
+        NewOrderFragment3 fragment = new NewEstateFragment3();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
                 showFragment4();
@@ -143,7 +141,7 @@ public class NewEstateActivity extends BaseActivity {
                 if (!uploadProcess) {
                     createModel();
                 } else {
-                    Toasty.info(NewEstateActivity.this, "در حال بارگذاری فایل انتخابی شما...", Toasty.LENGTH_LONG).show();
+                    Toasty.info(NewCustomerOrderActivity.this, "در حال بارگذاری فایل انتخابی شما...", Toasty.LENGTH_LONG).show();
                 }
         });
 
@@ -167,10 +165,10 @@ public class NewEstateActivity extends BaseActivity {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyModel> response) {
                 if (response.IsSuccess) {
-                    Toasty.success(NewEstateActivity.this, "ملک شما ثبت شد").show();
+                    Toasty.success(NewCustomerOrderActivity.this, "ملک شما ثبت شد").show();
                     finish();
                 } else {
-                    Toasty.error(NewEstateActivity.this, "هنگام ثبت خطا رخ داد مجددا تلاش نمایید" + "\n+" +
+                    Toasty.error(NewCustomerOrderActivity.this, "هنگام ثبت خطا رخ داد مجددا تلاش نمایید" + "\n+" +
                             response.ErrorMessage).show();
                     showContent();
                 }
@@ -178,7 +176,7 @@ public class NewEstateActivity extends BaseActivity {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Toasty.error(NewEstateActivity.this, "هنگام ثبت خطا رخ داد مجددا تلاش نمایید").show();
+                Toasty.error(NewCustomerOrderActivity.this, "هنگام ثبت خطا رخ داد مجددا تلاش نمایید").show();
                 showContent();
             }
         });
@@ -222,14 +220,14 @@ public class NewEstateActivity extends BaseActivity {
         switcher.showContentView();
     }
 
-    public EstatePropertyModel model() {
+    public EstateCustomerOrderModel model() {
         return model;
     }
 
     public static void START_ACTIVITY(Context c) {
         //user has logged in and saved his user Id
         if (Preferences.with(c).appVariableInfo().isLogin() && Preferences.with(c).UserInfo().userId() > 0)
-            c.startActivity(new Intent(c, NewEstateActivity.class));
+            c.startActivity(new Intent(c, NewCustomerOrderActivity.class));
         else {
             //show dialog to go to login page
             SweetAlertDialog dialog = new SweetAlertDialog(c, SweetAlertDialog.ERROR_TYPE);
@@ -238,7 +236,7 @@ public class NewEstateActivity extends BaseActivity {
             dialog.setConfirmButton("بلی", d -> {
                 Preferences.with(d.getContext()).appVariableInfo().set_registerNotInterested(false);
                 Preferences.with(d.getContext()).appVariableInfo().setIsLogin(false);
-                Intent i = new Intent( d.getContext(), AuthWithSmsActivity.class);
+                Intent i = new Intent(d.getContext(), AuthWithSmsActivity.class);
                 //clear all activity that open before
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 NTKApplication.get().startActivity(i);
@@ -248,4 +246,6 @@ public class NewEstateActivity extends BaseActivity {
             dialog.show();
         }
     }
+}
+
 }

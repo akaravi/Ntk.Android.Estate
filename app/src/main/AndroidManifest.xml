@@ -113,6 +113,8 @@
         <activity
             android:name=".activity.ProfileActivity" android:theme="@style/Theme.UserDialog"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.NewCustomerOrderActivity" />
+        <activity android:name=".activity.EstateCustomerOrderListActivity" />
 
 
         <provider
