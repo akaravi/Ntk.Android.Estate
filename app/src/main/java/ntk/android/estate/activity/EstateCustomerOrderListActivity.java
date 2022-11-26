@@ -30,12 +30,16 @@ public class EstateCustomerOrderListActivity extends BaseFilterModelListActivity
         ((TextView) findViewById(R.id.lblTitle)).setText(R.string.per_customer_order);
         findViewById(ntk.android.base.R.id.imgSearch).setVisibility(View.GONE);
         MaterialButton newBtn = findViewById(R.id.addNew);
+        MaterialButton newBtn2 = findViewById(R.id.addNewOnList);
         newBtn.setText("ثبت سفارش جدید");
+        newBtn2.setText("ثبت سفارش جدید");
         newBtn.setOnClickListener(view -> {
-            finish();
-            NewEstateActivity.START_ACTIVITY(view.getContext());
+            NewCustomerOrderActivity.START_ACTIVITY(view.getContext());
         });
-        newBtn.setVisibility(View.VISIBLE);
+        newBtn2.setOnClickListener(view -> {
+            NewCustomerOrderActivity.START_ACTIVITY(view.getContext());
+        });
+
     }
 
     @Override
