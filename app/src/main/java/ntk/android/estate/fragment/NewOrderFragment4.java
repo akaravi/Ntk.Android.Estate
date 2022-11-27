@@ -44,18 +44,16 @@ public class NewOrderFragment4 extends BaseFragment {
             titleEt.setText(model.Title);
         if (model.Description != null)
             descEt.setText(model.Description);
-        if (model.LinkLocationIds != null && model.LinkLocationIds.size() > 0) {
-            RecyclerView rc = findViewById(R.id.multiLocationRc);
-            FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
-            flowLayoutManager.setAutoMeasureEnabled(true);
-            flowLayoutManager.setAlignment(Alignment.RIGHT);
-            rc.setLayoutManager(flowLayoutManager);
-            rc.setAdapter(new MultiLocationsAdapter(model.LocationTitles, model.LinkLocationIds));
-        } else {
+        if (model.LinkLocationIds == null) {
             model.LinkLocationIds = new ArrayList<>();
             model.LocationTitles = new ArrayList<>();
         }
-
+        RecyclerView rc = findViewById(R.id.multiLocationRc);
+        FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+        flowLayoutManager.setAutoMeasureEnabled(true);
+        flowLayoutManager.setAlignment(Alignment.RIGHT);
+        rc.setLayoutManager(flowLayoutManager);
+        rc.setAdapter(new MultiLocationsAdapter(model.LocationTitles, model.LinkLocationIds));
         getData();
     }
 
@@ -75,9 +73,14 @@ public class NewOrderFragment4 extends BaseFragment {
             SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
                     selectedModel -> {
                         if (selectedModel != null) {
-                            orderActivity().model().LinkLocationIds.add(Long.valueOf(selectedModel.Id));
-                            orderActivity().model().LocationTitles.add(selectedModel.Title);
-                            ((RecyclerView) findViewById(R.id.multiLocationRc)).getAdapter().notifyDataSetChanged();
+                            if (!orderActivity().model().LinkLocationIds.contains(Long.valueOf(selectedModel.Id))) {
+                                orderActivity().model().LinkLocationIds.add(Long.valueOf(selectedModel.Id));
+                                orderActivity().model().LocationTitles.add(selectedModel.Title);
+                                ((RecyclerView) findViewById(R.id.multiLocationRc)).getAdapter().notifyDataSetChanged();
+                            } else {
+                                Toasty.error(getContext(), "این موقعیت قبلا انتخاب شده است", Toasty.LENGTH_LONG, true).show();
+                            }
+
                         }
                     });
             dialog.show(getActivity().getSupportFragmentManager(), "dialog");
