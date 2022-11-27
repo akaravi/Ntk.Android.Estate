@@ -37,9 +37,7 @@ public class NewCustomerOrderActivity extends BaseActivity {
     public CoreCurrencyModel selectedCurrency;
     TextView title;
     protected int stepNumber;
-    //boolean used for prevent add model until uploading pic finished
-    boolean uploadProcess = false;
-
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,7 +146,6 @@ public class NewCustomerOrderActivity extends BaseActivity {
             }
         });
     }
-
 
     @Override
     public void onBackPressed() {
