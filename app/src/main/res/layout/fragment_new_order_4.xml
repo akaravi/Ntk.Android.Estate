@@ -84,8 +84,8 @@
                     style="@style/new_estate_textInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignTop="@+id/estateTypeRc"
-                    android:layout_alignBottom="@+id/estateTypeRc"
+                    android:layout_alignTop="@+id/multiLocationRc"
+                    android:layout_alignBottom="@+id/multiLocationRc"
 
 
                     app:hintEnabled="false">
@@ -100,7 +100,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/estateTypeRc"
+                    android:id="@+id/multiLocationRc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="11dp"

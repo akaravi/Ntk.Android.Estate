@@ -17,31 +17,30 @@ import ntk.android.base.entitymodel.core.CoreLocationModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
-public class DeletableChipAdapter extends BaseRecyclerAdapter<CoreLocationModel, DeletableChipAdapter.VH> {
-    Consumer<CoreLocationModel> caller;
-    public DeletableChipAdapter(List<CoreLocationModel> list) {
-        super(list);
+public class MultiLocationsAdapter extends BaseRecyclerAdapter<String, MultiLocationsAdapter.VH> {
+    Consumer<Integer> caller;
+    List<Long> linkLocationIds;
+
+    public MultiLocationsAdapter(List<String> locationTitles, List<Long> linkLocationIds) {
+        super(locationTitles);
+        this.linkLocationIds = linkLocationIds;
     }
 
     @NonNull
     @Override
-    public DeletableChipAdapter.VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MultiLocationsAdapter.VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new VH(inflate(parent, R.layout.deleteabl_chip_row_item));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DeletableChipAdapter.VH holder, int position) {
-        CoreLocationModel item = getItem(position);
-        holder.title.setText(item.Title);
+    public void onBindViewHolder(@NonNull MultiLocationsAdapter.VH holder, int position) {
+        String item = getItem(position);
+        holder.title.setText(item);
         holder.title.setTag(position);
 
         holder.title.setOnCloseIconClickListener(view -> {
-//                if (lastSelected != copyOfLastCheckedPosition) {
-//                    notifyItemChanged(copyOfLastCheckedPosition);
-//                    notifyItemChanged(lastSelected);
-//                } else
-//                    ((Chip) view).setChecked(true);
-//                caller.accept(item);
+
+               caller.accept(item);
         });
     }
 

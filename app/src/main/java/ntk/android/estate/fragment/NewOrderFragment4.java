@@ -6,25 +6,24 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.xiaofeng.flowlayoutmanager.Alignment;
+import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
 import ntk.android.base.entitymodel.estate.EstateCustomerOrderModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
-import ntk.android.estate.activity.GetLocationActivity;
 import ntk.android.estate.activity.NewCustomerOrderActivity;
+import ntk.android.estate.adapter.MultiLocationsAdapter;
 
 public class NewOrderFragment4 extends BaseFragment {
-    List<String> locationTitles;
-    List<Long> locationId;
 
     @Override
     public void onCreateFragment() {
@@ -45,7 +44,17 @@ public class NewOrderFragment4 extends BaseFragment {
             titleEt.setText(model.Title);
         if (model.Description != null)
             descEt.setText(model.Description);
-
+        if (model.LinkLocationIds != null && model.LinkLocationIds.size() > 0) {
+            RecyclerView rc = findViewById(R.id.multiLocationRc);
+            FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+            flowLayoutManager.setAutoMeasureEnabled(true);
+            flowLayoutManager.setAlignment(Alignment.RIGHT);
+            rc.setLayoutManager(flowLayoutManager);
+            rc.setAdapter(new MultiLocationsAdapter(model.LocationTitles, model.LinkLocationIds));
+        } else {
+            model.LinkLocationIds = new ArrayList<>();
+            model.LocationTitles = new ArrayList<>();
+        }
 
         getData();
     }
