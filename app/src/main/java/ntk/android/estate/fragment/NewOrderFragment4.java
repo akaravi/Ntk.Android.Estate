@@ -55,35 +55,31 @@ public class NewOrderFragment4 extends BaseFragment {
         //input layout
         ((TextInputLayout) findViewById(R.id.EstateTitleTextInput)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.EstateDescTextInput)).setTypeface(t1);
-        ((TextInputLayout) findViewById(R.id.EstateAddressTextInput)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.locationTextInputLayout)).setTypeface(t1);
         //edit text
-        ((TextInputEditText) findViewById(R.id.EstateCodeEditText)).setTypeface(t1);
         ((TextInputEditText) findViewById(R.id.EstateTitleEditText)).setTypeface(t1);
         ((TextInputEditText) findViewById(R.id.EstateDescEditText)).setTypeface(t1);
-        ((TextInputEditText) findViewById(R.id.EstateAddressEditText)).setTypeface(t1);
-        ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setTypeface(t1);
     }
 
     private void getData() {
-        MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
-        spinner.setOnClickListener(view -> {
-            SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
-                    selectedModel -> {
-//                        if (selectedModel != null) {
-//                            ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);
-//                            orderActivity().model().LinkLocationId = selectedModel.Id;
-//                            orderActivity().model().LinkLocationIdTitle = selectedModel.Title;
-//                            if (orderActivity().model().Geolocationlatitude == null) {
-//                                if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
-//                                    if (myMap != null)
-//                                        marker = myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
-//                                }
-//                            }
-//                        }
-                    });
-            dialog.show(getActivity().getSupportFragmentManager(), "dialog");
-        });
+//        MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
+//        spinner.setOnClickListener(view -> {
+//            SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
+//                    selectedModel -> {
+////                        if (selectedModel != null) {
+////                            ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);
+////                            orderActivity().model().LinkLocationId = selectedModel.Id;
+////                            orderActivity().model().LinkLocationIdTitle = selectedModel.Title;
+////                            if (orderActivity().model().Geolocationlatitude == null) {
+////                                if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
+////                                    if (myMap != null)
+////                                        marker = myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
+////                                }
+////                            }
+////                        }
+//                    });
+//            dialog.show(getActivity().getSupportFragmentManager(), "dialog");
+//        });
     }
 
     public NewCustomerOrderActivity orderActivity() {
@@ -91,10 +87,8 @@ public class NewOrderFragment4 extends BaseFragment {
     }
 
     public boolean isValidForm() {
-        TextInputEditText codeEt = findViewById(R.id.EstateCodeEditText);
         TextInputEditText titleEt = findViewById(R.id.EstateTitleEditText);
         TextInputEditText descEt = findViewById(R.id.EstateDescEditText);
-        TextInputEditText addressEt = findViewById(R.id.EstateAddressEditText);
 
         if (titleEt.getText().toString().trim().equals("")) {
             Toasty.error(getContext(), "عنوان  را وارد نمایید", Toasty.LENGTH_LONG, true).show();

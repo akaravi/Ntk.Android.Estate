@@ -73,6 +73,7 @@ public class MainActivity3 extends BaseMainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
         Slider = findViewById(R.id.rcNews);
+        startActivity(new Intent(this, NewCustomerOrderActivity.class));
         //show drawer
         List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems(updateInfo.allowDirectShareApp, isLogin());
         RecyclerView drawerRecycler = findViewById(R.id.RecyclerDrawer);

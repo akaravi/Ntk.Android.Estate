@@ -83,7 +83,7 @@ public class NewCustomerOrderActivity extends BaseActivity {
         NewOrderFragment1 fragment = new NewOrderFragment1();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
-                showFragment2();
+                showFragment1();
         });
         fragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
