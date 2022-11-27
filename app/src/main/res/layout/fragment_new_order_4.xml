@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:mapbox="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -104,6 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="11dp"
+                    android:minHeight="55dp"
                     android:nestedScrollingEnabled="true"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
@@ -116,6 +116,23 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="نوع کاربری" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/addLocationBtn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorTextPrimary"
+                    app:icon="@android:drawable/ic_input_add"
+                    app:iconGravity="textStart"
+                    app:iconSize="32dp"
+                    app:iconTint="@color/colorPrimary"
+                    app:strokeColor="@color/colorAccent" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 

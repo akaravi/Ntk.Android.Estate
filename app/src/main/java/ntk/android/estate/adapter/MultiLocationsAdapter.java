@@ -13,7 +13,6 @@ import java.util.List;
 
 import java9.util.function.Consumer;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
-import ntk.android.base.entitymodel.core.CoreLocationModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
@@ -40,7 +39,7 @@ public class MultiLocationsAdapter extends BaseRecyclerAdapter<String, MultiLoca
 
         holder.title.setOnCloseIconClickListener(view -> {
 
-               caller.accept(item);
+            caller.accept(list.indexOf(item));
         });
     }
 

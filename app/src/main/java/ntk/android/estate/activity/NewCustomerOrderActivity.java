@@ -80,10 +80,10 @@ public class NewCustomerOrderActivity extends BaseActivity {
         title.setText("مشخصات اصلی");
         findViewById(R.id.backBtn).setVisibility(View.GONE);
 
-        NewOrderFragment1 fragment = new NewOrderFragment1();
+        NewOrderFragment4 fragment = new NewOrderFragment4();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
-                showFragment1();
+                showFragment2();
         });
         fragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();

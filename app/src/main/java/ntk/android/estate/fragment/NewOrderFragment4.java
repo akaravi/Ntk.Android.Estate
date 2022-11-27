@@ -71,24 +71,18 @@ public class NewOrderFragment4 extends BaseFragment {
     }
 
     private void getData() {
-//        MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
-//        spinner.setOnClickListener(view -> {
-//            SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
-//                    selectedModel -> {
-////                        if (selectedModel != null) {
-////                            ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);
-////                            orderActivity().model().LinkLocationId = selectedModel.Id;
-////                            orderActivity().model().LinkLocationIdTitle = selectedModel.Title;
-////                            if (orderActivity().model().Geolocationlatitude == null) {
-////                                if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
-////                                    if (myMap != null)
-////                                        marker = myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
-////                                }
-////                            }
-////                        }
-//                    });
-//            dialog.show(getActivity().getSupportFragmentManager(), "dialog");
-//        });
+        findViewById(R.id.addLocationBtn).setOnClickListener(v -> {
+            SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
+                    selectedModel -> {
+                        if (selectedModel != null) {
+                            orderActivity().model().LinkLocationIds.add(Long.valueOf(selectedModel.Id));
+                            orderActivity().model().LocationTitles.add(selectedModel.Title);
+                            ((RecyclerView) findViewById(R.id.multiLocationRc)).getAdapter().notifyDataSetChanged();
+                        }
+                    });
+            dialog.show(getActivity().getSupportFragmentManager(), "dialog");
+        });
+
     }
 
     public NewCustomerOrderActivity orderActivity() {
