@@ -41,7 +41,6 @@ public class NewOrderFragment3 extends BaseFragment {
 
     private int stepData = 0;
 
-
     @Override
     public void onCreateFragment() {
         setContentView(R.layout.fragment_new_order_3);

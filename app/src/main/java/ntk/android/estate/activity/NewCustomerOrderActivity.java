@@ -12,8 +12,6 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.button.MaterialButton;
 
-import java.util.ArrayList;
-
 import es.dmoral.toasty.Toasty;
 import ntk.android.base.NTKApplication;
 import ntk.android.base.activity.BaseActivity;
@@ -22,19 +20,12 @@ import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.coremain.CoreCurrencyModel;
-import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstateCustomerOrderModel;
-import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstateCustomerOrderService;
-import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.base.view.dialog.SweetAlertDialog;
 import ntk.android.estate.R;
-import ntk.android.estate.fragment.NewEstateFragment2;
-import ntk.android.estate.fragment.NewEstateFragment3;
-import ntk.android.estate.fragment.NewEstateFragment4;
-import ntk.android.estate.fragment.NewEstateFragment5;
 import ntk.android.estate.fragment.NewOrderFragment1;
 import ntk.android.estate.fragment.NewOrderFragment2;
 import ntk.android.estate.fragment.NewOrderFragment3;
@@ -106,6 +97,8 @@ public class NewCustomerOrderActivity extends BaseActivity {
         stepNumber = 3;
         title.setText("شرایط معامله");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
+        findViewById(R.id.addNewBtn).setVisibility(View.GONE);
+        findViewById(R.id.continueBtn).setVisibility(View.VISIBLE);
         NewOrderFragment3 fragment = new NewOrderFragment3();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
@@ -119,35 +112,13 @@ public class NewCustomerOrderActivity extends BaseActivity {
         stepNumber = 4;
         title.setText("سایر مشخصات");
         findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
-        findViewById(R.id.addNewBtn).setVisibility(View.GONE);
-        findViewById(R.id.continueBtn).setVisibility(View.VISIBLE);
+        findViewById(R.id.addNewBtn).setVisibility(View.VISIBLE);
+        findViewById(R.id.continueBtn).setVisibility(View.GONE);
         NewOrderFragment4 fragment = new NewOrderFragment4();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
-                showFragment5();
+                createModel();
         });
-        fragment.setArguments(getIntent().getExtras());
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
-
-    }
-
-    protected void showFragment5() {
-        stepNumber = 5;
-        title.setText("تصاویر ملک");
-        findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
-        findViewById(R.id.addNewBtn).setVisibility(View.VISIBLE);
-        findViewById(R.id.continueBtn).setVisibility(View.GONE);
-
-        NewEstateFragment5 fragment = new NewEstateFragment5();
-        findViewById(R.id.addNewBtn).setOnClickListener(view -> {
-            if (fragment.isValidForm())
-                if (!uploadProcess) {
-                    createModel();
-                } else {
-                    Toasty.info(NewCustomerOrderActivity.this, "در حال بارگذاری فایل انتخابی شما...", Toasty.LENGTH_LONG).show();
-                }
-        });
-
         fragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
 
@@ -155,15 +126,8 @@ public class NewCustomerOrderActivity extends BaseActivity {
 
     protected void createModel() {
         showProgress();
-//        model.PropertyDetailGroups = null;
-//        model.UploadFileGUID = new ArrayList<>();
-//        if (MainImage_GUID != null && !MainImage_GUID.equalsIgnoreCase(""))
-//            model.UploadFileGUID.add(MainImage_GUID);
-//        model.UploadFileGUID.addAll(OtherImageIds);
-//        for (EstateContractModel model :
-//                model.Contracts) {
-//            model.LinkCoreCurrencyId = selectedCurrency.Id;
-//        }
+        model.PropertyDetailGroups = null;
+        model.LinkCoreCurrencyId = selectedCurrency.Id;
         ServiceExecute.execute(new EstateCustomerOrderService(this).add(model)).subscribe(new NtkObserver<ErrorException<EstateCustomerOrderModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstateCustomerOrderModel> response) {
