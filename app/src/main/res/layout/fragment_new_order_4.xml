@@ -105,7 +105,7 @@
                     android:layout_marginTop="11dp"
                     android:minHeight="55dp"
                     android:nestedScrollingEnabled="true"
-                    android:paddingLeft="8dp"
+                    android:paddingLeft="54dp"
                     android:paddingRight="8dp"
                     android:paddingBottom="8dp" />
 

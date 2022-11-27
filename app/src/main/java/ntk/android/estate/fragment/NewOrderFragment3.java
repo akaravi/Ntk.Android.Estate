@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import java9.util.stream.IntStream;
 import ntk.android.base.adapter.SpinnerAdapter;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
@@ -36,8 +37,8 @@ import ntk.android.estate.adapter.EstateContractAdapterSelector;
 import ntk.android.estate.view.NumberTextWatcherForThousand;
 
 public class NewOrderFragment3 extends BaseFragment {
+    EstateContractTypeModel selectedModel;
 
-    private EstateContractTypeModel selectedModel;
     private int stepData = 0;
 
 
@@ -53,22 +54,30 @@ public class NewOrderFragment3 extends BaseFragment {
         {
             TextInputEditText et1 = findViewById(R.id.etSale);
             et1.addTextChangedListener(new NumberTextWatcherForThousand(et1));
+            et1.setText(orderActivity().model().SalePriceMax + "");
             TextInputEditText et2 = findViewById(R.id.etRent);
             et2.addTextChangedListener(new NumberTextWatcherForThousand(et2));
+            et2.setText(orderActivity().model().RentPriceMax + "");
             TextInputEditText et3 = findViewById(R.id.etDeposit);
             et3.addTextChangedListener(new NumberTextWatcherForThousand(et3));
+            et3.setText(orderActivity().model().DepositPriceMax + "");
             TextInputEditText et4 = findViewById(R.id.etPeriodPayment);
             et4.addTextChangedListener(new NumberTextWatcherForThousand(et4));
+            et4.setText(orderActivity().model().PeriodPriceMax + "");
         }
         {
             TextInputEditText et1 = findViewById(R.id.etSale2);
             et1.addTextChangedListener(new NumberTextWatcherForThousand(et1));
+            et1.setText(orderActivity().model().SalePriceMin + "");
             TextInputEditText et2 = findViewById(R.id.etRent2);
             et2.addTextChangedListener(new NumberTextWatcherForThousand(et2));
+            et2.setText(orderActivity().model().RentPriceMin + "");
             TextInputEditText et3 = findViewById(R.id.etDeposit2);
             et3.addTextChangedListener(new NumberTextWatcherForThousand(et3));
+            et3.setText(orderActivity().model().DepositPriceMin + "");
             TextInputEditText et4 = findViewById(R.id.etPeriodPayment2);
             et4.addTextChangedListener(new NumberTextWatcherForThousand(et4));
+            et4.setText(orderActivity().model().PeriodPriceMin + "");
         }
         //set font for views
         setFont();
@@ -110,7 +119,11 @@ public class NewOrderFragment3 extends BaseFragment {
             public void onNext(@NonNull ErrorException<EstateContractTypeModel> model) {
                 stepData++;
                 if (stepData == 2) orderActivity().showContent();
-                EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(model.ListItems, NewOrderFragment3.this::changeView);
+                String lastSelectedId = orderActivity().model().LinkContractTypeId + "";
+
+                //find last position of selected model or -1
+                int lastSelected = IntStream.range(0, model.ListItems.size()).filter(i -> lastSelectedId.equals(model.ListItems.get(i).Id)).findFirst().orElse(-1);
+                EstateContractAdapterSelector adapter = new EstateContractAdapterSelector(lastSelected, model.ListItems, NewOrderFragment3.this::changeView);
                 RecyclerView rc = findViewById(R.id.contractsRc);
                 rc.setAdapter(adapter);
                 FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
@@ -159,8 +172,8 @@ public class NewOrderFragment3 extends BaseFragment {
 
     private void changeView(EstateContractTypeModel model) {
         clearAllInput();
+        orderActivity().model().LinkContractTypeId = model.Id;
         selectedModel = model;
-
         TextInputLayout et1 = findViewById(R.id.etlSale);
         TextInputLayout et2 = findViewById(R.id.etlSale2);
         et1.setHint("حداکثر " + model.TitleSalePriceML);
@@ -215,7 +228,7 @@ public class NewOrderFragment3 extends BaseFragment {
 
     public boolean isValidForm() {
         //if contracts add can go to next page
-        if (selectedModel == null) {
+        if (orderActivity().model().LinkContractTypeId == null || orderActivity().model().LinkContractTypeId.equals("")) {
             Toasty.error(getContext(), "لطفا برای این ملک حداقل یک نوع معامله وارد نمایید", Toasty.LENGTH_LONG).show();
             return false;
         }
@@ -228,7 +241,6 @@ public class NewOrderFragment3 extends BaseFragment {
         TextInputEditText et6 = findViewById(R.id.etDeposit2);
         TextInputEditText et7 = findViewById(R.id.etPeriodPayment);
         TextInputEditText et8 = findViewById(R.id.etPeriodPayment2);
-        orderActivity().model().LinkContractTypeId = selectedModel.Id;
         double SalePriceMax = 0, SalePriceMin = 0, RentPriceMax = 0, RentPriceMin = 0,
                 DepositPriceMax = 0, DepositPriceMin = 0,
                 PeriodPriceMax = 0, PeriodPriceMin = 0;
@@ -289,11 +301,11 @@ public class NewOrderFragment3 extends BaseFragment {
             orderActivity().model().DepositPriceMax = DepositPriceMax;
         else
             orderActivity().model().DepositPriceMax = null;
-       if (PeriodPriceMin != 0)
+        if (PeriodPriceMin != 0)
             orderActivity().model().PeriodPriceMin = PeriodPriceMin;
         else
             orderActivity().model().PeriodPriceMin = null;
-       if (PeriodPriceMax != 0)
+        if (PeriodPriceMax != 0)
             orderActivity().model().PeriodPriceMax = PeriodPriceMax;
         else
             orderActivity().model().PeriodPriceMax = null;

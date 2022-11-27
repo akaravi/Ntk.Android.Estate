@@ -80,7 +80,7 @@ public class NewCustomerOrderActivity extends BaseActivity {
         title.setText("مشخصات اصلی");
         findViewById(R.id.backBtn).setVisibility(View.GONE);
 
-        NewOrderFragment4 fragment = new NewOrderFragment4();
+        NewOrderFragment1 fragment = new NewOrderFragment1();
         findViewById(R.id.continueBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
                 showFragment2();

@@ -103,9 +103,10 @@ public class NewOrderFragment4 extends BaseFragment {
         if (titleEt.getText().toString().trim().equals("")) {
             Toasty.error(getContext(), "عنوان  را وارد نمایید", Toasty.LENGTH_LONG, true).show();
             return false;
-        } else
+        } else {
             orderActivity().model().Title = titleEt.getText().toString().trim();
-
+            orderActivity().model().Description = descEt.getText().toString().trim();
+        }
         return true;
     }
 }
