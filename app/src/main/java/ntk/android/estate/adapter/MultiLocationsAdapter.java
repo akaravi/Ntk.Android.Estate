@@ -39,7 +39,6 @@ public class MultiLocationsAdapter extends BaseRecyclerAdapter<String, MultiLoca
         holder.title.setTag(position);
 
         holder.title.setOnCloseIconClickListener(view -> {
-
             caller.accept(list.indexOf(item));
         });
     }

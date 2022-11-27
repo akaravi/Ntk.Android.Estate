@@ -53,10 +53,10 @@ public class NewOrderFragment4 extends BaseFragment {
         flowLayoutManager.setAutoMeasureEnabled(true);
         flowLayoutManager.setAlignment(Alignment.RIGHT);
         rc.setLayoutManager(flowLayoutManager);
-        rc.setAdapter(new MultiLocationsAdapter(model.LocationTitles, model.LinkLocationIds,integer -> {
-            model.LinkLocationIds.remove(integer);
-            model.LocationTitles.remove(integer);
-            rc.getAdapter().notifyDataSetChanged();
+        rc.setAdapter(new MultiLocationsAdapter(model.LocationTitles, model.LinkLocationIds, integer -> {
+            Long s1 = model.LinkLocationIds.remove(integer.intValue());
+            String s = model.LocationTitles.remove(integer.intValue());
+            ((RecyclerView) findViewById(R.id.multiLocationRc)).getAdapter().notifyDataSetChanged();
         }));
         getData();
     }
