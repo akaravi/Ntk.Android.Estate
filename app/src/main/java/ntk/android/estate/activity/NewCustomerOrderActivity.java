@@ -37,7 +37,7 @@ public class NewCustomerOrderActivity extends BaseActivity {
     public CoreCurrencyModel selectedCurrency;
     TextView title;
     protected int stepNumber;
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
