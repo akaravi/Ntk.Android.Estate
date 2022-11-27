@@ -55,7 +55,6 @@ public class NewOrderFragment4 extends BaseFragment {
         //input layout
         ((TextInputLayout) findViewById(R.id.EstateTitleTextInput)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.EstateDescTextInput)).setTypeface(t1);
-        ((TextInputLayout) findViewById(R.id.EstateProvinceTextInput)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.EstateAddressTextInput)).setTypeface(t1);
         ((TextInputLayout) findViewById(R.id.locationTextInputLayout)).setTypeface(t1);
         //edit text
@@ -71,17 +70,17 @@ public class NewOrderFragment4 extends BaseFragment {
         spinner.setOnClickListener(view -> {
             SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
                     selectedModel -> {
-                        if (selectedModel != null) {
-                            ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);
-                            orderActivity().model().LinkLocationId = selectedModel.Id;
-                            orderActivity().model().LinkLocationIdTitle = selectedModel.Title;
-                            if (orderActivity().model().Geolocationlatitude == null) {
-                                if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
-                                    if (myMap != null)
-                                        marker = myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
-                                }
-                            }
-                        }
+//                        if (selectedModel != null) {
+//                            ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);
+//                            orderActivity().model().LinkLocationId = selectedModel.Id;
+//                            orderActivity().model().LinkLocationIdTitle = selectedModel.Title;
+//                            if (orderActivity().model().Geolocationlatitude == null) {
+//                                if (selectedModel.GeoLocationLatitude != null && selectedModel.GeoLocationLongitude != null) {
+//                                    if (myMap != null)
+//                                        marker = myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), new LatLng(selectedModel.GeoLocationLatitude, selectedModel.GeoLocationLongitude)));
+//                                }
+//                            }
+//                        }
                     });
             dialog.show(getActivity().getSupportFragmentManager(), "dialog");
         });

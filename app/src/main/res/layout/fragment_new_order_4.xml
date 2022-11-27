@@ -72,36 +72,51 @@
         <androidx.cardview.widget.CardView
             style="@style/new_estate_cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:contentPadding="8dp">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
+
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/EstateProvinceTextInput"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:id="@+id/locationTextInputLayout"
+                    style="@style/new_estate_textInputLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignTop="@+id/estateTypeRc"
+                    android:layout_alignBottom="@+id/estateTypeRc"
 
-                    android:hint="@string/location"
-                    app:helperTextEnabled="true"
-                    app:hintEnabled="true">
 
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/EstateProvinceAutoComplete"
-                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:focusable="false"
-                        android:inputType="text" />
 
+                        android:textSize="14sp"
+                        android:theme="@style/new_estate_textInputEditText" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/estateTypeRc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:nestedScrollingEnabled="true"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="8dp" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/tv1"
+                    style="@style/new_estate_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="نوع کاربری" />
+            </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
         <View
