@@ -20,9 +20,10 @@ public class MultiLocationsAdapter extends BaseRecyclerAdapter<String, MultiLoca
     Consumer<Integer> caller;
     List<Long> linkLocationIds;
 
-    public MultiLocationsAdapter(List<String> locationTitles, List<Long> linkLocationIds) {
+    public MultiLocationsAdapter(List<String> locationTitles, List<Long> linkLocationIds, Consumer<Integer> consumer) {
         super(locationTitles);
         this.linkLocationIds = linkLocationIds;
+        this.caller = consumer;
     }
 
     @NonNull
