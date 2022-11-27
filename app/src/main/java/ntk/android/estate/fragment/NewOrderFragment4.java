@@ -7,11 +7,12 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import ntk.android.base.entitymodel.estate.EstateCustomerOrderModel;
@@ -22,6 +23,8 @@ import ntk.android.estate.activity.GetLocationActivity;
 import ntk.android.estate.activity.NewCustomerOrderActivity;
 
 public class NewOrderFragment4 extends BaseFragment {
+    List<String> locationTitles;
+    List<Long> locationId;
 
     @Override
     public void onCreateFragment() {
