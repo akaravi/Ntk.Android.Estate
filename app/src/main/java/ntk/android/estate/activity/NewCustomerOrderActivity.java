@@ -130,7 +130,7 @@ public class NewCustomerOrderActivity extends BaseActivity {
             @Override
             public void onNext(@NonNull ErrorException<EstateCustomerOrderModel> response) {
                 if (response.IsSuccess) {
-                    Toasty.success(NewCustomerOrderActivity.this, "ملک شما ثبت شد").show();
+                    Toasty.success(NewCustomerOrderActivity.this, "سفارش شما ثبت شد").show();
                     finish();
                 } else {
                     Toasty.error(NewCustomerOrderActivity.this, "هنگام ثبت خطا رخ داد مجددا تلاش نمایید" + "\n+" +

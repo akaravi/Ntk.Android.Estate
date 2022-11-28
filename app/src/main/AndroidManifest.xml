@@ -120,6 +120,12 @@
         <activity
             android:name=".activity.EstateCustomerOrderListActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EstateListWithOrderIdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditCustomerOrderActivity"
+            android:screenOrientation="portrait" />
 
 
         <provider

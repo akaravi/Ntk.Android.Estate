@@ -1,6 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="12dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="2dp"
+    app:contentPaddingLeft="8dp"
+    app:contentPaddingBottom="8dp"
+    app:contentPaddingRight="8dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/delete"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="حذف"
+
+                android:textColor="@color/colorRed"
+                app:icon="@android:drawable/ic_menu_delete"
+                app:iconGravity="textStart"
+                app:iconSize="32dp"
+                app:iconTint="@color/colorRed"
+                app:strokeColor="@color/colorRed" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/edit"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="ویرایش"
+                android:textColor="@color/colorTextBlack"
+                app:icon="@android:drawable/ic_menu_edit"
+                app:iconGravity="textStart"
+                app:iconSize="32dp"
+                app:iconTint="@color/colorTextBlack"
+                app:strokeColor="@color/colorTextBlack" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/see"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="نتایج"
+
+                android:textColor="@color/colorGreen"
+                app:icon="@drawable/eye"
+                app:iconGravity="textStart"
+                app:iconSize="32dp"
+                app:iconTint="@color/colorGreen"
+                app:strokeColor="@color/colorGreen" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

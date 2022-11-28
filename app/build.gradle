@@ -133,7 +133,7 @@ dependencies {
     implementation "com.github.skydoves:balloon:1.4.7"
     //for locale
     implementation 'com.akexorcist:localization:1.2.11'
-//    api project(path: ':baseActivity')
-     api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
+    api project(path: ':baseActivity')
+//     api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
 }
 

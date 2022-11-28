@@ -21,5 +21,6 @@
     <string name="location">موقعیت</string>
     <string name="per_article">"مقالات "</string>
     <string name="per_customer_order">لیست سفارشات ملک</string>
+    <string name="per_result">نتایج</string>
 
 </resources>
