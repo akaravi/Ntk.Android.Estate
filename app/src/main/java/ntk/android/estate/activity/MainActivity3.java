@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
@@ -23,6 +24,11 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.gson.Gson;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+import com.skydoves.balloon.ArrowOrientation;
+import com.skydoves.balloon.ArrowPositionRules;
+import com.skydoves.balloon.Balloon;
+import com.skydoves.balloon.BalloonAnimation;
+import com.skydoves.balloon.BalloonSizeSpec;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,14 +36,12 @@ import java.util.List;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import io.sentry.Sentry;
 import ntk.android.base.Extras;
+import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.config.ErrorExceptionObserver;
-import ntk.android.base.config.ListOfJson;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.dtomodel.theme.DrawerChildThemeDtoModel;
-import ntk.android.base.entitymodel.application.ApplicationAppModel;
 import ntk.android.base.entitymodel.article.ArticleContentModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
@@ -143,7 +147,6 @@ public class MainActivity3 extends BaseMainActivity {
         }
     }
 
-
     private void init() {
         TextView seeMore = findViewById(R.id.seeMore);
         //see landUse list on new activity on click
@@ -156,8 +159,6 @@ public class MainActivity3 extends BaseMainActivity {
         } else {
             findViewById(R.id.shareQrCode).setOnClickListener(v -> onInviteMethod());
         }
-        //add fab
-        findViewById(R.id.fabAdd).setOnClickListener(view -> NewEstateActivity.START_ACTIVITY(MainActivity3.this));
         //search fab
         findViewById(R.id.fabSearch).setOnClickListener(view -> startActivity(new Intent(this, SearchEstateActivity.class)));
 
@@ -215,6 +216,38 @@ public class MainActivity3 extends BaseMainActivity {
         initStatePropertyShimmer(findViewById(R.id.row1));
         initStatePropertyShimmer(findViewById(R.id.row2));
         initStatePropertyShimmer(findViewById(R.id.row3));
+
+        //add fab
+        findViewById(R.id.fabAdd).setOnClickListener(view -> {
+            Balloon balloon = new Balloon.Builder(this)
+                    .setLayout(R.layout.sub_new_buttons)
+                    .setArrowSize(10)
+                    .setArrowOrientation(ArrowOrientation.TOP)
+                    .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+                    .setArrowPosition(0.5f)
+                    .setWidthRatio(1f)
+                    .setIsVisibleOverlay(true)
+                    .setHeight(BalloonSizeSpec.WRAP)
+                    .setTextSize(15f)
+                    .setCornerRadius(4f)
+                    .setAlpha(0.9f)
+                    .setMarginLeft(64)
+                    .setMarginRight(64)
+                    .setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                    .setBalloonAnimation(BalloonAnimation.CIRCULAR)
+                    .build();
+            balloon.showAlignTop(view, 1000);
+            balloon.getContentView().findViewById(R.id.new_estate).setOnClickListener(v -> {
+                balloon.dismiss();
+                NewEstateActivity.START_ACTIVITY(MainActivity3.this);
+            });
+            balloon.getContentView().findViewById(R.id.new_order).setOnClickListener(v -> {
+                balloon.dismiss();
+                NewCustomerOrderActivity.START_ACTIVITY(MainActivity3.this);
+            });
+
+        });
+
     }
 
     private void Search() {

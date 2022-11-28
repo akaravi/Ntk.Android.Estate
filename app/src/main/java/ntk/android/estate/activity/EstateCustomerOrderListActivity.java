@@ -23,7 +23,6 @@ public class EstateCustomerOrderListActivity extends BaseFilterModelListActivity
         return R.layout.activity_order_estate_list;
     }
 
-
     @Override
     protected void onCreated() {
         super.onCreated();
@@ -39,7 +38,6 @@ public class EstateCustomerOrderListActivity extends BaseFilterModelListActivity
         newBtn2.setOnClickListener(view -> {
             NewCustomerOrderActivity.START_ACTIVITY(view.getContext());
         });
-
     }
 
     @Override

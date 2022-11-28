@@ -129,6 +129,8 @@ dependencies {
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
     //for location autocomplete
     implementation "com.jakewharton.rxbinding2:rxbinding:2.0.0"
+    //for popup
+    implementation "com.github.skydoves:balloon:1.4.7"
     //for locale
     implementation 'com.akexorcist:localization:1.2.11'
 //    api project(path: ':baseActivity')
