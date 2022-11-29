@@ -37,7 +37,6 @@ import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.Extras;
-import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
@@ -406,8 +405,8 @@ public class MainActivity3 extends BaseMainActivity {
                         Main3ArticleAdapter adapter = new Main3ArticleAdapter(MainActivity3.this, response.ListItems);
                         rc.setAdapter(adapter);
                         rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
+                        rc.setOnFlingListener(null);
                         snapHelper.attachToRecyclerView(rc);
-                        adapter.notifyDataSetChanged();
                     }
             }
 

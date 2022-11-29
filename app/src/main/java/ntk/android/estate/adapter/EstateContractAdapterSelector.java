@@ -29,7 +29,7 @@ public class EstateContractAdapterSelector extends BaseRecyclerAdapter<EstateCon
     }
  public EstateContractAdapterSelector(int selected,List<EstateContractTypeModel> list, Consumer<EstateContractTypeModel> selector) {
         super(list);
-        lastSelected = -1;
+        lastSelected = selected;
         caller = selector;
         drawable=R.drawable.sweet_error_center_x;
     }

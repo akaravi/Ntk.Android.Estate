@@ -113,7 +113,7 @@ public class NewCustomerOrderActivity extends BaseActivity {
         findViewById(R.id.addNewBtn).setVisibility(View.VISIBLE);
         findViewById(R.id.continueBtn).setVisibility(View.GONE);
         NewOrderFragment4 fragment = new NewOrderFragment4();
-        findViewById(R.id.continueBtn).setOnClickListener(view -> {
+        findViewById(R.id.addNewBtn).setOnClickListener(view -> {
             if (fragment.isValidForm())
                 createModel();
         });
