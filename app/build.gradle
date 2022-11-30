@@ -131,7 +131,6 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding:2.0.0"
     //for popup
     implementation "com.github.skydoves:balloon:1.4.7"
-    implementation 'com.akexorcist:localization:1.2.11'
 
     api project(path: ':baseActivity')
 //     api "com.github.akaravi:Ntk.Android.Baseactivity:${BaseVersion}"
