@@ -297,19 +297,19 @@ public class NewOrderFragment3 extends BaseFragment {
             PeriodPriceMin = Double.valueOf(NumberTextWatcherForThousand.trimCommaOfString(et8.getText().toString()));
 
         if (SalePriceMin != 0 && SalePriceMax != 0 && SalePriceMax < SalePriceMin) {
-            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitleSalePriceML + "باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
+            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitleSalePriceML + " باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
             return false;
         }
         if (RentPriceMin != 0 && RentPriceMax != 0 && RentPriceMax < RentPriceMin) {
-            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitleRentPriceML + "باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
+            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitleRentPriceML + " باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
             return false;
         }
         if (DepositPriceMin != 0 && DepositPriceMax != 0 && DepositPriceMax < DepositPriceMin) {
-            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitleDepositPriceML + "باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
+            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitleDepositPriceML + " باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
             return false;
         }
         if (PeriodPriceMin != 0 && PeriodPriceMax != 0 && PeriodPriceMax < PeriodPriceMin) {
-            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitlePeriodPriceML + "باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
+            Toasty.error(getContext(), "میزان حداقلی " + selectedModel.TitlePeriodPriceML + " باید کم تر از میزان حداکثری باشد", Toasty.LENGTH_LONG).show();
             return false;
         }
         if (SalePriceMin != 0)
