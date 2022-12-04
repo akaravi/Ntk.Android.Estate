@@ -71,4 +71,5 @@ public class MyApplication extends NTKApplication {
     public ApplicationParameter getApplicationParameter() {
         return new ApplicationParameter(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
     }
+
 }

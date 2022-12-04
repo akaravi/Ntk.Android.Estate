@@ -129,6 +129,8 @@ public class NewOrderFragment3 extends BaseFragment {
                 flowLayoutManager.setAutoMeasureEnabled(true);
                 flowLayoutManager.setAlignment(Alignment.RIGHT);
                 rc.setLayoutManager(flowLayoutManager);
+                if (lastSelected>-1)
+                    setLatsSelected(model.ListItems.get(lastSelected));
             }
 
 
@@ -167,6 +169,27 @@ public class NewOrderFragment3 extends BaseFragment {
                 orderActivity().showErrorView();
             }
         });
+    }
+
+    private void setLatsSelected(EstateContractTypeModel estateContractTypeModel) {
+        TextInputEditText et1 = findViewById(R.id.etSale);
+        et1.setText(orderActivity().model().SalePriceMax + "");
+        TextInputEditText et2 = findViewById(R.id.etRent);
+        et2.setText(orderActivity().model().RentPriceMax + "");
+        TextInputEditText et3 = findViewById(R.id.etDeposit);
+        et3.setText(orderActivity().model().DepositPriceMax + "");
+        TextInputEditText et4 = findViewById(R.id.etPeriodPayment);
+        et4.setText(orderActivity().model().PeriodPriceMax + "");
+    }
+    {
+        TextInputEditText et1 = findViewById(R.id.etSale2);
+        et1.setText(orderActivity().model().SalePriceMin + "");
+        TextInputEditText et2 = findViewById(R.id.etRent2);
+        et2.setText(orderActivity().model().RentPriceMin + "");
+        TextInputEditText et3 = findViewById(R.id.etDeposit2);
+        et3.setText(orderActivity().model().DepositPriceMin + "");
+        TextInputEditText et4 = findViewById(R.id.etPeriodPayment2);
+        et4.setText(orderActivity().model().PeriodPriceMin + "");
     }
 
     private void changeView(EstateContractTypeModel model) {
