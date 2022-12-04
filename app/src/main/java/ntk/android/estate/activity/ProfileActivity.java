@@ -102,7 +102,7 @@ public class ProfileActivity extends BaseActivity {
 
     private void getUser() {
         switcher.showProgressView();
-        ServiceExecute.execute(new CoreUserService(this).getOne(id)).subscribe(new NtkObserver<ErrorException<CoreUserModel>>() {
+        ServiceExecute.execute(new CoreUserService(this).getOneByEdit(id)).subscribe(new NtkObserver<ErrorException<CoreUserModel>>() {
             @Override
             public void onNext(ErrorException<CoreUserModel> coreUserModelErrorException) {
                 switcher.showContentView();
