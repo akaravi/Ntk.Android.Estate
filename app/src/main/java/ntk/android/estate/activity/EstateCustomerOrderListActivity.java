@@ -47,7 +47,7 @@ public class EstateCustomerOrderListActivity extends BaseFilterModelListActivity
 
     @Override
     public Function<FilterModel, Observable<ErrorException<EstateCustomerOrderModel>>> getService() {
-        return new EstateCustomerOrderService(this)::getAll;
+        return new EstateCustomerOrderService(this)::getAllEditor;
     }
 
     @Override

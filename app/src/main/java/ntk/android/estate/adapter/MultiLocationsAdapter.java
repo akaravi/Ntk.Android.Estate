@@ -17,13 +17,13 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
 public class MultiLocationsAdapter extends BaseRecyclerAdapter<String, MultiLocationsAdapter.VH> {
-    Consumer<Integer> caller;
+    Consumer<Integer> remover;
     List<Long> linkLocationIds;
 
     public MultiLocationsAdapter(List<String> locationTitles, List<Long> linkLocationIds, Consumer<Integer> consumer) {
         super(locationTitles);
         this.linkLocationIds = linkLocationIds;
-        this.caller = consumer;
+        this.remover = consumer;
     }
 
     @NonNull
@@ -39,7 +39,7 @@ public class MultiLocationsAdapter extends BaseRecyclerAdapter<String, MultiLoca
         holder.title.setTag(position);
 
         holder.title.setOnCloseIconClickListener(view -> {
-            caller.accept(list.indexOf(item));
+            remover.accept(list.indexOf(item));
         });
     }
 

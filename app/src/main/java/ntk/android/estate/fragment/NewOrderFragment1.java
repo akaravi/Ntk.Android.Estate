@@ -98,25 +98,23 @@ public class NewOrderFragment1 extends BaseFragment {
     }
 
     private void getTypeLandUse() {
-        ServiceExecute.execute(new EstatePropertyTypeLanduseService(getContext()).getAll(new FilterModel().setRowPerPage(100)))
-                .subscribe(new NtkObserver<ErrorException<EstatePropertyTypeLanduseModel>>() {
-                    @Override
-                    public void onNext(@NonNull ErrorException<EstatePropertyTypeLanduseModel> response) {
-                        landUses = response.ListItems;
-                        if (orderActivity().model().PropertyTypeLanduse != null) {
-                            EstatePropertyTypeLanduseModel find =
-                                    StreamSupport.stream(landUses).filter(t -> t.Id.equals(orderActivity().model().LinkPropertyTypeLanduseId)).findFirst().orElse(null);
-                            orderActivity().model().PropertyTypeLanduse = (find);
-                            lastSelectedLandUse = find;
-                        }
-                        showData();
-                    }
+        ServiceExecute.execute(new EstatePropertyTypeLanduseService(getContext()).getAll(new FilterModel().setRowPerPage(100))).subscribe(new NtkObserver<ErrorException<EstatePropertyTypeLanduseModel>>() {
+            @Override
+            public void onNext(@NonNull ErrorException<EstatePropertyTypeLanduseModel> response) {
+                landUses = response.ListItems;
+                if (orderActivity().model().LinkPropertyTypeLanduseId != null) {
+                    EstatePropertyTypeLanduseModel find = StreamSupport.stream(landUses).filter(t -> t.Id.equals(orderActivity().model().LinkPropertyTypeLanduseId)).findFirst().orElse(null);
+                    orderActivity().model().PropertyTypeLanduse = (find);
+                    lastSelectedLandUse = find;
+                }
+                showData();
+            }
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        orderActivity().showErrorView();
-                    }
-                });
+            @Override
+            public void onError(@NonNull Throwable e) {
+                orderActivity().showErrorView();
+            }
+        });
     }
 
     private void getPropertyType() {
@@ -137,38 +135,35 @@ public class NewOrderFragment1 extends BaseFragment {
 
     private void getTypeUsage() {
 
-        ServiceExecute.execute(new EstatePropertyTypeUsageService(getContext()).getAll(new FilterModel().setRowPerPage(100)))
-                .subscribe(new NtkObserver<>() {
-                    @Override
-                    public void onNext(@NonNull ErrorException<EstatePropertyTypeUsageModel> response) {
-                        typeUsages = response.ListItems;
+        ServiceExecute.execute(new EstatePropertyTypeUsageService(getContext()).getAll(new FilterModel().setRowPerPage(100))).subscribe(new NtkObserver<>() {
+            @Override
+            public void onNext(@NonNull ErrorException<EstatePropertyTypeUsageModel> response) {
+                typeUsages = response.ListItems;
 
-                        if (orderActivity().model().PropertyTypeUsage != null) {
-                            EstatePropertyTypeUsageModel find =
-                                    StreamSupport.stream(typeUsages).filter(t -> t.Id.equals(orderActivity().model().LinkPropertyTypeUsageId)).findFirst().orElse(null);
-                            orderActivity().model().PropertyTypeUsage = (find);
+                if (orderActivity().model().LinkPropertyTypeUsageId != null) {
+                    EstatePropertyTypeUsageModel find = StreamSupport.stream(typeUsages).filter(t -> t.Id.equals(orderActivity().model().LinkPropertyTypeUsageId)).findFirst().orElse(null);
+                    orderActivity().model().PropertyTypeUsage = (find);
 
-                        }
-                        showData();
-                    }
+                }
+                showData();
+            }
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        orderActivity().showErrorView();
-                    }
-                });
+            @Override
+            public void onError(@NonNull Throwable e) {
+                orderActivity().showErrorView();
+            }
+        });
     }
 
 
     protected synchronized void showData() {
         if (count == 2) {
-            EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(isAllAdapterClickable, typeUsages, orderActivity().model().PropertyTypeUsage,
-                    estatePropertyTypeUsageModel -> {
-                        findViewById(R.id.cardLandUsesView).setVisibility(View.VISIBLE);
-                        orderActivity().model().PropertyTypeUsage = estatePropertyTypeUsageModel;
-                        orderActivity().model().PropertyTypeLanduse = null;
-                        setTypeUsage(estatePropertyTypeUsageModel);
-                    });
+            EstatePropertyTypeAdapterSelector adapter = new EstatePropertyTypeAdapterSelector(isAllAdapterClickable, typeUsages, orderActivity().model().PropertyTypeUsage, estatePropertyTypeUsageModel -> {
+                findViewById(R.id.cardLandUsesView).setVisibility(View.VISIBLE);
+                orderActivity().model().PropertyTypeUsage = estatePropertyTypeUsageModel;
+                orderActivity().model().PropertyTypeLanduse = null;
+                setTypeUsage(estatePropertyTypeUsageModel);
+            });
             RecyclerView rc = findViewById(R.id.estateTypeRc);
             rc.setAdapter(adapter);
             FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
@@ -185,25 +180,18 @@ public class NewOrderFragment1 extends BaseFragment {
 
     void setTypeUsage(EstatePropertyTypeUsageModel estatePropertyTypeUsageModel) {
         changeUi();
-        List<EstatePropertyTypeModel> mappers = StreamSupport.stream(propertyType)
-                .filter(t -> t.LinkPropertyTypeUsageId.equals(estatePropertyTypeUsageModel.Id))
-                .collect(Collectors.toList());
-        List<EstatePropertyTypeLanduseModel> models = StreamSupport.stream(landUses).
-                filter(t -> StreamSupport.stream(mappers)
-                        .anyMatch(k -> k.LinkPropertyTypeLanduseId.equals(t.Id)))
-                .collect(Collectors.toList());
+        List<EstatePropertyTypeModel> mappers = StreamSupport.stream(propertyType).filter(t -> t.LinkPropertyTypeUsageId.equals(estatePropertyTypeUsageModel.Id)).collect(Collectors.toList());
+        List<EstatePropertyTypeLanduseModel> models = StreamSupport.stream(landUses).filter(t -> StreamSupport.stream(mappers).anyMatch(k -> k.LinkPropertyTypeLanduseId.equals(t.Id))).collect(Collectors.toList());
         RecyclerView rc = findViewById(R.id.EstateLandUsedRc);
-        rc.setAdapter(new EstatePropertyLandUseAdapterSelector(isAllAdapterClickable, models, orderActivity().model().PropertyTypeLanduse,
-                t -> {
-                    orderActivity().model().PropertyTypeLanduse = t;
-                    changeUi();
-                }));
+        rc.setAdapter(new EstatePropertyLandUseAdapterSelector(isAllAdapterClickable, models, orderActivity().model().PropertyTypeLanduse, t -> {
+            orderActivity().model().PropertyTypeLanduse = t;
+            changeUi();
+        }));
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
         flowLayoutManager.setAutoMeasureEnabled(true);
         flowLayoutManager.maxItemsPerLine(4);
         flowLayoutManager.setAlignment(Alignment.RIGHT);
         rc.setLayoutManager(flowLayoutManager);
-
 
     }
 
@@ -246,8 +234,7 @@ public class NewOrderFragment1 extends BaseFragment {
         orderActivity().model().LinkPropertyTypeUsageId = orderActivity().model().PropertyTypeUsage.Id;
         if (!((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim().equals(""))
             orderActivity().model().Area = Double.parseDouble(NumberTextWatcherForThousand.trimCommaOfString(((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim()));
-        else
-            orderActivity().model().Area = 0;
+        else orderActivity().model().Area = 0;
         if (!(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim().equals("")))
             try {
                 orderActivity().model().CreatedYaer = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim());
@@ -256,8 +243,7 @@ public class NewOrderFragment1 extends BaseFragment {
 
                 return false;
             }
-        else
-            orderActivity().model().CreatedYaer = 0;
+        else orderActivity().model().CreatedYaer = 0;
 
         if (!((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).getText().toString().trim().equals(""))
             try {
@@ -266,8 +252,7 @@ public class NewOrderFragment1 extends BaseFragment {
                 Toasty.error(getContext(), "فرمت عدد وارده در قسمت " + lastSelectedLandUse.TitlePartition + "اشتباه است", Toasty.LENGTH_LONG, true).show();
                 return false;
             }
-        else
-            orderActivity().model().Partition = 0;
+        else orderActivity().model().Partition = 0;
         if (lastSelectedLandUse != null && !lastSelectedLandUse.Id.equals(orderActivity().model().PropertyTypeLanduse.Id)) {
             orderActivity().model().PropertyDetailGroups = null;
             orderActivity().model().PropertyDetailValues = null;
