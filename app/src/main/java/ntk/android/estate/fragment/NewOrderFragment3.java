@@ -129,8 +129,10 @@ public class NewOrderFragment3 extends BaseFragment {
                 flowLayoutManager.setAutoMeasureEnabled(true);
                 flowLayoutManager.setAlignment(Alignment.RIGHT);
                 rc.setLayoutManager(flowLayoutManager);
-                if (lastSelected > -1)
+                if (lastSelected > -1) {
+                    changeView(model.ListItems.get(lastSelected));
                     setLatsSelected(model.ListItems.get(lastSelected));
+                }
             }
 
 
@@ -174,23 +176,31 @@ public class NewOrderFragment3 extends BaseFragment {
     private void setLatsSelected(EstateContractTypeModel estateContractTypeModel) {
         {
             TextInputEditText et1 = findViewById(R.id.etSale);
-            et1.setText(orderActivity().model().SalePriceMax + "");
+            if (orderActivity().model().SalePriceMax != null && orderActivity().model().SalePriceMax != 0)
+                et1.setText(orderActivity().model().SalePriceMax + "");
             TextInputEditText et2 = findViewById(R.id.etRent);
-            et2.setText(orderActivity().model().RentPriceMax + "");
+            if (orderActivity().model().RentPriceMax != null && orderActivity().model().RentPriceMax != 0)
+                et2.setText(orderActivity().model().RentPriceMax + "");
             TextInputEditText et3 = findViewById(R.id.etDeposit);
-            et3.setText(orderActivity().model().DepositPriceMax + "");
+            if (orderActivity().model().DepositPriceMax != null && orderActivity().model().DepositPriceMax != 0)
+                et3.setText(orderActivity().model().DepositPriceMax + "");
             TextInputEditText et4 = findViewById(R.id.etPeriodPayment);
-            et4.setText(orderActivity().model().PeriodPriceMax + "");
+            if (orderActivity().model().PeriodPriceMax != null && orderActivity().model().PeriodPriceMax != 0)
+                et4.setText(orderActivity().model().PeriodPriceMax + "");
         }
         {
             TextInputEditText et1 = findViewById(R.id.etSale2);
-            et1.setText(orderActivity().model().SalePriceMin + "");
+            if (orderActivity().model().SalePriceMin != null && orderActivity().model().SalePriceMin != 0)
+                et1.setText(orderActivity().model().SalePriceMin + "");
             TextInputEditText et2 = findViewById(R.id.etRent2);
-            et2.setText(orderActivity().model().RentPriceMin + "");
+            if (orderActivity().model().RentPriceMin != null && orderActivity().model().RentPriceMin != 0)
+                et2.setText(orderActivity().model().RentPriceMin + "");
             TextInputEditText et3 = findViewById(R.id.etDeposit2);
-            et3.setText(orderActivity().model().DepositPriceMin + "");
+            if (orderActivity().model().DepositPriceMin != null && orderActivity().model().DepositPriceMin != 0)
+                et3.setText(orderActivity().model().DepositPriceMin + "");
             TextInputEditText et4 = findViewById(R.id.etPeriodPayment2);
-            et4.setText(orderActivity().model().PeriodPriceMin + "");
+            if (orderActivity().model().PeriodPriceMin != null && orderActivity().model().PeriodPriceMin != 0)
+                et4.setText(orderActivity().model().PeriodPriceMin + "");
         }
     }
 
