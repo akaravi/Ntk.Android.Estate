@@ -75,7 +75,7 @@ public class ProfileActivity extends BaseActivity {
             Toasty.error(this, "لطفا تا اتمام بارگذاری تصویر انتخابی صبر کنید").show();
         else {
             String email = ((TextInputEditText) findViewById(R.id.emailEt)).getText().toString();
-            if (Regex.ValidateEmail(email)) {
+            if (!Regex.ValidateEmail(email)) {
                 Toasty.error(this, "آدرس ایمیل خود را به صورت صحیح وارد کنید").show();
                 return;
             }
