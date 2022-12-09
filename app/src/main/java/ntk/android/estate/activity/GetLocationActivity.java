@@ -152,12 +152,12 @@ public class GetLocationActivity extends BaseActivity {
             map = mapboxMap;
 //            map.setMinZoomPreference(12);
             map.easeCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.689198, 51.388973), 12));
-            map.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_RASTER_STYLE), new Style.OnStyleLoaded() {
-                @Override
-                public void onStyleLoaded(@NonNull Style style) {
-                    mapStyle = style;
-                }
-            });
+//            map.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_RASTER_STYLE), new Style.OnStyleLoaded() {
+//                @Override
+//                public void onStyleLoaded(@NonNull Style style) {
+//                    mapStyle = style;
+//                }
+//            });
             map.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
                 @Override
                 public boolean onMapClick(@NonNull LatLng point) {
