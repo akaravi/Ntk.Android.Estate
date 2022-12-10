@@ -61,7 +61,7 @@
                             android:padding="3.0dip"
                             android:text="آرشیو شده"
                             android:textColor="@color/colorWhite"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </RelativeLayout>
 
                     <ntk.android.estate.view.component.CustomImageView

@@ -76,7 +76,7 @@
         android:progress="10"
         android:visibility="visible"
         app:indeterminateAnimationType="disjoint"
-        app:indicatorSize="18dp"
+        app:indicatorSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/lblVersionActSplash"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
