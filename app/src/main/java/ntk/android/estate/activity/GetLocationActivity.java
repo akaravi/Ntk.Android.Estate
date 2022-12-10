@@ -158,6 +158,9 @@ public class GetLocationActivity extends BaseActivity {
 //                    mapStyle = style;
 //                }
 //            });
+            mapboxMap.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
+
+            });
             map.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
                 @Override
                 public boolean onMapClick(@NonNull LatLng point) {
