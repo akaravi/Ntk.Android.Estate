@@ -42,16 +42,17 @@ public class EditCustomerOrderActivity extends NewCustomerOrderActivity {
                     protected void SuccessResponse(ErrorException<EstateCustomerOrderModel> ContentResponse) {
                         model = ContentResponse.Item;
                         //sync property and its values
-                        for (EstatePropertyDetailGroupModel detail :
-                                model.PropertyDetailGroups) {
-                            detail.PropertyValues = new ArrayList<>();
-                            for (EstatePropertyDetailValueModel value :
-                                    model.PropertyDetailValues) {
-                                if ( StreamSupport.stream(detail.PropertyDetails).anyMatch(j -> j.Id.equals(value.LinkPropertyDetailId))) {
-                                    detail.PropertyValues.add(value);
-                                }
-                            }
-                        }
+                        StreamSupport.stream(model.PropertyDetailGroups).
+                                forEach(estatePropertyDetailGroupModel -> {
+
+                                    StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails)
+                                            .forEach(estatePropertyDetailModel -> {
+                                                EstatePropertyDetailValueModel estatePropertyDetailValueModel = StreamSupport.stream(model.PropertyDetailValues).filter(valueModel -> valueModel.LinkPropertyDetailId.equals(estatePropertyDetailModel.Id)).findFirst().orElse(null);
+                                                estatePropertyDetailModel.Value = (estatePropertyDetailValueModel != null ? estatePropertyDetailValueModel.Value : null);
+                                            });
+                                });
+
+
                         switcher.showContentView();
                         showFragment1();
 

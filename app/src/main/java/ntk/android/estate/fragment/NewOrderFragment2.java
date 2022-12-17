@@ -25,7 +25,7 @@ import ntk.android.estate.R;
 import ntk.android.estate.activity.NewCustomerOrderActivity;
 import ntk.android.estate.adapter.EstatePropertyDetailGroupAdapterSelector;
 
-public class NewOrderFragment2  extends BaseFragment {
+public class NewOrderFragment2 extends BaseFragment {
     @Override
     public void onCreateFragment() {
         setContentView(R.layout.fragment_new_order_2);
@@ -54,13 +54,11 @@ public class NewOrderFragment2  extends BaseFragment {
                 //create list of values base on details
                 StreamSupport.stream(orderActivity().model().PropertyDetailGroups).
                         forEach(estatePropertyDetailGroupModel -> {
-                            estatePropertyDetailGroupModel.PropertyValues = new ArrayList<>();
+
                             StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails)
                                     .forEach(estatePropertyDetailModel -> {
-                                        EstatePropertyDetailValueModel value = new EstatePropertyDetailValueModel();
-                                        value.LinkPropertyDetailId = estatePropertyDetailModel.Id;
-                                        value.PropertyDetail = estatePropertyDetailModel;
-                                        estatePropertyDetailGroupModel.PropertyValues.add(value);
+                                        EstatePropertyDetailValueModel estatePropertyDetailValueModel = StreamSupport.stream(orderActivity().model().PropertyDetailValues).filter(valueModel -> valueModel.LinkPropertyDetailId.equals(estatePropertyDetailModel.Id)).findFirst().orElse(null);
+                                        estatePropertyDetailModel.Value = (estatePropertyDetailValueModel != null ? estatePropertyDetailValueModel.Value : null);
                                     });
                         });
                 orderActivity().showContent();
@@ -84,9 +82,13 @@ public class NewOrderFragment2  extends BaseFragment {
 
     public boolean isValidForm() {
         orderActivity().model().PropertyDetailValues = new ArrayList<>();
-        for (EstatePropertyDetailGroupModel group : orderActivity().model().PropertyDetailGroups
-        ) {
-            orderActivity().model().PropertyDetailValues.addAll(group.PropertyValues);
+        for (EstatePropertyDetailGroupModel group : orderActivity().model().PropertyDetailGroups) {
+            StreamSupport.stream(group.PropertyDetails).filter(estatePropertyDetailModel -> estatePropertyDetailModel.Value != null).forEach(estatePropertyDetailModel -> {
+                EstatePropertyDetailValueModel value = new EstatePropertyDetailValueModel();
+                value.LinkPropertyDetailId = estatePropertyDetailModel.Id;
+                value.Value = estatePropertyDetailModel.Value;
+                orderActivity().model().PropertyDetailValues.add(value);
+            });
         }
         return true;
     }

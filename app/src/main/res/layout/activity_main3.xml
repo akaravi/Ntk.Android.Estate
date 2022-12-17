@@ -185,7 +185,12 @@
             </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
-
+        <View
+            android:id="@+id/popUpIndicatorView"
+            android:layout_width="40dp"
+            android:layout_above="@+id/fabAdd"
+            android:layout_centerHorizontal="true"
+            android:layout_height="40dp"/>
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fabAdd"
             android:layout_width="match_parent"

@@ -37,18 +37,18 @@ public class EditEstateActivity extends NewEstateActivity {
 
     @Override
     protected void showFragment1() {
-            stepNumber = 1;
-            title.setText("مشخصات ملک");
-            findViewById(R.id.backBtn).setVisibility(View.GONE);
+        stepNumber = 1;
+        title.setText("مشخصات ملک");
+        findViewById(R.id.backBtn).setVisibility(View.GONE);
 
-            EditEstateFragment1 fragment = new EditEstateFragment1();
-            findViewById(R.id.continueBtn).setOnClickListener(view -> {
-                if (fragment.isValidForm())
-                    showFragment2();
-            });
-            fragment.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
-        }
+        EditEstateFragment1 fragment = new EditEstateFragment1();
+        findViewById(R.id.continueBtn).setOnClickListener(view -> {
+            if (fragment.isValidForm())
+                showFragment2();
+        });
+        fragment.setArguments(getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
+    }
 
 
     @Override
@@ -62,16 +62,12 @@ public class EditEstateActivity extends NewEstateActivity {
                         protected void SuccessResponse(ErrorException<EstatePropertyModel> ContentResponse) {
                             model = ContentResponse.Item;
                             //sync property and its values
-                            for (EstatePropertyDetailGroupModel detail :
-                                    model.PropertyDetailGroups) {
-                                detail.PropertyValues = new ArrayList<>();
-                                for (EstatePropertyDetailValueModel value :
-                                        model.PropertyDetailValues) {
-                                    if ( StreamSupport.stream(detail.PropertyDetails).anyMatch(j -> j.Id.equals(value.LinkPropertyDetailId))) {
-                                        detail.PropertyValues.add(value);
-                                    }
-                                }
-                            }
+                            StreamSupport.stream(model.PropertyDetailGroups).forEach(estatePropertyDetailGroupModel -> {
+                                StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails).forEach(estatePropertyDetailModel -> {
+                                    EstatePropertyDetailValueModel estatePropertyDetailValueModel = StreamSupport.stream(model.PropertyDetailValues).filter(valueModel -> valueModel.LinkPropertyDetailId.equals(estatePropertyDetailModel.Id)).findFirst().orElse(null);
+                                    estatePropertyDetailModel.Value = estatePropertyDetailValueModel != null ? estatePropertyDetailValueModel.Value : null;
+                                });
+                            });
                             switcher.showContentView();
                             showFragment1();
 

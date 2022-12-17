@@ -14,26 +14,27 @@ import java.util.List;
 import java9.util.stream.StreamSupport;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyDetailModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
 public class PropertyDetailGroupsAdapter extends BaseRecyclerAdapter<EstatePropertyDetailGroupModel, PropertyDetailGroupsAdapter.VH> {
     public PropertyDetailGroupsAdapter(List<EstatePropertyDetailGroupModel> list) {
-        super(list); drawable=R.drawable.sweet_error_center_x;
+        super(list);
+        drawable = R.drawable.sweet_error_center_x;
     }
 
     public static RecyclerView.Adapter INIT(List<EstatePropertyDetailGroupModel> details, List<EstatePropertyDetailValueModel> values) {
-        for (EstatePropertyDetailGroupModel detail :
-                details) {
-            detail.PropertyValues = new ArrayList<>();
-            for (EstatePropertyDetailValueModel value :
-                    values) {
-                if (value.Value != null && StreamSupport.stream(detail.PropertyDetails).anyMatch(j -> j.Id.equals(value.LinkPropertyDetailId))) {
-                    detail.PropertyValues.add(value);
-                }
-            }
-        }
+        StreamSupport.stream(details).
+                forEach(estatePropertyDetailGroupModel -> {
+
+                    StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails)
+                            .forEach(estatePropertyDetailModel -> {
+                                EstatePropertyDetailValueModel estatePropertyDetailValueModel = StreamSupport.stream(values).filter(valueModel -> valueModel.LinkPropertyDetailId.equals(estatePropertyDetailModel.Id)).findFirst().orElse(null);
+                                estatePropertyDetailModel.Value = (estatePropertyDetailValueModel != null ? estatePropertyDetailValueModel.Value : null);
+                            });
+                });
         return new PropertyDetailGroupsAdapter(details);
     }
 
@@ -47,16 +48,25 @@ public class PropertyDetailGroupsAdapter extends BaseRecyclerAdapter<EstatePrope
     public void onBindViewHolder(@NonNull VH holder, int position) {
         EstatePropertyDetailGroupModel item = getItem(position);
         holder.title.setText(item.Title);
-        holder.rc.setAdapter(new PropertyDetailValueAdapter(item.PropertyValues));
+        holder.rc.setAdapter(new PropertyDetailValueAdapter(item.PropertyDetails));
         holder.rc.setLayoutManager(new GridLayoutManager(holder.itemView.getContext(), 2));
         if (position == list.size() - 1)
             holder.line.setVisibility(View.GONE);
         else
             holder.line.setVisibility(View.VISIBLE);
-        if (item.PropertyValues.size() == 0)
+        if (item.PropertyDetails.isEmpty())
             holder.itemView.setVisibility(View.GONE);
-        else
-            holder.itemView.setVisibility(View.VISIBLE);
+        else {
+            boolean isNull = true;
+            for (EstatePropertyDetailModel detail : item.PropertyDetails) {
+                if (detail.Value != null && detail.equals("false")) {
+                    isNull = true;
+                    break;
+                }
+            }
+            if (isNull)
+                holder.itemView.setVisibility(View.VISIBLE);
+        }
     }
 
     public class VH extends RecyclerView.ViewHolder {

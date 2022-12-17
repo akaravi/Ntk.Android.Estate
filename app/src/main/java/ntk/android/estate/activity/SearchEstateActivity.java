@@ -38,6 +38,7 @@ import ntk.android.base.entitymodel.enums.EnumClauseType;
 import ntk.android.base.entitymodel.enums.EnumSearchType;
 import ntk.android.base.entitymodel.estate.EstateContractTypeModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyDetailModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeModel;
@@ -146,12 +147,12 @@ public class SearchEstateActivity extends BaseActivity {
         spinner.setOnClickListener(view -> {
             SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
                     selectedModel -> {
-                        if (selectedModel!=null) {
+                        if (selectedModel != null) {
                             ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);
-                           selectedLocation=selectedModel;
-                        }else{
+                            selectedLocation = selectedModel;
+                        } else {
                             ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText("");
-                            selectedLocation=null;
+                            selectedLocation = null;
 
                         }
                     });
@@ -274,10 +275,10 @@ public class SearchEstateActivity extends BaseActivity {
         if (SelectedPropertyDetailGroupModel != null) {
             FilterDataModel details = new FilterDataModel();
             for (int i = 0; i < SelectedPropertyDetailGroupModel.size(); i++) {
-                for (EstatePropertyDetailValueModel t : SelectedPropertyDetailGroupModel.get(i).PropertyValues) {
+                for (EstatePropertyDetailModel t : SelectedPropertyDetailGroupModel.get(i).PropertyDetails) {
                     if (t.Value != null && !t.Value.equals("") && !t.Value.equals("false")) {
                         FilterDataModel detailFilterModels = new FilterDataModel();
-                        FilterDataModel f1 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("LinkPropertyDetailId").setStringValue(t.LinkPropertyDetailId).setClauseType(EnumClauseType.And);
+                        FilterDataModel f1 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("LinkPropertyDetailId").setStringValue(t.Id).setClauseType(EnumClauseType.And);
                         FilterDataModel f2 = new FilterDataModel().setPropertyName("PropertyDetailValues").setPropertyAnyName("Value").setStringValue(t.Value).setClauseType(EnumClauseType.And);
                         detailFilterModels.addInnerFilter(f1).addInnerFilter(f2);
                         details.addInnerFilter(detailFilterModels);
@@ -321,7 +322,7 @@ public class SearchEstateActivity extends BaseActivity {
                         flowLayoutManager.setAlignment(Alignment.RIGHT);
                         rc.setLayoutManager(flowLayoutManager);
                         apiCall--;
-                        if (apiCall==0)
+                        if (apiCall == 0)
                             switcher.showContentView();
                     }
 
@@ -335,7 +336,7 @@ public class SearchEstateActivity extends BaseActivity {
             public void onNext(@NonNull ErrorException<EstatePropertyTypeModel> response) {
                 propertyType = response.ListItems;
                 apiCall--;
-                if (apiCall==0)
+                if (apiCall == 0)
                     switcher.showContentView();
             }
 
@@ -350,7 +351,7 @@ public class SearchEstateActivity extends BaseActivity {
                     public void onNext(@NonNull ErrorException<EstatePropertyTypeLanduseModel> response) {
                         landUses = response.ListItems;
                         apiCall--;
-                        if (apiCall==0)
+                        if (apiCall == 0)
                             switcher.showContentView();
                     }
 
@@ -415,17 +416,7 @@ public class SearchEstateActivity extends BaseActivity {
             public void onNext(@NonNull ErrorException<EstatePropertyDetailGroupModel> response) {
                 //create list of values base on details
                 SelectedPropertyDetailGroupModel = response.ListItems;
-                StreamSupport.stream(SelectedPropertyDetailGroupModel).
-                        forEach(estatePropertyDetailGroupModel -> {
-                            estatePropertyDetailGroupModel.PropertyValues = new ArrayList<>();
-                            StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails)
-                                    .forEach(estatePropertyDetailModel -> {
-                                        EstatePropertyDetailValueModel value = new EstatePropertyDetailValueModel();
-                                        value.LinkPropertyDetailId = estatePropertyDetailModel.Id;
-                                        value.PropertyDetail = estatePropertyDetailModel;
-                                        estatePropertyDetailGroupModel.PropertyValues.add(value);
-                                    });
-                        });
+          
                 SearchPropertyDetailGroupAdapterSelector adapter = new SearchPropertyDetailGroupAdapterSelector(SelectedPropertyDetailGroupModel, findViewById(R.id.nestedScrool), getSupportFragmentManager());
                 RecyclerView rc = (findViewById(R.id.detailRc));
                 rc.setAdapter(adapter);
@@ -453,7 +444,7 @@ public class SearchEstateActivity extends BaseActivity {
                 flowLayoutManager.setAlignment(Alignment.RIGHT);
                 rc.setLayoutManager(flowLayoutManager);
                 apiCall--;
-                if (apiCall==0)
+                if (apiCall == 0)
                     switcher.showContentView();
             }
 

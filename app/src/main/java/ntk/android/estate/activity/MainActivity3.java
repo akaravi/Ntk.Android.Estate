@@ -4,11 +4,15 @@ package ntk.android.estate.activity;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,6 +61,7 @@ import ntk.android.base.services.news.NewsContentService;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.imageCompressor;
 import ntk.android.base.utill.prefrense.Preferences;
+import ntk.android.base.view.NViewUtils;
 import ntk.android.estate.R;
 import ntk.android.estate.adapter.Main3ArticleAdapter;
 import ntk.android.estate.adapter.Main3EstateLandUseAdapter;
@@ -217,7 +222,13 @@ public class MainActivity3 extends BaseMainActivity {
         initStatePropertyShimmer(findViewById(R.id.row3));
 
         //add fab
-        findViewById(R.id.fabAdd).setOnClickListener(view -> {
+        findViewById(R.id.fabAdd).setOnClickListener(view ->
+                showBallon(view));
+
+    }
+
+    private void showBallon(View view) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             Balloon balloon = new Balloon.Builder(this)
                     .setLayout(R.layout.sub_new_buttons)
                     .setArrowSize(10)
@@ -244,9 +255,27 @@ public class MainActivity3 extends BaseMainActivity {
                 balloon.dismiss();
                 NewCustomerOrderActivity.START_ACTIVITY(MainActivity3.this);
             });
+        } else {
+            View popupView = getLayoutInflater().inflate(R.layout.sub_new_buttons, null);
 
-        });
+            // create the popup window
+            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+            int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            boolean focusable = true; // lets taps outside the popup also dismiss it
+            PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
+            // show the popup window
+            // which view you pass in doesn't matter, it is only used for the window tolken
+            popupWindow.showAtLocation(findViewById(R.id.popUpIndicatorView), Gravity.NO_GRAVITY, 0, 0);
+            popupWindow.getContentView().findViewById(R.id.new_estate).setOnClickListener(v -> {
+                popupWindow.dismiss();
+                NewEstateActivity.START_ACTIVITY(MainActivity3.this);
+            });
+            popupWindow.getContentView().findViewById(R.id.new_order).setOnClickListener(v -> {
+                popupWindow.dismiss();
+                NewCustomerOrderActivity.START_ACTIVITY(MainActivity3.this);
+            });
+        }
     }
 
     private void Search() {

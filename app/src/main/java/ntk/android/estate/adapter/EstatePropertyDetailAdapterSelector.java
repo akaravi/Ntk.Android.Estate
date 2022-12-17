@@ -27,34 +27,35 @@ import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.dialog.CheckBoxListDialog;
 import ntk.android.base.dialog.RadioListDialog;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
-import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyDetailModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyDetailModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
-class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstatePropertyDetailValueModel, EstatePropertyDetailAdapterSelector.VH> {
+class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstatePropertyDetailModel, EstatePropertyDetailAdapterSelector.VH> {
     FragmentManager frag;
 
     public EstatePropertyDetailAdapterSelector(FragmentManager fragment, EstatePropertyDetailGroupModel item) {
-        super(item.PropertyValues);
+        super(item.PropertyDetails);
         frag = fragment;
         drawable=R.drawable.sweet_error_center_x;
     }
 
     @Override
     public int getItemViewType(int position) {
-        EstatePropertyDetailValueModel item = list.get(position);
-        if (item.PropertyDetail.InputDataType == 0) {
+        EstatePropertyDetailModel item = list.get(position);
+        if (item.InputDataType == 0) {
             //is selectable String
-            if (item.PropertyDetail.ConfigValueForceUseDefaultValue)
+            if (item.ConfigValueForceUseDefaultValue)
                 //is as multiple choose
-                if (item.PropertyDetail.ConfigValueMultipleChoice)
+                if (item.ConfigValueMultipleChoice)
                     return 11;
                 else//is as single choose;
                     return 12;
             else
                 return 0;
         }
-        return item.PropertyDetail.InputDataType;
+        return item.InputDataType;
     }
 
     @NonNull
@@ -99,7 +100,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             return itemView.getContext();
         }
 
-        public void bindToView(EstatePropertyDetailValueModel item, int position) {
+        public void bindToView(EstatePropertyDetailModel item, int position) {
 
         }
 
@@ -134,9 +135,9 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         }
 
         @Override
-        public void bindToView(EstatePropertyDetailValueModel item, int position) {
+        public void bindToView(EstatePropertyDetailModel item, int position) {
             super.bindToView(item, position);
-            inputLayout.setHint(item.PropertyDetail.Title);
+            inputLayout.setHint(item.Title);
             if (item.Value != null)
                 editText.setText(item.Value);
             textChangeListener.updatePosition(position);
@@ -154,8 +155,8 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         }
 
         @Override
-        public void bindToView(EstatePropertyDetailValueModel item, int position) {
-            inputLayout.setHint(item.PropertyDetail.Title);
+        public void bindToView(EstatePropertyDetailModel item, int position) {
+            inputLayout.setHint(item.Title);
             if (item.Value != null)
                 editText.setText(item.Value);
             //add clickListener
@@ -167,7 +168,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
                             editText.setText(selected);
                             return null;
                         },
-                        item.PropertyDetail.ConfigValueDefaultValue
+                        item.ConfigValueDefaultValue
                 );
                 dialog.show(frag, "singleDialog");
             });
@@ -185,8 +186,8 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         }
 
         @Override
-        public void bindToView(EstatePropertyDetailValueModel item, int position) {
-            inputLayout.setHint(item.PropertyDetail.Title);
+        public void bindToView(EstatePropertyDetailModel item, int position) {
+            inputLayout.setHint(item.Title);
             if (item.Value != null)
                 editText.setText(item.Value);
             //add clickListener
@@ -199,7 +200,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
                             editText.setText(str);
                             return null;
                         },
-                        item.PropertyDetail.ConfigValueDefaultValue
+                        item.ConfigValueDefaultValue
                 );
                 dialog.show(frag, "multiDialog");
             });
@@ -252,8 +253,8 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         }
 
         @Override
-        public void bindToView(EstatePropertyDetailValueModel item, int position) {
-            inputLayout.setHint(item.PropertyDetail.Title);
+        public void bindToView(EstatePropertyDetailModel item, int position) {
+            inputLayout.setHint(item.Title);
             if (item.Value != null)
                 editText.setText(item.Value);
             //add clickListener
@@ -288,9 +289,9 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         }
 
         @Override
-        public void bindToView(EstatePropertyDetailValueModel item, int position) {
+        public void bindToView(EstatePropertyDetailModel item, int position) {
             super.bindToView(item, position);
-            textView.setText(item.PropertyDetail.Title);
+            textView.setText(item.Title);
             checkBox.setOnCheckedChangeListener((compoundButton, b) -> {
                 if (b) item.Value = "true";
                 else

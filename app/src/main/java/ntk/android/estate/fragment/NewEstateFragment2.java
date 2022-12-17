@@ -17,6 +17,7 @@ import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
+import ntk.android.base.entitymodel.estate.EstatePropertyDetailModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyTypeLanduseModel;
 import ntk.android.base.fragment.BaseFragment;
@@ -44,25 +45,20 @@ public class NewEstateFragment2 extends BaseFragment {
 
     private void getAllDetails(EstatePropertyTypeLanduseModel t) {
         estateActivity().showProgress();
-        FilterModel f = new FilterModel().addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeLanduseId")
-                .setStringValue(t.Id));
-        ServiceExecute.execute(new EstatePropertyDetailGroupService(getContext()).getAll(f
-        )).subscribe(new NtkObserver<ErrorException<EstatePropertyDetailGroupModel>>() {
+        FilterModel f = new FilterModel().addFilter(new FilterDataModel().setPropertyName("LinkPropertyTypeLanduseId").setStringValue(t.Id));
+        ServiceExecute.execute(new EstatePropertyDetailGroupService(getContext()).getAll(f)).subscribe(new NtkObserver<ErrorException<EstatePropertyDetailGroupModel>>() {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyDetailGroupModel> response) {
                 estateActivity().model().PropertyDetailGroups = response.ListItems;
                 //create list of values base on details
-                StreamSupport.stream(estateActivity().model().PropertyDetailGroups).
-                        forEach(estatePropertyDetailGroupModel -> {
-                            estatePropertyDetailGroupModel.PropertyValues = new ArrayList<>();
-                            StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails)
-                                    .forEach(estatePropertyDetailModel -> {
-                                        EstatePropertyDetailValueModel value = new EstatePropertyDetailValueModel();
-                                        value.LinkPropertyDetailId = estatePropertyDetailModel.Id;
-                                        value.PropertyDetail = estatePropertyDetailModel;
-                                        estatePropertyDetailGroupModel.PropertyValues.add(value);
-                                    });
-                        });
+                StreamSupport.stream(estateActivity().model().PropertyDetailGroups).forEach(estatePropertyDetailGroupModel -> {
+                    StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails).forEach(estatePropertyDetailModel -> {
+                        if (estateActivity().model().PropertyDetailValues != null) {
+                            EstatePropertyDetailValueModel estatePropertyDetailValueModel = StreamSupport.stream(estateActivity().model().PropertyDetailValues).filter(valueModel -> valueModel.LinkPropertyDetailId == estatePropertyDetailModel.Id).findFirst().orElse(null);
+                            estatePropertyDetailModel.Value = (estatePropertyDetailValueModel != null) ? estatePropertyDetailValueModel.Value : null;
+                        }
+                    });
+                });
                 estateActivity().showContent();
                 showView();
             }
@@ -75,8 +71,7 @@ public class NewEstateFragment2 extends BaseFragment {
     }
 
     private void showView() {
-        EstatePropertyDetailGroupAdapterSelector adapter = new EstatePropertyDetailGroupAdapterSelector(
-                estateActivity().getSupportFragmentManager(), estateActivity().model().PropertyDetailGroups);
+        EstatePropertyDetailGroupAdapterSelector adapter = new EstatePropertyDetailGroupAdapterSelector(estateActivity().getSupportFragmentManager(), estateActivity().model().PropertyDetailGroups);
         RecyclerView rc = (findViewById(R.id.estateDetailGroupRc));
         rc.setAdapter(adapter);
         rc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
@@ -84,9 +79,13 @@ public class NewEstateFragment2 extends BaseFragment {
 
     public boolean isValidForm() {
         estateActivity().model().PropertyDetailValues = new ArrayList<>();
-        for (EstatePropertyDetailGroupModel group : estateActivity().model().PropertyDetailGroups
-        ) {
-            estateActivity().model().PropertyDetailValues.addAll(group.PropertyValues);
+        for (EstatePropertyDetailGroupModel group : estateActivity().model().PropertyDetailGroups) {
+            StreamSupport.stream(group.PropertyDetails).filter(estatePropertyDetailModel -> estatePropertyDetailModel.Value != null).forEach(estatePropertyDetailModel -> {
+                EstatePropertyDetailValueModel value = new EstatePropertyDetailValueModel();
+                value.LinkPropertyDetailId = estatePropertyDetailModel.Id;
+                value.Value = estatePropertyDetailModel.Value;
+                estateActivity().model().PropertyDetailValues.add(value);
+            });
         }
         return true;
     }

@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
+import ntk.android.base.entitymodel.estate.EstatePropertyDetailModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailValueModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
-public class PropertyDetailValueAdapter extends BaseRecyclerAdapter<EstatePropertyDetailValueModel, PropertyDetailValueAdapter.VH> {
-    public PropertyDetailValueAdapter(List<EstatePropertyDetailValueModel> list) {
+public class PropertyDetailValueAdapter extends BaseRecyclerAdapter<EstatePropertyDetailModel, PropertyDetailValueAdapter.VH> {
+    public PropertyDetailValueAdapter(List<EstatePropertyDetailModel> list) {
         super(list); drawable=R.drawable.sweet_error_center_x;
     }
 
@@ -29,12 +30,12 @@ public class PropertyDetailValueAdapter extends BaseRecyclerAdapter<EstateProper
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        EstatePropertyDetailValueModel item = getItem(position);
-        holder.title.setText(item.PropertyDetail.Title);
-        String iconFont = item.PropertyDetail.IconFont;
+        EstatePropertyDetailModel item = getItem(position);
+        holder.title.setText(item.Title);
+        String iconFont = item.IconFont;
         holder.icon.setText("{" + iconFont.replace(iconFont.substring(0,iconFont.indexOf("-")+1), "faw-") + "}");
-        if (item.PropertyDetail.IconColor != null)
-            holder.icon.setTextColor(Color.parseColor(item.PropertyDetail.IconColor));
+        if (item.IconColor != null)
+            holder.icon.setTextColor(Color.parseColor(item.IconColor));
         if (item.Value.equalsIgnoreCase("true")) {
             holder.valueFont.setVisibility(View.VISIBLE);
             holder.value.setVisibility(View.GONE);

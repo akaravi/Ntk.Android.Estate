@@ -151,11 +151,8 @@ public class EstateDetailActivity extends BaseActivity {
             @Override
             public void onMapReady(@NonNull MapboxMap mapboxMap) {
                 map = mapboxMap;
-                mapboxMap.setMinZoomPreference(12);
-                map.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-                    }
+                map.setMinZoomPreference(12);
+                map.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
                 });
             }
         });
