@@ -77,7 +77,7 @@ public class EstateHistoryAdapter extends BaseRecyclerAdapter<EstatePropertyHist
             activityType = itemView.findViewById(R.id.ActivityTypeTv);
             toDate = itemView.findViewById(R.id.toDateTv);
             fromDate = itemView.findViewById(R.id.fromDateTv);
-            description = itemView.findViewById(R.id.description);
+            description = itemView.findViewById(R.id.DescriptionTv);
             tvFrom = itemView.findViewById(R.id.fromTv);
             tvTo = itemView.findViewById(R.id.toTv);
             Typeface t = FontManager.T1_Typeface(itemView.getContext());

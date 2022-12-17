@@ -2,6 +2,7 @@ package ntk.android.estate.activity;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -19,7 +20,7 @@ import ntk.android.base.services.estate.EstatePropertyHistoryService;
 import ntk.android.estate.adapter.EstateHistoryAdapter;
 
 public class EstateHistoryActivity extends BaseFilterModelListActivity<EstatePropertyHistoryModel> {
-    List<EstateActivityTypeModel> activityTypes;
+    List<EstateActivityTypeModel> activityTypes=new ArrayList<>();
 
     @Override
     public RecyclerView.Adapter createAdapter() {
@@ -40,7 +41,7 @@ public class EstateHistoryActivity extends BaseFilterModelListActivity<EstatePro
                 @Override
                 public void onNext(ErrorException<EstateActivityTypeModel> response) {
                     if (response.IsSuccess) {
-                        activityTypes = response.ListItems;
+                        activityTypes.addAll( response.ListItems);
                         RestCall(1);
                     } else
                         switcher.showErrorView(response.ErrorMessage, () -> callOtherApi());

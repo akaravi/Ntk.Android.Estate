@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -154,6 +155,16 @@ public class EstateDetailActivity extends BaseActivity {
                 map.setMinZoomPreference(12);
                 map.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
                 });
+                if (model!=null&&model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
+                    (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
+                    LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
+                    if (map != null) {
+
+                        map.addMarker(GetLocationActivity.MakeMarker(EstateDetailActivity.this, point));
+                        map.moveCamera(CameraUpdateFactory.newLatLng(point));
+
+                    }
+                }
             }
         });
         //call button
@@ -251,6 +262,7 @@ public class EstateDetailActivity extends BaseActivity {
             if (map != null) {
 
                 map.addMarker(GetLocationActivity.MakeMarker(this, point));
+                map.moveCamera(CameraUpdateFactory.newLatLng(point));
 
             }
         }
