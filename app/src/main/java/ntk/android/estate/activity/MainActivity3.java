@@ -266,7 +266,8 @@ public class MainActivity3 extends BaseMainActivity {
 
             // show the popup window
             // which view you pass in doesn't matter, it is only used for the window tolken
-            popupWindow.showAtLocation(findViewById(R.id.popUpIndicatorView), Gravity.NO_GRAVITY, 0, 0);
+            int[] size=new int[2]; findViewById(R.id.popUpIndicatorView).getLocationOnScreen(size);
+            popupWindow.showAtLocation(findViewById(R.id.popUpIndicatorView), Gravity.NO_GRAVITY,size[0], size[1]);
             popupWindow.getContentView().findViewById(R.id.new_estate).setOnClickListener(v -> {
                 popupWindow.dismiss();
                 NewEstateActivity.START_ACTIVITY(MainActivity3.this);
