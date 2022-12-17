@@ -137,6 +137,9 @@
         <activity
             android:name=".activity.EditCustomerOrderActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EstateHistoryActivity"
+            android:screenOrientation="portrait" />
 
 
         <provider

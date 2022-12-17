@@ -57,14 +57,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <TextView
-        android:id="@+id/lblVersionActSplash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/splashIndicator"
@@ -82,7 +75,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:trackThickness="5dp" />
 
-
+    <TextView
+        android:id="@id/lblVersionActSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextPrimary"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
     <View
         android:id="@id/splash_debugView"
         android:layout_width="200dp"

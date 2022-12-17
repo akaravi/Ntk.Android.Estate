@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
 
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,8 @@ import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
@@ -33,6 +36,7 @@ import ntk.android.base.view.dialog.SweetAlertDialog;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.EditEstateActivity;
 import ntk.android.estate.activity.EstateDetailActivity;
+import ntk.android.estate.activity.EstateHistoryActivity;
 
 public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyModel, MyEstatePropertyAdapter.VH> {
     Date now;
@@ -62,6 +66,9 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
         holder.delete.setOnClickListener(view -> {
             showDelete(view.getContext(), item);
         });
+        holder.history.setOnClickListener(view -> {
+            showHistory(view.getContext(), item);
+        });
         holder.edit.setOnClickListener(view -> {
             Intent i = new Intent(view.getContext(), EditEstateActivity.class);
             i.putExtra(Extras.EXTRA_FIRST_ARG, (item.Id));
@@ -78,6 +85,14 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
             holder.favorite.setImageResource(R.drawable.ic_fav_full);
         else
             holder.favorite.setImageResource(R.drawable.ic_fav);
+    }
+
+    private void showHistory(Context context, EstatePropertyModel item) {
+        Intent i = new Intent(context, EstateHistoryActivity.class);
+        FilterModel f=new FilterModel();
+        f.addFilter(new FilterDataModel().setPropertyName("LinkPropertyId").setStringValue( item.Id));
+        i.putExtra(Extras.EXTRA_FIRST_ARG,new Gson().toJson(f));
+        context.startActivity(i);
     }
 
     private void showDelete(Context c, EstatePropertyModel item) {
@@ -130,6 +145,8 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
         ImageView image;
         MaterialButton delete;
         MaterialButton edit;
+        MaterialButton share;
+        MaterialButton history;
 
         public VH(@NonNull View itemView) {
             super(itemView);
@@ -155,6 +172,8 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
             image = itemView.findViewById(R.id.imgPhoto);
             delete = itemView.findViewById(R.id.deleteEstate);
             edit = itemView.findViewById(R.id.editEstate);
+            share = itemView.findViewById(R.id.share);
+            history = itemView.findViewById(R.id.history);
 
             setFont();
         }
@@ -178,6 +197,8 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
             priceTitle3.setTypeface(req);
             delete.setTypeface(req);
             edit.setTypeface(req);
+            share.setTypeface(req);
+            history.setTypeface(req);
         }
 
         public void setContract(EstatePropertyModel item) {

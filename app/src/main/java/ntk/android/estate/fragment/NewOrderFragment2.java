@@ -57,8 +57,10 @@ public class NewOrderFragment2 extends BaseFragment {
 
                             StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails)
                                     .forEach(estatePropertyDetailModel -> {
-                                        EstatePropertyDetailValueModel estatePropertyDetailValueModel = StreamSupport.stream(orderActivity().model().PropertyDetailValues).filter(valueModel -> valueModel.LinkPropertyDetailId.equals(estatePropertyDetailModel.Id)).findFirst().orElse(null);
-                                        estatePropertyDetailModel.Value = (estatePropertyDetailValueModel != null ? estatePropertyDetailValueModel.Value : null);
+                                        if (orderActivity().model().PropertyDetailValues != null) {
+                                            EstatePropertyDetailValueModel estatePropertyDetailValueModel = StreamSupport.stream(orderActivity().model().PropertyDetailValues).filter(valueModel -> valueModel.LinkPropertyDetailId.equals(estatePropertyDetailModel.Id)).findFirst().orElse(null);
+                                            estatePropertyDetailModel.Value = (estatePropertyDetailValueModel != null ? estatePropertyDetailValueModel.Value : null);
+                                        }
                                     });
                         });
                 orderActivity().showContent();

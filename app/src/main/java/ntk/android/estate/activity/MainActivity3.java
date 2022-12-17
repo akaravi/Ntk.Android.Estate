@@ -106,7 +106,7 @@ public class MainActivity3 extends BaseMainActivity {
     private void getRuntimeJson() {
         String config = Preferences.with(this).appVariableInfo().applicationAppModel().ConfigRuntimeSiteJsonValues;
         List<View> viewRow = Arrays.asList(findViewById(R.id.includeRow1), findViewById(R.id.includedRow2));
-        if (!config.equals("") && !config.equals("null")) {
+        if (config != null && !config.equals("") && !config.equals("null")) {
             try {
                 List<RowModel> dataRow = (new Gson().fromJson(config, RuntimeJsonModel.class)).ListItems;
 
