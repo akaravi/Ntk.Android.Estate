@@ -105,10 +105,11 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
                     clickMyEstates();
                     break;
                 case 1:
-                    ClickFavoriteEstateList();
+                    ClickCustomerOrderList();
                     break;
                 case 2:
-                    ClickCustomerOrderList();
+                    ClickFavoriteEstateList();
+
                     break;
                 case 3:
                     ClickNews();
@@ -361,8 +362,8 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
 //        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("آخرین ملک های ثبت شده").setDrawableIcon(R.drawable.estate));
 //        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("ثبت ملک جدید").setDrawableIcon(R.drawable.add));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("املاک من").setDrawableIcon(R.drawable.my_estate));
+        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("درخواست های من").setDrawableIcon(R.drawable.order));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("لیست علاقه مندی").setDrawableIcon(R.drawable.favorites_folder));
-        list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("سفارشات").setDrawableIcon(R.drawable.order));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("اخبار").setDrawableIcon(R.drawable.news2));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("مقالات").setDrawableIcon(R.drawable.article_place_holder));
         list.add(new DrawerChildThemeDtoModel().setId(i++).setTitle("پشتیبانی").setDrawableIcon(R.drawable.inbox));
