@@ -28,12 +28,15 @@ public class PropertyDetailGroupsAdapter extends BaseRecyclerAdapter<EstatePrope
     public static RecyclerView.Adapter INIT(List<EstatePropertyDetailGroupModel> details, List<EstatePropertyDetailValueModel> values) {
         StreamSupport.stream(details).
                 forEach(estatePropertyDetailGroupModel -> {
-
+                    List<EstatePropertyDetailModel>newDetail=new ArrayList<>();
                     StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails)
                             .forEach(estatePropertyDetailModel -> {
                                 EstatePropertyDetailValueModel estatePropertyDetailValueModel = StreamSupport.stream(values).filter(valueModel -> valueModel.LinkPropertyDetailId.equals(estatePropertyDetailModel.Id)).findFirst().orElse(null);
                                 estatePropertyDetailModel.Value = (estatePropertyDetailValueModel != null ? estatePropertyDetailValueModel.Value : null);
+                                if (  estatePropertyDetailModel.Value!=null)
+                                    newDetail.add(estatePropertyDetailModel);
                             });
+                    estatePropertyDetailGroupModel.PropertyDetails=newDetail;
                 });
         return new PropertyDetailGroupsAdapter(details);
     }

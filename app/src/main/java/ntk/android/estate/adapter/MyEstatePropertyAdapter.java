@@ -4,6 +4,7 @@ package ntk.android.estate.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -91,12 +92,9 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
     }
 
     private void showShare(Context context, EstatePropertyModel item) {
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        String message = item.Title;
-        shareIntent.putExtra(Intent.EXTRA_TEXT, message + "\n\n\n" + context.getString(ntk.android.base.R.string.app_name) + "\n" + context.getString(R.string.per_view_link) + "\n" + item.UrlViewContent);
-        shareIntent.setType("text/txt");
-        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        Intent shareIntent = new Intent(Intent.ACTION_VIEW);
+        shareIntent.setData(Uri.parse(item.UrlViewContent));
         context.startActivity(Intent.createChooser(shareIntent, context.getString(ntk.android.base.R.string.per_share_to)));
     }
 
