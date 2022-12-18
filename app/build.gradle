@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
-def BaseVersion = '1.6.60'
+def BaseVersion = '1.6.61'
 def incrementalVersion = '3'
 android {
     compileSdk 33
@@ -132,7 +132,7 @@ dependencies {
     //for popup
     implementation "com.github.skydoves:balloon:1.4.7"
 
-    api project(path: ':baseActivity')
-//     api "com.github.akaravi:Ntk.Android.Baseactivity:${BaseVersion}"
+//    api project(path: ':baseActivity')
+     api "com.github.akaravi:Ntk.Android.Baseactivity:${BaseVersion}"
 }
 
