@@ -1,5 +1,7 @@
 package ntk.android.estate.activity;
 
+import android.view.View;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -17,19 +19,26 @@ import ntk.android.base.entitymodel.estate.EstateActivityTypeModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyHistoryModel;
 import ntk.android.base.services.estate.EstateActivityTypeService;
 import ntk.android.base.services.estate.EstatePropertyHistoryService;
+import ntk.android.estate.R;
 import ntk.android.estate.adapter.EstateHistoryAdapter;
 
 public class EstateHistoryActivity extends BaseFilterModelListActivity<EstatePropertyHistoryModel> {
-    List<EstateActivityTypeModel> activityTypes=new ArrayList<>();
+    List<EstateActivityTypeModel> activityTypes = new ArrayList<>();
 
     @Override
     public RecyclerView.Adapter createAdapter() {
-        return new EstateHistoryAdapter(models,activityTypes);
+        return new EstateHistoryAdapter(models, activityTypes);
     }
 
     @Override
     public Function<FilterModel, Observable<ErrorException<EstatePropertyHistoryModel>>> getService() {
         return new EstatePropertyHistoryService(this)::getAll;
+    }
+
+    @Override
+    protected void onCreated() {
+        findViewById(R.id.imgSearch).setVisibility(View.GONE);
+        findViewById(R.id.imgSort).setVisibility(View.GONE);
     }
 
     @Override
@@ -41,7 +50,7 @@ public class EstateHistoryActivity extends BaseFilterModelListActivity<EstatePro
                 @Override
                 public void onNext(ErrorException<EstateActivityTypeModel> response) {
                     if (response.IsSuccess) {
-                        activityTypes.addAll( response.ListItems);
+                        activityTypes.addAll(response.ListItems);
                         RestCall(1);
                     } else
                         switcher.showErrorView(response.ErrorMessage, () -> callOtherApi());
