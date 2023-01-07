@@ -30,7 +30,7 @@ public  class EstateListWithOrderIdActivity extends BaseFilterModelListActivity<
     private String orderId;
 
     public static void START_NEW(Context context, EstateCustomerOrderModel item) {
-        Intent i = new Intent(context, EstateListActivity.class);
+        Intent i = new Intent(context, EstateListWithOrderIdActivity.class);
         FilterModel filterModel = new FilterModel();
         filterModel.setSortType(EnumSortType.Descending.index())
                 .setSortColumn("Id");
@@ -39,6 +39,11 @@ public  class EstateListWithOrderIdActivity extends BaseFilterModelListActivity<
         context.startActivity(i);
     }
 
+    @Override
+    protected void requestOnIntent() {
+        orderId=getIntent().getExtras().getString(Extras.Extra_5_ARG);
+        super.requestOnIntent();
+    }
 
     @Override
     protected void onCreated() {
@@ -46,7 +51,7 @@ public  class EstateListWithOrderIdActivity extends BaseFilterModelListActivity<
         if (PARTITION_TITLE == null) {
             PARTITION_TITLE = "اتاق";
         }
-        orderId=getIntent().getExtras().getString(Extras.Extra_5_ARG);
+
     }
 
     @Override
@@ -57,7 +62,7 @@ public  class EstateListWithOrderIdActivity extends BaseFilterModelListActivity<
 
     @Override
     public Function<FilterModel, Observable<ErrorException<EstatePropertyModel>>> getService() {
-        return (new AndroidEstatePropertyService(this,orderId))::getAll;
+        return (new AndroidEstatePropertyService(this,orderId))::allWithCustomerOrderId;
     }
 
     @Override

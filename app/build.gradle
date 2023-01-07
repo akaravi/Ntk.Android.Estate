@@ -132,7 +132,7 @@ dependencies {
     //for popup
     implementation "com.github.skydoves:balloon:1.4.7"
 
-//    api project(path: ':baseActivity')
-     api "com.github.akaravi:Ntk.Android.Baseactivity:${BaseVersion}"
+    api project(path: ':baseActivity')
+//     api "com.github.akaravi:Ntk.Android.Baseactivity:${BaseVersion}"
 }
 
