@@ -246,8 +246,10 @@ public class NewEstateFragment1 extends BaseFragment {
         estateActivity().model().LinkPropertyTypeUsageId = estateActivity().model().PropertyTypeUsage.Id;
         if (!((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim().equals(""))
             estateActivity().model().Area = Double.parseDouble(NumberTextWatcherForThousand.trimCommaOfString(((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim()));
-        else
-            estateActivity().model().Area = 0;
+        else{
+            Toasty.error(getContext(), "متراژ را وارد نمایید", Toasty.LENGTH_LONG, true).show();
+            return false;
+        }
         if (!(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim().equals("")))
             try {
                 estateActivity().model().CreatedYaer = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim());
