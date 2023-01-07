@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 def BaseVersion = '1.6.62'
-def incrementalVersion = '3'
+def incrementalVersion = '4'
 android {
     compileSdk 33
     defaultConfig {
