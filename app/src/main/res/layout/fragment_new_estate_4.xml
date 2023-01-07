@@ -28,8 +28,8 @@
                         style="@style/new_estate_textInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_alignTop="@+id/contractsRc"
-                        android:layout_alignBottom="@+id/contractsRc"
+                        android:layout_alignTop="@id/contractsRc"
+                        android:layout_alignBottom="@id/contractsRc"
                         app:hintEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -58,6 +58,7 @@
                         android:layout_alignParentRight="true"
                         android:text="نوع معامله" />
                 </RelativeLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/CurrencyTextInput"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
