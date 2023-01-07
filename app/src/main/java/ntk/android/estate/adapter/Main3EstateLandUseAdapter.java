@@ -18,7 +18,8 @@ import ntk.android.estate.activity.EstateListActivity;
 
 public class Main3EstateLandUseAdapter extends BaseRecyclerAdapter<EstatePropertyTypeLanduseModel, Main3EstateLandUseAdapter.VH> {
     public Main3EstateLandUseAdapter(List<EstatePropertyTypeLanduseModel> list) {
-        super(list); drawable=R.drawable.sweet_error_center_x;
+        super(list);
+        drawable = R.drawable.error_estate;
     }
 
     @NonNull
@@ -30,9 +31,9 @@ public class Main3EstateLandUseAdapter extends BaseRecyclerAdapter<EstatePropert
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         EstatePropertyTypeLanduseModel item = getItem(position);
-        loadImage(item.LinkMainImageIdSrc,holder.image);
+        loadImage(item.LinkMainImageIdSrc, holder.image);
         holder.title.setText(item.Title);
-        holder.itemView.setOnClickListener(view -> EstateListActivity.START_NEW(view.getContext(),item));
+        holder.itemView.setOnClickListener(view -> EstateListActivity.START_NEW(view.getContext(), item));
     }
 
     public class VH extends RecyclerView.ViewHolder {

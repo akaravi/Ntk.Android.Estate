@@ -29,7 +29,7 @@ public class MyEstateActivity extends BaseFilterModelListActivity<EstateProperty
         ((TextView) findViewById(R.id.lblTitle)).setText(R.string.per_my_estate);
         findViewById(ntk.android.base.R.id.imgSearch).setVisibility(View.GONE);
         MaterialButton newBtn = findViewById(R.id.addNew);
-        newBtn.setText("ثبت سفارش جدید");
+        newBtn.setText("ثبت ملک جدید");
         newBtn.setOnClickListener(view -> {
             NewEstateActivity.START_ACTIVITY(view.getContext());
         });

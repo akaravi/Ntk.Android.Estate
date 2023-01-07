@@ -47,7 +47,7 @@ public class NewCustomerOrderActivity extends BaseActivity {
         findViewById(R.id.backBtn).setOnClickListener(view -> {
             onBackPressed();
         });
-        ((MaterialButton) findViewById(R.id.addNewBtn)).setText("ثبت سفارش");
+        ((MaterialButton) findViewById(R.id.addNewBtn)).setText("ثبت سفارش جدید");
         setFont();
         afterCreate();
 

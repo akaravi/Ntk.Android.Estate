@@ -465,7 +465,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="32dp"
                     android:layout_weight="1"
-                    android:text="تارخچه"
+                    android:text="تاریخچه"
                     app:backgroundTint="@color/colorTextBlack" />
 
             </LinearLayout>
