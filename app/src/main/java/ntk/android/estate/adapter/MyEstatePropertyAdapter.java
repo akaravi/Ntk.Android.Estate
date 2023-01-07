@@ -45,7 +45,7 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
     public MyEstatePropertyAdapter(List<EstatePropertyModel> models) {
         super(models);
         now = AppUtil.Now();
-        drawable = R.drawable.sweet_error_center_x;
+        drawable = R.drawable.error_estate;
     }
 
     @NonNull
