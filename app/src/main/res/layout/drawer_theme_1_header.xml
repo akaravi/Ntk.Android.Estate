@@ -46,6 +46,7 @@
         android:textColor="@color/colorWhite"
         android:textSize="15sp"
         android:textStyle="bold"
+        app:backgroundTint="@color/main3_toolbar_icon_bg"
         app:fabSize="normal"
         app:icon="@drawable/ic_plus"
         app:iconTint="@color/colorWhite" />
