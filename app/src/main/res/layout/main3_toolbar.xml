@@ -16,7 +16,7 @@
         android:background="@drawable/circle_main3"
         android:padding="10dp"
         android:src="@drawable/main_share"
-        app:tint="@color/colorWhite" />
+        app:tint="@color/colorPrimary" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
@@ -66,5 +66,5 @@
         android:background="@drawable/circle_main3"
         android:padding="8dp"
         app:srcCompat="@drawable/ic_menu"
-        app:tint="@color/colorWhite" />
+        app:tint="@color/colorPrimary" />
 </LinearLayout>

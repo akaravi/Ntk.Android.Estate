@@ -43,12 +43,12 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="ورود "
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorPrimary"
         android:textSize="15sp"
         android:textStyle="bold"
         app:backgroundTint="@color/main3_toolbar_icon_bg"
         app:fabSize="normal"
         app:icon="@drawable/ic_plus"
-        app:iconTint="@color/colorWhite" />
+        app:iconTint="@color/colorPrimary" />
 
 </LinearLayout>

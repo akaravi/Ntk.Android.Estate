@@ -207,13 +207,13 @@
             android:layout_toRightOf="@+id/fabSearch"
             android:gravity="center"
             android:text="ثبت ..."
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
             app:backgroundTint="@color/colorAccent"
             app:fabSize="normal"
             app:icon="@drawable/ic_plus"
-            app:iconTint="@color/colorWhite" />
+            app:iconTint="@color/colorPrimary" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fabSearch"
@@ -226,7 +226,7 @@
             app:backgroundTint="@color/colorAccent"
             app:fabSize="normal"
             app:icon="@drawable/ic_search"
-            app:iconTint="@color/colorWhite" />
+            app:iconTint="@color/colorPrimary" />
 
     </RelativeLayout>
 
