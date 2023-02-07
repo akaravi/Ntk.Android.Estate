@@ -27,6 +27,7 @@ import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
+import ntk.android.base.entitymodel.enums.EnumRecordStatus;
 import ntk.android.base.entitymodel.estate.EstateContractModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
 import ntk.android.base.services.estate.EstatePropertyService;
@@ -59,10 +60,12 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
         EstatePropertyModel item = getItem(position);
         holder.setContract(item);
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), EstateDetailActivity.class);
-            intent.putExtra(Extras.EXTRA_FIRST_ARG, item.Id);
-            intent.putExtra(Extras.EXTRA_SECOND_ARG, item.Title);
-            view.getContext().startActivity(intent);
+            if (item.RecordStatus == EnumRecordStatus.Available.index()) {
+                Intent intent = new Intent(view.getContext(), EstateDetailActivity.class);
+                intent.putExtra(Extras.EXTRA_FIRST_ARG, item.Id);
+                intent.putExtra(Extras.EXTRA_SECOND_ARG, item.Title);
+                view.getContext().startActivity(intent);
+            }
         });
         holder.delete.setOnClickListener(view -> {
             showDelete(view.getContext(), item);
@@ -73,6 +76,7 @@ public class MyEstatePropertyAdapter extends BaseRecyclerAdapter<EstatePropertyM
         holder.share.setOnClickListener(view -> {
             showShare(view.getContext(), item);
         });
+//todo         item.RecordStatus!= EnumRecordStatus.Available.
         holder.edit.setOnClickListener(view -> {
             Intent i = new Intent(view.getContext(), EditEstateActivity.class);
             i.putExtra(Extras.EXTRA_FIRST_ARG, (item.Id));

@@ -117,6 +117,10 @@ public class EstateDetailActivity extends BaseActivity {
                 mapView.setVisibility(View.VISIBLE);
             }
         });
+        if (Preferences.with(this).appVariableInfo().isLogin())
+            findViewById(R.id.imgFavDetail).setVisibility(View.INVISIBLE);
+        else
+            findViewById(R.id.imgFavDetail).setVisibility(View.VISIBLE);
         //favorite button listener
         findViewById(R.id.imgFavDetail).setOnClickListener(view -> {
             if (model != null) {
@@ -155,7 +159,7 @@ public class EstateDetailActivity extends BaseActivity {
                 map.setMinZoomPreference(12);
                 map.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
                 });
-                if (model!=null&&model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
+                if (model != null && model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
                     (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
                     LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
                     if (map != null) {
@@ -286,7 +290,7 @@ public class EstateDetailActivity extends BaseActivity {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         String message = createShareMassage();
-        shareIntent.putExtra(Intent.EXTRA_TEXT, message + "\n\n\n" + this.getString(ntk.android.base.R.string.app_name) + "\n" + getString(ntk.android.base.R.string.per_download_link) + "\n" + model.UrlViewContent);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, message + "\n\n\n" + this.getString(ntk.android.base.R.string.app_name) + "\n" + getString(ntk.android.base.R.string.content_view) + "\n" + model.UrlViewContent);
         shareIntent.setType("text/txt");
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         this.startActivity(Intent.createChooser(shareIntent, getString(ntk.android.base.R.string.per_share_to)));
