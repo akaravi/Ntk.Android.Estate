@@ -23,5 +23,6 @@
     <string name="per_customer_order">لیست سفارشات ملک</string>
     <string name="per_result">نتایج</string>
     <string name="per_view_link">لینک مشاهده</string>
+    <string name="content_view">لینک محتوا</string>
 
 </resources>
