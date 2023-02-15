@@ -181,18 +181,39 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/projects"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="پروژه ها" />
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            android:padding="8dp"
+                            android:text="پروژه ها"
+                            android:textColor="@color/colorPrimary"
+                            app:backgroundTint="@color/colorWhite"
+                            app:cornerRadius="16dp"
+                            app:icon="@drawable/projects"
+                            app:iconGravity="textStart"
+                            app:iconSize="24dp"
+                            app:iconTint="@color/colorPrimary" />
+
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/constructors"
-                            android:layout_width="match_parent"
-                            app:icon="@drawable/constructor"
-                            app:iconSize="24dp"
-                            app:iconTint="#fff"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="ُسازندگان" />
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:padding="8dp"
+                            android:text="سازندگان"
+                            android:textColor="@color/colorPrimary"
+                            app:backgroundTint="@color/colorWhite"
+                            app:cornerRadius="16dp"
+                            app:icon="@drawable/constructor"
+                            app:iconGravity="textStart"
+                            app:iconSize="24dp"
+                            app:iconTint="@color/colorPrimary" />
                     </LinearLayout>
 
                     <include
