@@ -140,6 +140,12 @@
         <activity
             android:name=".activity.EstateHistoryActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ProjectListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CompanyListActivity"
+            android:screenOrientation="portrait" />
 
 
         <provider

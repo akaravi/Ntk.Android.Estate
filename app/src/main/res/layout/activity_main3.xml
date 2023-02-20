@@ -206,7 +206,7 @@
                             android:layout_marginRight="8dp"
                             android:layout_weight="1"
                             android:padding="8dp"
-                            android:text="سازندگان"
+                            android:text="انبوه سازان"
                             android:textColor="@color/colorPrimary"
                             app:backgroundTint="@color/colorWhite"
                             app:cornerRadius="16dp"
