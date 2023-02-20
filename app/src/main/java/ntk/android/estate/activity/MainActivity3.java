@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.gson.Gson;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
@@ -224,13 +225,16 @@ public class MainActivity3 extends BaseMainActivity {
         //add fab
         findViewById(R.id.fabAdd).setOnClickListener(view ->
                 showBallon(view));
-
-        findViewById(R.id.projects).setOnClickListener(v -> {
+        MaterialButton projectBtn = findViewById(R.id.projects);
+        MaterialButton constructorBtn = findViewById(R.id.constructors);
+        projectBtn.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity3.this, ProjectListActivity.class));
         });
-        findViewById(R.id.constructors).setOnClickListener(v -> {
+        constructorBtn.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity3.this, CompanyListActivity.class));
         });
+        projectBtn.setTypeface(t1);
+        constructorBtn.setTypeface(t1);
     }
 
     private void showBallon(View view) {

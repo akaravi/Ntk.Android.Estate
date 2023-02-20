@@ -12,6 +12,7 @@ import java.util.List;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstateCompanyModel;
+import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
 public class CompanyAdapter extends BaseRecyclerAdapter<EstateCompanyModel, CompanyAdapter.VH> {
@@ -41,6 +42,7 @@ public class CompanyAdapter extends BaseRecyclerAdapter<EstateCompanyModel, Comp
             super(itemView);
             img = itemView.findViewById(R.id.img);
             title = itemView.findViewById(R.id.lblTitle);
+            title.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
         }
     }
 }

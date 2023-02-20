@@ -2,6 +2,7 @@ package ntk.android.estate.activity;
 
 import android.view.View;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.reactivex.Observable;
@@ -21,6 +22,11 @@ public class CompanyListActivity extends BaseFilterModelListActivity<EstateCompa
         LblTitle.setText("انبوه سازان");
         findViewById(R.id.imgSearch).setVisibility(View.GONE);
         findViewById(R.id.imgSort).setVisibility(View.GONE);
+    }
+
+    @Override
+    public RecyclerView.LayoutManager getRvLayoutManager() {
+        return new GridLayoutManager(this, 2);
     }
 
     @Override
