@@ -154,7 +154,6 @@ public class NewEstateFragment3 extends BaseFragment {
 
     private void getData() {
         MaterialAutoCompleteTextView spinner = (findViewById(R.id.EstateProvinceAutoComplete));
-        spinner.seton
         spinner.setOnClickListener(view -> showLocationDialog());
     }
 
