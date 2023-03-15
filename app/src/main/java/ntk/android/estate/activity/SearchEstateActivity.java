@@ -240,11 +240,13 @@ public class SearchEstateActivity extends BaseActivity {
             if (selectedContractType.HasDepositPrice) {
                 if (!depositCB.isChecked()) {
                     {
-                        //for contract Type3
-                        if (depositFromTo.getFrom() != null)
-                            filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
-                        if (depositFromTo.getTo() != null)
-                            filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+                        if ((depositFromTo) != null) {
+                            //for contract Type3
+                            if (depositFromTo.getFrom() != null)
+                                filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getFrom())).setSearchType(EnumSearchType.GreaterThan).setClauseType(EnumClauseType.And));
+                            if (depositFromTo.getTo() != null)
+                                filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPrice").setIntValue(((Long) depositFromTo.getTo())).setSearchType(EnumSearchType.LessThan).setClauseType(EnumClauseType.And));
+                        }
                     }
                 } else {
                     filter.addFilter(new FilterDataModel().setPropertyName("Contracts").setPropertyAnyName("DepositPriceByAgreement").setBooleanValue(true).setSearchType(EnumSearchType.Equal).setClauseType(EnumClauseType.And));
@@ -416,7 +418,7 @@ public class SearchEstateActivity extends BaseActivity {
             public void onNext(@NonNull ErrorException<EstatePropertyDetailGroupModel> response) {
                 //create list of values base on details
                 SelectedPropertyDetailGroupModel = response.ListItems;
-          
+
                 SearchPropertyDetailGroupAdapterSelector adapter = new SearchPropertyDetailGroupAdapterSelector(SelectedPropertyDetailGroupModel, findViewById(R.id.nestedScrool), getSupportFragmentManager());
                 RecyclerView rc = (findViewById(R.id.detailRc));
                 rc.setAdapter(adapter);

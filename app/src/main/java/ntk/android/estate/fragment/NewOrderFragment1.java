@@ -102,17 +102,18 @@ public class NewOrderFragment1 extends BaseFragment {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyTypeLanduseModel> response) {
                 landUses = response.ListItems;
-                if (orderActivity().model().LinkPropertyTypeLanduseId != null) {
+                if (orderActivity() != null && orderActivity().model().LinkPropertyTypeLanduseId != null) {
                     EstatePropertyTypeLanduseModel find = StreamSupport.stream(landUses).filter(t -> t.Id.equals(orderActivity().model().LinkPropertyTypeLanduseId)).findFirst().orElse(null);
                     orderActivity().model().PropertyTypeLanduse = (find);
                     lastSelectedLandUse = find;
                 }
-                showData();
+                if (orderActivity() != null)
+                    showData();
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                orderActivity().showErrorView();
+                if (orderActivity() != null) orderActivity().showErrorView();
             }
         });
     }
@@ -122,13 +123,13 @@ public class NewOrderFragment1 extends BaseFragment {
             @Override
             public void onNext(@NonNull ErrorException<EstatePropertyTypeModel> response) {
                 propertyType = response.ListItems;
-
-                showData();
+                if (orderActivity() != null)
+                    showData();
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                orderActivity().showErrorView();
+                if (orderActivity() != null) orderActivity().showErrorView();
             }
         });
     }
@@ -140,17 +141,18 @@ public class NewOrderFragment1 extends BaseFragment {
             public void onNext(@NonNull ErrorException<EstatePropertyTypeUsageModel> response) {
                 typeUsages = response.ListItems;
 
-                if (orderActivity().model().LinkPropertyTypeUsageId != null) {
+                if (orderActivity() != null && orderActivity().model().LinkPropertyTypeUsageId != null) {
                     EstatePropertyTypeUsageModel find = StreamSupport.stream(typeUsages).filter(t -> t.Id.equals(orderActivity().model().LinkPropertyTypeUsageId)).findFirst().orElse(null);
                     orderActivity().model().PropertyTypeUsage = (find);
 
                 }
-                showData();
+                if (orderActivity() != null)
+                    showData();
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                orderActivity().showErrorView();
+                if (orderActivity() != null) orderActivity().showErrorView();
             }
         });
     }

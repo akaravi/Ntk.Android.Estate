@@ -130,7 +130,7 @@ public class NewEstateFragment1 extends BaseFragment {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                estateActivity().showErrorView();
+                if (estateActivity() != null) estateActivity().showErrorView();
             }
         });
     }
@@ -246,7 +246,7 @@ public class NewEstateFragment1 extends BaseFragment {
         estateActivity().model().LinkPropertyTypeUsageId = estateActivity().model().PropertyTypeUsage.Id;
         if (!((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim().equals(""))
             estateActivity().model().Area = Double.parseDouble(NumberTextWatcherForThousand.trimCommaOfString(((TextInputEditText) findViewById(R.id.EstateAreaEditText)).getText().toString().trim()));
-        else{
+        else {
             Toasty.error(getContext(), "متراژ را وارد نمایید", Toasty.LENGTH_LONG, true).show();
             return false;
         }
@@ -254,7 +254,7 @@ public class NewEstateFragment1 extends BaseFragment {
             try {
                 estateActivity().model().CreatedYaer = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyOneEditText)).getText().toString().trim());
             } catch (Exception e) {
-                Toasty.error(getContext(), "فرمت عدد وارده در قسمت "+ lastSelectedLandUse.TitleCreatedYaer+"اشتباه است", Toasty.LENGTH_LONG, true).show();
+                Toasty.error(getContext(), "فرمت عدد وارده در قسمت " + lastSelectedLandUse.TitleCreatedYaer + "اشتباه است", Toasty.LENGTH_LONG, true).show();
 
                 return false;
             }
@@ -265,7 +265,7 @@ public class NewEstateFragment1 extends BaseFragment {
             try {
                 estateActivity().model().Partition = Integer.parseInt(((TextInputEditText) findViewById(R.id.EstatePropertyTowEditText)).getText().toString().trim());
             } catch (Exception e) {
-                Toasty.error(getContext(), "فرمت عدد وارده در قسمت "+ lastSelectedLandUse.TitlePartition+"اشتباه است", Toasty.LENGTH_LONG, true).show();
+                Toasty.error(getContext(), "فرمت عدد وارده در قسمت " + lastSelectedLandUse.TitlePartition + "اشتباه است", Toasty.LENGTH_LONG, true).show();
                 return false;
             }
         else

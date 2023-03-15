@@ -27,6 +27,7 @@ import ntk.android.base.service.FileManagerService;
 import ntk.android.base.services.file.FileUploaderService;
 import ntk.android.base.utill.AppUtil;
 import ntk.android.base.utill.FontManager;
+import ntk.android.estate.MyApplication;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.NewEstateActivity;
 import ntk.android.estate.adapter.OtherImageAdapter;
@@ -139,26 +140,38 @@ public class NewEstateFragment5 extends BaseFragment {
     }
 
     private void UploadFileToServer(String url, Consumer<FileUploadModel> consumer) {
-        if (AppUtil.isNetworkAvailable(getContext())) {
-            estateActivity().onUploadingStep();
-            Toasty.info(getContext(), "در حال بارگذاری...", Toasty.LENGTH_LONG).show();
-            ServiceExecute.execute(new FileUploaderService(getContext()).uploadFile(url))
-                    .subscribe(new NtkObserver<FileUploadModel>() {
-                        @Override
-                        public void onNext(@NonNull FileUploadModel fileUploadModel) {
-                            estateActivity().uploadFinished();
-                            consumer.accept(fileUploadModel);
-                        }
+        if (url == null)
+            Toasty.error(MyApplication.get(), "خطا در انتخاب فایل مجددا تلاش فرمایید").show();
+        else {
+            boolean error = false;
+            try {
+                String s = String.valueOf(Uri.parse(url));
+            } catch (Exception e) {
+                error = true;
+                Toasty.error(MyApplication.get(), "خطا در انتخاب فایل مجددا تلاش فرمایید").show();
+            }
+            if (!error)
+                if (AppUtil.isNetworkAvailable(getContext())) {
+                    estateActivity().onUploadingStep();
+                    Toasty.info(getContext(), "در حال بارگذاری...", Toasty.LENGTH_LONG).show();
+                    ServiceExecute.execute(new FileUploaderService(getContext()).uploadFile(url))
+                            .subscribe(new NtkObserver<FileUploadModel>() {
+                                @Override
+                                public void onNext(@NonNull FileUploadModel fileUploadModel) {
+                                    estateActivity().uploadFinished();
+                                    consumer.accept(fileUploadModel);
+                                }
 
-                        @Override
-                        public void onError(Throwable e) {
-                            estateActivity().uploadFinished();
-                            //todo show error
-                            Toasty.error(getContext(), "خطا در آپلود فایل").show();
-                        }
-                    });
-        } else {
-            Toasty.error(getContext(), "انترنت در دسترس نیست").show();
+                                @Override
+                                public void onError(Throwable e) {
+                                    estateActivity().uploadFinished();
+                                    //todo show error
+                                    Toasty.error(getContext(), "خطا در آپلود فایل").show();
+                                }
+                            });
+                } else {
+                    Toasty.error(getContext(), "انترنت در دسترس نیست").show();
+                }
         }
     }
 
