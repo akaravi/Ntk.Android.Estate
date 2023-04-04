@@ -11,22 +11,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
-import io.reactivex.functions.Function;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.NewEstateActivity;
 
 public class OtherImageAdapter extends BaseRecyclerAdapter<String, OtherImageAdapter.ViewHolder> {
-    List<String> src;
+    List<String> Ids;
     NewEstateActivity activity;
 
     public OtherImageAdapter(NewEstateActivity act, List<String> src, List<String> list) {
         super(list);
-        this.src = src;
+        this.Ids = src;
         activity = act;
 
     }
@@ -43,7 +44,14 @@ public class OtherImageAdapter extends BaseRecyclerAdapter<String, OtherImageAda
         holder.delete.setOnClickListener(view -> {
 
             if (activity.isUploaded()) {
-                src.remove(position);
+                //remove id from ids uploaded before
+                ArrayList<String> split = new ArrayList<String>(Arrays.asList(activity.model().LinkFileIds.split(",")));
+                split.remove(Ids.get(position));
+                activity.model().LinkFileIds = String.join(",", split);
+                //remove src form srs before uploaded
+                if (activity.model().LinkFileIdsSrc != null)
+                    activity.model().LinkFileIdsSrc.remove(list.get(position));
+                Ids.remove(position);
                 list.remove(position);
                 notifyItemRemoved(position);
             } else

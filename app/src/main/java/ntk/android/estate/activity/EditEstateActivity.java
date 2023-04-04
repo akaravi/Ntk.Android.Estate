@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import es.dmoral.toasty.Toasty;
 import java9.util.stream.StreamSupport;
@@ -24,6 +25,9 @@ import ntk.android.base.services.estate.EstatePropertyService;
 import ntk.android.base.utill.AppUtil;
 import ntk.android.estate.R;
 import ntk.android.estate.fragment.EditEstateFragment1;
+import ntk.android.estate.fragment.EditEstateFragment5;
+import ntk.android.estate.fragment.NewEstateFragment4;
+import ntk.android.estate.fragment.NewEstateFragment5;
 
 public class EditEstateActivity extends NewEstateActivity {
     String Id;
@@ -48,8 +52,30 @@ public class EditEstateActivity extends NewEstateActivity {
         });
         fragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
+
     }
 
+    @Override
+    protected void showFragment5() {
+        stepNumber = 5;
+        title.setText("تصاویر ملک");
+        findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
+        findViewById(R.id.addNewBtn).setVisibility(View.VISIBLE);
+        findViewById(R.id.continueBtn).setVisibility(View.GONE);
+
+        EditEstateFragment5 fragment = new EditEstateFragment5();
+        findViewById(R.id.addNewBtn).setOnClickListener(view -> {
+            if (fragment.isValidForm())
+                if (!uploadProcess) {
+                    createModel();
+                } else {
+                    Toasty.info(EditEstateActivity.this, "در حال بارگذاری فایل انتخابی شما...", Toasty.LENGTH_LONG).show();
+                }
+        });
+
+        fragment.setArguments(getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
+    }
 
     @Override
     protected void afterCreate() {
@@ -61,6 +87,12 @@ public class EditEstateActivity extends NewEstateActivity {
                         @Override
                         protected void SuccessResponse(ErrorException<EstatePropertyModel> ContentResponse) {
                             model = ContentResponse.Item;
+                            //add other src
+                            OtherImageSrc = new ArrayList<>();
+                            OtherImageIds = new ArrayList<>();
+                            OtherImageSrc.addAll(model.LinkFileIdsSrc);
+                            OtherImageIds.addAll(Arrays.asList(model.LinkFileIds.split(",")));
+
                             //sync property and its values
                             StreamSupport.stream(model.PropertyDetailGroups).forEach(estatePropertyDetailGroupModel -> {
                                 StreamSupport.stream(estatePropertyDetailGroupModel.PropertyDetails).forEach(estatePropertyDetailModel -> {
@@ -93,6 +125,9 @@ public class EditEstateActivity extends NewEstateActivity {
         model.UploadFileGUID = new ArrayList<>();
         if (MainImage_GUID != null && !MainImage_GUID.equalsIgnoreCase(""))
             model.UploadFileGUID.add(MainImage_GUID);
+        //remove uploaded before id form list
+        OtherImageIds.removeAll(  new ArrayList<String>(Arrays.asList(model.LinkFileIds.split(","))));
+
         model.UploadFileGUID.addAll(OtherImageIds);
         for (EstateContractModel model :
                 model.Contracts) {

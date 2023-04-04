@@ -46,8 +46,28 @@ public class NewEstateFragment5 extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         setFont();
         findViewById(R.id.selectMainImage).setOnClickListener(t -> selectMainImage());
-        findViewById(R.id.deleteImage).setOnClickListener(t -> deleteMainPage());
+        findViewById(R.id.deleteImage).setOnClickListener(t -> deleteMainImage());
         findViewById(R.id.addOtherImageBtn).setOnClickListener(t -> selectOtherImage());
+        showPrevImages();
+
+    }
+
+    protected void showPrevImages() {
+        if (estateActivity().MainImage_FilePath != null && !estateActivity().MainImage_FilePath.equals("")){
+            ImageLoader.getInstance().displayImage(estateActivity().MainImage_FilePath, (ImageView) findViewById(R.id.selectedImageView));
+            findViewById(R.id.deleteImage).setVisibility(View.VISIBLE);
+            findViewById(R.id.extraImageCardView).setVisibility(View.VISIBLE);
+            findViewById(R.id.extraImagePadding).setVisibility(View.VISIBLE);
+        }
+        if (estateActivity().OtherImageIds!=null&&estateActivity().OtherImageIds.size()>0){
+            RecyclerView rc = (RecyclerView) findViewById(R.id.imageRecycler);
+            FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+            flowLayoutManager.setAutoMeasureEnabled(true);
+            flowLayoutManager.setAlignment(Alignment.RIGHT);
+            rc.setLayoutManager(flowLayoutManager);
+            rc.setAdapter(new OtherImageAdapter(estateActivity(),
+                    estateActivity().OtherImageIds, estateActivity().OtherImageSrc));
+        }
     }
 
     private void setFont() {
@@ -58,7 +78,7 @@ public class NewEstateFragment5 extends BaseFragment {
     }
 
 
-    private void deleteMainPage() {
+    protected void deleteMainImage() {
         if (estateActivity().isUploaded()) {
 
             if (estateActivity().OtherImageIds.size() > 0) {
@@ -67,6 +87,8 @@ public class NewEstateFragment5 extends BaseFragment {
             }
             estateActivity().MainImage_GUID = "";
             estateActivity().MainImage_FilePath = "";
+            estateActivity().model().LinkMainImageId=0;
+            estateActivity().model().LinkMainImageIdSrc="";
             ((ImageView) findViewById(R.id.selectedImageView)).setImageResource(0);
             findViewById(R.id.deleteImage).setVisibility(View.GONE);
             findViewById(R.id.extraImageCardView).setVisibility(View.GONE);
@@ -77,7 +99,7 @@ public class NewEstateFragment5 extends BaseFragment {
     }
 
 
-    private void selectMainImage() {
+    protected void selectMainImage() {
         if (estateActivity().isUploaded()) {
             ClickAttach(MAIN_IMAGE_REQ);
         } else {
@@ -85,7 +107,7 @@ public class NewEstateFragment5 extends BaseFragment {
         }
     }
 
-    private void selectOtherImage() {
+    protected void selectOtherImage() {
         if (estateActivity().isUploaded()) {
             ClickAttachOther();
         } else {
@@ -181,7 +203,7 @@ public class NewEstateFragment5 extends BaseFragment {
         }
     }
 
-    private NewEstateActivity estateActivity() {
+    protected NewEstateActivity estateActivity() {
         return ((NewEstateActivity) getActivity());
     }
 
