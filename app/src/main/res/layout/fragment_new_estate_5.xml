@@ -58,6 +58,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
                         android:text="حذف"
+                        android:visibility="gone"
                         app:tint="@color/colorGrayText" />
                 </RelativeLayout>
             </LinearLayout>
@@ -68,48 +69,54 @@
             android:layout_width="match_parent" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/extraImageCardView"
             style="@style/new_estate_cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:contentPadding="8dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/addOtherImageBtn"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    app:icon="@drawable/ic_plus"
-                    app:iconSize="20dp"/>
-                <TextView
-                    android:id="@+id/tv2"
-                    style="@style/new_estate_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="عکس های بیشتر" />
-            </LinearLayout>
-                <androidx.recyclerview.widget.RecyclerView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/addOtherImageBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/ic_plus"
+                        app:iconSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        style="@style/new_estate_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="عکس های بیشتر" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/imageRecycler"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <View
+            android:id="@+id/extraImagePadding"
             style="@style/new_estate_padding"
+            android:visibility="gone"
             android:layout_width="match_parent" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

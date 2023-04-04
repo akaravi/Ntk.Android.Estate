@@ -152,16 +152,13 @@ public class ProfileActivity extends BaseActivity {
             Toasty.info(this, "فایل انتخابی قبلی در حال بارگزاری است...", Toasty.LENGTH_LONG).show();
         else {
             new FileManagerService().clickAttach(this, result -> {
-                Uri uri;
-                if (result.getData() != null) {
-                    uri = result.getData().getData();
-                    if (uri != null) {
-                        ImageLoader.getInstance().displayImage(uri.toString(), (ImageView) findViewById(R.id.image));
-                        UploadFileToServer(FileManagerService.getFilePath(this, uri), fileUploadModel -> {
-                            image_GUID = fileUploadModel.FileKey;
-                            image_FilePath = uri.toString();
-                        });
-                    }
+                Uri uri = result;
+                if (uri != null) {
+                    ImageLoader.getInstance().displayImage(uri.toString(), (ImageView) findViewById(R.id.image));
+                    UploadFileToServer(FileManagerService.getFilePath(this, uri), fileUploadModel -> {
+                        image_GUID = fileUploadModel.FileKey;
+                        image_FilePath = uri.toString();
+                    });
                 }
             });
         }

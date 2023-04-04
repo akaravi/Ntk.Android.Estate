@@ -60,9 +60,17 @@ public class NewEstateFragment5 extends BaseFragment {
 
     private void deleteMainPage() {
         if (estateActivity().isUploaded()) {
+
+            if (estateActivity().OtherImageIds.size() > 0) {
+                Toasty.error(getContext(), "قادر به حذف عکس اصلی نیستید در حالی که در قسمت عکس های بیشتر موردی اضافه کرده اید ").show();
+                return;
+            }
             estateActivity().MainImage_GUID = "";
+            estateActivity().MainImage_FilePath = "";
             ((ImageView) findViewById(R.id.selectedImageView)).setImageResource(0);
             findViewById(R.id.deleteImage).setVisibility(View.GONE);
+            findViewById(R.id.extraImageCardView).setVisibility(View.GONE);
+            findViewById(R.id.extraImagePadding).setVisibility(View.GONE);
         } else {
             Toasty.info(getContext(), "فایل انتخابی قبلی در حال بارگزاری است...", Toasty.LENGTH_LONG).show();
         }
@@ -88,49 +96,47 @@ public class NewEstateFragment5 extends BaseFragment {
     public void ClickAttach(int REQ) {
         new FileManagerService().clickAttach(estateActivity(), result -> {
             Uri uri;
-            if (result.getData() != null) {
-                uri = result.getData().getData();
-                if (uri != null) {
-                    if (uploadedBefore(uri.toString()))
-                        Toasty.error(getContext(), "این فایل قبلا انتخاب شده است").show();
-                    else {
-                        ImageLoader.getInstance().displayImage(uri.toString(), (ImageView) findViewById(R.id.selectedImageView));
-                        findViewById(R.id.deleteImage).setVisibility(View.VISIBLE);
-                        UploadFileToServer(FileManagerService.getFilePath(getContext(), uri),
-                                fileUploadModel -> {
-                                    estateActivity().MainImage_GUID = fileUploadModel.FileKey;
-                                    estateActivity().MainImage_FilePath = uri.toString();
-                                });
-                    }
+            uri = result;
+            if (uri != null) {
+                if (uploadedBefore(uri.toString()))
+                    Toasty.error(getContext(), "این فایل قبلا انتخاب شده است").show();
+                else {
+                    ImageLoader.getInstance().displayImage(uri.toString(), (ImageView) findViewById(R.id.selectedImageView));
+                    findViewById(R.id.extraImageCardView).setVisibility(View.VISIBLE);
+                    findViewById(R.id.extraImagePadding).setVisibility(View.VISIBLE);
+                    findViewById(R.id.deleteImage).setVisibility(View.VISIBLE);
+                    UploadFileToServer(FileManagerService.getFilePath(getContext(), uri),
+                            fileUploadModel -> {
+                                estateActivity().MainImage_GUID = fileUploadModel.FileKey;
+                                estateActivity().MainImage_FilePath = uri.toString();
+                            });
                 }
             }
+
         });
     }
 
     public void ClickAttachOther() {
         new FileManagerService().clickAttach(estateActivity(), result -> {
-            Uri uri;
-            if (result.getData() != null) {
-                uri = result.getData().getData();
-                if (uri != null) {
-                    if (uploadedBefore(uri.toString()))
-                        Toasty.error(getContext(), "این فایل قبلا انتخاب شده است").show();
-                    else
-                        UploadFileToServer(FileManagerService.getFilePath(getContext(), uri),
-                                fileUploadModel -> {
-                                    estateActivity().OtherImageIds.add(fileUploadModel.FileKey);
-                                    estateActivity().OtherImageSrc.add(uri.toString());
-                                    if (isSafeFragment(this)) {
-                                        RecyclerView rc = (RecyclerView) findViewById(R.id.imageRecycler);
-                                        FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
-                                        flowLayoutManager.setAutoMeasureEnabled(true);
-                                        flowLayoutManager.setAlignment(Alignment.RIGHT);
-                                        rc.setLayoutManager(flowLayoutManager);
-                                        rc.setAdapter(new OtherImageAdapter(estateActivity(),
-                                                estateActivity().OtherImageIds, estateActivity().OtherImageSrc));
-                                    }
-                                });
-                }
+            Uri uri = result;
+            if (uri != null) {
+                if (uploadedBefore(uri.toString()))
+                    Toasty.error(getContext(), "این فایل قبلا انتخاب شده است").show();
+                else
+                    UploadFileToServer(FileManagerService.getFilePath(getContext(), uri),
+                            fileUploadModel -> {
+                                estateActivity().OtherImageIds.add(fileUploadModel.FileKey);
+                                estateActivity().OtherImageSrc.add(uri.toString());
+                                if (isSafeFragment(this)) {
+                                    RecyclerView rc = (RecyclerView) findViewById(R.id.imageRecycler);
+                                    FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+                                    flowLayoutManager.setAutoMeasureEnabled(true);
+                                    flowLayoutManager.setAlignment(Alignment.RIGHT);
+                                    rc.setLayoutManager(flowLayoutManager);
+                                    rc.setAdapter(new OtherImageAdapter(estateActivity(),
+                                            estateActivity().OtherImageIds, estateActivity().OtherImageSrc));
+                                }
+                            });
             }
         });
     }

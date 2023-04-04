@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
-def BaseVersion = '1.6.65'
-def incrementalVersion = '5'
+def BaseVersion = '1.7.09'
+def incrementalVersion = '1'
 android {
     compileSdk 33
     defaultConfig {
@@ -60,13 +60,21 @@ android {
     }
     buildToolsVersion '33.0.0'
 }
-configurations.all {
-    resolutionStrategy.force 'androidx.annotation:annotation:1.2.0'
-}
+//configurations.all {
+//    resolutionStrategy.force 'androidx.annotation:annotation:1.2.0'
+//}
 dependencies {
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //for result
-    implementation "androidx.activity:activity:1.6.1"
+    implementation "androidx.activity:activity:1.7.0"
     // Add the  Crashlytics SDK.
     implementation 'io.sentry:sentry-android:6.6.0'
     //rounded imageView
@@ -81,7 +89,7 @@ dependencies {
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
 
     //noinspection GradleCompatible
-    implementation 'androidx.appcompat:appcompat:1.7.0-alpha01'
+    implementation 'androidx.appcompat:appcompat:1.7.0-alpha02'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
@@ -101,7 +109,7 @@ dependencies {
     implementation 'com.github.GrenderG:Toasty:1.4.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.nineoldandroids:library:2.4.0'
-    implementation 'com.google.android.material:material:1.6.1'//karavi:dont change
+    implementation 'com.google.android.material:material:1.8.0'//karavi:dont change
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'

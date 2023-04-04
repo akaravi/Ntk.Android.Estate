@@ -1,5 +1,6 @@
 package ntk.android.estate.adapter;
 
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,11 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ntk.android.base.Extras;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
-import ntk.android.base.entitymodel.estate.EstateCompanyModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyProjectModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
+import ntk.android.estate.activity.ProjectDetailActivity;
 
 public class ProjectAdapter extends BaseRecyclerAdapter<EstatePropertyProjectModel, ProjectAdapter.VH> {
     public ProjectAdapter(List<EstatePropertyProjectModel> list) {
@@ -32,8 +34,14 @@ public class ProjectAdapter extends BaseRecyclerAdapter<EstatePropertyProjectMod
         EstatePropertyProjectModel item = getItem(position);
         loadImage(item.LinkMainImageIdSrc, holder.img);
         holder.title.setText(item.Title != null ? item.Title : "نا مشخص");
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), ProjectDetailActivity.class);
+            intent.putExtra(Extras.EXTRA_FIRST_ARG, item.Id);
+            v.getContext().startActivity(intent);
+        });
 
     }
+
     public class VH extends RecyclerView.ViewHolder {
         ImageView img;
         TextView title;
