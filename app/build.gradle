@@ -4,7 +4,8 @@ apply plugin: 'com.google.gms.google-services'
 def BaseVersion = '1.7.09'
 def incrementalVersion = '1'
 android {
-    compileSdk 33
+    compileSdkVersion 35
+    namespace 'ntk.android.estate'
     defaultConfig {
         applicationId "ntk.android.estate.APPNTK"//change for packagename for api
         minSdkVersion 17
@@ -58,7 +59,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-    buildToolsVersion '33.0.0'
+    //buildToolsVersion '33.0.0'
 }
 //configurations.all {
 //    resolutionStrategy.force 'androidx.annotation:annotation:1.2.0'
@@ -122,7 +123,7 @@ dependencies {
     //for ripple
     implementation 'com.balysv:material-ripple:1.0.2'
     //for  map
-    implementation 'ir.map:map-sdk:4.0.0'
+    implementation 'ir.map:map-sdk:6.0.0'
     //for icon fonts
     implementation "com.mikepenz:iconics-core:5.3.0"
     implementation "com.mikepenz:iconics-views:5.3.0"
@@ -141,7 +142,11 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding:2.0.0"
     //for popup
     implementation "com.github.skydoves:balloon:1.4.7"
+
+
+    implementation 'androidx.annotation:annotation:1.5.0'
+
 //    implementation 'com.google.firebase:firebase-analytics:17.4.1'
-//    api project(path: ':baseActivity')
-     api "com.github.akaravi:Ntk.Android.Baseactivity:${BaseVersion}"
+    api project(path: ':baseActivity')
+//     api "com.github.akaravi:Ntk.Android.Baseactivity:${BaseVersion}"
 }
