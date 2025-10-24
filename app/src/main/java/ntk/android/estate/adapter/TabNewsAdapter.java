@@ -14,8 +14,8 @@ import com.balysv.materialripple.MaterialRippleLayout;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
+
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.news.NewsContentOtherInfoModel;
 import ntk.android.base.utill.FontManager;

@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.reactivex.Observable;
-import java9.util.function.BiFunction;
+import java8.util.function.BiFunction;
 import ntk.android.base.activity.common.BaseFilterModelCategoryUsedListActivity;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;

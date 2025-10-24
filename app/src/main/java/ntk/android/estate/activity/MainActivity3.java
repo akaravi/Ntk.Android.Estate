@@ -28,12 +28,8 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.gson.Gson;
-import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
-import com.skydoves.balloon.ArrowOrientation;
-import com.skydoves.balloon.ArrowPositionRules;
-import com.skydoves.balloon.Balloon;
-import com.skydoves.balloon.BalloonAnimation;
-import com.skydoves.balloon.BalloonSizeSpec;
+import androidx.drawerlayout.widget.DrawerLayout;
+// Balloon library removed - using simple Toast instead
 
 import java.util.Arrays;
 import java.util.List;

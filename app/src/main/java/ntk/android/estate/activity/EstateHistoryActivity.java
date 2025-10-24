@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import java9.util.function.Function;
+import java8.util.function.Function;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.activity.common.BaseFilterModelListActivity;
 import ntk.android.base.config.NtkObserver;

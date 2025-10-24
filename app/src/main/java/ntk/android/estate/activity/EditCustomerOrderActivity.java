@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
-import java9.util.stream.StreamSupport;
+import java8.util.stream.StreamSupport;
 import ntk.android.base.Extras;
 import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.NtkObserver;

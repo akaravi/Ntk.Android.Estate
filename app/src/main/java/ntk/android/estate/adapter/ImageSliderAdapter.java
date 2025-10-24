@@ -8,45 +8,33 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.smarteist.autoimageslider.SliderViewAdapter;
-import com.smarteist.autoimageslider.sliderItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ntk.android.estate.R;
 
-public class ImageSliderAdapter extends SliderViewAdapter<ImageSliderAdapter.SliderAdapterVH> {
+public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.SliderAdapterVH> {
 
     private final Context context;
-    private List<sliderItem> mSliderItems = new ArrayList();
+    private List<String> mSliderItems = new ArrayList<>();
 
     public ImageSliderAdapter(Context context) {
         this.context = context;
     }
 
-    public void renewItems(List<sliderItem> sliderItems) {
+    public void renewUrls(List<String> sliderItems) {
         this.mSliderItems = sliderItems;
         notifyDataSetChanged();
     }
 
-    public void renewUrls(List<String> sliderItems) {
-        this.mSliderItems = new ArrayList<>();
-        for (String u :
-                sliderItems) {
-            sliderItem a = new sliderItem();
-            a.setImageUrl(u);
-            a.setImageTitle("");
-            mSliderItems.add(a);
-        }
-        notifyDataSetChanged();
-    }
-
     public void addUrl(String url) {
-        if (url != null & !url.trim().isEmpty()) {
-            sliderItem s = new sliderItem().setImageTitle("").setImageUrl(url);
-            this.mSliderItems.add(s);
+        if (url != null && !url.trim().isEmpty()) {
+            this.mSliderItems.add(url);
             notifyDataSetChanged();
         }
     }
@@ -56,26 +44,21 @@ public class ImageSliderAdapter extends SliderViewAdapter<ImageSliderAdapter.Sli
         notifyDataSetChanged();
     }
 
-    public void addItem(sliderItem sliderItem) {
-        this.mSliderItems.add(sliderItem);
-        notifyDataSetChanged();
-    }
-
+    @NonNull
     @Override
-    public SliderAdapterVH onCreateViewHolder(ViewGroup parent) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_slider_layout_item, null);
+    public SliderAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_slider_layout_item, parent, false);
         return new SliderAdapterVH(inflate);
     }
 
     @Override
-    public void onBindViewHolder(SliderAdapterVH viewHolder, final int position) {
-
-        sliderItem sliderItem = mSliderItems.get(position);
+    public void onBindViewHolder(@NonNull SliderAdapterVH viewHolder, final int position) {
+        String imageUrl = mSliderItems.get(position);
 
         viewHolder.textViewDescription.setText("");
         viewHolder.textViewDescription.setTextSize(16);
         viewHolder.textViewDescription.setTextColor(Color.WHITE);
-        ImageLoader.getInstance().displayImage(sliderItem.getImageUrl(), viewHolder.imageViewBackground);
+        ImageLoader.getInstance().displayImage(imageUrl, viewHolder.imageViewBackground);
 
         viewHolder.itemView.setOnClickListener(v -> {
             //todo call gallery
@@ -83,19 +66,18 @@ public class ImageSliderAdapter extends SliderViewAdapter<ImageSliderAdapter.Sli
     }
 
     @Override
-    public int getCount() {
-        //slider view count could be dynamic size
+    public int getItemCount() {
         return mSliderItems.size();
     }
 
-    class SliderAdapterVH extends SliderViewAdapter.ViewHolder {
+    static class SliderAdapterVH extends RecyclerView.ViewHolder {
 
         View itemView;
         ImageView imageViewBackground;
         ImageView imageGifContainer;
         TextView textViewDescription;
 
-        public SliderAdapterVH(View itemView) {
+        public SliderAdapterVH(@NonNull View itemView) {
             super(itemView);
             imageViewBackground = itemView.findViewById(R.id.iv_auto_image_slider);
             imageGifContainer = itemView.findViewById(R.id.iv_gif_container);

@@ -17,8 +17,8 @@ import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.annotations.NonNull;
-import java9.util.function.Consumer;
-import java9.util.stream.StreamSupport;
+import java8.util.function.Consumer;
+import java8.util.stream.StreamSupport;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.file.FileUploadModel;

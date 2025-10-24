@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
-import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import java.util.ArrayList;
 import java.util.List;

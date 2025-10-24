@@ -18,8 +18,8 @@ import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
-import java9.util.stream.Collectors;
-import java9.util.stream.StreamSupport;
+import java8.util.stream.Collectors;
+import java8.util.stream.StreamSupport;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;

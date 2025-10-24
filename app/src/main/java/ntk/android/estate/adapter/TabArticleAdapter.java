@@ -13,8 +13,8 @@ import com.balysv.materialripple.MaterialRippleLayout;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
+
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.article.ArticleContentOtherInfoModel;
 import ntk.android.base.utill.FontManager;

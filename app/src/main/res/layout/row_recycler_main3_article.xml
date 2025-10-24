@@ -33,13 +33,13 @@
         android:scrollHorizontally="true"
         android:textColor="@color/main3_toolbar_text" />
 
-    <com.makeramen.roundedimageview.RoundedImageView
+    <ImageView
         android:id="@+id/ImageRecyclerImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="fitXY"
-        app:riv_border_color="@color/main3_card_bg"
-        app:riv_border_width="2.5dp"
-        app:riv_corner_radius="12dp" />
+        
+        
+         />
 </LinearLayout>
 </androidx.cardview.widget.CardView>

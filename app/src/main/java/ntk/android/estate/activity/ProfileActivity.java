@@ -16,7 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.annotations.NonNull;
-import java9.util.function.Consumer;
+import java8.util.function.Consumer;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.config.NtkObserver;

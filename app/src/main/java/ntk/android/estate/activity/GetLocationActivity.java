@@ -32,29 +32,24 @@ import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.gms.tasks.Task;
-import com.mapbox.mapboxsdk.annotations.Icon;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.Style;
+// Mapbox and Mapir SDK removed - using Google Maps instead
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
-import ir.map.sdk_map.MapirStyle;
-import ir.map.sdk_map.maps.MapView;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.estate.R;
 
-public class GetLocationActivity extends BaseActivity {
-    MapboxMap map;
-    Style mapStyle;
+public class GetLocationActivity extends BaseActivity implements OnMapReadyCallback {
+    GoogleMap map;
     Marker myMarker;
-
     Marker myLocalMarker;
 
     FusedLocationProviderClient fusedLocationClient;

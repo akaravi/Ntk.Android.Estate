@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import java9.util.stream.StreamSupport;
+import java8.util.stream.StreamSupport;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailModel;

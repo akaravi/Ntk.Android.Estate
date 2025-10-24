@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.BindViews;
-import butterknife.ButterKnife;
+
+
+
 import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import es.dmoral.toasty.Toasty;
-import java9.util.stream.StreamSupport;
+import java8.util.stream.StreamSupport;
 import ntk.android.base.Extras;
 import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.GenericErrors;

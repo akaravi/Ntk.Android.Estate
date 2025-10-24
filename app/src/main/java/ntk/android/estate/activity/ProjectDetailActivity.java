@@ -7,9 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
-import com.smarteist.autoimageslider.SliderAnimations;
-import com.smarteist.autoimageslider.SliderView;
+import androidx.viewpager2.widget.ViewPager2;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.mxn.soul.flowingdrawer_core.FlowingDrawer xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:shimmer="http://schemas.android.com/tools"
-    android:id="@+id/floaingDrawer"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    app:edMenuBackground="@color/main3_card_bg"
-    app:edMenuSize="220dp"
-    app:edPosition="2">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,256 +16,27 @@
             android:background="@color/main3_bg"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/include"
-                layout="@layout/main3_toolbar"
+            <!-- Toolbar removed temporarily -->
+
+            <FrameLayout
+                android:id="@+id/frame"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp" />
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="240dp">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rcNews"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-
-                        <com.facebook.shimmer.ShimmerFrameLayout
-                            android:id="@+id/news_shimmer"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            shimmer:duration="800">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <include
-                                    android:id="@+id/shimmer_news1"
-                                    layout="@layout/shimmer_main3_news" />
-
-                                <include
-                                    android:id="@+id/shimmer_news2"
-                                    layout="@layout/shimmer_main3_news" />
-                            </LinearLayout>
-                        </com.facebook.shimmer.ShimmerFrameLayout>
-                    </RelativeLayout>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardElevation="8dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:id="@+id/title1"
-                                style="@style/main_activity3_Title"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="دسته بندی املاک" />
-
-                            <TextView
-                                android:id="@+id/seeMore"
-                                style="@style/main_activity3_SeeMore"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true" />
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/landUseAdapter"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/title1"
-                                android:orientation="horizontal"
-                                android:padding="8dp"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-                            <com.facebook.shimmer.ShimmerFrameLayout
-                                android:id="@+id/landUsed_shimmer"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/title1"
-                                android:orientation="horizontal"
-                                shimmer:duration="800">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <include
-                                        android:id="@+id/shimmer_land1"
-                                        layout="@layout/shimmer_main3_land" />
-
-                                    <include
-                                        android:id="@+id/shimmer_land2"
-                                        layout="@layout/shimmer_main3_land" />
-
-                                    <include
-                                        android:id="@+id/shimmer_land3"
-                                        layout="@layout/shimmer_main3_land" />
-
-                                    <include
-                                        android:id="@+id/shimmer_land4"
-                                        layout="@layout/shimmer_main3_land" />
-
-                                    <include
-                                        android:id="@+id/shimmer_land5"
-                                        layout="@layout/shimmer_main3_land" />
-
-                                    <include
-                                        android:id="@+id/shimmer_land6"
-                                        layout="@layout/shimmer_main3_land" />
-
-                                    <include
-                                        android:id="@+id/shimmer_land7"
-                                        layout="@layout/shimmer_main3_land" />
-                                </LinearLayout>
-                            </com.facebook.shimmer.ShimmerFrameLayout>
-
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <include
-                        android:id="@+id/includeRow1"
-                        layout="@layout/sub_main_activity3_row"
-                        android:visibility="gone" />
-
-                    <include
-                        android:id="@+id/includedRow2"
-                        layout="@layout/sub_main_activity3_row"
-                        android:visibility="gone" />
-
-                    <include
-                        android:id="@+id/row1"
-
-                        layout="@layout/sub_main_activity3_row" />
-
-
-                    <include
-                        android:id="@+id/row2"
-                        layout="@layout/sub_main_activity3_row" />
-
-                    <include
-                        android:id="@+id/row3"
-                        layout="@layout/sub_main_activity3_row" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/projects"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:text="پروژه ها"
-                            android:textColor="@color/colorPrimary"
-                            app:backgroundTint="@color/colorWhite"
-                            app:cornerRadius="16dp"
-                            app:icon="@drawable/projects"
-                            app:iconGravity="textStart"
-                            app:iconSize="24dp"
-                            app:iconTint="@color/colorPrimary" />
-
-                        <View
-                            android:layout_width="20dp"
-                            android:layout_height="wrap_content" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/constructors"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:text="انبوه سازان"
-                            android:textColor="@color/colorPrimary"
-                            app:backgroundTint="@color/colorWhite"
-                            app:cornerRadius="16dp"
-                            app:icon="@drawable/constructor"
-                            app:iconGravity="textStart"
-                            app:iconSize="24dp"
-                            app:iconTint="@color/colorPrimary" />
-                    </LinearLayout>
-
-                    <include
-                        android:id="@+id/row4"
-                        layout="@layout/sub_main_activity3_row" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_marginTop="16dp" />
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
-        <View
-            android:id="@+id/popUpIndicatorView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_above="@+id/fabAdd"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fabAdd"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginBottom="32dp"
-            android:layout_toRightOf="@+id/fabSearch"
-            android:gravity="center"
-            android:text="ثبت ..."
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:backgroundTint="@color/colorAccent"
-            app:fabSize="normal"
-            app:icon="@drawable/ic_plus"
-            app:iconTint="@color/colorPrimary" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fabSearch"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginBottom="32dp"
-            app:backgroundTint="@color/colorAccent"
-            app:fabSize="normal"
-            app:icon="@drawable/ic_search"
-            app:iconTint="@color/colorPrimary" />
-
     </RelativeLayout>
 
-    <include layout="@layout/estate_menu_1" />
-</com.mxn.soul.flowingdrawer_core.FlowingDrawer>
+    <!-- Navigation Drawer -->
+    <ListView
+        android:id="@+id/drawerList"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/main3_card_bg"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

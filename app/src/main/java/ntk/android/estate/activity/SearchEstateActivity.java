@@ -17,15 +17,16 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.xiaofeng.flowlayoutmanager.Alignment;
-import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import java9.util.stream.Collectors;
-import java9.util.stream.StreamSupport;
+import java8.util.stream.Collectors;
+import java8.util.stream.StreamSupport;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.appclass.FromToClass;
 import ntk.android.base.config.NtkObserver;

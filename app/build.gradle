@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId "ntk.android.estate.APPNTK" //change for packagename for api
         minSdkVersion 21
-        targetSdk 34
+        targetSdk 35
         multiDexEnabled true
         versionCode 1  //Build Version NTK
         versionName "${BaseVersion}${incrementalVersion}" //Splash Version Label
@@ -66,7 +66,7 @@ dependencies {
     }
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // وابستگی‌های اصلی با نسخه‌های بروز
+    // وابستگی‌های اصلی با نسخه‌های سازگار با SDK 35
     implementation 'androidx.core:core-ktx:1.15.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
@@ -87,10 +87,15 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.6.0')
     implementation 'com.google.firebase:firebase-messaging'
 
-    // کتابخانه‌های دیگر با نسخه‌های به‌روز
-    implementation 'com.github.romandanylyk:PageIndicatorView:v2.4.0'
-    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
-    implementation 'com.mxn.soul:flowingdrawer-core:2.1.0'
+    // کتابخانه‌های مدرن و سازگار با SDK 35
+    implementation 'com.tbuonomo:dotsindicator:5.0'
+    
+    // جایگزین‌های مدرن برای کتابخانه‌های قدیمی
+    // برای BubbleNavigation - استفاده از BottomNavigationView استاندارد
+    implementation 'com.google.android.material:material:1.12.0'
+    
+    // برای FlowingDrawer - استفاده از DrawerLayout استاندارد
+    implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
 
     // exoplayer
     implementation 'androidx.media3:media3-exoplayer:1.4.1'
@@ -100,5 +105,38 @@ dependencies {
     // location
     implementation 'com.google.android.gms:play-services-location:21.3.0'
 
-    api "com.github.akaravi:Ntk.Android.Baseactivity:${BaseVersion}"
+    // کتابخانه‌های گمشده
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.google.code.gson:gson:2.11.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.4'
+    implementation 'com.github.GrenderG:Toasty:1.5.2'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    
+    // جایگزین‌های مدرن برای کتابخانه‌های قدیمی
+    implementation 'androidx.viewpager2:viewpager2:1.1.0'
+    implementation 'com.tbuonomo:dotsindicator:5.0'
+    
+    // BottomNavigationView به جای BubbleNavigation
+    implementation 'com.google.android.material:material:1.12.0'
+    
+    // DrawerLayout به جای FlowingDrawer
+    implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
+    
+    // Google Maps به جای Mapir SDK
+    implementation 'com.google.android.gms:play-services-maps:19.0.0'
+    
+    // Slider library alternative
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.2'
+    
+    // Additional libraries for MainActivity
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    
+    // Additional missing libraries
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    //api "com.github.akaravi:Ntk.Android.Baseactivity:${BaseVersion}"
+    api project(path: ':baseApi')
+    api project(path: ':baseActivity')
 }

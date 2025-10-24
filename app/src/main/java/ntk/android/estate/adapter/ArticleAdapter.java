@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
+
 import ntk.android.base.Extras;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.article.ArticleContentModel;

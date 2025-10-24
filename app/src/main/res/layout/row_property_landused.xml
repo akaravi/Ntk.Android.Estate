@@ -19,13 +19,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <ImageView
             android:id="@+id/imgPhoto"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="centerCrop"
             android:src="@drawable/curve_8_gray_image_bg"
-            app:riv_corner_radius="8dp" />
+             />
 
         <TextView
             android:id="@+id/title"

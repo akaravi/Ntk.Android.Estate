@@ -23,22 +23,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.maps.Style;
-import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
-import com.smarteist.autoimageslider.SliderAnimations;
-import com.smarteist.autoimageslider.SliderView;
+import androidx.viewpager2.widget.ViewPager2;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
-import ir.map.sdk_map.MapirStyle;
-import ir.map.sdk_map.maps.MapView;
+// Mapir SDK removed - using Google Maps instead
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.appclass.UpdateClass;

@@ -10,7 +10,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import es.dmoral.toasty.Toasty;
-import java9.util.function.Consumer;
+import java8.util.function.Consumer;
 import ntk.android.base.appclass.FromToClass;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;

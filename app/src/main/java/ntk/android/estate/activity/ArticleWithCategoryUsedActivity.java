@@ -3,7 +3,7 @@ package ntk.android.estate.activity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.reactivex.Observable;
-import java9.util.function.BiFunction;
+import java8.util.function.BiFunction;
 import ntk.android.base.activity.common.BaseFilterModelCategoryUsedListActivity;
 import ntk.android.base.entitymodel.article.ArticleContentModel;
 import ntk.android.base.entitymodel.base.ErrorException;

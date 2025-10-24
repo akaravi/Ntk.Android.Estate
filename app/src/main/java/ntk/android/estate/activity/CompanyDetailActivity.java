@@ -7,9 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
-import com.smarteist.autoimageslider.SliderAnimations;
-import com.smarteist.autoimageslider.SliderView;
+import androidx.viewpager2.widget.ViewPager2;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,12 +78,11 @@ public class CompanyDetailActivity extends BaseActivity {
             body.loadData("<html dir=\"rtl\" lang=\"\"><body>" + item.Body + "</body></html>", "text/html; charset=utf-8", "UTF-8");
         else
             body.setVisibility(View.GONE);
-        SliderView sliderView = findViewById(R.id.imageSlider);
+        ViewPager2 viewPager = findViewById(R.id.imageSlider);
+        DotsIndicator dotsIndicator = findViewById(R.id.dotsIndicator);
         ImageSliderAdapter sliderAdapter = new ImageSliderAdapter(this);
-        sliderView.setSliderAdapter(sliderAdapter);
-        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
-        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        sliderView.startAutoCycle();
+        viewPager.setAdapter(sliderAdapter);
+        dotsIndicator.attachTo(viewPager);
         List<String> images = new ArrayList<>();
         images.add(item.LinkMainImageIdSrc);
         images.addAll(item.LinkExtraImageIdsSrc);
