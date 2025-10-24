@@ -135,6 +135,17 @@ dependencies {
     
     // Additional missing libraries
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    implementation 'com.airbnb.android:lottie:6.1.0'
+    
+    // Persian date picker removed - using Material Design date picker
+    
+    // Material Ripple Layout
+    implementation 'com.balysv:material-ripple:1.0.2'
+    
+    // Additional missing libraries
+    implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     //api "com.github.akaravi:Ntk.Android.Baseactivity:${BaseVersion}"
     api project(path: ':baseApi')

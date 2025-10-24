@@ -49,13 +49,10 @@ public class TabNewsAdapter extends BaseRecyclerAdapter<NewsContentOtherInfoMode
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.BtnRecyclerTab)
         Button Btn;
 
-        @BindView(R.id.RippleBtnRecyclerTab)
         MaterialRippleLayout Ripple;
 
-        @BindView(R.id.WebViewActDetailNews)
         WebView webView;
 
         public ViewHolder(View view) {

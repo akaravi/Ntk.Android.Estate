@@ -114,21 +114,12 @@ public class NewsCommentAdapter extends BaseRecyclerAdapter<NewsCommentModel, Ne
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindViews({R.id.lblUserNameRecyclerComment,
-                R.id.lblDateRecyclerComment,
-                R.id.lblDesLikeRecyclerComment,
-                R.id.lblLikeRecyclerComment,
-                R.id.lblContentRecyclerComment
-        })
         List<TextView> Lbls;
 
-        @BindView(R.id.imgDisLikeRecyclerComment)
         ImageView ImgDisLike;
 
-        @BindView(R.id.imgLikeRecyclerComment)
         ImageView ImgLike;
 
-        @BindView(R.id.relativeLoading)
         RelativeLayout loading;
 
         public ViewHolder(View view) {

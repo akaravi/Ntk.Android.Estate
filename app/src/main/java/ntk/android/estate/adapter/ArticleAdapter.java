@@ -61,25 +61,15 @@ public class ArticleAdapter extends BaseRecyclerAdapter<ArticleContentModel, Art
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.lblTitleRowRecyclerArticle)
         TextView LblTitle;
-
-        @BindView(R.id.lblDescriptionRowRecyclerArticle)
         TextView LblDescrption;
-
-        @BindView(R.id.lblLikeRowRecyclerArticle)
         TextView LblLike;
-
-        @BindView(R.id.imgRowRecyclerArticle)
         ImageView Img;
 
-        @BindView(R.id.ratingBarRowRecyclerArticle)
         RatingBar Rate;
 
-        @BindView(R.id.rootArticle)
         CardView Root;
 
-        @BindView(R.id.ProgressRecyclerArticle)
         ProgressBar Progress;
 
 

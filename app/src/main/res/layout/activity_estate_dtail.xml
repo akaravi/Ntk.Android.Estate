@@ -35,13 +35,23 @@
                         android:layout_height="match_parent"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-                    <ir.map.sdk_map.maps.MapView
+                    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                        android:id="@+id/dotsIndicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="16dp"
+                        app:dotsColor="@color/colorWhite"
+                        app:dotsSize="8dp"
+                        app:dotsSpacing="4dp" />
+
+                    <fragment
                         android:id="@+id/map_view"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
-                        android:visibility="gone"
-                        tools:mapbox_cameraZoomMax="20"
-                        tools:mapbox_cameraZoomMin="1" />
+                        android:visibility="gone" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/toggleMaps"

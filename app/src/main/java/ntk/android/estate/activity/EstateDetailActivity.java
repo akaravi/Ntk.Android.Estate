@@ -66,7 +66,7 @@ public class EstateDetailActivity extends BaseActivity {
     public String Id = "";
     private EstatePropertyModel model;
     ImageSliderAdapter sliderAdapter;
-    MapboxMap map;
+    GoogleMap map;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -150,26 +150,24 @@ public class EstateDetailActivity extends BaseActivity {
 
             }
         });
-        MapView mapView = findViewById(R.id.map_view);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull MapboxMap mapboxMap) {
-                map = mapboxMap;
-                map.setMinZoomPreference(12);
-                map.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
-                });
-                if (model != null && model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
-                    (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
-                    LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
-                    if (map != null) {
-
-                        map.addMarker(GetLocationActivity.MakeMarker(EstateDetailActivity.this, point));
-                        map.moveCamera(CameraUpdateFactory.newLatLng(point));
-
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_view);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(@NonNull GoogleMap googleMap) {
+                    map = googleMap;
+                    map.getUiSettings().setZoomControlsEnabled(true);
+                    if (model != null && model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
+                        (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
+                        LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
+                        if (map != null) {
+                            map.addMarker(new MarkerOptions().position(point).title("Property Location"));
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 15));
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
         //call button
         findViewById(R.id.phoneButton).setOnClickListener(view -> call());
         findViewById(R.id.reportBtn).setOnClickListener(view -> showReportDialog());
@@ -263,10 +261,8 @@ public class EstateDetailActivity extends BaseActivity {
             (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
             LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
             if (map != null) {
-
-                map.addMarker(GetLocationActivity.MakeMarker(this, point));
-                map.moveCamera(CameraUpdateFactory.newLatLng(point));
-
+                map.addMarker(new MarkerOptions().position(point).title("Property Location"));
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 15));
             }
         }
     }

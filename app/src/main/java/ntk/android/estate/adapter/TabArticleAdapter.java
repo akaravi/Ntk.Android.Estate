@@ -52,13 +52,10 @@ public class TabArticleAdapter extends BaseRecyclerAdapter<ArticleContentOtherIn
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.BtnRecyclerTab)
         Button Btn;
 
-        @BindView(R.id.RippleBtnRecyclerTab)
         MaterialRippleLayout Ripple;
 
-        @BindView(R.id.WebViewActDetailNews)
         WebView webView;
 
         public ViewHolder(View view) {

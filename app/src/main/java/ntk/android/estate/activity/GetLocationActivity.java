@@ -153,9 +153,7 @@ public class GetLocationActivity extends BaseActivity implements OnMapReadyCallb
 //                    mapStyle = style;
 //                }
 //            });
-            mapboxMap.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
-
-            });
+            // MapirStyle removed - using Google Maps default style
             map.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
                 @Override
                 public boolean onMapClick(@NonNull LatLng point) {

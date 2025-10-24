@@ -15,18 +15,16 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.maps.Style;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Random;
 
 import es.dmoral.toasty.Toasty;
-import ir.map.sdk_map.MapirStyle;
-import ir.map.sdk_map.maps.MapView;
 import ntk.android.base.Extras;
 import ntk.android.base.entitymodel.enums.EnumManageUserAccessUserTypes;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
@@ -40,7 +38,7 @@ import ntk.android.estate.activity.NewEstateActivity;
 
 public class NewEstateFragment3 extends BaseFragment {
     Marker marker;
-    MapboxMap myMap;
+    GoogleMap myMap;
 
     @Override
     public void onCreateFragment() {
@@ -89,9 +87,7 @@ public class NewEstateFragment3 extends BaseFragment {
                     marker = myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), loc));
                     myMap.animateCamera(CameraUpdateFactory.newLatLng(loc));
                 }
-                mapboxMap.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
-
-                });
+                // MapirStyle removed - using Google Maps default style
             }
         });
         //set custom color for custom hint Title

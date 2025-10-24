@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import ntk.android.estate.R;
 public class Drawer3Adapter extends DrawerAdapter {
     int color = -1;
 
-    public Drawer3Adapter(Context context, List<DrawerChildThemeDtoModel> children, FlowingDrawer drawer) {
+    public Drawer3Adapter(Context context, List<DrawerChildThemeDtoModel> children, DrawerLayout drawer) {
         super(context, children, drawer);
     }
 
