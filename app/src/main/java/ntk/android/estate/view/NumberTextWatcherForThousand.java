@@ -48,7 +48,6 @@ public class NumberTextWatcherForThousand implements TextWatcher {
                 editText.setSelection(editText.getText().toString().length());
             }
             editText.addTextChangedListener(this);
-            return;
         }
         catch (Exception ex)
         {

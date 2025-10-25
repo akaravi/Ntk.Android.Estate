@@ -27,7 +27,7 @@ public class EditEstateFragment5 extends NewEstateFragment5{
         }
 
         if (estateActivity().OtherImageIds!=null&&estateActivity().OtherImageIds.size()>0){
-            RecyclerView rc = (RecyclerView) findViewById(R.id.imageRecycler);
+            RecyclerView rc = findViewById(R.id.imageRecycler);
             FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
             flowLayoutManager.setAutoMeasureEnabled(true);
             flowLayoutManager.setAlignment(Alignment.RIGHT);

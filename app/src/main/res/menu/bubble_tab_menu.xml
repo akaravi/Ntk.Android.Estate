@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_newest"
+        android:icon="@drawable/ic_search"
+        android:title="جدید ترین"
+        android:color="@color/tab_blue_active"
+        android:checked="true" />
+    
+    <item
+        android:id="@+id/tab_popular"
+        android:icon="@drawable/ic_like_comment"
+        android:title="پربازدید ترین"
+        android:color="@color/tab_red_active" />
+    
+    <item
+        android:id="@+id/tab_special"
+        android:icon="@drawable/ic_like"
+        android:title="ویژه"
+        android:color="@color/tab_green_active" />
+    
+    <item
+        android:id="@+id/tab_menu"
+        android:icon="@drawable/ic_menu"
+        android:title="منو"
+        android:color="@color/tab_blue_grey_active" />
+</menu>

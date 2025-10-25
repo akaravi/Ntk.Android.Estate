@@ -120,7 +120,7 @@ public class MainActivity3 extends BaseMainActivity {
                     if (!model.HeaderString.equals("")) {
                         ((TextView) view.findViewById(R.id.title)).setText(model.HeaderString);
                     } else
-                        ((TextView) view.findViewById(R.id.title)).setVisibility(View.INVISIBLE);
+                        view.findViewById(R.id.title).setVisibility(View.INVISIBLE);
                     //set seeMore
                     if (model.Filter != null && !model.Filter.equals("")) {
                         //add clickListener
@@ -158,7 +158,12 @@ public class MainActivity3 extends BaseMainActivity {
         //see landUse list on new activity on click
         seeMore.setOnClickListener(view -> startActivity(new Intent(MainActivity3.this, LandUsedListActivity.class)));
         //click on humberger
-        findViewById(R.id.img_menu).setOnClickListener(v -> ((DrawerLayout) findViewById(R.id.floaingDrawer)).openDrawer(GravityCompat.START));
+        findViewById(R.id.img_menu).setOnClickListener(v -> {
+            DrawerLayout drawerLayout = findViewById(R.id.floaingDrawer);
+            if (drawerLayout != null) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
         //click share
         if (!updateInfo.allowDirectShareApp) {
             findViewById(R.id.shareQrCode).setVisibility(View.GONE);

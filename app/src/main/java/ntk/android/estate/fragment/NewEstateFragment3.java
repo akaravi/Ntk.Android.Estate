@@ -100,7 +100,7 @@ public class NewEstateFragment3 extends BaseFragment {
         //get location listener
         findViewById(R.id.getLocationBtn).setOnClickListener(view1 -> getLocation());
         //set hide estate listener
-        TextView title = (TextView) findViewById(R.id.txt);
+        TextView title = findViewById(R.id.txt);
         title.setText("این ملک به صورت مخفی ثبت شود و به صورت عمومی نمایش داده نشود");
         title.setOnClickListener(v -> ((MaterialCheckBox) findViewById(R.id.checkBox)).toggle());
         getData();

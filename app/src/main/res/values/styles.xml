@@ -174,10 +174,8 @@
     </style>
 
     <style name="main_activity_tab">
-        <item name="btb_colorActive">@color/colorAccentDark</item>
-        <item name="btb_colorInactive">@color/colorAccent</item>
-        <item name="btb_shape">@drawable/rounded_rect</item>
-        <item name="btb_shapeColor">@color/colorPrimaryDark</item>
+        <item name="android:color">@color/colorAccentDark</item>
+        <item name="android:background">@drawable/rounded_rect</item>
     </style>
 
     <style name="main_activity3_Title">

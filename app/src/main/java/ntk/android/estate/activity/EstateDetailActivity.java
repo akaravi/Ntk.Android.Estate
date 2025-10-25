@@ -241,7 +241,7 @@ public class EstateDetailActivity extends BaseActivity {
             ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav);
         if (model.CaseCode != null)
             ((TextView) findViewById(R.id.idTextView)).setText("شماره ملک : " + model.CaseCode);
-        ((TextView) findViewById(R.id.dateTv)).setText("" + AppUtil.DateDifferenceNow(model.CreatedDate));
+        ((TextView) findViewById(R.id.dateTv)).setText(AppUtil.DateDifferenceNow(model.CreatedDate));
         List<String> images = new ArrayList<>();
         images.add(model.LinkMainImageIdSrc);
         images.addAll(model.LinkExtraImageIdsSrc);

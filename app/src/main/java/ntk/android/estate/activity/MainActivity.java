@@ -49,7 +49,12 @@ public class MainActivity extends BaseMainActivity {
         //click on humberger
         ImageView menu = findViewById(R.id.img_drawable_back);
         menu.setImageResource(R.drawable.hamburger);
-        menu.setOnClickListener(v -> ((DrawerLayout) findViewById(R.id.floaingDrawer)).openDrawer(GravityCompat.START));
+        menu.setOnClickListener(v -> {
+            DrawerLayout drawerLayout = findViewById(R.id.floaingDrawer);
+            if (drawerLayout != null) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
 
         getdata(row1,findViewById(R.id.rc1));

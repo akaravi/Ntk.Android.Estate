@@ -6,12 +6,12 @@ plugins {
 def BaseVersion = '2.0'
 def incrementalVersion = '1'
 android {
-    compileSdk 35
+    compileSdk 33
     namespace 'ntk.android.estate'
     defaultConfig {
         applicationId "ntk.android.estate.APPNTK" //change for packagename for api
         minSdkVersion 21
-        targetSdk 34
+        targetSdk 33
         multiDexEnabled true
         versionCode 1  //Build Version NTK
         versionName "${BaseVersion}${incrementalVersion}" //Splash Version Label
@@ -67,7 +67,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Main dependencies with updated versions
-    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'androidx.core:core:1.12.0'
+    implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
@@ -91,6 +92,8 @@ dependencies {
     implementation 'com.tbuonomo:dotsindicator:5.0'
     implementation 'io.ak1:bubbletabbar:1.0.8'
     implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
     // exoplayer
     implementation 'androidx.media3:media3-exoplayer:1.4.1'

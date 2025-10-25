@@ -25,57 +25,13 @@
             android:background="@drawable/rounded_rect_bg"
             android:elevation="8dp"
             android:padding="16dp"
-            app:btb_mode="packed"
+            app:bubbletab_menuResource="@menu/bubble_tab_menu"
+            app:bubbletab_icon_size="24dp"
+            app:bubbletab_title_size="12sp"
+            app:bubbletab_tab_corner_radius="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <io.ak1.BubbleTabBar.BubbleTabView
-                android:id="@+id/l_item_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:btb_active="true"
-                app:btb_colorActive="@color/tab_blue_active"
-                app:btb_colorInactive="@color/tab_blue_inactive"
-                app:btb_icon="@drawable/ic_search"
-                app:btb_shape="@drawable/rounded_rect_white"
-                app:btb_shapeColor="@color/tab_blue_bg_light"
-                app:btb_title="جدید ترین" />
-
-            <io.ak1.BubbleTabBar.BubbleTabView
-                android:id="@+id/l_item_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:btb_colorActive="@color/tab_red_active"
-                app:btb_colorInactive="@color/tab_red_inactive"
-                app:btb_icon="@drawable/ic_like_comment"
-                app:btb_shape="@drawable/rounded_rect"
-                app:btb_shapeColor="@color/tab_red_bg_light"
-                app:btb_title="پربازدید ترین" />
-
-            <io.ak1.BubbleTabBar.BubbleTabView
-                android:id="@+id/l_item_notification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:btb_colorActive="@color/tab_green_active"
-                app:btb_colorInactive="@color/tab_green_inactive"
-                app:btb_shape="@drawable/rounded_rect_white"
-                app:btb_icon="@drawable/ic_like"
-                app:btb_shapeColor="@color/tab_green_bg_light"
-                app:btb_title="ویژه" />
-
-            <io.ak1.BubbleTabBar.BubbleTabView
-                android:id="@+id/l_item_profile_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:btb_colorActive="@color/tab_blue_grey_active"
-                app:btb_colorInactive="@color/tab_blue_grey_inactive"
-                app:btb_icon="@drawable/ic_menu"
-                app:btb_shape="@drawable/rounded_rect_white"
-                app:btb_shapeColor="@color/tab_blue_grey_bg_light"
-                app:btb_title="منو" />
-
-        </io.ak1.BubbleTabBar>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"

@@ -1,6 +1,12 @@
 <resources>
 
     <!-- Small -->
+    <dimen name="default_corner_radii">8dp</dimen>
+    
+    <!-- ImageSlider dimensions -->
+    <dimen name="slider_indicator_padding">4dp</dimen>
+    <dimen name="slider_indicator_radius">4dp</dimen>
+    <dimen name="slider_indicator_margin">8dp</dimen>
 
     <!-- Notifications -->
 

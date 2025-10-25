@@ -60,7 +60,7 @@ public class NewEstateFragment5 extends BaseFragment {
             findViewById(R.id.extraImagePadding).setVisibility(View.VISIBLE);
         }
         if (estateActivity().OtherImageIds!=null&&estateActivity().OtherImageIds.size()>0){
-            RecyclerView rc = (RecyclerView) findViewById(R.id.imageRecycler);
+            RecyclerView rc = findViewById(R.id.imageRecycler);
             FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
             flowLayoutManager.setAutoMeasureEnabled(true);
             flowLayoutManager.setAlignment(Alignment.RIGHT);
@@ -150,7 +150,7 @@ public class NewEstateFragment5 extends BaseFragment {
                                 estateActivity().OtherImageIds.add(fileUploadModel.FileKey);
                                 estateActivity().OtherImageSrc.add(uri.toString());
                                 if (isSafeFragment(this)) {
-                                    RecyclerView rc = (RecyclerView) findViewById(R.id.imageRecycler);
+                                    RecyclerView rc = findViewById(R.id.imageRecycler);
                                     FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
                                     flowLayoutManager.setAutoMeasureEnabled(true);
                                     flowLayoutManager.setAlignment(Alignment.RIGHT);

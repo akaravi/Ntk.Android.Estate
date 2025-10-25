@@ -118,7 +118,7 @@ public class NewOrderFragment3 extends BaseFragment {
             public void onNext(@NonNull ErrorException<EstateContractTypeModel> model) {
                 stepData++;
                 if (stepData == 2) orderActivity().showContent();
-                String lastSelectedId = orderActivity().model().LinkContractTypeId + "";
+                String lastSelectedId = orderActivity().model().LinkContractTypeId;
 
                 //find last position of selected model or -1
                 int lastSelected = IntStream.range(0, model.ListItems.size()).filter(i -> lastSelectedId.equals(model.ListItems.get(i).Id)).findFirst().orElse(-1);

@@ -99,8 +99,7 @@ public class GetLocationActivity extends BaseActivity {
                 Log.d("GPS_main", "GPS off");
                 Toasty.info(GetLocationActivity.this, "gps" + " دستگاه شما غیرفعال است ").show();
                 // GPS off
-                if (e instanceof ResolvableApiException) {
-                    ResolvableApiException resolvable = (ResolvableApiException) e;
+                if (e instanceof ResolvableApiException resolvable) {
                     try {
                         resolvable.startResolutionForResult(GetLocationActivity.this, 1);
                     } catch (IntentSender.SendIntentException e1) {

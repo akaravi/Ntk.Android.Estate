@@ -53,18 +53,22 @@ public class MainActivity2 extends BaseMainActivity {
             }
         });
         BubbleTabBar topMenu = findViewById(R.id.floating_top_bar_navigation);
+        
         topMenu.addBubbleListener(id -> {
             int position = -1;
-            if (id == R.id.l_item_search) position = 0;
-            else if (id == R.id.l_item_home) position = 1;
-            else if (id == R.id.l_item_notification) position = 2;
-            else if (id == R.id.l_item_profile_list) position = 3;
+            if (id == R.id.tab_newest) position = 0;
+            else if (id == R.id.tab_popular) position = 1;
+            else if (id == R.id.tab_special) position = 2;
+            else if (id == R.id.tab_menu) position = 3;
             
             if (position >= 0 && position < fragments.size()) {
                 pager.setCurrentItem(position, true);
                 lastSelected = position;
             } else if (position == 3) {
-                ((DrawerLayout) findViewById(R.id.floaingDrawer)).openDrawer(GravityCompat.START);
+                DrawerLayout drawerLayout = findViewById(R.id.floaingDrawer);
+                if (drawerLayout != null) {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                }
                 topMenu.setSelected(lastSelected);
             }
         });
