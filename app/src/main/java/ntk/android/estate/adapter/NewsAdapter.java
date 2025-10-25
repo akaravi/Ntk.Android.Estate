@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ntk.android.base.Extras;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.news.NewsContentModel;
@@ -62,18 +62,25 @@ public class NewsAdapter extends BaseRecyclerAdapter<NewsContentModel, NewsAdapt
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.lblTitleRowRecyclerNews)
         TextView LblTitle;
 
+        @BindView(R.id.lblDescriptionRowRecyclerNews)
         TextView LblDescrption;
 
+        @BindView(R.id.lblLikeRowRecyclerNews)
         TextView LblLike;
 
+        @BindView(R.id.imgRowRecyclerNews)
         ImageView Img;
 
+        @BindView(R.id.ratingBarRowRecyclerNews)
         RatingBar Rate;
 
+        @BindView(R.id.rootNews)
         CardView Root;
 
+        @BindView(R.id.ProgressRecyclerNews)
         ProgressBar Progress;
 
 

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import java8.util.function.Function;
+import java9.util.function.Function;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.article.ArticleCategoryModel;
 import ntk.android.base.utill.FontManager;

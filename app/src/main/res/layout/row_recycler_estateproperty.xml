@@ -38,11 +38,11 @@
                     android:layout_marginRight="8.0dip"
                     android:layout_marginBottom="8.0dip">
 
-                    <ImageView
+                    <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/imgPhoto"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        
+                        app:riv_corner_radius="8dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/curve_8_gray_image_bg" />
 

@@ -32,24 +32,29 @@ import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.gms.tasks.Task;
-// Mapbox and Mapir SDK removed - using Google Maps instead
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import ir.map.sdk_map.MapirStyle;
+import ir.map.sdk_map.maps.MapView;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.estate.R;
 
-public class GetLocationActivity extends BaseActivity implements OnMapReadyCallback {
-    GoogleMap map;
+public class GetLocationActivity extends BaseActivity {
+    MapboxMap map;
+    Style mapStyle;
     Marker myMarker;
+
     Marker myLocalMarker;
 
     FusedLocationProviderClient fusedLocationClient;
@@ -153,7 +158,9 @@ public class GetLocationActivity extends BaseActivity implements OnMapReadyCallb
 //                    mapStyle = style;
 //                }
 //            });
-            // MapirStyle removed - using Google Maps default style
+            mapboxMap.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
+
+            });
             map.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
                 @Override
                 public boolean onMapClick(@NonNull LatLng point) {

@@ -14,8 +14,8 @@ import com.balysv.materialripple.MaterialRippleLayout;
 
 import java.util.List;
 
-
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.news.NewsContentOtherInfoModel;
 import ntk.android.base.utill.FontManager;
@@ -49,10 +49,13 @@ public class TabNewsAdapter extends BaseRecyclerAdapter<NewsContentOtherInfoMode
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.BtnRecyclerTab)
         Button Btn;
 
+        @BindView(R.id.RippleBtnRecyclerTab)
         MaterialRippleLayout Ripple;
 
+        @BindView(R.id.WebViewActDetailNews)
         WebView webView;
 
         public ViewHolder(View view) {

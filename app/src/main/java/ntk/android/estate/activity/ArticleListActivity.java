@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 
 import io.reactivex.Observable;
-import java.util.function.Function;
+import java9.util.function.Function;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.common.BaseFilterModelWithCategoryActivity;
 import ntk.android.base.entitymodel.article.ArticleCategoryModel;
@@ -33,11 +33,6 @@ public class ArticleListActivity extends BaseFilterModelWithCategoryActivity<Art
     @Override
     public Function<FilterModel, Observable<ErrorException<ArticleContentModel>>> getService() {
         return new ArticleContentService(this)::getAll;
-    }
-
-    @Override
-    public Function<FilterModel, Observable<ErrorException<ArticleCategoryModel>>> getCatService() {
-        return new ArticleCategoryService(this)::getAll;
     }
 
     @Override

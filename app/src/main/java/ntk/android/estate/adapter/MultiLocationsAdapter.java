@@ -11,7 +11,7 @@ import com.google.android.material.chip.Chip;
 
 import java.util.List;
 
-import java8.util.function.Consumer;
+import java9.util.function.Consumer;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;

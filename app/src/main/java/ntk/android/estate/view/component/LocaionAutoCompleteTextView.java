@@ -16,7 +16,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java8.util.function.Consumer;
+import java9.util.function.Consumer;
 import ntk.android.base.adapter.SpinnerAdapter;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.core.CoreLocationModel;

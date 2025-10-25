@@ -23,21 +23,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
-import androidx.viewpager2.widget.ViewPager2;
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
-// Mapir SDK removed - using Google Maps instead
+import ir.map.sdk_map.MapirStyle;
+import ir.map.sdk_map.maps.MapView;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.appclass.UpdateClass;
@@ -66,7 +67,7 @@ public class EstateDetailActivity extends BaseActivity {
     public String Id = "";
     private EstatePropertyModel model;
     ImageSliderAdapter sliderAdapter;
-    GoogleMap map;
+    MapboxMap map;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -150,24 +151,26 @@ public class EstateDetailActivity extends BaseActivity {
 
             }
         });
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_view);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(new OnMapReadyCallback() {
-                @Override
-                public void onMapReady(@NonNull GoogleMap googleMap) {
-                    map = googleMap;
-                    map.getUiSettings().setZoomControlsEnabled(true);
-                    if (model != null && model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
-                        (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
-                        LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
-                        if (map != null) {
-                            map.addMarker(new MarkerOptions().position(point).title("Property Location"));
-                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 15));
-                        }
+        MapView mapView = findViewById(R.id.map_view);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull MapboxMap mapboxMap) {
+                map = mapboxMap;
+                map.setMinZoomPreference(12);
+                map.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
+                });
+                if (model != null && model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
+                    (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
+                    LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
+                    if (map != null) {
+
+                        map.addMarker(GetLocationActivity.MakeMarker(EstateDetailActivity.this, point));
+                        map.moveCamera(CameraUpdateFactory.newLatLng(point));
+
                     }
                 }
-            });
-        }
+            }
+        });
         //call button
         findViewById(R.id.phoneButton).setOnClickListener(view -> call());
         findViewById(R.id.reportBtn).setOnClickListener(view -> showReportDialog());
@@ -261,8 +264,10 @@ public class EstateDetailActivity extends BaseActivity {
             (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
             LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
             if (map != null) {
-                map.addMarker(new MarkerOptions().position(point).title("Property Location"));
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 15));
+
+                map.addMarker(GetLocationActivity.MakeMarker(this, point));
+                map.moveCamera(CameraUpdateFactory.newLatLng(point));
+
             }
         }
     }

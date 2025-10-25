@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 
 import io.reactivex.Observable;
-import java8.util.function.Function;
+import java9.util.function.Function;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.common.BaseFilterModelWithCategoryActivity;
 import ntk.android.base.entitymodel.base.ErrorException;

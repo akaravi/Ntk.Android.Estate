@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
-import java8.util.function.Consumer;
-import java8.util.stream.StreamSupport;
+import java9.util.function.Consumer;
+import java9.util.stream.StreamSupport;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.adapter.SpinnerAdapter;
 import ntk.android.base.config.NtkObserver;

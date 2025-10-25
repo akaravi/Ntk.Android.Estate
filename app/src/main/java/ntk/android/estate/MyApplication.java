@@ -11,7 +11,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.io.File;
 
 import es.dmoral.toasty.Toasty;
-// Mapir SDK removed - using Google Maps instead
+import ir.map.sdk_map.Mapir;
 import ntk.android.base.ApplicationParameter;
 import ntk.android.base.ApplicationStaticParameter;
 import ntk.android.base.NTKApplication;

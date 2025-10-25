@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import java8.util.stream.StreamSupport;
+import java9.util.stream.StreamSupport;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.estate.EstateActivityTypeModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyHistoryModel;

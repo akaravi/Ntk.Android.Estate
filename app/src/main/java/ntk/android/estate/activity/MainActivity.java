@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
-import androidx.drawerlayout.widget.DrawerLayout;
+import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import java.util.List;
 
