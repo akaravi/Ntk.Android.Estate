@@ -6,12 +6,12 @@ plugins {
 def BaseVersion = '2.0'
 def incrementalVersion = '1'
 android {
-    compileSdk 33
+    compileSdk 34
     namespace 'ntk.android.estate'
     defaultConfig {
         applicationId "ntk.android.estate.APPNTK" //change for packagename for api
-        minSdkVersion 21
-        targetSdk 33
+        minSdkVersion 24
+        targetSdk 34
         multiDexEnabled true
         versionCode 1  //Build Version NTK
         versionName "${BaseVersion}${incrementalVersion}" //Splash Version Label
