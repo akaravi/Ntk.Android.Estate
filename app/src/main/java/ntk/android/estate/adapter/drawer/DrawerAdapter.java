@@ -12,7 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.core.view.GravityCompat;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -51,9 +52,9 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
     protected final static int ID_INVITE = 1095;
     private final Context context;
 
-    private final FlowingDrawer Drawer;
+    private final DrawerLayout Drawer;
 
-    public DrawerAdapter(Context context, List<DrawerChildThemeDtoModel> children, FlowingDrawer drawer) {
+    public DrawerAdapter(Context context, List<DrawerChildThemeDtoModel> children, DrawerLayout drawer) {
         super(children);
         this.context = context;
         this.Drawer = drawer;

@@ -66,7 +66,7 @@ dependencies {
     }
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // وابستگی‌های اصلی با نسخه‌های بروز
+    // Main dependencies with updated versions
     implementation 'androidx.core:core-ktx:1.15.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
@@ -87,10 +87,10 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.6.0')
     implementation 'com.google.firebase:firebase-messaging'
 
-    // کتابخانه‌های دیگر با نسخه‌های به‌روز
-    implementation 'com.github.romandanylyk:PageIndicatorView:v2.4.0'
-    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
-    implementation 'com.mxn.soul:flowingdrawer-core:2.1.0'
+    // Other libraries with updated versions
+    implementation 'com.tbuonomo:dotsindicator:5.0'
+    implementation 'io.ak1:bubbletabbar:1.0.8'
+    implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
 
     // exoplayer
     implementation 'androidx.media3:media3-exoplayer:1.4.1'

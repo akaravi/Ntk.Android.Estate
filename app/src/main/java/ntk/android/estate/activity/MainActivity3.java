@@ -28,7 +28,8 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.gson.Gson;
-import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.core.view.GravityCompat;
 import com.skydoves.balloon.ArrowOrientation;
 import com.skydoves.balloon.ArrowPositionRules;
 import com.skydoves.balloon.Balloon;
@@ -157,7 +158,7 @@ public class MainActivity3 extends BaseMainActivity {
         //see landUse list on new activity on click
         seeMore.setOnClickListener(view -> startActivity(new Intent(MainActivity3.this, LandUsedListActivity.class)));
         //click on humberger
-        findViewById(R.id.img_menu).setOnClickListener(v -> ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(true));
+        findViewById(R.id.img_menu).setOnClickListener(v -> ((DrawerLayout) findViewById(R.id.floaingDrawer)).openDrawer(GravityCompat.START));
         //click share
         if (!updateInfo.allowDirectShareApp) {
             findViewById(R.id.shareQrCode).setVisibility(View.GONE);

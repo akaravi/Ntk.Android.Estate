@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
-import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.core.view.GravityCompat;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class MainActivity extends BaseMainActivity {
         //click on humberger
         ImageView menu = findViewById(R.id.img_drawable_back);
         menu.setImageResource(R.drawable.hamburger);
-        menu.setOnClickListener(v -> ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(true));
+        menu.setOnClickListener(v -> ((DrawerLayout) findViewById(R.id.floaingDrawer)).openDrawer(GravityCompat.START));
 
 
         getdata(row1,findViewById(R.id.rc1));

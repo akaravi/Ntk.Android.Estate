@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
-import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+import io.ak1.BubbleTabBar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.core.view.GravityCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,21 +48,26 @@ public class MainActivity2 extends BaseMainActivity {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                BubbleNavigationConstraintView menu = findViewById(R.id.floating_top_bar_navigation);
-                menu.setCurrentActiveItem(position);
+                BubbleTabBar menu = findViewById(R.id.floating_top_bar_navigation);
+                menu.setSelected(position);
             }
         });
-        BubbleNavigationConstraintView topMenu = findViewById(R.id.floating_top_bar_navigation);
-        topMenu.setNavigationChangeListener((view, position) -> {
-            if (position<fragments.size() ) {
+        BubbleTabBar topMenu = findViewById(R.id.floating_top_bar_navigation);
+        topMenu.addBubbleListener(id -> {
+            int position = -1;
+            if (id == R.id.l_item_search) position = 0;
+            else if (id == R.id.l_item_home) position = 1;
+            else if (id == R.id.l_item_notification) position = 2;
+            else if (id == R.id.l_item_profile_list) position = 3;
+            
+            if (position >= 0 && position < fragments.size()) {
                 pager.setCurrentItem(position, true);
-                lastSelected=position;
+                lastSelected = position;
+            } else if (position == 3) {
+                ((DrawerLayout) findViewById(R.id.floaingDrawer)).openDrawer(GravityCompat.START);
+                topMenu.setSelected(lastSelected);
             }
-            else {
-                ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(true);
-                topMenu.setCurrentActiveItem(lastSelected);
-            }
-            });
+        });
     }
 
     private class MainPagerAdapter extends FragmentStateAdapter {

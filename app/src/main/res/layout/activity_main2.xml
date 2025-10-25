@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.mxn.soul.flowingdrawer_core.FlowingDrawer xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/floaingDrawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
-    android:clipToPadding="false"
-    app:edMenuBackground="@color/colorPrimary"
-    app:edMenuSize="220dp"
-    app:edPosition="2">
+    android:clipToPadding="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.MainActivity2">
 
-        <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
+        <io.ak1.BubbleTabBar
             android:id="@+id/floating_top_bar_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,58 +25,57 @@
             android:background="@drawable/rounded_rect_bg"
             android:elevation="8dp"
             android:padding="16dp"
-            app:bnc_mode="packed"
+            app:btb_mode="packed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.gauravk.bubblenavigation.BubbleToggleView
+            <io.ak1.BubbleTabBar.BubbleTabView
                 android:id="@+id/l_item_search"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"     app:bt_active="true"
-                app:bt_colorActive="@color/tab_blue_active"
-                app:bt_colorInactive="@color/tab_blue_inactive"
-                app:bt_icon="@drawable/ic_search"
-                app:bt_shape="@drawable/rounded_rect_white"
-                app:bt_shapeColor="@color/tab_blue_bg_light"
-                app:bt_title="جدید ترین" />
+                android:layout_height="wrap_content"
+                app:btb_active="true"
+                app:btb_colorActive="@color/tab_blue_active"
+                app:btb_colorInactive="@color/tab_blue_inactive"
+                app:btb_icon="@drawable/ic_search"
+                app:btb_shape="@drawable/rounded_rect_white"
+                app:btb_shapeColor="@color/tab_blue_bg_light"
+                app:btb_title="جدید ترین" />
 
-            <com.gauravk.bubblenavigation.BubbleToggleView
+            <io.ak1.BubbleTabBar.BubbleTabView
                 android:id="@+id/l_item_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:btb_colorActive="@color/tab_red_active"
+                app:btb_colorInactive="@color/tab_red_inactive"
+                app:btb_icon="@drawable/ic_like_comment"
+                app:btb_shape="@drawable/rounded_rect"
+                app:btb_shapeColor="@color/tab_red_bg_light"
+                app:btb_title="پربازدید ترین" />
 
-                app:bt_colorActive="@color/tab_red_active"
-                app:bt_colorInactive="@color/tab_red_inactive"
-                app:bt_icon="@drawable/ic_like_comment"
-                app:bt_shape="@drawable/rounded_rect"
-                app:bt_shapeColor="@color/tab_red_bg_light"
-                app:bt_title="پربازدید ترین" />
-
-            <com.gauravk.bubblenavigation.BubbleToggleView
+            <io.ak1.BubbleTabBar.BubbleTabView
                 android:id="@+id/l_item_notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:bt_colorActive="@color/tab_green_active"
-                app:bt_colorInactive="@color/tab_green_inactive"
+                app:btb_colorActive="@color/tab_green_active"
+                app:btb_colorInactive="@color/tab_green_inactive"
+                app:btb_shape="@drawable/rounded_rect_white"
+                app:btb_icon="@drawable/ic_like"
+                app:btb_shapeColor="@color/tab_green_bg_light"
+                app:btb_title="ویژه" />
 
-                app:bt_shape="@drawable/rounded_rect_white"   app:bt_icon="@drawable/ic_like"
-                app:bt_shapeColor="@color/tab_green_bg_light"
-                app:bt_title="ویژه" />
-
-            <com.gauravk.bubblenavigation.BubbleToggleView
+            <io.ak1.BubbleTabBar.BubbleTabView
                 android:id="@+id/l_item_profile_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:bt_colorActive="@color/tab_blue_grey_active"
-                app:bt_colorInactive="@color/tab_blue_grey_inactive"
-                app:bt_icon="@drawable/ic_menu"
-                app:bt_shape="@drawable/rounded_rect_white"
-                app:bt_shapeColor="@color/tab_blue_grey_bg_light"
-                app:bt_title="منو" />
+                app:btb_colorActive="@color/tab_blue_grey_active"
+                app:btb_colorInactive="@color/tab_blue_grey_inactive"
+                app:btb_icon="@drawable/ic_menu"
+                app:btb_shape="@drawable/rounded_rect_white"
+                app:btb_shapeColor="@color/tab_blue_grey_bg_light"
+                app:btb_title="منو" />
 
-
-        </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
+        </io.ak1.BubbleTabBar>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
@@ -92,5 +88,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/drawer_theme_1" />
-</com.mxn.soul.flowingdrawer_core.FlowingDrawer>
+    <include layout="@layout/estate_menu_1" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
