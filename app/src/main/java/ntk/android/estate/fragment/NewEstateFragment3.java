@@ -10,23 +10,21 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.Random;
 
-import es.dmoral.toasty.Toasty;
-import ir.map.sdk_map.MapirStyle;
-import ir.map.sdk_map.maps.MapView;
+es.dmoral.toasty.Toasty;
 import ntk.android.base.Extras;
 import ntk.android.base.entitymodel.enums.EnumManageUserAccessUserTypes;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
@@ -40,7 +38,7 @@ import ntk.android.estate.activity.NewEstateActivity;
 
 public class NewEstateFragment3 extends BaseFragment {
     Marker marker;
-    MapboxMap myMap;
+    GoogleMap myMap;
 
     @Override
     public void onCreateFragment() {
@@ -80,18 +78,15 @@ public class NewEstateFragment3 extends BaseFragment {
         MapView mapView = findViewById(R.id.map_view);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(@NonNull MapboxMap mapboxMap) {
-                myMap = mapboxMap;
-                mapboxMap.setMinZoomPreference(12);
-                myMap.easeCamera(CameraUpdateFactory.newLatLng(new LatLng(35.689198, 51.388973)));
+            public void onMapReady(@NonNull GoogleMap googleMap) {
+                myMap = googleMap;
+                myMap.setMinZoomPreference(12);
+                myMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(35.689198, 51.388973)));
                 if (model.Geolocationlatitude != null) {
                     LatLng loc = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
                     marker = myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), loc));
                     myMap.animateCamera(CameraUpdateFactory.newLatLng(loc));
                 }
-                mapboxMap.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
-
-                });
             }
         });
         //set custom color for custom hint Title
@@ -117,8 +112,7 @@ public class NewEstateFragment3 extends BaseFragment {
 
                     //remove previous marker
                     if (marker != null)
-                        if (myMap != null)
-                            myMap.removeMarker(marker);
+                        marker.remove();
                     if (myMap != null) {
                         marker = myMap.addMarker(GetLocationActivity.MakeMarker(getContext(), latLng));
                         myMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -158,7 +152,7 @@ public class NewEstateFragment3 extends BaseFragment {
     }
 
     private void showLocationDialog() {
-        SelectProviceDialog dialog = SelectProviceDialog.START_DIALOG(
+        SelectProviceDialog.START_DIALOG(
                 selectedModel -> {
                     if (selectedModel != null) {
                         ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);

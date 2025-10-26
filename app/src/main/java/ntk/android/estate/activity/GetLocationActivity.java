@@ -28,36 +28,33 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.gms.tasks.Task;
-import com.mapbox.mapboxsdk.annotations.Icon;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
-import ir.map.sdk_map.MapirStyle;
-import ir.map.sdk_map.maps.MapView;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.estate.R;
 
 public class GetLocationActivity extends BaseActivity {
-    MapboxMap map;
-    Style mapStyle;
+    GoogleMap map;
     Marker myMarker;
 
     Marker myLocalMarker;
 
-    FusedLocationProviderClient fusedLocationClient;
+    FusedLocationProviderClient fusedLocationProviderClient;
     ActivityResultLauncher<String[]> locationPermissionRequest =
             registerForActivityResult(new ActivityResultContracts
                             .RequestMultiplePermissions(), result -> {
@@ -148,33 +145,17 @@ public class GetLocationActivity extends BaseActivity {
         //location button
         findViewById(R.id.lastLocationFab).setOnClickListener(view -> getPermission());
         MapView mapView = findViewById(R.id.mapview);
-        mapView.getMapAsync(mapboxMap -> {
-            map = mapboxMap;
-//            map.setMinZoomPreference(12);
-            map.easeCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.689198, 51.388973), 12));
-//            map.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_RASTER_STYLE), new Style.OnStyleLoaded() {
-//                @Override
-//                public void onStyleLoaded(@NonNull Style style) {
-//                    mapStyle = style;
-//                }
-//            });
-            mapboxMap.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
-
-            });
-            map.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
+        mapView.getMapAsync(googleMap -> {
+            map = googleMap;
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.689198, 51.388973), 12));
+            map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override
-                public boolean onMapClick(@NonNull LatLng point) {
+                public void onMapClick(@NonNull LatLng point) {
                     if (myMarker != null)
-                        map.removeMarker(myMarker);
+                        myMarker.remove();
                     addMarker(point);
                     map.animateCamera(CameraUpdateFactory.newLatLng(point));
-                    return false;
                 }
-            });
-            map.addOnCameraMoveListener(() -> {
-//                if (myMarker != null)
-//                    map.removeMarker(myMarker);
-//                addMarker(map.getCameraPosition().target);
             });
         });
 
@@ -184,8 +165,8 @@ public class GetLocationActivity extends BaseActivity {
                 Toasty.error(GetLocationActivity.this, "موقعیتی انتخاب نشده است").show();
             else {
                 Intent i = new Intent();
-                i.putExtra(Extras.EXTRA_FIRST_ARG, myMarker.getPosition().getLatitude());
-                i.putExtra(Extras.EXTRA_SECOND_ARG, myMarker.getPosition().getLongitude());
+                i.putExtra(Extras.EXTRA_FIRST_ARG, myMarker.getPosition().latitude);
+                i.putExtra(Extras.EXTRA_SECOND_ARG, myMarker.getPosition().longitude);
                 setResult(RESULT_OK, i);
                 finish();
             }
@@ -235,43 +216,32 @@ public class GetLocationActivity extends BaseActivity {
 
 
     private Marker addMarker(LatLng latLng) {
-        // Creating animation for marker. We should use an object of type AnimationStyleBuilder, set
-        // all animation features on it and then call buildStyle() method that returns an object of type
-        // AnimationStyle
-        IconFactory iconFactory = IconFactory.getInstance(GetLocationActivity.this);
-        Icon icon = iconFactory.fromResource(R.drawable.logo);
-
         myMarker = map.addMarker(new MarkerOptions()
                 .position(latLng)
                 .title("مکان انتخابی")
-                .icon(icon)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.logo))
         );
 
         return myMarker;
     }
 
     private Marker addMyLocationMarker(LatLng latLng) {
-        IconFactory iconFactory = IconFactory.getInstance(GetLocationActivity.this);
-        Icon icon = iconFactory.fromResource(R.drawable.marker);
         if (myLocalMarker != null)
-            map.removeMarker(myLocalMarker);
+            myLocalMarker.remove();
         myLocalMarker = map.addMarker(new MarkerOptions()
                 .position(latLng)
                 .title("مکان تقریبی")
-                .icon(icon)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
         );
 
         return myMarker;
     }
 
     public static MarkerOptions MakeMarker(Context context, LatLng loc) {
-        IconFactory iconFactory = IconFactory.getInstance(context);
-        Icon icon = iconFactory.fromResource(R.drawable.logo);
-
         MarkerOptions options = new MarkerOptions()
                 .position(loc)
                 .title("مکان انتخابی")
-                .icon(icon);
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.logo));
         return options;
     }
 

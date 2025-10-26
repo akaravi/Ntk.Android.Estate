@@ -44,17 +44,15 @@
                         app:sliderIndicatorPadding="3dp"
                         app:sliderIndicatorRadius="2dp"
                         app:sliderIndicatorSelectedColor="@color/colorAccent"
-                        app:sliderIndicatorUnselectedColor="#FFF"
+                        app.sliderIndicatorUnselectedColor="#FFF"
                         app:sliderScrollTimeInSec="@integer/material_motion_duration_short_1"
                         app:sliderStartAutoCycle="false" />
 
-                    <ir.map.sdk_map.maps.MapView
+                    <com.google.android.gms.maps.MapView
                         android:id="@+id/map_view"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
-                        android:visibility="gone"
-                        tools:mapbox_cameraZoomMax="20"
-                        tools:mapbox_cameraZoomMin="1" />
+                        android:visibility="gone" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/toggleMaps"

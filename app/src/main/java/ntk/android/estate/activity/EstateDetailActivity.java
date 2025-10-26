@@ -21,13 +21,13 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.maps.Style;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -37,11 +37,8 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
-import ir.map.sdk_map.MapirStyle;
-import ir.map.sdk_map.maps.MapView;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
-import ntk.android.base.appclass.UpdateClass;
 import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.GenericErrors;
 import ntk.android.base.config.NtkObserver;
@@ -67,7 +64,7 @@ public class EstateDetailActivity extends BaseActivity {
     public String Id = "";
     private EstatePropertyModel model;
     ImageSliderAdapter sliderAdapter;
-    MapboxMap map;
+    GoogleMap map;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -154,11 +151,9 @@ public class EstateDetailActivity extends BaseActivity {
         MapView mapView = findViewById(R.id.map_view);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(@NonNull MapboxMap mapboxMap) {
-                map = mapboxMap;
+            public void onMapReady(@NonNull GoogleMap googleMap) {
+                map = googleMap;
                 map.setMinZoomPreference(12);
-                map.setStyle(new Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE), style -> {
-                });
                 if (model != null && model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
                     (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
                     LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);

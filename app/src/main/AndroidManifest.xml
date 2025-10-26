@@ -40,6 +40,10 @@
         <meta-data
             android:name="io.sentry.auto-init"
             android:value="true" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_GOOGLE_MAPS_API_KEY" />
+
         <!-- locale service       -->
         <service
             android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
@@ -113,9 +117,7 @@
         <activity
             android:name=".activity.FavoriteEstateListActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MainActivity2"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".activity.MainActivity3"
             android:screenOrientation="portrait" />

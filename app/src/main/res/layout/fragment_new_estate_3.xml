@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:mapbox="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -233,16 +232,14 @@
                             android:theme="@style/new_estate_textInputEditText" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <ir.map.sdk_map.maps.MapView
+                    <com.google.android.gms.maps.MapView
                         android:id="@+id/map_view"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
 
                         android:layout_marginLeft="2dp"
                         android:layout_marginTop="11dp"
-                        android:layout_marginRight="2dp"
-                        mapbox:mapbox_cameraZoomMax="20"
-                        mapbox:mapbox_cameraZoomMin="12" />
+                        android:layout_marginRight="2dp" />
 
                     <TextView
                         android:id="@+id/customHint"
