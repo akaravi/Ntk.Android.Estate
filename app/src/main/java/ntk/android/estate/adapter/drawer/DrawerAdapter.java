@@ -9,10 +9,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -51,9 +51,9 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
     protected final static int ID_INVITE = 1095;
     private final Context context;
 
-    private final FlowingDrawer Drawer;
+    private final DrawerLayout Drawer;
 
-    public DrawerAdapter(Context context, List<DrawerChildThemeDtoModel> children, FlowingDrawer drawer) {
+    public DrawerAdapter(Context context, List<DrawerChildThemeDtoModel> children, DrawerLayout drawer) {
         super(children);
         this.context = context;
         this.Drawer = drawer;
@@ -185,28 +185,28 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
     private void ClickEstateList() {
         context.startActivity(new Intent(context, EstateListActivity.class));
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
     private void ClickCustomerOrderList() {
         context.startActivity(new Intent(context, EstateCustomerOrderListActivity.class));
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
     private void ClickNewEstate() {
         NewEstateActivity.START_ACTIVITY(context);
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
     private void ClickFavoriteEstateList() {
         context.startActivity(new Intent(context, FavoriteEstateListActivity.class));
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
@@ -231,55 +231,55 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             dialog.show();
         }
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
     private void ClickNews() {
         context.startActivity(new Intent(context, NewsListActivity.class));
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
     private void ClickArticle() {
         context.startActivity(new Intent(context, ArticleListActivity.class));
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
     private void ClickContact() {
         context.startActivity(new Intent(context, TicketListActivity.class));
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
     private void ClickPooling() {
         context.startActivity(new Intent(context, PolingActivity.class));
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
     private void ClickInboxNotification() {
         context.startActivity(new Intent(context, NotificationsActivity.class));
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
     private void ClickQuestion() {
         context.startActivity(new Intent(context, FaqActivity.class));
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
     private void ClickFeedBack() {
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
         ((AbstractMainActivity) context).onFeedbackClick();
     }
@@ -288,14 +288,14 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
     private void ClickShare() {
         ((AbstractMainActivity) context).onInviteMethod();
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
     private void ClickAbout() {
         context.startActivity(new Intent(context, AboutUsActivity.class));
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
@@ -303,7 +303,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
     private void ClickIntro() {
         context.startActivity(new Intent(context, IntroActivity.class));
         if (Drawer != null) {
-            Drawer.closeMenu(true);
+            Drawer.closeDrawers();
         }
     }
 
