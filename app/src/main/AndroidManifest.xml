@@ -118,10 +118,7 @@
             android:name=".activity.FavoriteEstateListActivity"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".activity.MainActivity3"
-            android:screenOrientation="portrait" />
-        <activity
+          <activity
             android:name=".activity.LandUsedListActivity"
             android:screenOrientation="portrait" />
         <activity
