@@ -31,7 +31,6 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -140,7 +139,7 @@ public class GetLocationActivity extends BaseActivity {
         setContentView(R.layout.activity_get_location);
         findViewById(R.id.imgToolbarBack).setOnClickListener(view -> finish());
         //get last location
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         //location button
         findViewById(R.id.lastLocationFab).setOnClickListener(view -> getPermission());
@@ -181,7 +180,7 @@ public class GetLocationActivity extends BaseActivity {
                     Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION});
 
         } else {
-            fusedLocationClient.requestLocationUpdates(LocationRequest.create()
+            fusedLocationProviderClient.requestLocationUpdates(LocationRequest.create()
                             .setInterval(36000).setFastestInterval(36000)
                             .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
                             .setMaxWaitTime(1000),
@@ -192,7 +191,7 @@ public class GetLocationActivity extends BaseActivity {
 
 
     public void getCurrentLocation() {
-        fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY, new CancellationToken() {
+        fusedLocationProviderClient.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY, new CancellationToken() {
             @Override
             public boolean isCancellationRequested() {
                 return false;
