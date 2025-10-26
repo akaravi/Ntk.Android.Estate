@@ -56,4 +56,6 @@
     <color name="main3_toolbar_hint">#C3C4C8</color>
     <color name="main3_bg">#EDEFF6</color>
     <color name="main3_card_bg">#FAFAFA</color>
+    <color name="main3_primary_text">#000</color>
+    <color name="main3_secondary_text">#6D90A4</color>
 </resources>

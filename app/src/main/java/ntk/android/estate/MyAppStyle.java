@@ -6,7 +6,6 @@ import ntk.android.base.styles.UnitStyleEnum;
 import ntk.android.base.view.ThemeNameEnum;
 import ntk.android.base.view.ViewController;
 import ntk.android.estate.activity.EstateListActivity;
-import ntk.android.estate.activity.MainActivity;
 import ntk.android.estate.activity.MainActivity3;
 
 public class MyAppStyle extends ApplicationStyle {

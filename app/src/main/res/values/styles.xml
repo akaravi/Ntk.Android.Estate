@@ -191,8 +191,4 @@
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:text">مشاهده همه</item>
     </style>
-
-
-    <color name="main3_primary_text">#000</color>
-    <color name="main3_secondary_text">#6D90A4</color>
 </resources>
