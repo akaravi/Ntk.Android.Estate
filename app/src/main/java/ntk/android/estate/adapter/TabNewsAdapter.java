@@ -14,26 +14,25 @@ import com.balysv.materialripple.MaterialRippleLayout;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.news.NewsContentOtherInfoModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
-public class TabNewsAdapter extends BaseRecyclerAdapter<NewsContentOtherInfoModel,TabNewsAdapter.ViewHolder> {
+public class TabNewsAdapter extends BaseRecyclerAdapter<NewsContentOtherInfoModel, TabNewsAdapter.ViewHolder> {
 
     private final Context context;
 
     public TabNewsAdapter(Context context, List<NewsContentOtherInfoModel> arrayList) {
         super(arrayList);
-        this.context = context; drawable=R.drawable.sweet_error_center_x;
+        this.context = context;
+        drawable = R.drawable.sweet_error_center_x;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = inflate(viewGroup,R.layout.row_recycler_tab);
+        View view = inflate(viewGroup, R.layout.row_recycler_tab);
         return new ViewHolder(view);
     }
 
@@ -49,18 +48,16 @@ public class TabNewsAdapter extends BaseRecyclerAdapter<NewsContentOtherInfoMode
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.BtnRecyclerTab)
         Button Btn;
-
-        @BindView(R.id.RippleBtnRecyclerTab)
         MaterialRippleLayout Ripple;
-
-        @BindView(R.id.WebViewActDetailNews)
         WebView webView;
 
         public ViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
+            Btn = view.findViewById(R.id.BtnRecyclerTab);
+            Ripple = view.findViewById(R.id.RippleBtnRecyclerTab);
+            webView = view.findViewById(R.id.WebViewActDetailNews);
+
             Btn.setTypeface(FontManager.T1_Typeface(context));
             webView.getSettings().setJavaScriptEnabled(true);
             webView.getSettings().setBuiltInZoomControls(true);

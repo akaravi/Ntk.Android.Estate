@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import ntk.android.base.Extras;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.news.NewsContentModel;
@@ -33,7 +31,7 @@ public class NewsAdapter extends BaseRecyclerAdapter<NewsContentModel, NewsAdapt
     public NewsAdapter(Context context, List<NewsContentModel> arrayList) {
         super(arrayList);
         this.context = context;
-        drawable=R.drawable.news_placeholder;   }
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -48,6 +46,7 @@ public class NewsAdapter extends BaseRecyclerAdapter<NewsContentModel, NewsAdapt
         holder.LblTitle.setText(item.Title);
         holder.LblDescrption.setText(item.Description);
         holder.LblLike.setText(String.valueOf(item.ViewCount));
+        holder.Img.setImageResource(R.drawable.news_placeholder);
         loadImage(item.LinkMainImageIdSrc, holder.Img, holder.Progress);
         double rating = CmsApiScoreApi.CONVERT_TO_RATE(item.ViewCount, item.ScoreSumPercent);
 
@@ -62,31 +61,25 @@ public class NewsAdapter extends BaseRecyclerAdapter<NewsContentModel, NewsAdapt
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.lblTitleRowRecyclerNews)
         TextView LblTitle;
-
-        @BindView(R.id.lblDescriptionRowRecyclerNews)
         TextView LblDescrption;
-
-        @BindView(R.id.lblLikeRowRecyclerNews)
         TextView LblLike;
-
-        @BindView(R.id.imgRowRecyclerNews)
         ImageView Img;
-
-        @BindView(R.id.ratingBarRowRecyclerNews)
         RatingBar Rate;
-
-        @BindView(R.id.rootNews)
         CardView Root;
-
-        @BindView(R.id.ProgressRecyclerNews)
         ProgressBar Progress;
 
 
         public ViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
+            LblTitle = view.findViewById(R.id.lblTitleRowRecyclerNews);
+            LblDescrption = view.findViewById(R.id.lblDescriptionRowRecyclerNews);
+            LblLike = view.findViewById(R.id.lblLikeRowRecyclerNews);
+            Img = view.findViewById(R.id.imgRowRecyclerNews);
+            Rate = view.findViewById(R.id.ratingBarRowRecyclerNews);
+            Root = view.findViewById(R.id.rootNews);
+            Progress = view.findViewById(R.id.ProgressRecyclerNews);
+
             LblTitle.setTypeface(FontManager.T1_Typeface(context));
             LblDescrption.setTypeface(FontManager.T1_Typeface(context));
             LblLike.setTypeface(FontManager.T1_Typeface(context));

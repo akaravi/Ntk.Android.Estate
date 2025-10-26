@@ -9,11 +9,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.BindViews;
-import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -112,31 +110,27 @@ public class ArticleCommentAdapter extends BaseRecyclerAdapter<ArticleCommentMod
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindViews({R.id.lblUserNameRecyclerComment,
-                R.id.lblDateRecyclerComment,
-                R.id.lblDesLikeRecyclerComment,
-                R.id.lblLikeRecyclerComment,
-                R.id.lblContentRecyclerComment
-        })
         List<TextView> Lbls;
-
-        @BindView(R.id.imgDisLikeRecyclerComment)
         ImageView ImgDisLike;
-
-        @BindView(R.id.imgLikeRecyclerComment)
         ImageView ImgLike;
-
-        @BindView(R.id.relativeLoading)
         RelativeLayout loading;
 
         public ViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
-            Lbls.get(0).setTypeface(FontManager.T1_Typeface(context));
-            Lbls.get(1).setTypeface(FontManager.T1_Typeface(context));
-            Lbls.get(2).setTypeface(FontManager.T1_Typeface(context));
-            Lbls.get(3).setTypeface(FontManager.T1_Typeface(context));
-            Lbls.get(4).setTypeface(FontManager.T1_Typeface(context));
+            ImgDisLike = view.findViewById(R.id.imgDisLikeRecyclerComment);
+            ImgLike = view.findViewById(R.id.imgLikeRecyclerComment);
+            loading = view.findViewById(R.id.relativeLoading);
+
+            Lbls = new ArrayList<>();
+            Lbls.add(view.findViewById(R.id.lblUserNameRecyclerComment));
+            Lbls.add(view.findViewById(R.id.lblDateRecyclerComment));
+            Lbls.add(view.findViewById(R.id.lblDesLikeRecyclerComment));
+            Lbls.add(view.findViewById(R.id.lblLikeRecyclerComment));
+            Lbls.add(view.findViewById(R.id.lblContentRecyclerComment));
+
+            for (TextView lbl : Lbls) {
+                lbl.setTypeface(FontManager.T1_Typeface(context));
+            }
         }
     }
 }
