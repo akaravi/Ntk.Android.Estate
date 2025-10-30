@@ -57,7 +57,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
         super(children);
         this.context = context;
         this.Drawer = drawer;
-        drawable = R.drawable.sweet_error_center_x;
+        drawable = ntk.android.base.R.drawable.sweet_error_center_x;
     }
 
 
@@ -68,7 +68,7 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
             View view = inflate(viewGroup, R.layout.drawer_theme_1_header);
             return new HeaderViewHolder(view);
         } else {
-            View view = inflate(viewGroup, R.layout.drawer_theme_1_item);
+            View view = inflate(viewGroup, ntk.android.base.R.layout.drawer_theme_1_item);
             return new MenuViewHolder(view);
         }
     }
@@ -326,10 +326,10 @@ public class DrawerAdapter extends BaseRecyclerAdapter<DrawerChildThemeDtoModel,
 
         public MenuViewHolder(View view) {
             super(view);
-            icon = view.findViewById(R.id.ImgRecyclerDrawerChild);
-            title = view.findViewById(R.id.lblRecyclerDrawerChild);
-            badge = view.findViewById(R.id.lblBadgeRecyclerDrawerChild);
-            Root = view.findViewById(R.id.RootContainerRecyclerDrawerChild);
+            icon = view.findViewById(ntk.android.base.R.id.ImgRecyclerDrawerChild);
+            title = view.findViewById(ntk.android.base.R.id.lblRecyclerDrawerChild);
+            badge = view.findViewById(ntk.android.base.R.id.lblBadgeRecyclerDrawerChild);
+            Root = view.findViewById(ntk.android.base.R.id.RootContainerRecyclerDrawerChild);
             title.setTypeface(FontManager.T1_Typeface(context));
             badge.setTypeface(FontManager.T1_Typeface(context));
         }

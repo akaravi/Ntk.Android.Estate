@@ -52,8 +52,8 @@ public class NewEstateActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_estate_and_order);
-        title = findViewById(R.id.txtToolbarTitle);
-        findViewById(R.id.imgToolbarBack).setOnClickListener(view -> finish());
+        title = findViewById(ntk.android.base.R.id.txtToolbarTitle);
+        findViewById(ntk.android.base.R.id.imgToolbarBack).setOnClickListener(view -> finish());
         findViewById(R.id.backBtn).setOnClickListener(view -> {
             onBackPressed();
         });
@@ -67,7 +67,7 @@ public class NewEstateActivity extends BaseActivity {
 
     private void setFont() {
         Typeface t1 = FontManager.T1_Typeface(this);
-        ((TextView) findViewById(R.id.txtToolbarTitle)).setTypeface(t1);
+        ((TextView) findViewById(ntk.android.base.R.id.txtToolbarTitle)).setTypeface(t1);
         ((MaterialButton) findViewById(R.id.continueBtn)).setTypeface(t1);
         ((MaterialButton) findViewById(R.id.backBtn)).setTypeface(t1);
         ((MaterialButton) findViewById(R.id.addNewBtn)).setTypeface(t1);

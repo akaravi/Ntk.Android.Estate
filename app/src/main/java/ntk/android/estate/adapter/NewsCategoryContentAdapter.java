@@ -1,53 +1,55 @@
 package ntk.android.estate.adapter;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import java9.util.function.Function;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.news.NewsCategoryModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
-
 public class NewsCategoryContentAdapter extends BaseRecyclerAdapter<NewsCategoryModel, NewsCategoryContentAdapter.ViewHolder> {
+    Function<NewsCategoryModel, Void> function;
 
-    private final Context context;
+    public NewsCategoryContentAdapter(List<NewsCategoryModel> list, Function<NewsCategoryModel, Void> func) {
+        super(list);
+        function = func;
+    }
 
-    public NewsCategoryContentAdapter(Context context, List<NewsCategoryModel> arrayList) {
-        super(arrayList);
-        this.context = context;
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(inflate(parent, R.layout.common_category));
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = inflate(viewGroup, R.layout.row_recycler_category_content);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         NewsCategoryModel item = getItem(position);
-        holder.Title.setText(item.Title);
-        loadImage(item.LinkMainImageIdSrc, holder.Img, null);
+        holder.tv.setText(item.Title);
+        if (item.LinkMainImageIdSrc != null && !item.LinkMainImageIdSrc.equals(""))
+            loadImage(item.LinkMainImageIdSrc, holder.image);
+        else
+            holder.image.setImageResource(ntk.android.base.R.drawable.categoty);
+        holder.itemView.setOnClickListener(v -> function.apply(item));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tv;
+        ImageView image;
 
-        TextView Title;
-        ImageView Img;
-
-        public ViewHolder(View view) {
-            super(view);
-            Title = view.findViewById(R.id.txt_category_content);
-            Img = view.findViewById(R.id.img_category_content);
-            Title.setTypeface(FontManager.T1_Typeface(context));
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tv = itemView.findViewById(R.id.textView);
+            image = itemView.findViewById(R.id.image);
+            tv.setTypeface(FontManager.T1_Typeface(itemView.getContext()));
         }
     }
 }

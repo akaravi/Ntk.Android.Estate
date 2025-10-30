@@ -28,7 +28,6 @@ import ntk.android.base.dialog.CheckBoxListDialog;
 import ntk.android.base.dialog.RadioListDialog;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailGroupModel;
 import ntk.android.base.entitymodel.estate.EstatePropertyDetailModel;
-import ntk.android.base.entitymodel.estate.EstatePropertyDetailModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 
@@ -38,7 +37,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     public EstatePropertyDetailAdapterSelector(FragmentManager fragment, EstatePropertyDetailGroupModel item) {
         super(item.PropertyDetails);
         frag = fragment;
-        drawable=R.drawable.sweet_error_center_x;
+        drawable = ntk.android.base.R.drawable.sweet_error_center_x;
     }
 
     @Override
@@ -63,6 +62,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return CREATE_HOLDER(parent, viewType);
     }
+
     public VH CREATE_HOLDER(ViewGroup parent, int viewType) {
         if (viewType == 0)//as String
             return new StringVH(inflate(parent, R.layout.row_property_detail_stirng_type), viewType);
@@ -81,6 +81,7 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
         else
             return new SingleChoiceVH(inflate(parent, R.layout.row_property_detail_stirng_type), 12);
     }
+
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         holder.bindToView(getItem(position), position);
@@ -93,7 +94,6 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             super(itemView);
             viewType = type;
         }
-
 
 
         public Context getContext() {
@@ -124,7 +124,8 @@ class EstatePropertyDetailAdapterSelector extends BaseRecyclerAdapter<EstateProp
             create();
 
         }
-        public void create(){
+
+        public void create() {
             textChangeListener = new MyCustomEditTextListener();
             editText.setFocusable(true);
             editText.addTextChangedListener(textChangeListener);

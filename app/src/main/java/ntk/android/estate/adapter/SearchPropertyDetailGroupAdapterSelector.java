@@ -27,7 +27,7 @@ public class SearchPropertyDetailGroupAdapterSelector extends BaseRecyclerAdapte
     public SearchPropertyDetailGroupAdapterSelector(List<EstatePropertyDetailGroupModel> list, ViewGroup rootView, FragmentManager frag) {
         super(list);
         root = rootView;
-        fragmentManager = frag; drawable=R.drawable.sweet_error_center_x;
+        fragmentManager = frag; drawable=ntk.android.base.R.drawable.sweet_error_center_x;
     }
 
 

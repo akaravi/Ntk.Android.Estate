@@ -18,7 +18,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +30,6 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.gson.Gson;
-import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.skydoves.balloon.ArrowOrientation;
 import com.skydoves.balloon.ArrowPositionRules;
 import com.skydoves.balloon.Balloon;
@@ -85,7 +86,7 @@ public class MainActivity3 extends BaseMainActivity {
         //show drawer
         List<DrawerChildThemeDtoModel> menus = DrawerAdapter.createDrawerItems(updateInfo.allowDirectShareApp, isLogin());
         RecyclerView drawerRecycler = findViewById(R.id.RecyclerDrawer);
-        Drawer3Adapter adapter = new Drawer3Adapter(this, menus, findViewById(R.id.floaingDrawer));
+        Drawer3Adapter adapter = new Drawer3Adapter(this, menus, findViewById(R.id.drawer_layout));
         drawerRecycler.setAdapter(adapter);
         drawerRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         init();
@@ -138,7 +139,7 @@ public class MainActivity3 extends BaseMainActivity {
                             rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
                             rc.setAdapter(new Main3EstateSpecialAdapter(model.Items));
                             ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
-                            shimmerFrameLayout.stopShimmerAnimation();
+                            shimmerFrameLayout.stopShimmer();
                             shimmerFrameLayout.setVisibility(View.GONE);
                         }
                     }
@@ -157,7 +158,7 @@ public class MainActivity3 extends BaseMainActivity {
         //see landUse list on new activity on click
         seeMore.setOnClickListener(view -> startActivity(new Intent(MainActivity3.this, LandUsedListActivity.class)));
         //click on humberger
-        findViewById(R.id.img_menu).setOnClickListener(v -> ((FlowingDrawer) findViewById(R.id.floaingDrawer)).openMenu(true));
+        findViewById(R.id.img_menu).setOnClickListener(v -> ((DrawerLayout) findViewById(R.id.drawer_layout)).openDrawer(GravityCompat.END));
         //click share
         if (!updateInfo.allowDirectShareApp) {
             findViewById(R.id.shareQrCode).setVisibility(View.GONE);
@@ -216,8 +217,8 @@ public class MainActivity3 extends BaseMainActivity {
         //show shimmer
         findViewById(R.id.shimmer_news1).getLayoutParams().width = Main3NewsAdapter.ITEM_WIDTH();
         findViewById(R.id.shimmer_news2).getLayoutParams().width = Main3NewsAdapter.ITEM_WIDTH();
-        ((ShimmerFrameLayout) findViewById(R.id.news_shimmer)).startShimmerAnimation();
-        ((ShimmerFrameLayout) findViewById(R.id.landUsed_shimmer)).startShimmerAnimation();
+        ((ShimmerFrameLayout) findViewById(R.id.news_shimmer)).startShimmer();
+        ((ShimmerFrameLayout) findViewById(R.id.landUsed_shimmer)).startShimmer();
         initStatePropertyShimmer(findViewById(R.id.row1));
         initStatePropertyShimmer(findViewById(R.id.row2));
         initStatePropertyShimmer(findViewById(R.id.row3));
@@ -316,7 +317,7 @@ public class MainActivity3 extends BaseMainActivity {
             image.getLayoutParams().width = w;
             image.getLayoutParams().height = w;
         }
-        ((ShimmerFrameLayout) v.findViewById(R.id.shimmer_rc)).startShimmerAnimation();
+        ((ShimmerFrameLayout) v.findViewById(R.id.shimmer_rc)).startShimmer();
     }
 
     private void getData(FilterModel filter, View view) {
@@ -344,7 +345,7 @@ public class MainActivity3 extends BaseMainActivity {
                     rc.setLayoutManager(new LinearLayoutManager(MainActivity3.this, RecyclerView.HORIZONTAL, false));
                     ViewCompat.setNestedScrollingEnabled(rc, false);
                     ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
-                    shimmerFrameLayout.stopShimmerAnimation();
+                    shimmerFrameLayout.stopShimmer();
                     shimmerFrameLayout.setVisibility(View.GONE);
                 } else view.setVisibility(View.GONE);
             }
@@ -368,7 +369,7 @@ public class MainActivity3 extends BaseMainActivity {
                 RecyclerView rc = findViewById(R.id.landUseAdapter);
                 rc.setAdapter(adapter);
                 ShimmerFrameLayout shimmer = findViewById(R.id.landUsed_shimmer);
-                shimmer.stopShimmerAnimation();
+                shimmer.stopShimmer();
                 shimmer.setVisibility(View.GONE);
             }
 
@@ -389,7 +390,7 @@ public class MainActivity3 extends BaseMainActivity {
             @Override
             public void onNext(ErrorException<NewsContentModel> newsContentResponse) {
                 ShimmerFrameLayout shimmerLayout = findViewById(R.id.news_shimmer);
-                shimmerLayout.stopShimmerAnimation();
+                shimmerLayout.stopShimmer();
                 shimmerLayout.setVisibility(View.GONE);
                 if (newsContentResponse.IsSuccess) {
                     if (newsContentResponse.ListItems.size() > 0) {
@@ -429,7 +430,7 @@ public class MainActivity3 extends BaseMainActivity {
                 //hide shimmer
                 ViewCompat.setNestedScrollingEnabled(rc, false);
                 ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_rc);
-                shimmerFrameLayout.stopShimmerAnimation();
+                shimmerFrameLayout.stopShimmer();
                 shimmerFrameLayout.setVisibility(View.GONE);
                 if (response.IsSuccess)
                     //image optimize

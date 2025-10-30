@@ -24,7 +24,7 @@ public class TabArticleAdapter extends BaseRecyclerAdapter<ArticleContentOtherIn
     public TabArticleAdapter(Context context, List<ArticleContentOtherInfoModel> arrayList) {
         super(arrayList);
         this.context = context;
-        drawable = R.drawable.sweet_error_center_x;
+        drawable = ntk.android.base.R.drawable.sweet_error_center_x;
     }
 
     @Override

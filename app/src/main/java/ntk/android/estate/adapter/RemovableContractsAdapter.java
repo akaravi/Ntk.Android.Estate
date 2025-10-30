@@ -17,7 +17,7 @@ import ntk.android.estate.R;
 
 public class RemovableContractsAdapter extends BaseRecyclerAdapter<EstateContractModel, RemovableContractsAdapter.VH> {
     public RemovableContractsAdapter(List<EstateContractModel> list) {
-        super(list); drawable=R.drawable.sweet_error_center_x;
+        super(list); drawable=ntk.android.base.R.drawable.sweet_error_center_x;
     }
 
     @NonNull

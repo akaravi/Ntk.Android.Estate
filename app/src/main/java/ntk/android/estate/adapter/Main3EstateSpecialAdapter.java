@@ -26,7 +26,7 @@ import ntk.android.estate.models.RecyclerItemModel;
 public class Main3EstateSpecialAdapter extends BaseRecyclerAdapter<RecyclerItemModel, Main3EstateSpecialAdapter.VH> {
     public Main3EstateSpecialAdapter(List<RecyclerItemModel> list) {
         super(list);
-        drawable = R.drawable.sweet_error_center_x;
+        drawable = ntk.android.base.R.drawable.sweet_error_center_x;
     }
 
     @NonNull

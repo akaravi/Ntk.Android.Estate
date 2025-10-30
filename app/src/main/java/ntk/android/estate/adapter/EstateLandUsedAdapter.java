@@ -23,7 +23,7 @@ public class EstateLandUsedAdapter extends BaseRecyclerAdapter<EstatePropertyTyp
         super(list);
         int w = getScreenWidth();
         width = w/3 - (w / 12);
-        drawable=R.drawable.sweet_error_center_x;
+        drawable=ntk.android.base.R.drawable.sweet_error_center_x;
     }
 
     @NonNull

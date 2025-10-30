@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
 import ntk.android.base.Extras;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.news.NewsContentModel;
@@ -64,7 +63,6 @@ public class Main3NewsAdapter extends BaseRecyclerAdapter<NewsContentModel, Main
 
         public ViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
             Img = view.findViewById(R.id.ImageRecyclerImage);
             Lbl = view.findViewById(R.id.LblRecyclerImage);
             Lbl.setTypeface(FontManager.T1_Typeface(context));

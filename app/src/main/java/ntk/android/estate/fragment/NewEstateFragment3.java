@@ -24,7 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Random;
 
-es.dmoral.toasty.Toasty;
+import es.dmoral.toasty.Toasty;
 import ntk.android.base.Extras;
 import ntk.android.base.entitymodel.enums.EnumManageUserAccessUserTypes;
 import ntk.android.base.entitymodel.estate.EstatePropertyModel;
@@ -152,7 +152,7 @@ public class NewEstateFragment3 extends BaseFragment {
     }
 
     private void showLocationDialog() {
-        SelectProviceDialog.START_DIALOG(
+        SelectProviceDialog  dialog= SelectProviceDialog.START_DIALOG(
                 selectedModel -> {
                     if (selectedModel != null) {
                         ((MaterialAutoCompleteTextView) (findViewById(R.id.EstateProvinceAutoComplete))).setText(selectedModel.Title);

@@ -29,7 +29,7 @@ public class EstatePropertyTypeAdapterSelector extends BaseRecyclerAdapter<Estat
         if (Item != null) {
             lastSelected = listItems.indexOf(Item);
         }
-        drawable = R.drawable.sweet_error_center_x;
+        drawable = ntk.android.base.R.drawable.sweet_error_center_x;
     }
 
     public EstatePropertyTypeAdapterSelector(boolean canClick, List<EstatePropertyTypeUsageModel> listItems, EstatePropertyTypeUsageModel Item, Consumer<EstatePropertyTypeUsageModel> detailCaller) {
@@ -40,13 +40,13 @@ public class EstatePropertyTypeAdapterSelector extends BaseRecyclerAdapter<Estat
         if (Item != null) {
             lastSelected = listItems.indexOf(Item);
         }
-        drawable = R.drawable.sweet_error_center_x;
+        drawable = ntk.android.base.R.drawable.sweet_error_center_x;
     }
 
     @NonNull
     @Override
     public EstatePropertyTypeAdapterSelector.VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new VH(inflate(parent, R.layout.chip_row_item));
+        return new VH(inflate(parent, ntk.android.base.R.layout.chip_row_item));
     }
 
     @Override

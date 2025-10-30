@@ -299,11 +299,11 @@ public class EstateDetailActivity extends BaseActivity {
         window.setLayout(LinearLayoutCompat.LayoutParams.WRAP_CONTENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
         window.setGravity(Gravity.CENTER);
         dialog.setContentView(ntk.android.base.R.layout.dialog_report_add);
-        TextView Lbl = dialog.findViewById(R.id.lblTitleDialogAddReport);
+        TextView Lbl = dialog.findViewById(ntk.android.base.R.id.lblTitleDialogAddReport);
         Lbl.setTypeface(FontManager.T1_Typeface(this));
 
 
-        EditText subject = dialog.findViewById(R.id.txtContentDialogAddReport);
+        EditText subject = dialog.findViewById(ntk.android.base.R.id.txtContentDialogAddReport);
         subject.setTypeface(FontManager.T1_Typeface(this));
 
 

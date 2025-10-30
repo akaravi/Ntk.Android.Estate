@@ -93,11 +93,11 @@ public class SearchEstateActivity extends BaseActivity {
     }
 
     private void initView() {
-        findViewById(R.id.imgToolbarBack).setOnClickListener(view -> finish());
-        ((TextView) findViewById(R.id.txtToolbarTitle)).setText("جست و جو");
+        findViewById(ntk.android.base.R.id.imgToolbarBack).setOnClickListener(view -> finish());
+        ((TextView) findViewById(ntk.android.base.R.id.txtToolbarTitle)).setText("جست و جو");
         //set font
         Typeface t1 = FontManager.T1_Typeface(this);
-        ((TextView) findViewById(R.id.txtToolbarTitle)).setTypeface(t1);
+        ((TextView) findViewById(ntk.android.base.R.id.txtToolbarTitle)).setTypeface(t1);
         ((TextView) findViewById(R.id.titleExpandTv)).setTypeface(t1);
         ((TextView) findViewById(R.id.locationExpandTv)).setTypeface(t1);
         ((TextView) findViewById(R.id.contractTypeExpandTv)).setTypeface(t1);

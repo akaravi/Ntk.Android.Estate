@@ -25,20 +25,20 @@ public class EstateContractAdapterSelector extends BaseRecyclerAdapter<EstateCon
         super(list);
         lastSelected = -1;
         caller = selector;
-        drawable=R.drawable.sweet_error_center_x;
+        drawable=ntk.android.base.R.drawable.sweet_error_center_x;
     }
  public EstateContractAdapterSelector(int selected,List<EstateContractTypeModel> list, Consumer<EstateContractTypeModel> selector) {
         super(list);
         lastSelected = selected;
         caller = selector;
-        drawable=R.drawable.sweet_error_center_x;
+        drawable=ntk.android.base.R.drawable.sweet_error_center_x;
     }
 
 
     @NonNull
     @Override
     public EstateContractAdapterSelector.VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new EstateContractAdapterSelector.VH(inflate(parent, R.layout.chip_row_item));
+        return new EstateContractAdapterSelector.VH(inflate(parent, ntk.android.base.R.layout.chip_row_item));
     }
 
     @Override

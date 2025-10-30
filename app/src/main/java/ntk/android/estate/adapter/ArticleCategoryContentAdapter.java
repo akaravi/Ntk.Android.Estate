@@ -37,7 +37,7 @@ public class ArticleCategoryContentAdapter extends BaseRecyclerAdapter<ArticleCa
         if (item.LinkMainImageIdSrc != null && !item.LinkMainImageIdSrc.equals(""))
             loadImage(item.LinkMainImageIdSrc, holder.image);
         else
-            holder.image.setImageResource(R.drawable.categoty);
+            holder.image.setImageResource(ntk.android.base.R.drawable.categoty);
         holder.itemView.setOnClickListener(v -> function.apply(item));
     }
 

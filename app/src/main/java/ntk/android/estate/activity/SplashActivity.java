@@ -15,7 +15,7 @@ public class SplashActivity extends BaseSplashActivity {
         setContentView(R.layout.activity_estate_splash);
         LottieAnimationView lottieAnimationView = (LottieAnimationView) findViewById(R.id.AnimationActSplash2);
         lottieAnimationView.setImageAssetsFolder("images/");
-        findViewById(R.id.splash_debugView).setOnClickListener(v -> showDebugView(v));
+        findViewById(ntk.android.base.R.id.splash_debugView).setOnClickListener(v -> showDebugView(v));
         TextView Lb2 = findViewById(ntk.android.base.R.id.lblWorkActSplash);
         TextView Lbl = findViewById(ntk.android.base.R.id.lblVersionActSplash);
         findViewById(ntk.android.base.R.id.splash_debugView).setOnClickListener(this::showDebugView);

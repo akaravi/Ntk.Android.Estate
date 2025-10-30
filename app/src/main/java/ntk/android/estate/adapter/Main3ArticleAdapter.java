@@ -11,16 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
 import ntk.android.base.Extras;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.article.ArticleContentModel;
-import ntk.android.base.entitymodel.news.NewsContentModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.estate.R;
 import ntk.android.estate.activity.ArticleDetailActivity;
-import ntk.android.estate.activity.MainActivity3;
-import ntk.android.estate.activity.NewsDetailActivity;
 
 public class Main3ArticleAdapter extends BaseRecyclerAdapter<ArticleContentModel, Main3ArticleAdapter.ViewHolder> {
 
@@ -67,7 +63,6 @@ public class Main3ArticleAdapter extends BaseRecyclerAdapter<ArticleContentModel
 
         public ViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
             Img = view.findViewById(R.id.ImageRecyclerImage);
             Lbl = view.findViewById(R.id.LblRecyclerImage);
             Lbl.setTypeface(FontManager.T1_Typeface(context));

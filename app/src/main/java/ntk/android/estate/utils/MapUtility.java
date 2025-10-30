@@ -56,7 +56,7 @@ public class MapUtility {
         try {
             if (!((Activity) context).isFinishing()) {
                 //todo change
-                View layout = LayoutInflater.from(context).inflate(R.layout.dialog_load, null);
+                View layout = LayoutInflater.from(context).inflate(ntk.android.base.R.layout.dialog_load, null);
                 popupWindow = new Dialog(context, android.R.style.Theme_Translucent);
                 popupWindow.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 popupWindow.setContentView(layout);
