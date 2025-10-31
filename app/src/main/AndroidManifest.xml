@@ -156,6 +156,9 @@
         <activity
             android:name=".activity.CompanyDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="ntk.android.estate.activity.MainActivity3"
+            android:screenOrientation="portrait" />
 
 
         <provider
