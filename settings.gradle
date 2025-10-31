@@ -25,5 +25,5 @@ rootProject.name = "Ntk.Android.Estate"
 include 'app'
 include 'baseActivity'
 project(':baseActivity').projectDir = new File('..\\Ntk.Android.BaseActivity\\app')
-//include('baseApi')
-//project(':baseApi').projectDir = new File('..\\Ntk.Android.Base\\api')
+include('baseApi')
+project(':baseApi').projectDir = new File('..\\Ntk.Android.Base\\api')
