@@ -8,8 +8,9 @@
         android:id="@+id/includeToolbar"
         layout="@layout/base_toolbar_back" />
 
-    <com.google.android.gms.maps.MapView
+    <fragment
         android:id="@+id/mapview"
+        class="ir.parsimap.map.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -24,9 +25,9 @@
         android:text="ثبت مکان" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/lastLocationFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lastLocationFab"
         android:layout_above="@id/setLocationBtn"
         android:layout_alignParentRight="true"
         android:layout_marginRight="26dp"

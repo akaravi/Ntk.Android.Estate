@@ -28,13 +28,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
@@ -43,12 +36,21 @@ import com.google.android.gms.tasks.Task;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import ir.parsimap.map.MapFragment;
+import ir.parsimap.map.ParsiMap;
+import ir.parsimap.map.camera.CameraUpdateFactory;
+import ir.parsimap.map.location.LocationMarker;
+import ir.parsimap.map.location.OnLocationUpdateListener;
+import ir.parsimap.map.model.BitmapDescriptorFactory;
+import ir.parsimap.map.model.LatLng;
+import ir.parsimap.map.model.Marker;
+import ir.parsimap.map.model.MarkerOptions;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.estate.R;
 
 public class GetLocationActivity extends BaseActivity {
-    GoogleMap map;
+    ParsiMap map;
     Marker myMarker;
 
     Marker myLocalMarker;
@@ -143,18 +145,15 @@ public class GetLocationActivity extends BaseActivity {
 
         //location button
         findViewById(R.id.lastLocationFab).setOnClickListener(view -> getPermission());
-        MapView mapView = findViewById(R.id.mapview);
-        mapView.getMapAsync(googleMap -> {
-            map = googleMap;
+        MapFragment mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.mapview);
+        mapFragment.getMapAsync(parsiMap -> {
+            map = parsiMap;
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.689198, 51.388973), 12));
-            map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                @Override
-                public void onMapClick(@NonNull LatLng point) {
-                    if (myMarker != null)
-                        myMarker.remove();
-                    addMarker(point);
-                    map.animateCamera(CameraUpdateFactory.newLatLng(point));
-                }
+            map.setOnMapClickListener(point -> {
+                if (myMarker != null)
+                    myMarker.remove();
+                addMarker(point);
+                map.animateCamera(CameraUpdateFactory.newLatLng(point));
             });
         });
 
@@ -164,8 +163,8 @@ public class GetLocationActivity extends BaseActivity {
                 Toasty.error(GetLocationActivity.this, "موقعیتی انتخاب نشده است").show();
             else {
                 Intent i = new Intent();
-                i.putExtra(Extras.EXTRA_FIRST_ARG, myMarker.getPosition().latitude);
-                i.putExtra(Extras.EXTRA_SECOND_ARG, myMarker.getPosition().longitude);
+                i.putExtra(Extras.EXTRA_FIRST_ARG, myMarker.getPosition().getLatitude());
+                i.putExtra(Extras.EXTRA_SECOND_ARG, myMarker.getPosition().getLongitude());
                 setResult(RESULT_OK, i);
                 finish();
             }
