@@ -1,36 +1,32 @@
 package ntk.android.estate.activity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.text.Html;
 import android.view.View;
-import android.view.Window;
 import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+
+import org.maplibre.android.annotations.MarkerOptions;
+import org.maplibre.android.camera.CameraUpdateFactory;
+import org.maplibre.android.geometry.LatLng;
+import org.maplibre.android.maps.MapView;
+import org.maplibre.android.maps.MapLibreMap;
+import org.maplibre.android.maps.OnMapReadyCallback;
+import org.maplibre.android.maps.Style;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,14 +60,15 @@ public class EstateDetailActivity extends BaseActivity {
     public String Id = "";
     private EstatePropertyModel model;
     ImageSliderAdapter sliderAdapter;
-    GoogleMap map;
+    MapLibreMap map;
+    MapView mapView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estate_dtail);
 
-        initView();
+        initView(savedInstanceState);
         setFont();
         getContent();
     }
@@ -87,7 +84,7 @@ public class EstateDetailActivity extends BaseActivity {
         ((MaterialButton) (findViewById(R.id.phoneButton))).setTypeface(tf);
     }
 
-    private void initView() {
+    private void initView(Bundle savedInstanceState) {
         Id = getIntent().getExtras().getString(Extras.EXTRA_FIRST_ARG);
         ((TextView) findViewById(R.id.lblTitleDetail)).setText(getIntent().getExtras().getString(Extras.EXTRA_SECOND_ARG));
         findViewById(R.id.imgBackDetail).setOnClickListener(view -> finish());
@@ -127,10 +124,10 @@ public class EstateDetailActivity extends BaseActivity {
                         if (errorExceptionBase.IsSuccess) {
                             model.IsFavorite = !model.IsFavorite;
                             if (model.IsFavorite) {
-                                ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav_full);
+                                ((ImageView) findViewById(R.id.imgFavDetail)).setImageResource(R.drawable.ic_fav_full);
                                 Toasty.success(view.getContext(), "به لیست علافه مندی اضافه شد", Toasty.LENGTH_SHORT).show();
                             } else {
-                                ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav);
+                                ((ImageView) findViewById(R.id.imgFavDetail)).setImageResource(R.drawable.ic_fav);
                                 Toasty.success(view.getContext(), "از لیست علافه مندی خارج شد", Toasty.LENGTH_SHORT).show();
                             }
                         }
@@ -148,24 +145,28 @@ public class EstateDetailActivity extends BaseActivity {
 
             }
         });
-        MapView mapView = findViewById(R.id.map_view);
+        mapView = findViewById(R.id.map_view);
+        mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(@NonNull GoogleMap googleMap) {
-                map = googleMap;
-                map.setMinZoomPreference(12);
-                if (model != null && model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
-                    (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
-                    LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
-                    if (map != null) {
-
-                        map.addMarker(GetLocationActivity.MakeMarker(EstateDetailActivity.this, point));
-                        map.moveCamera(CameraUpdateFactory.newLatLng(point));
-
+            public void onMapReady(@NonNull MapLibreMap mapLibreMap) {
+                map = mapLibreMap;
+                map.setStyle(new Style.Builder().fromUri("https://demotiles.maplibre.org/style.json"), new Style.OnStyleLoaded() {
+                    @Override
+                    public void onStyleLoaded(@NonNull Style style) {
+                        if (model != null && model.Geolocationlatitude != null && model.Geolocationlongitude != null && model.Geolocationlatitude != 0 && model.Geolocationlongitude != 0) {
+                            (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
+                            LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
+                            if (map != null) {
+                                map.addMarker(new MarkerOptions().position(point).title(model.Title));
+                                map.moveCamera(CameraUpdateFactory.newLatLng(point));
+                            }
+                        }
                     }
-                }
+                });
             }
         });
+
         //call button
         findViewById(R.id.phoneButton).setOnClickListener(view -> call());
         findViewById(R.id.reportBtn).setOnClickListener(view -> showReportDialog());
@@ -231,9 +232,9 @@ public class EstateDetailActivity extends BaseActivity {
         }
         ((TextView) findViewById(R.id.txtArea)).setText(model.LinkLocationIdParentTitle + " - " + model.LinkLocationIdTitle);
         if (model.IsFavorite)
-            ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav_full);
+            ((ImageView) findViewById(R.id.imgFavDetail)).setImageResource(R.drawable.ic_fav_full);
         else
-            ((ImageView) findViewById(R.id.imgHeartDetail)).setImageResource(R.drawable.ic_fav);
+            ((ImageView) findViewById(R.id.imgFavDetail)).setImageResource(R.drawable.ic_fav);
         if (model.CaseCode != null)
             ((TextView) findViewById(R.id.idTextView)).setText("شماره ملک : " + model.CaseCode);
         ((TextView) findViewById(R.id.dateTv)).setText("" + AppUtil.DateDifferenceNow(model.CreatedDate));
@@ -259,10 +260,7 @@ public class EstateDetailActivity extends BaseActivity {
             (findViewById(R.id.toggleMaps)).setVisibility(View.VISIBLE);
             LatLng point = new LatLng(model.Geolocationlatitude, model.Geolocationlongitude);
             if (map != null) {
-
-                map.addMarker(GetLocationActivity.MakeMarker(this, point));
                 map.moveCamera(CameraUpdateFactory.newLatLng(point));
-
             }
         }
     }
@@ -272,85 +270,76 @@ public class EstateDetailActivity extends BaseActivity {
         if (model != null) {
             message += "\n" + model.Description + "\n";
             return message;
+        } else {
+            return "";
         }
-        return message;
+    }
+
+    private void ClickShare() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        String message = createShareMassage();
+        if (model != null && model.LinkMainImageIdSrc != null && !model.LinkMainImageIdSrc.equals("")) {
+            Uri imageUri = Uri.parse(model.LinkMainImageIdSrc);
+            intent.setType("image/*");
+            intent.putExtra(Intent.EXTRA_STREAM, imageUri);
+        } else
+            intent.setType("text/plain");
+
+        intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(message).toString());
+        startActivity(Intent.createChooser(intent, "اشتراک گذاری در..."));
     }
 
     private void call() {
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + model.AboutAgentTel));
-        startActivity(intent);
-    }
+        if (model.AboutAgentTel != null) {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", model.AboutAgentTel, null));
+            startActivity(intent);
+        }
 
-    public void ClickShare() {
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        String message = createShareMassage();
-        shareIntent.putExtra(Intent.EXTRA_TEXT, message + "\n\n\n" + this.getString(ntk.android.base.R.string.app_name) + "\n" + getString(ntk.android.base.R.string.content_view) + "\n" + model.UrlViewContent);
-        shareIntent.setType("text/txt");
-        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        this.startActivity(Intent.createChooser(shareIntent, getString(ntk.android.base.R.string.per_share_to)));
     }
 
     public void showReportDialog() {
-        Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCanceledOnTouchOutside(true);
-        Window window = dialog.getWindow();
-        window.setLayout(LinearLayoutCompat.LayoutParams.WRAP_CONTENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
-        window.setGravity(Gravity.CENTER);
-        dialog.setContentView(ntk.android.base.R.layout.dialog_report_add);
-        TextView Lbl = dialog.findViewById(ntk.android.base.R.id.lblTitleDialogAddReport);
-        Lbl.setTypeface(FontManager.T1_Typeface(this));
+        new CoreModuleReportAbuseDtoModel().show(this, model.Id, getSupportFragmentManager());
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
 
-        EditText subject = dialog.findViewById(ntk.android.base.R.id.txtContentDialogAddReport);
-        subject.setTypeface(FontManager.T1_Typeface(this));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
 
-        Button Btn = dialog.findViewById(ntk.android.base.R.id.btnSubmitDialogReportAdd);
-        Btn.setTypeface(FontManager.T1_Typeface(this));
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
 
-        Btn.setOnClickListener(v -> {
-            if (subject.getText().toString().isEmpty()) {
-                Toast.makeText(this, ntk.android.base.R.string.per_insert_num, Toast.LENGTH_SHORT).show();
-            } else {
-                if (AppUtil.isNetworkAvailable(this)) {
-//                        NewsCommentModel add = new NewsCommentModel();
-                    String text = subject.getText().toString();
-                    CoreModuleReportAbuseDtoModel m = new CoreModuleReportAbuseDtoModel();
-                    m.ModuleEntityId = model.Id;
-                    m.SubjectBody = text;
-                    ServiceExecute.execute(new EstatePropertyService(this).report(m))
-                            .subscribe(new NtkObserver<ErrorException<EstatePropertyModel>>() {
-                                @Override
-                                public void onNext(ErrorException<EstatePropertyModel> e) {
-                                    if (e.IsSuccess) {
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
 
-                                        dialog.dismiss();
-                                        Toasty.success(EstateDetailActivity.this, ntk.android.base.R.string.success_comment).show();
-                                    } else {
-                                        dialog.dismiss();
-                                        Toasty.warning(EstateDetailActivity.this, e.ErrorMessage).show();
-                                    }
-                                }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
 
-                                @Override
-                                public void onError(Throwable e) {
-                                    Snackbar.make(findViewById(ntk.android.base.R.id.mainLayoutDetail), ntk.android.base.R.string.error_raised, Snackbar.LENGTH_INDEFINITE).setAction(ntk.android.base.R.string.try_again, new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            //todo add
-                                        }
-                                    }).show();
-                                }
-                            });
-                } else {
-                    Toasty.error(EstateDetailActivity.this, "خطا در ارسال اطلاعات").show();
-
-                }
-            }
-        });
-
-        dialog.show();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
     }
 }

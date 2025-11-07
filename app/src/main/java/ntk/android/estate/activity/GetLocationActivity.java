@@ -32,28 +32,24 @@ import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.gms.tasks.Task;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
-import ir.parsimap.map.MapFragment;
-import ir.parsimap.map.ParsiMap;
-import ir.parsimap.map.camera.CameraUpdateFactory;
-import ir.parsimap.map.location.LocationMarker;
-import ir.parsimap.map.location.OnLocationUpdateListener;
-import ir.parsimap.map.model.BitmapDescriptorFactory;
-import ir.parsimap.map.model.LatLng;
-import ir.parsimap.map.model.Marker;
-import ir.parsimap.map.model.MarkerOptions;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.estate.R;
 
 public class GetLocationActivity extends BaseActivity {
-    ParsiMap map;
-    Marker myMarker;
-
-    Marker myLocalMarker;
+    MapboxMap map;
+    MapView mapView;
 
     FusedLocationProviderClient fusedLocationProviderClient;
     ActivityResultLauncher<String[]> locationPermissionRequest =
@@ -121,7 +117,7 @@ public class GetLocationActivity extends BaseActivity {
 
                     //Place current location marker
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    addMyLocationMarker(latLng);
+
                     //move map camera
                     map.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 }
@@ -138,6 +134,7 @@ public class GetLocationActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mapbox.getInstance(this, "YOUR_MAPBOX_API_KEY");
         setContentView(R.layout.activity_get_location);
         findViewById(ntk.android.base.R.id.imgToolbarBack).setOnClickListener(view -> finish());
         //get last location
@@ -145,26 +142,28 @@ public class GetLocationActivity extends BaseActivity {
 
         //location button
         findViewById(R.id.lastLocationFab).setOnClickListener(view -> getPermission());
-        MapFragment mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.mapview);
-        mapFragment.getMapAsync(parsiMap -> {
-            map = parsiMap;
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.689198, 51.388973), 12));
-            map.setOnMapClickListener(point -> {
-                if (myMarker != null)
-                    myMarker.remove();
-                addMarker(point);
-                map.animateCamera(CameraUpdateFactory.newLatLng(point));
-            });
+        mapView = findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull MapboxMap mapboxMap) {
+                map = mapboxMap;
+                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+                    @Override
+                    public void onStyleLoaded(@NonNull Style style) {
+                        // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
+                    }
+                });
+            }
         });
 
-
         findViewById(R.id.setLocationBtn).setOnClickListener(view -> {
-            if (myMarker == null)
+            if (map.getCameraPosition().target == null)
                 Toasty.error(GetLocationActivity.this, "موقعیتی انتخاب نشده است").show();
             else {
                 Intent i = new Intent();
-                i.putExtra(Extras.EXTRA_FIRST_ARG, myMarker.getPosition().getLatitude());
-                i.putExtra(Extras.EXTRA_SECOND_ARG, myMarker.getPosition().getLongitude());
+                i.putExtra(Extras.EXTRA_FIRST_ARG, map.getCameraPosition().target.getLatitude());
+                i.putExtra(Extras.EXTRA_SECOND_ARG, map.getCameraPosition().target.getLongitude());
                 setResult(RESULT_OK, i);
                 finish();
             }
@@ -206,45 +205,55 @@ public class GetLocationActivity extends BaseActivity {
             if (location != null) {
                 LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
                 map.animateCamera(CameraUpdateFactory.newLatLng((myLoc)));
-//                addLabel(myLoc);
             }
         });
 
     }
 
-
-    private Marker addMarker(LatLng latLng) {
-        myMarker = map.addMarker(new MarkerOptions()
-                .position(latLng)
-                .title("مکان انتخابی")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.logo))
-        );
-
-        return myMarker;
-    }
-
-    private Marker addMyLocationMarker(LatLng latLng) {
-        if (myLocalMarker != null)
-            myLocalMarker.remove();
-        myLocalMarker = map.addMarker(new MarkerOptions()
-                .position(latLng)
-                .title("مکان تقریبی")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
-        );
-
-        return myMarker;
-    }
-
-    public static MarkerOptions MakeMarker(Context context, LatLng loc) {
-        MarkerOptions options = new MarkerOptions()
-                .position(loc)
-                .title("مکان انتخابی")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.logo));
-        return options;
-    }
-
     public static void REGISTER_FOR_RESULT(BaseActivity activity, ActivityResultCallback<ActivityResult> callback) {
         Intent intent = new Intent(activity, GetLocationActivity.class);
         activity.lunchActivityForResult(intent, callback);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
     }
 }
